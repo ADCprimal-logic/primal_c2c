@@ -1,0 +1,1241 @@
+input PersonalAddressRelateToOneInput {
+  create: PersonalAddressCreateInput
+  connect: PersonalAddressWhereUniqueInput
+  disconnect: PersonalAddressWhereUniqueInput
+  disconnectAll: Boolean
+}
+
+input PostRelateToManyInput {
+  create: [PostCreateInput]
+  connect: [PostWhereUniqueInput]
+  disconnect: [PostWhereUniqueInput]
+  disconnectAll: Boolean
+}
+
+input RoleRelateToOneInput {
+  create: RoleCreateInput
+  connect: RoleWhereUniqueInput
+  disconnect: RoleWhereUniqueInput
+  disconnectAll: Boolean
+}
+
+""" A keystone list """
+type User {
+  id: ID!
+  name: String
+  email: String
+  password_is_set: Boolean
+  address: PersonalAddress
+  posts(where: PostWhereInput, search: String, sortBy: [SortPostsBy!], orderBy: String, first: Int, skip: Int): [Post!]!
+  _postsMeta(where: PostWhereInput, search: String, sortBy: [SortPostsBy!], orderBy: String, first: Int, skip: Int): _QueryMeta
+  role: Role
+}
+
+input UserWhereInput {
+  AND: [UserWhereInput]
+  OR: [UserWhereInput]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  name: String
+  name_not: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  name_i: String
+  name_not_i: String
+  name_contains_i: String
+  name_not_contains_i: String
+  name_starts_with_i: String
+  name_not_starts_with_i: String
+  name_ends_with_i: String
+  name_not_ends_with_i: String
+  name_in: [String]
+  name_not_in: [String]
+  email: String
+  email_not: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  email_i: String
+  email_not_i: String
+  email_contains_i: String
+  email_not_contains_i: String
+  email_starts_with_i: String
+  email_not_starts_with_i: String
+  email_ends_with_i: String
+  email_not_ends_with_i: String
+  email_in: [String]
+  email_not_in: [String]
+  password_is_set: Boolean
+  address: PersonalAddressWhereInput
+  address_is_null: Boolean
+
+  """ condition must be true for all nodes """
+  posts_every: PostWhereInput
+
+  """ condition must be true for at least 1 node """
+  posts_some: PostWhereInput
+
+  """ condition must be false for all nodes """
+  posts_none: PostWhereInput
+  role: RoleWhereInput
+  role_is_null: Boolean
+}
+
+input UserWhereUniqueInput {
+  id: ID!
+}
+
+enum SortUsersBy {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  email_ASC
+  email_DESC
+  address_ASC
+  address_DESC
+  posts_ASC
+  posts_DESC
+  role_ASC
+  role_DESC
+}
+
+input UserUpdateInput {
+  name: String
+  email: String
+  password: String
+  address: PersonalAddressRelateToOneInput
+  posts: PostRelateToManyInput
+  role: RoleRelateToOneInput
+}
+
+input UsersUpdateInput {
+  id: ID!
+  data: UserUpdateInput
+}
+
+input UserCreateInput {
+  name: String
+  email: String
+  password: String
+  address: PersonalAddressRelateToOneInput
+  posts: PostRelateToManyInput
+  role: RoleRelateToOneInput
+}
+
+input UsersCreateInput {
+  data: UserCreateInput
+}
+
+input UserRelateToOneInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+  disconnect: UserWhereUniqueInput
+  disconnectAll: Boolean
+}
+
+""" A keystone list """
+type PersonalAddress {
+  id: ID!
+  street: String
+  city: String
+  state: String
+  zipcode: String
+  resident: User
+}
+
+input PersonalAddressWhereInput {
+  AND: [PersonalAddressWhereInput]
+  OR: [PersonalAddressWhereInput]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  street: String
+  street_not: String
+  street_contains: String
+  street_not_contains: String
+  street_starts_with: String
+  street_not_starts_with: String
+  street_ends_with: String
+  street_not_ends_with: String
+  street_i: String
+  street_not_i: String
+  street_contains_i: String
+  street_not_contains_i: String
+  street_starts_with_i: String
+  street_not_starts_with_i: String
+  street_ends_with_i: String
+  street_not_ends_with_i: String
+  street_in: [String]
+  street_not_in: [String]
+  city: String
+  city_not: String
+  city_contains: String
+  city_not_contains: String
+  city_starts_with: String
+  city_not_starts_with: String
+  city_ends_with: String
+  city_not_ends_with: String
+  city_i: String
+  city_not_i: String
+  city_contains_i: String
+  city_not_contains_i: String
+  city_starts_with_i: String
+  city_not_starts_with_i: String
+  city_ends_with_i: String
+  city_not_ends_with_i: String
+  city_in: [String]
+  city_not_in: [String]
+  state: String
+  state_not: String
+  state_contains: String
+  state_not_contains: String
+  state_starts_with: String
+  state_not_starts_with: String
+  state_ends_with: String
+  state_not_ends_with: String
+  state_i: String
+  state_not_i: String
+  state_contains_i: String
+  state_not_contains_i: String
+  state_starts_with_i: String
+  state_not_starts_with_i: String
+  state_ends_with_i: String
+  state_not_ends_with_i: String
+  state_in: [String]
+  state_not_in: [String]
+  zipcode: String
+  zipcode_not: String
+  zipcode_contains: String
+  zipcode_not_contains: String
+  zipcode_starts_with: String
+  zipcode_not_starts_with: String
+  zipcode_ends_with: String
+  zipcode_not_ends_with: String
+  zipcode_i: String
+  zipcode_not_i: String
+  zipcode_contains_i: String
+  zipcode_not_contains_i: String
+  zipcode_starts_with_i: String
+  zipcode_not_starts_with_i: String
+  zipcode_ends_with_i: String
+  zipcode_not_ends_with_i: String
+  zipcode_in: [String]
+  zipcode_not_in: [String]
+  resident: UserWhereInput
+  resident_is_null: Boolean
+}
+
+input PersonalAddressWhereUniqueInput {
+  id: ID!
+}
+
+enum SortPersonalAddressesBy {
+  id_ASC
+  id_DESC
+  street_ASC
+  street_DESC
+  city_ASC
+  city_DESC
+  state_ASC
+  state_DESC
+  zipcode_ASC
+  zipcode_DESC
+  resident_ASC
+  resident_DESC
+}
+
+input PersonalAddressUpdateInput {
+  street: String
+  city: String
+  state: String
+  zipcode: String
+  resident: UserRelateToOneInput
+}
+
+input PersonalAddressesUpdateInput {
+  id: ID!
+  data: PersonalAddressUpdateInput
+}
+
+input PersonalAddressCreateInput {
+  street: String
+  city: String
+  state: String
+  zipcode: String
+  resident: UserRelateToOneInput
+}
+
+input PersonalAddressesCreateInput {
+  data: PersonalAddressCreateInput
+}
+
+input PostImageRelateToOneInput {
+  create: PostImageCreateInput
+  connect: PostImageWhereUniqueInput
+  disconnect: PostImageWhereUniqueInput
+  disconnectAll: Boolean
+}
+
+type Post_content_DocumentField {
+  document(hydrateRelationships: Boolean! = false): JSON!
+}
+
+input TagRelateToManyInput {
+  create: [TagCreateInput]
+  connect: [TagWhereUniqueInput]
+  disconnect: [TagWhereUniqueInput]
+  disconnectAll: Boolean
+}
+
+""" A keystone list """
+type Post {
+  id: ID!
+  title: String
+  status: String
+  photo: PostImage
+  content: Post_content_DocumentField
+  publishDate: String
+  author: User
+  tags(where: TagWhereInput, search: String, sortBy: [SortTagsBy!], orderBy: String, first: Int, skip: Int): [Tag!]!
+  _tagsMeta(where: TagWhereInput, search: String, sortBy: [SortTagsBy!], orderBy: String, first: Int, skip: Int): _QueryMeta
+}
+
+input PostWhereInput {
+  AND: [PostWhereInput]
+  OR: [PostWhereInput]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  title: String
+  title_not: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  title_i: String
+  title_not_i: String
+  title_contains_i: String
+  title_not_contains_i: String
+  title_starts_with_i: String
+  title_not_starts_with_i: String
+  title_ends_with_i: String
+  title_not_ends_with_i: String
+  title_in: [String]
+  title_not_in: [String]
+  status: String
+  status_not: String
+  status_in: [String]
+  status_not_in: [String]
+  photo: PostImageWhereInput
+  photo_is_null: Boolean
+  publishDate: String
+  publishDate_not: String
+  publishDate_lt: String
+  publishDate_lte: String
+  publishDate_gt: String
+  publishDate_gte: String
+  publishDate_in: [String]
+  publishDate_not_in: [String]
+  author: UserWhereInput
+  author_is_null: Boolean
+
+  """ condition must be true for all nodes """
+  tags_every: TagWhereInput
+
+  """ condition must be true for at least 1 node """
+  tags_some: TagWhereInput
+
+  """ condition must be false for all nodes """
+  tags_none: TagWhereInput
+}
+
+input PostWhereUniqueInput {
+  id: ID!
+}
+
+enum SortPostsBy {
+  id_ASC
+  id_DESC
+  title_ASC
+  title_DESC
+  status_ASC
+  status_DESC
+  photo_ASC
+  photo_DESC
+  publishDate_ASC
+  publishDate_DESC
+  author_ASC
+  author_DESC
+  tags_ASC
+  tags_DESC
+}
+
+input PostUpdateInput {
+  title: String
+  status: String
+  photo: PostImageRelateToOneInput
+  content: JSON
+  publishDate: String
+  author: UserRelateToOneInput
+  tags: TagRelateToManyInput
+}
+
+input PostsUpdateInput {
+  id: ID!
+  data: PostUpdateInput
+}
+
+input PostCreateInput {
+  title: String
+  status: String
+  photo: PostImageRelateToOneInput
+  content: JSON
+  publishDate: String
+  author: UserRelateToOneInput
+  tags: TagRelateToManyInput
+}
+
+input PostsCreateInput {
+  data: PostCreateInput
+}
+
+""" A keystone list """
+type Tag {
+  id: ID!
+  name: String
+  posts(where: PostWhereInput, search: String, sortBy: [SortPostsBy!], orderBy: String, first: Int, skip: Int): [Post!]!
+  _postsMeta(where: PostWhereInput, search: String, sortBy: [SortPostsBy!], orderBy: String, first: Int, skip: Int): _QueryMeta
+}
+
+input TagWhereInput {
+  AND: [TagWhereInput]
+  OR: [TagWhereInput]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  name: String
+  name_not: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  name_i: String
+  name_not_i: String
+  name_contains_i: String
+  name_not_contains_i: String
+  name_starts_with_i: String
+  name_not_starts_with_i: String
+  name_ends_with_i: String
+  name_not_ends_with_i: String
+  name_in: [String]
+  name_not_in: [String]
+
+  """ condition must be true for all nodes """
+  posts_every: PostWhereInput
+
+  """ condition must be true for at least 1 node """
+  posts_some: PostWhereInput
+
+  """ condition must be false for all nodes """
+  posts_none: PostWhereInput
+}
+
+input TagWhereUniqueInput {
+  id: ID!
+}
+
+enum SortTagsBy {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  posts_ASC
+  posts_DESC
+}
+
+input TagUpdateInput {
+  name: String
+  posts: PostRelateToManyInput
+}
+
+input TagsUpdateInput {
+  id: ID!
+  data: TagUpdateInput
+}
+
+input TagCreateInput {
+  name: String
+  posts: PostRelateToManyInput
+}
+
+input TagsCreateInput {
+  data: TagCreateInput
+}
+
+type CloudinaryImage_File {
+  id: ID
+  path: String
+  filename: String
+  originalFilename: String
+  mimetype: String
+  encoding: String
+  publicUrl: String
+  publicUrlTransformed(transformation: CloudinaryImageFormat): String
+}
+
+"""
+Mirrors the formatting options [Cloudinary provides](https://cloudinary.com/documentation/image_transformation_reference).
+All options are strings as they ultimately end up in a URL.
+"""
+input CloudinaryImageFormat {
+  """ Rewrites the filename to be this pretty string. Do not include `/` or `.` 
+  """
+  prettyName: String
+  width: String
+  height: String
+  crop: String
+  aspect_ratio: String
+  gravity: String
+  zoom: String
+  x: String
+  y: String
+  format: String
+  fetch_format: String
+  quality: String
+  radius: String
+  angle: String
+  effect: String
+  opacity: String
+  border: String
+  background: String
+  overlay: String
+  underlay: String
+  default_image: String
+  delay: String
+  color: String
+  color_space: String
+  dpr: String
+  page: String
+  density: String
+  flags: String
+  transformation: String
+}
+
+input PostRelateToOneInput {
+  create: PostCreateInput
+  connect: PostWhereUniqueInput
+  disconnect: PostWhereUniqueInput
+  disconnectAll: Boolean
+}
+
+""" A keystone list """
+type PostImage {
+  id: ID!
+  image: CloudinaryImage_File
+  altText: String
+  post: Post
+}
+
+input PostImageWhereInput {
+  AND: [PostImageWhereInput]
+  OR: [PostImageWhereInput]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  image: String
+  image_not: String
+  image_in: [String]
+  image_not_in: [String]
+  altText: String
+  altText_not: String
+  altText_contains: String
+  altText_not_contains: String
+  altText_starts_with: String
+  altText_not_starts_with: String
+  altText_ends_with: String
+  altText_not_ends_with: String
+  altText_i: String
+  altText_not_i: String
+  altText_contains_i: String
+  altText_not_contains_i: String
+  altText_starts_with_i: String
+  altText_not_starts_with_i: String
+  altText_ends_with_i: String
+  altText_not_ends_with_i: String
+  altText_in: [String]
+  altText_not_in: [String]
+  post: PostWhereInput
+  post_is_null: Boolean
+}
+
+input PostImageWhereUniqueInput {
+  id: ID!
+}
+
+enum SortPostImagesBy {
+  id_ASC
+  id_DESC
+  altText_ASC
+  altText_DESC
+  post_ASC
+  post_DESC
+}
+
+input PostImageUpdateInput {
+  image: Upload
+  altText: String
+  post: PostRelateToOneInput
+}
+
+input PostImagesUpdateInput {
+  id: ID!
+  data: PostImageUpdateInput
+}
+
+input PostImageCreateInput {
+  image: Upload
+  altText: String
+  post: PostRelateToOneInput
+}
+
+input PostImagesCreateInput {
+  data: PostImageCreateInput
+}
+
+input UserRelateToManyInput {
+  create: [UserCreateInput]
+  connect: [UserWhereUniqueInput]
+  disconnect: [UserWhereUniqueInput]
+  disconnectAll: Boolean
+}
+
+""" A keystone list """
+type Role {
+  id: ID!
+  name: String
+  canManagePosts: Boolean
+  canSeeOtherUsers: Boolean
+  canManageUsers: Boolean
+  canManageRoles: Boolean
+  assignedTo(where: UserWhereInput, search: String, sortBy: [SortUsersBy!], orderBy: String, first: Int, skip: Int): [User!]!
+  _assignedToMeta(where: UserWhereInput, search: String, sortBy: [SortUsersBy!], orderBy: String, first: Int, skip: Int): _QueryMeta
+}
+
+input RoleWhereInput {
+  AND: [RoleWhereInput]
+  OR: [RoleWhereInput]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  name: String
+  name_not: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  name_i: String
+  name_not_i: String
+  name_contains_i: String
+  name_not_contains_i: String
+  name_starts_with_i: String
+  name_not_starts_with_i: String
+  name_ends_with_i: String
+  name_not_ends_with_i: String
+  name_in: [String]
+  name_not_in: [String]
+  canManagePosts: Boolean
+  canManagePosts_not: Boolean
+  canSeeOtherUsers: Boolean
+  canSeeOtherUsers_not: Boolean
+  canManageUsers: Boolean
+  canManageUsers_not: Boolean
+  canManageRoles: Boolean
+  canManageRoles_not: Boolean
+
+  """ condition must be true for all nodes """
+  assignedTo_every: UserWhereInput
+
+  """ condition must be true for at least 1 node """
+  assignedTo_some: UserWhereInput
+
+  """ condition must be false for all nodes """
+  assignedTo_none: UserWhereInput
+}
+
+input RoleWhereUniqueInput {
+  id: ID!
+}
+
+enum SortRolesBy {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  canManagePosts_ASC
+  canManagePosts_DESC
+  canSeeOtherUsers_ASC
+  canSeeOtherUsers_DESC
+  canManageUsers_ASC
+  canManageUsers_DESC
+  canManageRoles_ASC
+  canManageRoles_DESC
+  assignedTo_ASC
+  assignedTo_DESC
+}
+
+input RoleUpdateInput {
+  name: String
+  canManagePosts: Boolean
+  canSeeOtherUsers: Boolean
+  canManageUsers: Boolean
+  canManageRoles: Boolean
+  assignedTo: UserRelateToManyInput
+}
+
+input RolesUpdateInput {
+  id: ID!
+  data: RoleUpdateInput
+}
+
+input RoleCreateInput {
+  name: String
+  canManagePosts: Boolean
+  canSeeOtherUsers: Boolean
+  canManageUsers: Boolean
+  canManageRoles: Boolean
+  assignedTo: UserRelateToManyInput
+}
+
+input RolesCreateInput {
+  data: RoleCreateInput
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
+
+type _ListAccess {
+  """
+  Access Control settings for the currently logged in (or anonymous)
+  user when performing 'create' operations.
+  NOTE: 'create' can only return a Boolean.
+  It is not possible to specify a declarative Where clause for this
+  operation
+  """
+  create: Boolean
+
+  """
+  Access Control settings for the currently logged in (or anonymous)
+  user when performing 'read' operations.
+  """
+  read: JSON
+
+  """
+  Access Control settings for the currently logged in (or anonymous)
+  user when performing 'update' operations.
+  """
+  update: JSON
+
+  """
+  Access Control settings for the currently logged in (or anonymous)
+  user when performing 'delete' operations.
+  """
+  delete: JSON
+
+  """
+  Access Control settings for the currently logged in (or anonymous)
+  user when performing 'auth' operations.
+  """
+  auth: JSON
+}
+
+type _ListQueries {
+  """Single-item query name"""
+  item: String
+
+  """All-items query name"""
+  list: String
+
+  """List metadata query name"""
+  meta: String
+}
+
+type _ListMutations {
+  """Create mutation name"""
+  create: String
+
+  """Create many mutation name"""
+  createMany: String
+
+  """Update mutation name"""
+  update: String
+
+  """Update many mutation name"""
+  updateMany: String
+
+  """Delete mutation name"""
+  delete: String
+
+  """Delete many mutation name"""
+  deleteMany: String
+}
+
+type _ListInputTypes {
+  """Input type for matching multiple items"""
+  whereInput: String
+
+  """Input type for matching a unique item"""
+  whereUniqueInput: String
+
+  """Create mutation input type name"""
+  createInput: String
+
+  """Create many mutation input type name"""
+  createManyInput: String
+
+  """Update mutation name input"""
+  updateInput: String
+
+  """Update many mutation name input"""
+  updateManyInput: String
+}
+
+type _ListSchemaFields {
+  """The path of the field in its list"""
+  path: String
+
+  """The name of the field in its list"""
+  name: String @deprecated(reason: "Use `path` instead")
+
+  """The field type (ie, Checkbox, Text, etc)"""
+  type: String
+}
+
+type _ListSchemaRelatedFields {
+  """The typename as used in GraphQL queries"""
+  type: String
+
+  """A list of GraphQL field names"""
+  fields: [String]
+}
+
+type _ListSchema {
+  """The typename as used in GraphQL queries"""
+  type: String
+
+  """
+  Top level GraphQL query names which either return this type, or
+  provide aggregate information about this type
+  """
+  queries: _ListQueries
+
+  """Top-level GraphQL mutation names"""
+  mutations: _ListMutations
+
+  """Top-level GraphQL input types"""
+  inputTypes: _ListInputTypes
+
+  """Information about fields defined on this list"""
+  fields(where: _ListSchemaFieldsInput): [_ListSchemaFields]
+
+  """
+  Information about fields on other types which return this type, or
+  provide aggregate information about this type
+  """
+  relatedFields: [_ListSchemaRelatedFields]
+}
+
+type _ListMeta {
+  """The Keystone list key"""
+  key: String
+
+  """The Keystone List name"""
+  name: String @deprecated(reason: "Use `key` instead")
+
+  """The list's user-facing description"""
+  description: String
+
+  """The list's display name in the Admin UI"""
+  label: String
+
+  """The list's singular display name"""
+  singular: String
+
+  """The list's plural display name"""
+  plural: String
+
+  """The list's data path"""
+  path: String
+
+  """Access control configuration for the currently authenticated request"""
+  access: _ListAccess
+
+  """Information on the generated GraphQL schema"""
+  schema: _ListSchema
+}
+
+type _QueryMeta {
+  count: Int
+}
+
+input _ksListsMetaInput {
+  key: String
+
+  """Whether this is an auxiliary helper list"""
+  auxiliary: Boolean
+}
+
+input _ListSchemaFieldsInput {
+  type: String
+}
+
+type Mutation {
+  """ Create a single User item. """
+  createUser(data: UserCreateInput): User
+
+  """ Create multiple User items. """
+  createUsers(data: [UsersCreateInput]): [User]
+
+  """ Update a single User item by ID. """
+  updateUser(id: ID!, data: UserUpdateInput): User
+
+  """ Update multiple User items by ID. """
+  updateUsers(data: [UsersUpdateInput]): [User]
+
+  """ Delete a single User item by ID. """
+  deleteUser(id: ID!): User
+
+  """ Delete multiple User items by ID. """
+  deleteUsers(ids: [ID!]): [User]
+
+  """ Create a single PersonalAddress item. """
+  createPersonalAddress(data: PersonalAddressCreateInput): PersonalAddress
+
+  """ Create multiple PersonalAddress items. """
+  createPersonalAddresses(data: [PersonalAddressesCreateInput]): [PersonalAddress]
+
+  """ Update a single PersonalAddress item by ID. """
+  updatePersonalAddress(id: ID!, data: PersonalAddressUpdateInput): PersonalAddress
+
+  """ Update multiple PersonalAddress items by ID. """
+  updatePersonalAddresses(data: [PersonalAddressesUpdateInput]): [PersonalAddress]
+
+  """ Delete a single PersonalAddress item by ID. """
+  deletePersonalAddress(id: ID!): PersonalAddress
+
+  """ Delete multiple PersonalAddress items by ID. """
+  deletePersonalAddresses(ids: [ID!]): [PersonalAddress]
+
+  """ Create a single Post item. """
+  createPost(data: PostCreateInput): Post
+
+  """ Create multiple Post items. """
+  createPosts(data: [PostsCreateInput]): [Post]
+
+  """ Update a single Post item by ID. """
+  updatePost(id: ID!, data: PostUpdateInput): Post
+
+  """ Update multiple Post items by ID. """
+  updatePosts(data: [PostsUpdateInput]): [Post]
+
+  """ Delete a single Post item by ID. """
+  deletePost(id: ID!): Post
+
+  """ Delete multiple Post items by ID. """
+  deletePosts(ids: [ID!]): [Post]
+
+  """ Create a single Tag item. """
+  createTag(data: TagCreateInput): Tag
+
+  """ Create multiple Tag items. """
+  createTags(data: [TagsCreateInput]): [Tag]
+
+  """ Update a single Tag item by ID. """
+  updateTag(id: ID!, data: TagUpdateInput): Tag
+
+  """ Update multiple Tag items by ID. """
+  updateTags(data: [TagsUpdateInput]): [Tag]
+
+  """ Delete a single Tag item by ID. """
+  deleteTag(id: ID!): Tag
+
+  """ Delete multiple Tag items by ID. """
+  deleteTags(ids: [ID!]): [Tag]
+
+  """ Create a single PostImage item. """
+  createPostImage(data: PostImageCreateInput): PostImage
+
+  """ Create multiple PostImage items. """
+  createPostImages(data: [PostImagesCreateInput]): [PostImage]
+
+  """ Update a single PostImage item by ID. """
+  updatePostImage(id: ID!, data: PostImageUpdateInput): PostImage
+
+  """ Update multiple PostImage items by ID. """
+  updatePostImages(data: [PostImagesUpdateInput]): [PostImage]
+
+  """ Delete a single PostImage item by ID. """
+  deletePostImage(id: ID!): PostImage
+
+  """ Delete multiple PostImage items by ID. """
+  deletePostImages(ids: [ID!]): [PostImage]
+
+  """ Create a single Role item. """
+  createRole(data: RoleCreateInput): Role
+
+  """ Create multiple Role items. """
+  createRoles(data: [RolesCreateInput]): [Role]
+
+  """ Update a single Role item by ID. """
+  updateRole(id: ID!, data: RoleUpdateInput): Role
+
+  """ Update multiple Role items by ID. """
+  updateRoles(data: [RolesUpdateInput]): [Role]
+
+  """ Delete a single Role item by ID. """
+  deleteRole(id: ID!): Role
+
+  """ Delete multiple Role items by ID. """
+  deleteRoles(ids: [ID!]): [Role]
+  authenticateUserWithPassword(email: String!, password: String!): UserAuthenticationWithPasswordResult!
+  createInitialUser(data: CreateInitialUserInput!): UserAuthenticationWithPasswordSuccess!
+  endSession: Boolean!
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+union AuthenticatedItem = User
+
+union UserAuthenticationWithPasswordResult = UserAuthenticationWithPasswordSuccess | UserAuthenticationWithPasswordFailure
+
+type UserAuthenticationWithPasswordSuccess {
+  sessionToken: String!
+  item: User!
+}
+
+type UserAuthenticationWithPasswordFailure {
+  code: PasswordAuthErrorCode!
+  message: String!
+}
+
+enum PasswordAuthErrorCode {
+  FAILURE
+  IDENTITY_NOT_FOUND
+  SECRET_NOT_SET
+  MULTIPLE_IDENTITY_MATCHES
+  SECRET_MISMATCH
+}
+
+input CreateInitialUserInput {
+  name: String
+  email: String
+  password: String
+}
+
+type Query {
+  """ Search for all User items which match the where clause. """
+  allUsers(where: UserWhereInput, search: String, sortBy: [SortUsersBy!], orderBy: String, first: Int, skip: Int): [User]
+
+  """ Search for the User item with the matching ID. """
+  User(where: UserWhereUniqueInput!): User
+
+  """ Perform a meta-query on all User items which match the where clause. """
+  _allUsersMeta(where: UserWhereInput, search: String, sortBy: [SortUsersBy!], orderBy: String, first: Int, skip: Int): _QueryMeta
+
+  """ Retrieve the meta-data for the User list. """
+  _UsersMeta: _ListMeta
+
+  """ Search for all PersonalAddress items which match the where clause. """
+  allPersonalAddresses(where: PersonalAddressWhereInput, search: String, sortBy: [SortPersonalAddressesBy!], orderBy: String, first: Int, skip: Int): [PersonalAddress]
+
+  """ Search for the PersonalAddress item with the matching ID. """
+  PersonalAddress(where: PersonalAddressWhereUniqueInput!): PersonalAddress
+
+  """ Perform a meta-query on all PersonalAddress items which match the where clause. 
+  """
+  _allPersonalAddressesMeta(where: PersonalAddressWhereInput, search: String, sortBy: [SortPersonalAddressesBy!], orderBy: String, first: Int, skip: Int): _QueryMeta
+
+  """ Retrieve the meta-data for the PersonalAddress list. """
+  _PersonalAddressesMeta: _ListMeta
+
+  """ Search for all Post items which match the where clause. """
+  allPosts(where: PostWhereInput, search: String, sortBy: [SortPostsBy!], orderBy: String, first: Int, skip: Int): [Post]
+
+  """ Search for the Post item with the matching ID. """
+  Post(where: PostWhereUniqueInput!): Post
+
+  """ Perform a meta-query on all Post items which match the where clause. """
+  _allPostsMeta(where: PostWhereInput, search: String, sortBy: [SortPostsBy!], orderBy: String, first: Int, skip: Int): _QueryMeta
+
+  """ Retrieve the meta-data for the Post list. """
+  _PostsMeta: _ListMeta
+
+  """ Search for all Tag items which match the where clause. """
+  allTags(where: TagWhereInput, search: String, sortBy: [SortTagsBy!], orderBy: String, first: Int, skip: Int): [Tag]
+
+  """ Search for the Tag item with the matching ID. """
+  Tag(where: TagWhereUniqueInput!): Tag
+
+  """ Perform a meta-query on all Tag items which match the where clause. """
+  _allTagsMeta(where: TagWhereInput, search: String, sortBy: [SortTagsBy!], orderBy: String, first: Int, skip: Int): _QueryMeta
+
+  """ Retrieve the meta-data for the Tag list. """
+  _TagsMeta: _ListMeta
+
+  """ Search for all PostImage items which match the where clause. """
+  allPostImages(where: PostImageWhereInput, search: String, sortBy: [SortPostImagesBy!], orderBy: String, first: Int, skip: Int): [PostImage]
+
+  """ Search for the PostImage item with the matching ID. """
+  PostImage(where: PostImageWhereUniqueInput!): PostImage
+
+  """ Perform a meta-query on all PostImage items which match the where clause. 
+  """
+  _allPostImagesMeta(where: PostImageWhereInput, search: String, sortBy: [SortPostImagesBy!], orderBy: String, first: Int, skip: Int): _QueryMeta
+
+  """ Retrieve the meta-data for the PostImage list. """
+  _PostImagesMeta: _ListMeta
+
+  """ Search for all Role items which match the where clause. """
+  allRoles(where: RoleWhereInput, search: String, sortBy: [SortRolesBy!], orderBy: String, first: Int, skip: Int): [Role]
+
+  """ Search for the Role item with the matching ID. """
+  Role(where: RoleWhereUniqueInput!): Role
+
+  """ Perform a meta-query on all Role items which match the where clause. """
+  _allRolesMeta(where: RoleWhereInput, search: String, sortBy: [SortRolesBy!], orderBy: String, first: Int, skip: Int): _QueryMeta
+
+  """ Retrieve the meta-data for the Role list. """
+  _RolesMeta: _ListMeta
+
+  """ Retrieve the meta-data for all lists. """
+  _ksListsMeta(where: _ksListsMetaInput): [_ListMeta]
+  authenticatedItem: AuthenticatedItem
+  keystone: KeystoneMeta!
+}
+
+type KeystoneMeta {
+  adminMeta: KeystoneAdminMeta!
+}
+
+type KeystoneAdminMeta {
+  enableSignout: Boolean!
+  enableSessionItem: Boolean!
+  lists: [KeystoneAdminUIListMeta!]!
+  list(key: String!): KeystoneAdminUIListMeta
+}
+
+type KeystoneAdminUIListMeta {
+  key: String!
+  itemQueryName: String!
+  listQueryName: String!
+  hideCreate: Boolean!
+  hideDelete: Boolean!
+  path: String!
+  label: String!
+  singular: String!
+  plural: String!
+  description: String
+  initialColumns: [String!]!
+  pageSize: Int!
+  labelField: String!
+  fields: [KeystoneAdminUIFieldMeta!]!
+  initialSort: KeystoneAdminUISort
+  isHidden: Boolean!
+}
+
+type KeystoneAdminUIFieldMeta {
+  path: String!
+  label: String!
+  isOrderable: Boolean!
+  fieldMeta: JSON
+  viewsIndex: Int!
+  customViewsIndex: Int
+  createView: KeystoneAdminUIFieldMetaCreateView!
+  listView: KeystoneAdminUIFieldMetaListView!
+  itemView(id: ID!): KeystoneAdminUIFieldMetaItemView
+}
+
+type KeystoneAdminUIFieldMetaCreateView {
+  fieldMode: KeystoneAdminUIFieldMetaCreateViewFieldMode!
+}
+
+enum KeystoneAdminUIFieldMetaCreateViewFieldMode {
+  edit
+  hidden
+}
+
+type KeystoneAdminUIFieldMetaListView {
+  fieldMode: KeystoneAdminUIFieldMetaListViewFieldMode!
+}
+
+enum KeystoneAdminUIFieldMetaListViewFieldMode {
+  read
+  hidden
+}
+
+type KeystoneAdminUIFieldMetaItemView {
+  fieldMode: KeystoneAdminUIFieldMetaItemViewFieldMode!
+}
+
+enum KeystoneAdminUIFieldMetaItemViewFieldMode {
+  edit
+  read
+  hidden
+}
+
+type KeystoneAdminUISort {
+  field: String!
+  direction: KeystoneAdminUISortDirection!
+}
+
+enum KeystoneAdminUISortDirection {
+  ASC
+  DESC
+}
