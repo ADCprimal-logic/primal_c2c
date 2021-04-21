@@ -20,7 +20,7 @@ const auth = createAuth({
   identityField: "email",
   secretField: "password",
   initFirstItem: {
-    fields: ["name", "email", "password"],
+    fields: ["name", "email", "password", "phone", "birthdate"],
   },
 });
 

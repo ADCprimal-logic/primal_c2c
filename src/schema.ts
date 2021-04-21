@@ -23,15 +23,15 @@ export const lists = createSchema({
     },
     ui: {
       listView: {
-        initialColumns: ["name", "posts", "address"],
+        fields: ["name", "email", "password", "phone", "birthdate"],
       },
     },
     fields: {
       name: text({ isRequired: true }),
       email: text({ isRequired: true, isUnique: true }),
       password: password(),
-      //phone: text({ isRequired: true }),
-      //birthdate: text({ isRequired: true}),
+      phone: text({ isRequired: true }),
+      birthdate: text({ isRequired: true }),
       address: relationship({ ref: "PersonalAddress.resident" }),
       posts: relationship({ ref: "Post.author", many: true }),
       role: relationship({
