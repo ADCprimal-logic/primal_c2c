@@ -7,7 +7,7 @@ export const permissionFields = {
   }),
   canSeeOtherUsers: checkbox({
     defaultValue: false,
-    label: "User can query other users",
+    label: "User can Query other users",
   }),
   canManageUsers: checkbox({
     defaultValue: false,
@@ -15,7 +15,7 @@ export const permissionFields = {
   }),
   canManageRoles: checkbox({
     defaultValue: false,
-    label: "User can have a few CRUD roles",
+    label: "User can CRUD roles",
   }),
 };
 

@@ -13,6 +13,7 @@ import { Role } from "./schemas/Role";
 import { isSignedIn, permissions, rules } from "./access";
 
 export const lists = createSchema({
+  // User Schema
   User: list({
     access: {
       create: () => true,
@@ -42,6 +43,7 @@ export const lists = createSchema({
       }),
     },
   }),
+  // Address Schema
   PersonalAddress: list({
     fields: {
       street: text({ isRequired: true }),
@@ -58,6 +60,7 @@ export const lists = createSchema({
       },
     },
   }),
+  // Post Schema
   Post: list({
     access: {
       create: isSignedIn,
@@ -125,6 +128,7 @@ export const lists = createSchema({
       }),
     },
   }),
+  // Tag Schema
   Tag: list({
     ui: {
       isHidden: true,

@@ -25,7 +25,7 @@ _If you want to change things here are some options_
 
 Hope these things are helpful.
 
-Enviornment Set Up
+Environment Set Up
 
 ```
 COOKIE_SECRET="32 character string"
