@@ -28,6 +28,9 @@ Hope these things are helpful.
 Environment Set Up
 
 ```
+CLOUDINARY_CLOUD_NAME= "cloud_name"
+CLOUDINARY_KEY= "cloud_key"
+CLOUDINARY_SECRET= "abcdwxyz"
 COOKIE_SECRET="32 character string"
 DATABASE_URL="Supabase.io DB url in supabase settings"
 FRONTEND_URL="http://localhost:7777
