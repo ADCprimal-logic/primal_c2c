@@ -1,5 +1,7 @@
 node_modules
-.keystone/admin
-.keystone/prisma
+src/.keystone
 *.log
 .env
+package-lock.json
+yarn-lock.json
+.nova

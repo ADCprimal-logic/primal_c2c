@@ -3,9 +3,9 @@
   "version": "1.0.1",
   "private": true,
   "scripts": {
-    "dev": "keystone-next dev",
-    "start": "keystone-next start",
-    "build": "keystone-next build"
+    "dev": "cd src && keystone-next dev",
+    "start": "cd src && keystone-next start",
+    "build": "cd src && keystone-next build"
   },
   "dependencies": {
     "@keystone-next/admin-ui": "^13.0.0",
