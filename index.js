@@ -1,22 +1,28 @@
-const { Keystone } = require('@keystonejs/keystone');
-const { PasswordAuthStrategy } = require('@keystonejs/auth-password');
-const { Text, Checkbox, Password } = require('@keystonejs/fields');
-const { GraphQLApp } = require('@keystonejs/app-graphql');
-const { AdminUIApp } = require('@keystonejs/app-admin-ui');
-const initialiseData = require('./initial-data');
+const { Keystone } = require("@keystonejs/keystone");
+const { PasswordAuthStrategy } = require("@keystonejs/auth-password");
+const { Text, Checkbox, Password } = require("@keystonejs/fields");
+const { GraphQLApp } = require("@keystonejs/app-graphql");
+const { AdminUIApp } = require("@keystonejs/app-admin-ui");
+const initialiseData = require("./initial-data");
+import "dotenv/config";
 
-const { KnexAdapter: Adapter } = require('@keystonejs/adapter-knex');
-const PROJECT_NAME = 'C2C_Children_Connect';
-const adapterConfig = { knexOptions: { connection: 'postgres://postgres:JenovaRemake07@db.jplluueqspkamxpwipro.supabase.co:5432/postgres' } };
-
+const { KnexAdapter: Adapter } = require("@keystonejs/adapter-knex");
+const PROJECT_NAME = "C2C_Children_Connect";
+const adapterConfig = {
+  knexOptions: {
+    connection:
+      "postgres://postgres:JenovaRemake07@db.jplluueqspkamxpwipro.supabase.co:5432/postgres",
+  },
+};
 
 const keystone = new Keystone({
   adapter: new Adapter(adapterConfig),
-  onConnect: process.env.CREATE_TABLES !== 'true' && initialiseData,
+  onConnect: process.env.CREATE_TABLES !== "true" && initialiseData,
 });
 
 // Access control functions
-const userIsAdmin = ({ authentication: { item: user } }) => Boolean(user && user.isAdmin);
+const userIsAdmin = ({ authentication: { item: user } }) =>
+  Boolean(user && user.isAdmin);
 const userOwnsItem = ({ authentication: { item: user } }) => {
   if (!user) {
     return false;
@@ -27,7 +33,7 @@ const userOwnsItem = ({ authentication: { item: user } }) => {
   return { id: user.id };
 };
 
-const userIsAdminOrOwner = auth => {
+const userIsAdminOrOwner = (auth) => {
   const isAdmin = access.userIsAdmin(auth);
   const isOwner = access.userOwnsItem(auth);
   return isAdmin ? isAdmin : isOwner;
@@ -35,7 +41,7 @@ const userIsAdminOrOwner = auth => {
 
 const access = { userIsAdmin, userOwnsItem, userIsAdminOrOwner };
 
-keystone.createList('User', {
+keystone.createList("User", {
   fields: {
     name: { type: Text },
     email: {
@@ -66,8 +72,8 @@ keystone.createList('User', {
 
 const authStrategy = keystone.createAuthStrategy({
   type: PasswordAuthStrategy,
-  list: 'User',
-  config: { protectIdentities: process.env.NODE_ENV === 'production' },
+  list: "User",
+  config: { protectIdentities: process.env.NODE_ENV === "production" },
 });
 
 module.exports = {
