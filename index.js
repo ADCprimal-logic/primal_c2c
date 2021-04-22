@@ -4,7 +4,6 @@ const { Text, Checkbox, Password } = require("@keystonejs/fields");
 const { GraphQLApp } = require("@keystonejs/app-graphql");
 const { AdminUIApp } = require("@keystonejs/app-admin-ui");
 const initialiseData = require("./initial-data");
-import "dotenv/config";
 
 const { KnexAdapter: Adapter } = require("@keystonejs/adapter-knex");
 const PROJECT_NAME = "C2C_Children_Connect";
