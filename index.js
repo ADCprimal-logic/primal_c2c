@@ -6,7 +6,7 @@ const { AdminUIApp } = require("@keystonejs/app-admin-ui");
 const initialiseData = require("./initial-data");
 
 const { KnexAdapter: Adapter } = require("@keystonejs/adapter-knex");
-const PROJECT_NAME = "C2C_Children_Connect";
+const PROJECT_NAME = "C2C Children Connect";
 const adapterConfig = {
   knexOptions: {
     connection:
