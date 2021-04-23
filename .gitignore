@@ -3,6 +3,6 @@ src/.keystone
 *.log
 .env
 package-lock.json
-yarn-lock.json
+yarn.lock
 .nova
 .DS_Store
