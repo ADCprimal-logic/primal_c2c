@@ -5,3 +5,4 @@ src/.keystone
 package-lock.json
 yarn-lock.json
 .nova
+.DS_Store
