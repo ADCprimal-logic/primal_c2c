@@ -5,6 +5,8 @@
       Hello! This is the front page to C2C Children Connect.
       <br />
       <a href="/admin">Keystone 5 Admin UI</a>
+      <br />
+      <NuxtLink to="/fun">FUN</NuxtLink>
     </p>
     <hr class="divider" />
   </div>
