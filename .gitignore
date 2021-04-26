@@ -1,7 +1,5 @@
-.nuxt
 .nova
 node_modules
-src
 *.log
 CHANGELOG.md
 yarn.lock
