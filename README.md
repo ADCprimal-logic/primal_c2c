@@ -22,7 +22,7 @@ CLOUDINARY_CLOUD_NAME= "cloud_name"
 CLOUDINARY_KEY= "cloud_key"
 CLOUDINARY_SECRET= "abcdwxyz"
 # Endpoint URLS
-DATABASE_URL="postgres://postgres:JenovaRemake07@db.jplluueqspkamxpwipro.supabase.co:5432/postgres"
+DATABASE_URL="postgres://primal_postgres:primal-squad@c2cdatabase.cqs5a6cxnjkx.us-east-1.rds.amazonaws.com:5432/development"
 FRONTEND_URL="http://localhost:7777
 ```
 
