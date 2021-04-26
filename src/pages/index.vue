@@ -6,9 +6,9 @@
       <br />
       <a href="/admin">Keystone 5 Admin UI</a>
       <br />
-      <NuxtLink to="/next">NuxtJS FUN</NuxtLink>
     </p>
     <hr class="divider" />
+    <NuxtLink to="/next">NuxtJS FUN</NuxtLink>
   </div>
 </template>
 
