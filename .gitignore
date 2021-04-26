@@ -1,7 +1,6 @@
 .nova
 node_modules
 *.log
-CHANGELOG.md
 yarn.lock
 .env
 .DS_Store
