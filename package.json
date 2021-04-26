@@ -1,9 +1,9 @@
 {
-  "name": "@keystonejs/example-projects-nuxt",
+  "name": "C2C Children Connect",
   "description": "A NuxtJS example project.",
   "private": true,
   "version": "5.0.30",
-  "author": "The KeystoneJS Development Team",
+  "author": "primal. Development Team",
   "license": "MIT",
   "engines": {
     "node": ">=10.0.0"

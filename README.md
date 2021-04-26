@@ -6,16 +6,35 @@ To get setup for this project you will need to set up a handful of things.
 2. Once you have clone the repository, either run npm install or yarn to add all the dependencies
 3. You will need to set up a cookie secret as well
 
-To run the Keystone server, run 'npm run dev'. This gives you a http://localhost:3000 url and place to interact with the backend.
+To run the project run 'yarn dev'. This gives you a http://localhost:3000 url which would prompt our NuxtJS Front-End with http://localhost:3000/admin acting as our Administrative Backend
 
 ## NOTICE:
 
 > This is using Keystone 5, the most stable release of KeystoneJS. Keystone 6, or Keystone Next, is the next stage for KeystoneJS. Unfortunately there is no telling when the next version will be released and this version becomes deprecated, but this is used for more active development to be released to production.
 
-## KeystoneJS Starter Template
+## Environment Set (.env)
 
-You've created a KeystoneJS project! This project contains a simple list of users and an admin application (`localhost:3000/admin`) with basic authentication.
+```
+PROJECT_NAME="C2C Children Connect"
+COOKIE_SECRET="bNLVPe1NIFSCeNRHEQ7CUyjcnVzko6MI"
+# Cloudinary Creds
+CLOUDINARY_CLOUD_NAME= "cloud_name"
+CLOUDINARY_KEY= "cloud_key"
+CLOUDINARY_SECRET= "abcdwxyz"
+# Endpoint URLS
+DATABASE_URL="postgres://postgres:JenovaRemake07@db.jplluueqspkamxpwipro.supabase.co:5432/postgres"
+FRONTEND_URL="http://localhost:7777
+```
 
-## Next steps
+## Scripts to Run with Yarn
 
-This example has no front-end application but you can build your own using the GraphQL API (`http://localhost:3000/admin/graphiql`).
+```
+"dev": "cross-env NODE_ENV=development DISABLE_LOGGING=true keystone dev"
+"build": "cross-env NODE_ENV=production keystone build"
+"start": "cross-env NODE_ENV=production keystone start"
+```
+
+## Documentation for further development:
+
+- KeystoneJS (Back-End): https://www.keystonejs.com/documentation/
+- NuxtJS (Front-End): https://nuxtjs.org/docs/2.x/get-started/installation
