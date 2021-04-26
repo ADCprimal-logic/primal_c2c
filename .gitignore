@@ -1,6 +1,8 @@
 .nuxt
 .nova
 node_modules
+src/.keystone
+*.log
 CHANGELOG.md
 yarn.lock
 .env
