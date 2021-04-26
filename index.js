@@ -1,6 +1,6 @@
 const { Keystone } = require("@keystonejs/keystone");
 const { PasswordAuthStrategy } = require("@keystonejs/auth-password");
-const { Text } = require("@keystonejs/fields");
+const { Text, Checkbox, Password } = require("@keystonejs/fields");
 const { GraphQLApp } = require("@keystonejs/app-graphql");
 const { AdminUIApp } = require("@keystonejs/app-admin-ui");
 const { NuxtApp } = require("@keystonejs/app-nuxt");
@@ -8,14 +8,13 @@ const initialiseData = require("./initial-data");
 // .ENV Configuration
 const dotenv = require("dotenv");
 dotenv.config();
-console.log(process.env.PASSWORD);
 
 const { KnexAdapter: Adapter } = require("@keystonejs/adapter-knex");
-const PROJECT_NAME = "C2C Children Connect";
+const PROJECT_NAME = process.env.PROJECT_NAME;
+const DATABASE_URL = process.env.DATABASE_URL;
 const adapterConfig = {
   knexOptions: {
-    connection:
-      "postgres://postgres:JenovaRemake07@db.jplluueqspkamxpwipro.supabase.co:5432/postgres",
+    connection: DATABASE_URL,
   },
 };
 

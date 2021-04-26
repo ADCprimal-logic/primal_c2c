@@ -1,9 +1,10 @@
 .nuxt
 .nova
 node_modules
-src/.keystone
+src
 *.log
 CHANGELOG.md
 yarn.lock
 .env
 .DS_Store
+dist
