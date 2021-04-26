@@ -1,145 +1,14 @@
 <template>
   <div class="app">
-    <h1 class="main-heading">Welcome to Keystone 5!</h1>
+    <h1 class="main-heading">C2C Children Connect</h1>
     <p class="intro-text">
-      Here's a simple
-      <a href="https://nuxtjs.org">NuxtJS</a> demo app that lets you add/remove
-      todo items. Create a few entries, then go check them out from your
-      <a href="/admin">Keystone 5 Admin UI</a>!
+      Hello! This is the front page to C2C Children Connect.
+      <br />
+      <a href="/admin">Keystone 5 Admin UI</a>
     </p>
     <hr class="divider" />
-    <div class="form-wrapper">
-      <h2 class="app-heading">To-Do List</h2>
-
-      <!-- Add todo form -->
-      <div>
-        <form @submit.prevent="addTodo">
-          <input
-            v-model="newTodo"
-            required
-            name="add-item"
-            placeholder="Add new item"
-            class="form-input add-item"
-          />
-        </form>
-      </div>
-
-      <!-- Todo list -->
-      <div class="results">
-        <!-- Data not loaded yet -->
-        <p v-if="!todos">loading...</p>
-
-        <!-- If there are no todos... -->
-        <p v-if="!todos.length">No todo items yet. Create one above! ☝️</p>
-        <!-- If there are some... -->
-        <ul v-else class="list">
-          <li v-for="todo in todos" :key="todo.id" class="list-item">
-            {{ todo.name }}
-            <!-- Remove button -->
-            <button @click="removeTodo(todo.id)" class="remove-item">
-              <svg viewBox="0 0 14 16" class="delete-icon">
-                <title>Delete this item</title>
-                <path
-                  fill-rule="evenodd"
-                  d="M11 2H9c0-.55-.45-1-1-1H5c-.55 0-1 .45-1 1H2c-.55 0-1 .45-1 1v1c0 .55.45 1 1 1v9c0 .55.45 1 1 1h7c.55 0 1-.45 1-1V5c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 12H3V5h1v8h1V5h1v8h1V5h1v8h1V5h1v9zm1-10H2V3h9v1z"
-                />
-              </svg>
-            </button>
-          </li>
-        </ul>
-      </div>
-    </div>
   </div>
 </template>
-
-<script>
-/** 
-  GraphQL Queries & Mutations
-*/
-const GET_TODOS = `
-  query GetTodos {
-    allTodos {
-      name
-      id
-    }
-  }
-`;
-
-const ADD_TODO = `
-    mutation AddTodo($name: String!) {
-      createTodo(data: { name: $name }) {
-        name
-        id
-      }
-    }
-  `;
-
-const REMOVE_TODO = `
-    mutation RemoveTodo($id: ID!) {
-      deleteTodo(id: $id) {
-        name
-        id
-      }
-    }
-  `;
-
-function graphql(query, variables = {}) {
-  return fetch("http://localhost:3000/admin/api", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      variables,
-      query,
-    }),
-  }).then(function (result) {
-    return result.json();
-  });
-}
-
-export default {
-  head: {
-    title: "Home page",
-  },
-  data() {
-    return {
-      newTodo: "",
-    };
-  },
-  // Get the todo items on server side
-  async asyncData() {
-    const { data } = await graphql(GET_TODOS);
-    return {
-      todos: data.allTodos,
-    };
-  },
-
-  methods: {
-    async getTodos() {
-      const { data } = await graphql(GET_TODOS);
-      this.todos = data.allTodos;
-    },
-    async addTodo() {
-      if (this.newTodo.length === 0) {
-        return;
-      }
-      // Add todo to list
-      await graphql(ADD_TODO, { name: this.newTodo });
-      // Reset the input field value
-      this.newTodo = "";
-      // Update the todo list
-      this.getTodos();
-    },
-
-    async removeTodo(id) {
-      await graphql(REMOVE_TODO, { id });
-      // Update the todo list
-      this.getTodos();
-    },
-  },
-};
-</script>
 
 <style>
 *,
