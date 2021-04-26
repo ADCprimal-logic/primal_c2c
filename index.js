@@ -1,33 +1,97 @@
-const { Keystone } = require('@keystonejs/keystone');
-const { Text } = require('@keystonejs/fields');
-const { GraphQLApp } = require('@keystonejs/app-graphql');
-const { AdminUIApp } = require('@keystonejs/app-admin-ui');
-const { NuxtApp } = require('@keystonejs/app-nuxt');
+const { Keystone } = require("@keystonejs/keystone");
+const { PasswordAuthStrategy } = require("@keystonejs/auth-password");
+const { Text } = require("@keystonejs/fields");
+const { GraphQLApp } = require("@keystonejs/app-graphql");
+const { AdminUIApp } = require("@keystonejs/app-admin-ui");
+const { NuxtApp } = require("@keystonejs/app-nuxt");
+const initialiseData = require("./initial-data");
+// .ENV Configuration
+const dotenv = require("dotenv");
+dotenv.config();
+console.log(process.env.PASSWORD);
 
-const { KnexAdapter: Adapter } = require('@keystonejs/adapter-knex');
-const PROJECT_NAME = 'C2C Children Connect';
-const adapterConfig = { knexOptions: { connection: 'postgres://postgres:JenovaRemake07@db.jplluueqspkamxpwipro.supabase.co:5432/postgres' } };
-
+const { KnexAdapter: Adapter } = require("@keystonejs/adapter-knex");
+const PROJECT_NAME = "C2C Children Connect";
+const adapterConfig = {
+  knexOptions: {
+    connection:
+      "postgres://postgres:JenovaRemake07@db.jplluueqspkamxpwipro.supabase.co:5432/postgres",
+  },
+};
 
 const keystone = new Keystone({
   adapter: new Adapter(adapterConfig),
+  onConnect: process.env.CREATE_TABLES !== "true" && initialiseData,
 });
 
-keystone.createList('Todo', {
-  schemaDoc: 'A list of things which need to be done',
+// Access control functions
+const userIsAdmin = ({ authentication: { item: user } }) =>
+  Boolean(user && user.isAdmin);
+const userOwnsItem = ({ authentication: { item: user } }) => {
+  if (!user) {
+    return false;
+  }
+
+  // Instead of a boolean, you can return a GraphQL query:
+  // https://www.keystonejs.com/api/access-control#graphqlwhere
+  return { id: user.id };
+};
+
+const userIsAdminOrOwner = (auth) => {
+  const isAdmin = access.userIsAdmin(auth);
+  const isOwner = access.userOwnsItem(auth);
+  return isAdmin ? isAdmin : isOwner;
+};
+
+const access = { userIsAdmin, userOwnsItem, userIsAdminOrOwner };
+
+keystone.createList("User", {
   fields: {
-    name: { type: Text, schemaDoc: 'This is the thing you need to do' },
+    name: { type: Text },
+    email: {
+      type: Text,
+      isUnique: true,
+    },
+    isAdmin: {
+      type: Checkbox,
+      // Field-level access controls
+      // Here, we set more restrictive field access so a non-admin cannot make themselves admin.
+      access: {
+        update: access.userIsAdmin,
+      },
+    },
+    password: {
+      type: Password,
+    },
   },
+  // List-level access controls
+  access: {
+    read: access.userIsAdminOrOwner,
+    update: access.userIsAdminOrOwner,
+    create: access.userIsAdmin,
+    delete: access.userIsAdmin,
+    auth: true,
+  },
+});
+
+const authStrategy = keystone.createAuthStrategy({
+  type: PasswordAuthStrategy,
+  list: "User",
+  config: { protectIdentities: process.env.NODE_ENV === "production" },
 });
 
 module.exports = {
   keystone,
   apps: [
     new GraphQLApp(),
-    new AdminUIApp({ name: PROJECT_NAME }),
+    new AdminUIApp({
+      name: PROJECT_NAME,
+      enableDefaultRoute: true,
+      authStrategy,
+    }),
     new NuxtApp({
-      srcDir: 'src',
-      buildDir: 'dist',
+      srcDir: "src",
+      buildDir: "dist",
     }),
   ],
 };

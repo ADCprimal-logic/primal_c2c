@@ -3,11 +3,9 @@
     <h1 class="main-heading">Welcome to Keystone 5!</h1>
     <p class="intro-text">
       Here's a simple
-      <a href="https://nuxtjs.org">NuxtJS</a> demo app that lets you add/remove todo items. Create a few entries, then go
-      check them out from your
-      <a
-        href="/admin"
-      >Keystone 5 Admin UI</a>!
+      <a href="https://nuxtjs.org">NuxtJS</a> demo app that lets you add/remove
+      todo items. Create a few entries, then go check them out from your
+      <a href="/admin">Keystone 5 Admin UI</a>!
     </p>
     <hr class="divider" />
     <div class="form-wrapper">
@@ -86,27 +84,27 @@ const REMOVE_TODO = `
   `;
 
 function graphql(query, variables = {}) {
-  return fetch('http://localhost:3000/admin/api', {
-    method: 'POST',
+  return fetch("http://localhost:3000/admin/api", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       variables,
       query,
     }),
-  }).then(function(result) {
+  }).then(function (result) {
     return result.json();
   });
 }
 
 export default {
   head: {
-    title: 'Home page',
+    title: "Home page",
   },
   data() {
     return {
-      newTodo: '',
+      newTodo: "",
     };
   },
   // Get the todo items on server side
@@ -129,7 +127,7 @@ export default {
       // Add todo to list
       await graphql(ADD_TODO, { name: this.newTodo });
       // Reset the input field value
-      this.newTodo = '';
+      this.newTodo = "";
       // Update the todo list
       this.getTodos();
     },
@@ -142,7 +140,6 @@ export default {
   },
 };
 </script>
-
 
 <style>
 *,
@@ -157,7 +154,8 @@ html {
 }
 
 body {
-  font-family: system-ui, BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-family: system-ui, BlinkMacSystemFont, -apple-system, Segoe UI, Roboto,
+    sans-serif;
   display: flex;
   justify-content: center;
   min-height: 100vh;
