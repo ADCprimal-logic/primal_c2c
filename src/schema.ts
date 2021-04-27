@@ -14,7 +14,7 @@ import { isSignedIn, permissions, rules } from "./access";
 
 export const lists = createSchema({
   // User Schema
-  User: list({
+  SuperAdmin: list({
     access: {
       create: () => true,
       read: rules.canManageUsers,
@@ -51,7 +51,7 @@ export const lists = createSchema({
       state: text({ isRequired: true }),
       zipcode: text({ isRequired: true }),
       resident: relationship({
-        ref: "User.address",
+        ref: "SuperAdmin.address",
       }),
     },
     ui: {
@@ -102,7 +102,7 @@ export const lists = createSchema({
       }),
       publishDate: timestamp(),
       author: relationship({
-        ref: "User.posts",
+        ref: "SuperAdmin.posts",
         defaultValue: ({ context }) => ({
           connect: { id: context.session.itemId },
         }),

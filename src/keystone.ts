@@ -41,7 +41,7 @@ export default auth.withAuth(
     },
     lists,
     session: withItemData(statelessSessions(sessionConfig), {
-      User: `id name email role { ${permissionsList.join(" ")} }`,
+      SuperAdmin: `id name email role { ${permissionsList.join(" ")} }`,
     }),
   })
 );

@@ -5,3 +5,4 @@ yarn.lock
 .nova
 .DS_Store
 dist
+src/.keystone
