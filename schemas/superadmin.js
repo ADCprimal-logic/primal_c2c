@@ -1,4 +1,6 @@
+const index = require("../index");
 const { Text, Checkbox, Password } = require("@keystonejs/fields");
+const keystone = index.indexKey;
 
 // Access control functions
 const userIsAdmin = ({ authentication: { item: user } }) =>
@@ -24,11 +26,13 @@ const access = { userIsAdmin, userOwnsItem, userIsAdminOrOwner };
 console.log("Creating SuperAdmin");
 keystone.createList("SuperAdmin", {
   fields: {
-    name: { type: Text },
+    first_name: { type: Text },
+    last_name: { type: Text },
     email: {
       type: Text,
       isUnique: true,
     },
+    phone: { type: Text },
     isAdmin: {
       type: Checkbox,
       // Field-level access controls

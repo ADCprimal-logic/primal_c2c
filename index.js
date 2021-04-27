@@ -4,8 +4,6 @@ const { Text, Checkbox, Password } = require("@keystonejs/fields");
 const { GraphQLApp } = require("@keystonejs/app-graphql");
 const { AdminUIApp } = require("@keystonejs/app-admin-ui");
 const { NuxtApp } = require("@keystonejs/app-nuxt");
-const initialiseData = require("./initial-data");
-const userSchemas = require("./schemas/superadmin");
 // .ENV Configuration
 const dotenv = require("dotenv");
 dotenv.config();
@@ -18,6 +16,9 @@ const adapterConfig = {
     connection: DATABASE_URL,
   },
 };
+
+// Keystone Class Config
+// https://www.keystonejs.com/keystonejs/keystone/
 
 const keystone = new Keystone({
   appVersion: {
@@ -32,14 +33,24 @@ const keystone = new Keystone({
     sameSite: false,
   },
   adapter: new Adapter(adapterConfig),
-  onConnect: process.env.CREATE_TABLES !== "true" && initialiseData,
 });
 
-exports.keystone = keystone;
+console.log(keystone);
 
-const authStrategy = keystone.createAuthStrategy({
+exports.indexKey = keystone;
+
+const superAdminSchema = require("./schemas/superadmin");
+const staffSchema = require("./schemas/staff");
+
+const adminAuthStrategy = keystone.createAuthStrategy({
   type: PasswordAuthStrategy,
-  list: "User",
+  list: "SuperAdmin",
+  config: { protectIdentities: process.env.NODE_ENV === "production" },
+});
+
+const staffMemberAuthStrategy = keystone.createAuthStrategy({
+  type: PasswordAuthStrategy,
+  list: "StaffMember",
   config: { protectIdentities: process.env.NODE_ENV === "production" },
 });
 
@@ -49,7 +60,8 @@ module.exports = {
     new GraphQLApp(),
     new AdminUIApp({
       name: PROJECT_NAME,
-      authStrategy,
+      adminAuthStrategy,
+      staffMemberAuthStrategy,
     }),
     new NuxtApp({
       srcDir: "src",
