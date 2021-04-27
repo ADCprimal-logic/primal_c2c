@@ -2,7 +2,7 @@
 
 To get setup for this project you will need to set up a handful of things.
 
-1. Set up the .env as shown in the example below.
+1. Set up the .env as shown in the example below and put it in your project root.
 2. Run `yarn install` to install all the dependancies from package.json
 3. Run `yarn dev` to initialize the project so it can be built and ran locally. If asked, "Are you interested in participating?", type N.
 
