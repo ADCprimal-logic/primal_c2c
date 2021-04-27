@@ -13,7 +13,7 @@
     "build": "cross-env NODE_ENV=production keystone build",
     "start": "cross-env NODE_ENV=production keystone start",
     "create-tables": "cross-env keystone create-tables",
-    "project-setup": "yarn install && yarn dev"
+    "project-setup": "yarn install && yarn dev && cd src && yarn install"
   },
   "repository": "https://github.com/keystonejs/keystone-5/tree/main/packages/create-keystone-5-app/example-projects/nuxt",
   "homepage": "https://github.com/keystonejs/keystone-5",

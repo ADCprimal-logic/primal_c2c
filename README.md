@@ -37,4 +37,6 @@ FRONTEND_URL="http://localhost:7777
 ## Documentation for further development:
 
 - KeystoneJS (Back-End): https://www.keystonejs.com/documentation/
+  - KnexJS (Database Middleware): https://knexjs.org
 - NuxtJS (Front-End): https://nuxtjs.org/docs/2.x/get-started/installation
+  - Vue (Javascript Framework): https://vuejs.org
