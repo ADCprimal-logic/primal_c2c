@@ -25,6 +25,7 @@ CLOUDINARY_SECRET= "abcdwxyz"
 # Endpoint URLS
 DATABASE_URL="postgres://primal_postgres:primal-squad@c2cdatabase.cqs5a6cxnjkx.us-east-1.rds.amazonaws.com:5432/development"
 FRONTEND_URL="http://localhost:7777"
+NUXT_TELEMETRY_DISABLED=1
 ```
 
 ## Scripts to Run with Yarn
