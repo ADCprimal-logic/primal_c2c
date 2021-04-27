@@ -16,6 +16,7 @@ Once run you will have a http://localhost:3000 url which would prompt our NuxtJS
 
 ```
 PROJECT_NAME="C2C Children Connect"
+VERSION_NUMBER="0.0.1"
 COOKIE_SECRET="bNLVPe1NIFSCeNRHEQ7CUyjcnVzko6MI"
 # Cloudinary Creds
 CLOUDINARY_CLOUD_NAME= "cloud_name"
@@ -23,7 +24,7 @@ CLOUDINARY_KEY= "cloud_key"
 CLOUDINARY_SECRET= "abcdwxyz"
 # Endpoint URLS
 DATABASE_URL="postgres://primal_postgres:primal-squad@c2cdatabase.cqs5a6cxnjkx.us-east-1.rds.amazonaws.com:5432/development"
-FRONTEND_URL="http://localhost:7777
+FRONTEND_URL="http://localhost:7777"
 ```
 
 ## Scripts to Run with Yarn
