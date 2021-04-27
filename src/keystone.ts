@@ -16,7 +16,7 @@ const sessionConfig = {
 };
 
 const auth = createAuth({
-  listKey: "User",
+  listKey: "SuperAdmin",
   identityField: "email",
   secretField: "password",
   initFirstItem: {
