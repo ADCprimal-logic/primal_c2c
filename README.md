@@ -4,7 +4,8 @@ To get setup for this project you will need to set up a handful of things.
 
 1. Set up the .env as shown in the example below and put it in the server folder.
 2. Run `yarn install` to install all the dependancies from package.json
-3. Run `yarn dev` to initialize the project so it can be built and ran locally.
+3. Run `yarn create-tables` to initalize all the tables in your project found in the schema folder under server.
+4. Run `yarn dev` to initialize the project so it can be built and ran locally.
 
 Once run you will have a http://localhost:3000 url which would prompt our NuxtJS Front-End with http://localhost:3000/admin acting as our Administrative KeystoneJS Backend
 
@@ -32,5 +33,10 @@ NUXT_TELEMETRY_DISABLED=1
 
 - KeystoneJS (Back-End): https://www.keystonejs.com/documentation/
   - KnexJS (Database Middleware): https://knexjs.org
+  - Apollo (GraphQL Playground): https://www.apollographql.com/docs/apollo-server/testing/graphql-playground/
 - NuxtJS (Front-End): https://nuxtjs.org/docs/2.x/get-started/installation
+
   - Vue (Javascript Framework): https://vuejs.org
+
+email: c2cSuper@admin.net
+password: ac5f1e12ca66

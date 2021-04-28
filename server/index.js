@@ -12,6 +12,7 @@ const { KnexAdapter: Adapter } = require("@keystonejs/adapter-knex");
 const initialData = require("./initialData");
 const PROJECT_NAME = process.env.PROJECT_NAME;
 const DATABASE_URL = process.env.DATABASE_URL;
+console.log("Database: " + DATABASE_URL);
 const adapterConfig = {
   knexOptions: {
     connection: DATABASE_URL,
@@ -34,6 +35,7 @@ const keystone = new Keystone({
     sameSite: false,
   },
   adapter: new Adapter(adapterConfig),
+  //onConnect: process.env.CREATE_TABLES !== "true" && initialData,
 });
 
 //console.log(keystone);
@@ -61,7 +63,6 @@ module.exports = {
     new GraphQLApp(),
     new AdminUIApp({
       name: PROJECT_NAME,
-      enableDefaultRoute: true,
       adminAuthStrategy,
     }),
     new NuxtApp({

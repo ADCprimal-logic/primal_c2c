@@ -6,7 +6,7 @@
   "author": "primal. Development Team",
   "license": "MIT",
   "engines": {
-    "node": ">=10.0.0"
+    "node": "16.0.0"
   },
   "scripts": {
     "dev": "cd server && cross-env NODE_ENV=development DISABLE_LOGGING=true keystone dev",
@@ -14,7 +14,8 @@
     "start": "cd server && cross-env NODE_ENV=production keystone start",
     "build-test": "cd server && cross-env NODE_ENV=testing keystone build",
     "start-test": "cd server && cross-env NODE_ENV=testing keystone start",
-    "create-tables": "cd server && cross-env keystone create-tables"
+    "create-tables": "cd server && cross-env keystone create-tables",
+    "project-setup": "yarn install && cd client/src && yarn install"
   },
   "repository": "https://github.com/keystonejs/keystone-5/tree/main/packages/create-keystone-5-app/example-projects/nuxt",
   "homepage": "https://github.com/keystonejs/keystone-5",
