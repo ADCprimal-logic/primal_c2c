@@ -2,9 +2,10 @@ const index = require("../index");
 const { Text, Checkbox, Password } = require("@keystonejs/fields");
 const keystone = index.indexKey;
 
-keystone.createList("Location", {
+console.log("Creating Child");
+keystone.createList("Child", {
   fields: {
-    name: { type: Text },
-    program: { type: Text },
+    first_name: { type: Text },
+    last_name: { type: Text },
   },
 });

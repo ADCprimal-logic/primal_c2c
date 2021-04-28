@@ -9,6 +9,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const { KnexAdapter: Adapter } = require("@keystonejs/adapter-knex");
+const initialData = require("./initialData");
 const PROJECT_NAME = process.env.PROJECT_NAME;
 const DATABASE_URL = process.env.DATABASE_URL;
 const adapterConfig = {
@@ -26,8 +27,8 @@ const keystone = new Keystone({
     addVersionToHttpHeaders: true,
     access: true,
   },
+  cookieSecret: process.env.COOKIE_SECRET,
   cookie: {
-    cookieSecret: process.env.COOKIE_SECRET,
     secure: process.env.NODE_ENV === "production", // Default to true in production
     maxAge: 1000 * 60 * 60 * 24 * 30, // 30 days
     sameSite: false,
@@ -35,22 +36,22 @@ const keystone = new Keystone({
   adapter: new Adapter(adapterConfig),
 });
 
-console.log(keystone);
+//console.log(keystone);
 
 exports.indexKey = keystone;
 
+// User Schemas
 const superAdminSchema = require("./schemas/superadmin");
 const staffSchema = require("./schemas/staff");
+const parentSchema = require("./schemas/parent");
+const childSchema = require("./schemas/child");
+// Object Schemas
+const locationSchema = require("./schemas/location");
+const scheduleSchema = require("./schemas/schedule");
 
 const adminAuthStrategy = keystone.createAuthStrategy({
   type: PasswordAuthStrategy,
   list: "SuperAdmin",
-  config: { protectIdentities: process.env.NODE_ENV === "production" },
-});
-
-const staffMemberAuthStrategy = keystone.createAuthStrategy({
-  type: PasswordAuthStrategy,
-  list: "StaffMember",
   config: { protectIdentities: process.env.NODE_ENV === "production" },
 });
 
@@ -60,12 +61,12 @@ module.exports = {
     new GraphQLApp(),
     new AdminUIApp({
       name: PROJECT_NAME,
+      enableDefaultRoute: true,
       adminAuthStrategy,
-      staffMemberAuthStrategy,
     }),
     new NuxtApp({
-      srcDir: "src",
-      buildDir: "dist",
+      srcDir: "../client/src",
+      buildDir: "../client/dist",
     }),
   ],
 };

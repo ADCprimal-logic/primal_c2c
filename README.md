@@ -2,7 +2,7 @@
 
 To get setup for this project you will need to set up a handful of things.
 
-1. Set up the .env as shown in the example below and put it in your project root.
+1. Set up the .env as shown in the example below and put it in the server folder.
 2. Run `yarn install` to install all the dependancies from package.json
 3. Run `yarn dev` to initialize the project so it can be built and ran locally.
 
@@ -26,14 +26,6 @@ CLOUDINARY_SECRET= "abcdwxyz"
 DATABASE_URL="postgres://primal_postgres:primal-squad@c2cdatabase.cqs5a6cxnjkx.us-east-1.rds.amazonaws.com:5432/development"
 FRONTEND_URL="http://localhost:7777"
 NUXT_TELEMETRY_DISABLED=1
-```
-
-## Scripts to Run with Yarn
-
-```
-"dev": "cross-env NODE_ENV=development DISABLE_LOGGING=true keystone dev"
-"build": "cross-env NODE_ENV=production keystone build"
-"start": "cross-env NODE_ENV=production keystone start"
 ```
 
 ## Documentation for further development:

@@ -9,13 +9,12 @@
     "node": ">=10.0.0"
   },
   "scripts": {
-    "dev": "cross-env NODE_ENV=development DISABLE_LOGGING=true keystone dev",
-    "build": "cross-env NODE_ENV=production keystone build",
-    "start": "cross-env NODE_ENV=production keystone start",
-    "build-test": "cross-env NODE_ENV=testing keystone build",
-    "start-test": "cross-env NODE_ENV=testing keystone start",
-    "create-tables": "cross-env keystone create-tables",
-    "project-setup": "yarn install && yarn dev && cd src && yarn install"
+    "dev": "cd server && cross-env NODE_ENV=development DISABLE_LOGGING=true keystone dev",
+    "build": "cd server && cross-env NODE_ENV=production keystone build",
+    "start": "cd server && cross-env NODE_ENV=production keystone start",
+    "build-test": "cd server && cross-env NODE_ENV=testing keystone build",
+    "start-test": "cd server && cross-env NODE_ENV=testing keystone start",
+    "create-tables": "cd server && cross-env keystone create-tables"
   },
   "repository": "https://github.com/keystonejs/keystone-5/tree/main/packages/create-keystone-5-app/example-projects/nuxt",
   "homepage": "https://github.com/keystonejs/keystone-5",
