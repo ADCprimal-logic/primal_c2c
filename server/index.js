@@ -19,23 +19,9 @@ const adapterConfig = {
   },
 };
 
-// Keystone Class Config
-// https://www.keystonejs.com/keystonejs/keystone/
-
 const keystone = new Keystone({
-  appVersion: {
-    version: process.env.VERSION_NUMBER,
-    addVersionToHttpHeaders: true,
-    access: true,
-  },
-  cookieSecret: process.env.COOKIE_SECRET,
-  cookie: {
-    secure: process.env.NODE_ENV === "production", // Default to true in production
-    maxAge: 1000 * 60 * 60 * 24 * 30, // 30 days
-    sameSite: false,
-  },
   adapter: new Adapter(adapterConfig),
-  //onConnect: process.env.CREATE_TABLES !== "true" && initialData,
+  onConnect: process.env.CREATE_TABLES !== "true" && initialiseData,
 });
 
 //console.log(keystone);
@@ -51,7 +37,7 @@ const childSchema = require("./schemas/child");
 const locationSchema = require("./schemas/location");
 const scheduleSchema = require("./schemas/schedule");
 
-const adminAuthStrategy = keystone.createAuthStrategy({
+const authStrategy = keystone.createAuthStrategy({
   type: PasswordAuthStrategy,
   list: "SuperAdmin",
   config: { protectIdentities: process.env.NODE_ENV === "production" },
@@ -63,7 +49,7 @@ module.exports = {
     new GraphQLApp(),
     new AdminUIApp({
       name: PROJECT_NAME,
-      adminAuthStrategy,
+      authStrategy,
     }),
     new NuxtApp({
       srcDir: "../client/src",
