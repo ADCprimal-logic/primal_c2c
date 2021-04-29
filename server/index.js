@@ -9,7 +9,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const { KnexAdapter: Adapter } = require("@keystonejs/adapter-knex");
-const initialData = require("./initialData");
+const initialiseData = require("./initial-data");
 const PROJECT_NAME = process.env.PROJECT_NAME;
 const DATABASE_URL = process.env.DATABASE_URL;
 console.log("Database: " + DATABASE_URL);
