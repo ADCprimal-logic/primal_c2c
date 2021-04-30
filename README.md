@@ -9,13 +9,23 @@ To get setup for this project you will need to set up a handful of things.
 
 To run the Keystone server, run 'npm run dev'. This gives you a http://localhost:3000 url and place to interact with the backend.
 
+## NOTICE:
+
+> This is using Keystone 6 or Keystone-Next, the next stage for KeystoneJS. In order to future proof the product we are developing schemas and frameworks on this branch so functionality is one for one without sacrificing time to learn new syntax once a new version is released.
+
 Environment Set Up (.env file)
 
 ```
+#Back-End Environment
+PROJECT_NAME="C2C Children Connect"
+VERSION_NUMBER="0.0.1"
+COOKIE_SECRET="bNLVPe1NIFSCeNRHEQ7CUyjcnVzko6MI"
+# Cloudinary Creds
 CLOUDINARY_CLOUD_NAME= "cloud_name"
 CLOUDINARY_KEY= "cloud_key"
 CLOUDINARY_SECRET= "abcdwxyz"
-COOKIE_SECRET="32 character string"
-DATABASE_URL="Supabase.io DB url in supabase settings"
-FRONTEND_URL="http://localhost:7777
+# Endpoint URLS
+DATABASE_URL="postgres://primal_postgres:primal-squad@c2cdatabase.cqs5a6cxnjkx.us-east-1.rds.amazonaws.com:5432/development"
+FRONTEND_URL="http://localhost:7777"
+NUXT_TELEMETRY_DISABLED=1
 ```
