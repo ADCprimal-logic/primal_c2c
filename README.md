@@ -35,8 +35,4 @@ NUXT_TELEMETRY_DISABLED=1
   - KnexJS (Database Middleware): https://knexjs.org
   - Apollo (GraphQL Playground): https://www.apollographql.com/docs/apollo-server/testing/graphql-playground/
 - NuxtJS (Front-End): https://nuxtjs.org/docs/2.x/get-started/installation
-
   - Vue (Javascript Framework): https://vuejs.org
-
-email: c2cSuper@admin.net
-password: ac5f1e12ca66
