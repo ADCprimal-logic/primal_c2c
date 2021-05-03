@@ -45,7 +45,7 @@ keystone.createList("SuperAdmin", {
       type: Password,
     },
   },
-  //labelResolver: item => `${item.first_name} ${item.last_name}`,
+  labelResolver: (item) => `Admin ${item.id}`,
   // List-level access controls
   access: {
     read: access.userIsAdminOrOwner,
