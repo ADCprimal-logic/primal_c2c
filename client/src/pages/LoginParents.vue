@@ -1,15 +1,24 @@
 <template>
   <div class="app">
-    <h1 class="main-heading">C2C Children Connect</h1>
+    <h1 class="main-heading">C2C Parents Login</h1>
     <p class="intro-text">
-      Hello! This is the front page to C2C Children Connect.
-      <br />
-      <a href="/admin">Keystone 5 Admin UI</a>
-      <br />
-    </p>
+      <hr class="divider" />
+      <br>Welcome parents!<br/> 
+      Returning users login here.<br/>
+      <br>
+<form>
+  <label for="username">Username:</label><br>
+  <input type="text" id="username" name="username"><br>
+  <label for="pwd">Password:</label><br>
+  <input type="password" id="pwd" name="pwd">
+</form>
+      
+
+    <a href="/">Return</a><br />
     <hr class="divider" />
-    <NuxtLink to="/next">NuxtJS FUN</NuxtLink> <br />
-    <NuxtLink to="/login">Login</NuxtLink> <br />
+    <a href=/resetpassword>Forgot password?</a><br />
+    <a href=/new_register>Don't have an account yet?</a>
+    
   </div>
 </template>
 
@@ -54,7 +63,7 @@ body {
   margin: 20px 20px;
   padding: 20px;
   max-width: 600px;
-  background: #fff;
+  background: rgb(255, 255, 255);
   border-radius: 18px;
   border: solid 3px hsl(220, 70%, 60%, 0.8);
   color: hsla(220, 84%, 14%, 1);
@@ -125,5 +134,11 @@ body {
   width: 20px;
   height: 20px;
   fill: hsla(220, 84%, 60%, 1);
+}
+.vertical-line{
+        display: inline-block;
+        border-left: 1px solid #ccc;
+        margin: 0 10px;
+        height: 300px;
 }
 </style>
