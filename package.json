@@ -5,9 +5,6 @@
   "version": "0.0.0",
   "author": "primal. Development Team",
   "license": "MIT",
-  "engines": {
-    "node": "16.0.0"
-  },
   "scripts": {
     "dev": "cd server && cross-env NODE_ENV=development DISABLE_LOGGING=true keystone dev",
     "build": "cd server && cross-env NODE_ENV=production keystone build",
