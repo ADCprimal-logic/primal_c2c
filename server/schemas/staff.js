@@ -14,4 +14,5 @@ keystone.createList("StaffMember", {
     phone: { type: Text },
     status: { type: Text },
   },
+  //labelResolver: item => `${item.first_name} ${item.last_name}`,
 });
