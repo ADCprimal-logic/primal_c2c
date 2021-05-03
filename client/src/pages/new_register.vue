@@ -23,14 +23,53 @@
             </select>
         <br />
         <br />
-            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-            <label for="vehicle1"> I have a bike</label><br>
+        <div class="border-5">
+            <label for="program"><span>* </span>What program are you enrolling your child in?</label><br><br>
+                <input type="radio" id="op1" name="programType" value="op1">
+                <label for="op1"> C2C Virtual SChool (5 Full Days)</label><br><br>
 
-            <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-            <label for="vehicle2"> I have a car</label><br>
+                <input type="radio" id="op2" name="programType" value="op2">
+                <label for="op2"> Hybrid E-learning (Full days/school pick ups as needed due to school's schedule)</label><br><br>
 
-            <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-            <label for="vehicle3"> I have a boat</label><br><br>
+                <input type="radio" id="op3" name="programType" value="op3">
+                <label for="op3"> After School Only (School pick up-6pm only)</label><br><br>
+
+                <input type="radio" id="op4" name="programType" value="op4">
+                <label for="op4"> Drop-In Attendance (Summer Camp Only)</label><br><br>
+
+                <input type="radio" id="op5" name="programType" value="op5">
+                <label for="op5"> Summer Camp Only (2021)</label><br><br>
+
+                <input type="radio" id="op6" name="programType" value="op6">
+                <label for="op6"> Annual Contract (June 2021 - May 2022)</label><br><br>
+        </div>
+        <br />
+        <br />
+        <br>
+        <h3>Child's Information</h3>
+        <p>Please complete 1 registration for each child.</p>
+        <br>
+        <label><span>* </span>Child's Name</label>
+        <br>
+        <input type="text" placeholder="First Name"><input type="text" placeholder="Last Name">
+
+        <br><br>
+        
+        <label><span>* </span>Child's Gender</label>
+        <br>
+        <input type="radio" id="M" name="gender" value="op1">
+        <label for="op1"> Male</label><br>
+
+        <input type="radio" id="F" name="gender" value="op2">
+        <label for="op2"> Female</label><br><br>
+
+        <br><br>
+
+
+        
+
+
+
         <br />
         <br />
         <input type="submit" value="Submit">
@@ -102,6 +141,13 @@ body {
 .intro-text {
   line-height: 1.5;
   color: hsla(220, 84%, 14%, 0.6);
+}
+
+.border-5 {
+    border: thin solid black;
+    border-radius: 5px;
+    padding: 10px;
+
 }
 
 .divider {
