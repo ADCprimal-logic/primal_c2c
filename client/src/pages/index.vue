@@ -9,7 +9,7 @@
     </p>
     <hr class="divider" />
     <NuxtLink to="/next">NuxtJS FUN</NuxtLink> <br />
-    <NuxtLink to="/login">Login</NuxtLink> <br />
+    <NuxtLink to="/loginparents">Login</NuxtLink> <br />
   </div>
 </template>
 
