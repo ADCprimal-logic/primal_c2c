@@ -2,7 +2,7 @@
   "name": "c2c-children-connect-back",
   "description": "A NuxtJS example project.",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": "primal. Development Team",
   "license": "MIT",
   "scripts": {
