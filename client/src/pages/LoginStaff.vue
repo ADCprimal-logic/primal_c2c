@@ -1,9 +1,9 @@
 <template>
   <div class="app">
-    <h1 class="main-heading">C2C Parents Login</h1>
+    <h1 class="main-heading">C2C Staff Login</h1>
     <p class="intro-text">
       <hr class="divider" />
-      <br>Welcome parents!<br/> 
+      <br>Welcome employees!<br/> 
       Returning users login here.<br/>
       <br>
 <form>
@@ -15,7 +15,6 @@
     <a href="/">Return</a><br />
     <hr class="divider" />
     <a href=/resetpassword>Forgot password?</a><br />
-    <a href=/new_register>Don't have an account yet?</a>
   </div>
 </template>
 
@@ -138,4 +137,10 @@ body {
         margin: 0 10px;
         height: 250px;
 }
+logofloater {
+  float: right;
+  margin: 0 1.5%;
+  width: 30%;
+}
+
 </style>
