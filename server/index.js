@@ -27,7 +27,7 @@ const keystone = new Keystone({
     sameSite: false,
   },
   adapter: new Adapter(adapterConfig),
-  onConnect: process.env.CREATE_TABLES !== "true" && initialiseData,
+  //onConnect: process.env.CREATE_TABLES !== "true" && initialiseData,
 });
 
 //console.log(keystone);
