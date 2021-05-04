@@ -4,6 +4,7 @@ const { Text, Checkbox, Password } = require("@keystonejs/fields");
 const { GraphQLApp } = require("@keystonejs/app-graphql");
 const { AdminUIApp } = require("@keystonejs/app-admin-ui");
 const { NuxtApp } = require("@keystonejs/app-nuxt");
+
 // .ENV Configuration
 const dotenv = require("dotenv");
 dotenv.config();
@@ -18,6 +19,29 @@ const adapterConfig = {
     connection: DATABASE_URL,
   },
 };
+
+const { S3Adapter } = require("@keystonejs/file-adapters");
+/*const CF_DISTRIBUTION_ID = 'cloudfront-distribution-id';
+const S3_PATH = 'uploads';
+
+const fileAdapter = new S3Adapter({
+  bucket: 'bucket-name',
+  folder: S3_PATH,
+  publicUrl: ({ id, filename, _meta }) =>
+    `https://${CF_DISTRIBUTION_ID}.cloudfront.net/${S3_PATH}/${filename}`,
+  s3Options: {
+    // Optional paramaters to be supplied directly to AWS.S3 constructor
+    apiVersion: '2006-03-01',
+    accessKeyId: 'ACCESS_KEY_ID',
+    secretAccessKey: 'SECRET_ACCESS_KEY',
+    region: 'us-west-2',
+  },
+  uploadParams: ({ filename, id, mimetype, encoding }) => ({
+    Metadata: {
+      keystone_id: `${id}`,
+    },
+  }),
+});*/
 
 const keystone = new Keystone({
   cookieSecret: process.env.COOKIE_SECRET,

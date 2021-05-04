@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "c2c-children-connect",
+    title: "C2C Children Connect",
     htmlAttrs: {
       lang: "en",
     },
