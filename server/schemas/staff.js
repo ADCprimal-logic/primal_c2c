@@ -12,7 +12,8 @@ keystone.createList("StaffMember", {
       isUnique: true,
     },
     phone: { type: Text },
-    status: { type: Text },
+    location: { type: Relationship, ref: "Location", many: false },
+    schedule: { type: Relationship, ref: "Schedule", many: false },
   },
   //labelResolver: item => `${item.first_name} ${item.last_name}`,
 });
