@@ -14,8 +14,29 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
-
+  css: [
+	~/assets/css/main.css
+	~/assets/css/bootstrap.min.css
+	~/assets/css/font-awesome.min.css
+	~/assets/css/owl.carousel.css
+	~/assets/css/owl.theme.css
+	~/assets/css/owl.theme.css
+	~/assets/css/owl.theme.css
+	~/assets/css/owl.transitions.css
+	~/assets/css/animate.css
+	~/assets/css/normalize.css
+        ~/assets/css/main.css
+        ~/assets/css/morrisjs/morris.css
+	~/assets/css/scrollbar/jquery.mCustomScrollbar.min.css
+	~/assets/css/metisMenu/metisMenu.min.css
+	~/assets/css/metisMenu/metisMenu-vertical.css
+	~/assets/css/calendar/fullcalendar.min.css
+	~/assets/css/calendar/fullcalendar.print.min.css
+	~/assets/css/form/all-type-forms.css
+	~/assets/style.css
+        ~/assets/css/responsive.css 
+],
+	
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
 
