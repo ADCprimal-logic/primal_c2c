@@ -1,5 +1,18 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    export default {
+        head () {
+            script: [
+            {
+              src: "static/test.js",
+              body: false
+            },]
+        }
+    }
+</script>
+
 <template>
-  <div class="app">
+  <div class="app" >
     <h1 class="main-heading">C2C Kids Registration</h1>
     <p class="intro-text">
       This form is for Kindergarten - 8th grade students at our Spartanburg or Greenville locations. If you would like to register for our Preschool in Lyman, please call (864) 529-9386 ext. 2 and request an appointment. Thank you!
@@ -9,7 +22,7 @@
     </p>
     <hr class="divider" />
     <br />
-    <form>
+    <form id="demo">
         <label><span>* </span>How did you hear about C2C Kids?</label>
             <textarea id="hearAbout" name="hearAbout" rows="4" cols="50">
             </textarea>
@@ -17,8 +30,8 @@
         <br><br>
 
         <label for="location"><span>* </span>C2C Location:</label>
-            <select name="cars" id="cars">
-                <option value="--">--</option>
+            <select name="location" id="location">
+                <option value="">--</option>
                 <option value="GreenVille">Greenville</option>
                 <option value="Spartanburg">Spartanburg</option>
             </select>
@@ -27,22 +40,22 @@
 
         <div class="border-5">
             <label for="program"><span>* </span>What program are you enrolling your child in?</label><br><br>
-                <input type="radio" id="op1" name="programType" value="op1">
+                <input type="radio" id="op1" name="programType" value="C2C Virtual SChool (5 Full Days)">
                 <label for="op1"> C2C Virtual SChool (5 Full Days)</label><br><br>
 
-                <input type="radio" id="op2" name="programType" value="op2">
+                <input type="radio" id="op2" name="programType" value="Hybrid E-learning (Full days/school pick ups as needed due to school's schedule)">
                 <label for="op2"> Hybrid E-learning (Full days/school pick ups as needed due to school's schedule)</label><br><br>
 
-                <input type="radio" id="op3" name="programType" value="op3">
+                <input type="radio" id="op3" name="programType" value="After School Only (School pick up-6pm only)">
                 <label for="op3"> After School Only (School pick up-6pm only)</label><br><br>
 
-                <input type="radio" id="op4" name="programType" value="op4">
+                <input type="radio" id="op4" name="programType" value="Drop-In Attendance (Summer Camp Only)">
                 <label for="op4"> Drop-In Attendance (Summer Camp Only)</label><br><br>
 
-                <input type="radio" id="op5" name="programType" value="op5">
+                <input type="radio" id="op5" name="programType" value="Summer Camp Only (2021)">
                 <label for="op5"> Summer Camp Only (2021)</label><br><br>
 
-                <input type="radio" id="op6" name="programType" value="op6">
+                <input type="radio" id="op6" name="programType" value="Annual Contract (June 2021 - May 2022)">
                 <label for="op6"> Annual Contract (June 2021 - May 2022)</label><br><br>
         </div>
         
@@ -52,13 +65,13 @@
         <h3>Child's Information</h3>
         <p>Please complete 1 registration for each child.</p>
         <br>
-        <label><span>* </span>Child's Name</label>
+        <label><span>* </span>Child's Name</label> {{ msg }}
         <br>
-        <input type="text" placeholder="First Name"><input type="text" placeholder="Last Name">
+        <input type="text" placeholder="First Name" id="fname" v-model="msg"><input type="text" placeholder="Last Name" id="lname">
 
         <br><br>
         
-        <label><span>* </span>Child's Gender</label>
+        <label><span>* </span>Child's Genders</label>
         <br>
         <input type="radio" id="M" name="gender" value="op1">
         <label for="op1"> Male</label><br>
@@ -286,6 +299,8 @@
         <input type="text" maxlength="3" id="docNum1" size="3"> -
         <input type="text" maxlength="3" id="docNum2" size="3"> -
         <input type="text" maxlength="4" id="docNum3" size="4">
+        
+    
 
         <br><br>
 
@@ -607,7 +622,7 @@
 		<br><br>
 
 		<label>What is your expected start date at C2C Kids?</label><br>
-        <select name="dob-month" id="dob-month">
+        <select name="expected-m" id="expected-m">
                 <option value="">Month</option>
                 <option value="01">January</option>
                 <option value="02">February</option>
@@ -622,7 +637,7 @@
                 <option value="11">November</option>
                 <option value="12">December</option>
         </select>
-        <select name="dob-day" id="dob-day">
+        <select name="expected-d" id="expected-d">
                 <option value="">Day</option>
                 <option value="01">01</option>
                 <option value="02">02</option>
@@ -656,7 +671,7 @@
                 <option value="30">30</option>
                 <option value="31">31</option>
         </select>
-        <select name="dob-year" id="dob-year">
+        <select name="expected-y" id="expected-y">
                 <option value="">Year</option>
                 <option value="2021">2021</option>
                 <option value="2020">2020</option>
@@ -783,10 +798,12 @@
 
 
         <br><br>
-        <input type="submit" value="Submit">
+        <input type="submit" id="register" value="Register" v-on:click="greet" />
+        <button @click="greet">Greet</button>
     </form>
   </div>
 </template>
+
 
 <style>
 *,
