@@ -3,7 +3,7 @@
 To get setup for this project you will need to set up a handful of things.
 
 1. Set up the .env as shown in the example below and put it in the server folder.
-2. Run `yarn setup-project` to install all the dependancies from package.json on both the front-end & back-end
+2. Run `yarn install` to install all the dependancies from package.json on both the front-end & back-end
    - If running with a new database url, run `yarn create-tables` to initialize all the tables in your project found in the schema folder under server.
 3. Run `yarn dev` to initialize the project so it can be built and ran locally.
 
@@ -36,7 +36,7 @@ NUXT_TELEMETRY_DISABLED=1
   - Apollo (GraphQL Playground): https://www.apollographql.com/docs/apollo-server/testing/graphql-playground/
 - NuxtJS (Front-End): https://nuxtjs.org/docs/2.x/get-started/installation
   - Vue (Javascript Framework): https://vuejs.org
-  
+
 ## Contributing Repo
 
 > NuxtJs Dashboard is based on Vuetify Material Theme purposed by Creative Tim
