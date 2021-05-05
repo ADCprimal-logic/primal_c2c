@@ -7,5 +7,10 @@ keystone.createList("Location", {
   fields: {
     name: { type: Text },
     program: { type: Text },
+    street_Address: { type: Text },
+    city: { type: Text },
+    state: { type: Text },
+    zip: { type: Text },
+    country: { type: Text },
   },
 });
