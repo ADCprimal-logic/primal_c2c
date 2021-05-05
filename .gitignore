@@ -1,7 +1,12 @@
 node_modules
-src/.keystone
 *.log
 .env
+yarn.lock
 package-lock.json
-yarn-lock.json
 .nova
+.nuxt
+.vs
+.DS_Store
+dist
+.keystone
+schema.*
