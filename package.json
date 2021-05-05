@@ -11,7 +11,9 @@
     "start": "cd server && cross-env NODE_ENV=production keystone start",
     "build-test": "cd server && cross-env NODE_ENV=testing keystone build",
     "start-test": "cd server && cross-env NODE_ENV=testing keystone start",
-    "create-tables": "cd server && cross-env keystone create-tables"
+    "create-tables": "cd server && cross-env keystone create-tables",
+    "matchmaker": "cd server && cross-env keystone upgrade-relationships",
+    "matchmaker-date": "cd server && cross-env keystone upgrade-relationships --migration"
   },
   "repository": "https://github.com/keystonejs/keystone-5/tree/main/packages/create-keystone-5-app/example-projects/nuxt",
   "homepage": "https://github.com/keystonejs/keystone-5",
