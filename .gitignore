@@ -2,6 +2,7 @@ node_modules
 *.log
 .env
 yarn.lock
+package-lock.json
 .nova
 .DS_Store
 dist
