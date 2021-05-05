@@ -36,10 +36,10 @@ NUXT_TELEMETRY_DISABLED=1
   - Apollo (GraphQL Playground): https://www.apollographql.com/docs/apollo-server/testing/graphql-playground/
 - NuxtJS (Front-End): https://nuxtjs.org/docs/2.x/get-started/installation
   - Vue (Javascript Framework): https://vuejs.org
-
+  
 ## Contributing Repo
 
 > NuxtJs Dashboard is based on Vuetify Material Theme purposed by Creative Tim
 
 NuxtJs Dashboard Vuetify Material is a beautiful resource built over [NuxtJs](https://nuxtjs.org/) coupled with [Vuetify](https://vuetifyjs.com/en/). It will help you get started developing dashboards in no time.
-This dashboard is the official Vuetify version of the Original [Material Dashboard](https://www.creative-tim.com/product/material-dashboard). Using the Dashboard is pretty simple but requires basic knowledge of [NuxtJs](https://nuxtjs.org/) and [Vuetify](https://vuetifyjs.com/en/).
+This dashboard is the official Vuetify version of the Original [Material Dashboard](https://www.creative-tim.com/product/material-dashbo
