@@ -2,7 +2,10 @@ node_modules
 *.log
 .env
 yarn.lock
+package-lock.json
+.vs
 .nova
+.nuxt
 .DS_Store
 dist
 .keystone
