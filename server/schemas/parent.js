@@ -1,5 +1,6 @@
 const index = require("../index");
-const { Text, Checkbox, Password } = require("@keystonejs/fields");
+const { Text, Relationship } = require("@keystonejs/fields");
+const Stripe = require("stripe");
 const keystone = index.indexKey;
 
 console.log("Creating Parent");
@@ -12,5 +13,7 @@ keystone.createList("Parent", {
       isUnique: true,
     },
     phone: { type: Text },
+    child: { type: Relationship, ref: "Child", many: true },
+    stripeId: { type: Text },
   },
 });

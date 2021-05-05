@@ -1,5 +1,7 @@
 # Keystone Schemas
 
-Using `createList` we are able to create "schemas" for our PostGreSQL database.
+Using `createList` we are able to create "schemas" for our PostgreSQL database.
 
-To see more detail about options for this, see: https://www.keystonejs.com/api/create-list
+Creating Lists through Keystone: https://www.keystonejs.com/api/create-list
+Schema Guide for Keystone: https://www.keystonejs.com/guides/schema
+Data Relationships Between Schemas: https://www.keystonejs.com/guides/relationships

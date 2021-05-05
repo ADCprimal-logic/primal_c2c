@@ -23,7 +23,7 @@ module.exports = async (keystone) => {
     const { errors } = await keystone.executeGraphQL({
       context: keystone.createContext().sudo(),
       query: `mutation initialSuperAdmin($password: String, $email: String) {
-            createSuperAdmin(data: {first_name: "Admin", email: $email, isAdmin: true, phone: "", password: $password}) {
+            createSuperAdmin(data: {first_name: "Super", last_name: "Admin" email: $email, isAdmin: true, phone: "", password: $password}) {
               id
             }
           }`,
@@ -31,12 +31,12 @@ module.exports = async (keystone) => {
     });
 
     if (errors) {
-      console.log("failed to create initial user:");
+      console.log("failed to create initial super admin:");
       console.log(errors);
     } else {
       console.log(`
 
-      User created:
+      SuperAdmin created:
         email: ${email}
         password: ${password}
       Please change these details after initial login.

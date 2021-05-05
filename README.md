@@ -3,11 +3,11 @@
 To get setup for this project you will need to set up a handful of things.
 
 1. Set up the .env as shown in the example below and put it in the server folder.
-2. Run `yarn install` to install all the dependancies from package.json
-3. Run `yarn create-tables` to initalize all the tables in your project found in the schema folder under server.
-4. Run `yarn dev` to initialize the project so it can be built and ran locally.
+2. Run `yarn setup-project` to install all the dependancies from package.json on both the front-end & back-end
+   - If running with a new database url, run `yarn create-tables` to initialize all the tables in your project found in the schema folder under server.
+3. Run `yarn dev` to initialize the project so it can be built and ran locally.
 
-Once run you will have a http://localhost:3000 url which would prompt our NuxtJS Front-End with http://localhost:3000/admin acting as our Administrative KeystoneJS Backend
+Once run you will have a http://localhost:3000 url which would prompt your NuxtJS Front-End with http://localhost:3000/admin acting as your Administrative KeystoneJS Backend
 
 ## NOTICE:
 
@@ -36,3 +36,10 @@ NUXT_TELEMETRY_DISABLED=1
   - Apollo (GraphQL Playground): https://www.apollographql.com/docs/apollo-server/testing/graphql-playground/
 - NuxtJS (Front-End): https://nuxtjs.org/docs/2.x/get-started/installation
   - Vue (Javascript Framework): https://vuejs.org
+  
+## Contributing Repo
+
+> NuxtJs Dashboard is based on Vuetify Material Theme purposed by Creative Tim
+
+NuxtJs Dashboard Vuetify Material is a beautiful resource built over [NuxtJs](https://nuxtjs.org/) coupled with [Vuetify](https://vuetifyjs.com/en/). It will help you get started developing dashboards in no time.
+This dashboard is the official Vuetify version of the Original [Material Dashboard](https://www.creative-tim.com/product/material-dashbo

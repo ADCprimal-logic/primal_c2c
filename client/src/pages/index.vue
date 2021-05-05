@@ -1,128 +1,62 @@
 <template>
-  <div class="app">
-    <h1 class="main-heading">C2C Children Connect</h1>
-    <p class="intro-text">
-      Hello! This is the front page to C2C Children Connect.
-      <br />
-      <a href="/admin">Keystone 5 Admin UI</a>
-      <br />
-    </p>
-    <hr class="divider" />
-    <NuxtLink to="/next">NuxtJS FUN</NuxtLink>
-  </div>
+  <v-content>
+    <v-container fluid fill-height>
+      <v-layout align-center justify-center>
+        <v-flex xs12 sm8 md4>
+          <material-card
+            color="success"
+            elevation="12"
+            title="Connexion"
+          >
+            <v-card-text>
+              <v-form>
+                <v-text-field type="text" v-model="username" prepend-icon="person" name="username" label="Login" :placeholder="defaultUserPassword"></v-text-field>
+                <v-text-field type="password" v-model="password" prepend-icon="lock" name="password" label="Password" :placeholder="defaultUserPassword"></v-text-field>
+              </v-form>
+            </v-card-text>
+            <v-card-actions>
+              <v-layout justify-center align-center>
+                <v-btn color="success" :disabled="isDisabled" @click.prevent="authenticate">Login</v-btn>
+              </v-layout>
+            </v-card-actions>
+          </material-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </v-content>
 </template>
 
-<style>
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-}
-body,
-html {
-  margin: 0;
-  padding: 0;
-}
+<script>
+  import { mapActions } from 'vuex'
+  import materialCard  from '~/components/material/AppCard'
 
-body {
-  font-family: system-ui, BlinkMacSystemFont, -apple-system, Segoe UI, Roboto,
-    sans-serif;
-  display: flex;
-  justify-content: center;
-  min-height: 100vh;
-}
+  export default {
+    components: {
+      materialCard
+    },
+    data() {
+      return {
+        username: 'admin',
+        password: 'admin',
+        defaultUserPassword: 'admin'
+      }
+    },
+    computed: {
+      isDisabled() {
+        return this.username !== this.defaultUserPassword || this.password !== this.defaultUserPassword;
+      }
+    },
+    methods: {
+      ...mapActions({
+        setUsername: 'user/setUsername'
+      }),
 
-.add-item::placeholder {
-  color: hsla(220, 30%, 60%, 0.8);
-}
-.add-item:focus {
-  outline: solid 2px hsl(220, 70%, 60%);
-}
-.remove-item:focus {
-  border-bottom: solid 2px hsl(220, 70%, 60%);
-}
-.remove-item {
-  background: transparent;
-  outline: none;
-  border: 0;
-  padding: 0;
-  cursor: pointer;
-}
-
-.app {
-  margin: 20px 20px;
-  padding: 20px;
-  max-width: 600px;
-  background: #fff;
-  border-radius: 18px;
-  border: solid 3px hsl(220, 70%, 60%, 0.8);
-  color: hsla(220, 84%, 14%, 1);
-}
-
-@media (min-width: 550px) {
-  .app {
-    margin: 10vh 10vw;
-    padding: 50px;
+      async authenticate() {
+        if (!this.isDisabled) {
+          await this.setUsername(this.defaultUserPassword);
+          this.$router.push({ path: 'dashboard' });
+        }
+      }
+    }
   }
-}
-
-.main-heading {
-  font-weight: 900;
-}
-
-.intro-text {
-  line-height: 1.5;
-  color: hsla(220, 84%, 14%, 0.6);
-}
-
-.divider {
-  margin-top: 30px;
-  margin-left: 0;
-  width: 48px;
-  height: 4px;
-  border-width: 0;
-  background-color: hsla(220, 84%, 60%, 1);
-}
-
-.form-wrapper {
-  max-width: 500;
-}
-
-.app-heading {
-  text-transform: uppercase;
-  font-weight: 900;
-  margin-top: 50px;
-}
-
-.form-input {
-  color: hsla(220, 84%, 14%, 0.6);
-  padding: 12px 16px;
-  font-size: 1.25em;
-  width: 100%;
-  border-radius: 6;
-  border: 0;
-  border: solid 1px hsl(220, 30%, 70%);
-  background: hsl(220, 84%, 98%);
-}
-
-.list {
-  list-style: none;
-  padding: 0;
-}
-
-.list-item {
-  padding: 32px 16px;
-  font-size: 1.25em;
-  font-weight: 600;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  border-top: 1px solid hsla(220, 84%, 60%, 0.32);
-}
-
-.delete-icon {
-  width: 20px;
-  height: 20px;
-  fill: hsla(220, 84%, 60%, 1);
-}
-</style>
+</script>

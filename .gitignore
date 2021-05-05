@@ -1,8 +1,12 @@
-.nova
 node_modules
 *.log
-yarn.lock
 .env
+yarn.lock
+package-lock.json
+.nova
+.nuxt
+.vs
 .DS_Store
 dist
 .keystone
+schema.*

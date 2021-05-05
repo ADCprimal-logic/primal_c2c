@@ -2,20 +2,16 @@
   "name": "c2c-children-connect-back",
   "description": "A NuxtJS example project.",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": "primal. Development Team",
   "license": "MIT",
-  "engines": {
-    "node": "16.0.0"
-  },
   "scripts": {
     "dev": "cd server && cross-env NODE_ENV=development DISABLE_LOGGING=true keystone dev",
     "build": "cd server && cross-env NODE_ENV=production keystone build",
     "start": "cd server && cross-env NODE_ENV=production keystone start",
     "build-test": "cd server && cross-env NODE_ENV=testing keystone build",
     "start-test": "cd server && cross-env NODE_ENV=testing keystone start",
-    "create-tables": "cd server && cross-env keystone create-tables",
-    "project-setup": "yarn install && cd client/src && yarn install"
+    "create-tables": "cd server && cross-env keystone create-tables"
   },
   "repository": "https://github.com/keystonejs/keystone-5/tree/main/packages/create-keystone-5-app/example-projects/nuxt",
   "homepage": "https://github.com/keystonejs/keystone-5",
@@ -26,11 +22,25 @@
     "@keystonejs/app-nuxt": "^5.2.2",
     "@keystonejs/auth-password": "^6.1.1",
     "@keystonejs/fields": "^22.1.2",
+    "@keystonejs/file-adapters": "^7.1.1",
     "@keystonejs/keystone": "^19.3.2",
     "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "nuxt": "^2.15.4",
-    "stripe": "^8.145.0"
+    "stripe": "^8.145.0",
+    "v-tooltip": "^2.1.3",
+    "@mdi/font": "^3.6.95",
+    "@nuxtjs/axios": "^5.5.3",
+    "vue-chartist": "^2.2.0",
+    "vuetify": "^1.5.14",
+    "vuetify-loader": "^1.2.2"
+  },
+  "devDependencies": {
+    "node-sass": "^4.12.0",
+    "nodemon": "^1.19.1",
+    "sass-loader": "^7.1.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2"
   }
 }
