@@ -30,7 +30,7 @@
               />
             </v-list-tile-avatar>
             <v-list-tile-title class="title">
-              Coast 2 Coast Kids
+              C2C Kidscmd
             </v-list-tile-title>
           </v-list-tile>
         </v-list>
@@ -39,6 +39,11 @@
           <v-list-tile
             v-if="responsive"
           >
+            <v-text-field
+              class="purple-input search-input"
+              label="Search..."
+              color="purple"
+            />
           </v-list-tile>
           <v-list-tile
             v-for="(link, i) in links"
@@ -73,17 +78,22 @@
           {
             to: '/dashboard',
             icon: 'mdi-view-dashboard',
-            text: 'Staff Management Portal'
+            text: 'Dashboard'
+          },
+          {
+            to: '/user-profile',
+            icon: 'mdi-account',
+            text: 'User Profile'
           },
           {
             to: '/table-list',
             icon: 'mdi-clipboard-outline',
-            text: 'Child Check-In System'
+            text: 'Table List'
           },
           {
             to: '/typography',
-            icon: 'mdi-alarm',
-            text: 'Staff Time Clock'
+            icon: 'mdi-format-font',
+            text: 'Typography'
           },
           {
             to: '/icons',
@@ -99,12 +109,7 @@
             to: '/notifications',
             icon: 'mdi-bell',
             text: 'Notifications'
-          },
-          {
-            to: '/user-profile',
-            icon: 'mdi-account',
-            text: ' Update Staff Profile'
-          },
+          }
         ],
         responsive: true
       }
