@@ -45,7 +45,7 @@ const childSchema = require("./schemas/child");
 // Object Schemas
 const locationSchema = require("./schemas/location");
 const scheduleSchema = require("./schemas/schedule");
-const healthSchema = require("./schemas/schedule");
+//const healthSchema = require("./schemas/schedule");
 
 const authStrategy = keystone.createAuthStrategy({
   type: PasswordAuthStrategy,
@@ -91,8 +91,6 @@ module.exports = {
       plugins: [
         "~/plugins/vuetify",
         { src: "~/plugins/chartist", mode: "client" },
-        "@babel/plugin-proposal-private-methods",
-        { loose: true },
       ],
 
       /*

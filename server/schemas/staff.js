@@ -1,5 +1,10 @@
 const index = require("../index");
-const { Text, Checkbox, Password } = require("@keystonejs/fields");
+const {
+  Text,
+  Checkbox,
+  Password,
+  Relationship,
+} = require("@keystonejs/fields");
 const keystone = index.indexKey;
 
 console.log("Creating Staff");

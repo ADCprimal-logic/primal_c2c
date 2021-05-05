@@ -18,10 +18,10 @@ keystone.createList("Child", {
       type: Select,
       options: "Kindergarden, First, Second, Third, Fourth, Fifth",
     },
-    birthdate: { type: CalanderDay },
+    //birthdate: { type: CalanderDay },
     parent: { type: Relationship, ref: "Parent", many: true },
     location: { type: Relationship, ref: "Location", many: false },
     schedule: { type: Relationship, ref: "Schedule", many: false },
-    medical_record: { type: Relationship, ref: "MedicalRecord", many: false },
+    //medical_record: { type: Relationship, ref: "MedicalRecord", many: false },
   },
 });
