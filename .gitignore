@@ -5,6 +5,7 @@ yarn.lock
 package-lock.json
 .nova
 .nuxt
+.vs
 .DS_Store
 dist
 .keystone
