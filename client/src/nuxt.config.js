@@ -1,38 +1,76 @@
+import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin'
+import pkg from './package'
+
 export default {
-  // Global page headers: https://go.nuxtjs.dev/config-head
+  mode: 'universal',
+
+  /*
+  ** Headers of the page
+  */
   head: {
-    title: "c2c-children-connect",
-    htmlAttrs: {
-      lang: "en",
-    },
+    title: pkg.name,
     meta: [
-      { charset: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: "" },
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { hid: 'description', name: 'description', content: pkg.description }
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href:
+          'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'
+      }
+    ]
   },
 
-  // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  /*
+  ** Customize the progress-bar color
+  */
+  loading: { color: '#fff' },
 
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-    plugins: [
-        '~/plugins/vue-tooltip.js'
-    ],
-
-  // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
-
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [],
-
-  // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    // https://go.nuxtjs.dev/bootstrap
-    //'bootstrap-vue/nuxt',
+  /*
+  ** Global CSS
+  */
+  css: [
+    '~/assets/style/index.scss'
   ],
 
-  // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
-};
+  /*
+  ** Plugins to load before mounting the App
+  */
+  plugins: [
+    '~/plugins/vuetify',
+    { src: '~/plugins/chartist', mode: 'client' }
+  ],
+
+  /*
+  ** Nuxt.js modules
+  */
+  modules: [
+    // Doc: https://axios.nuxtjs.org/usage
+    '@nuxtjs/axios',
+  ],
+  /*
+  ** Axios module configuration
+  */
+  axios: {
+    // See https://github.com/nuxt-community/axios-module#options
+  },
+
+  /*
+  ** Build configuration
+  */
+  build: {
+    transpile: ['vuetify/lib'],
+    plugins: [new VuetifyLoaderPlugin()],
+    loaders: {
+
+    },
+    /*
+    ** You can extend webpack config here
+    */
+    extend(config, ctx) {
+    }
+  }
+}
