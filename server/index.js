@@ -91,6 +91,8 @@ module.exports = {
       plugins: [
         "~/plugins/vuetify",
         { src: "~/plugins/chartist", mode: "client" },
+        "@babel/plugin-proposal-private-methods",
+        { loose: true },
       ],
 
       /*
