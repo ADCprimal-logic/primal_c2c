@@ -4,6 +4,7 @@ const { Text, Checkbox, Password } = require("@keystonejs/fields");
 const { GraphQLApp } = require("@keystonejs/app-graphql");
 const { AdminUIApp } = require("@keystonejs/app-admin-ui");
 const { NuxtApp } = require("@keystonejs/app-nuxt");
+const PROJECT_NAME = process.env.PROJECT_NAME;
 // Nuxt Plugins
 var VuetifyLoaderPlugin = require("vuetify-loader/lib/plugin");
 // .ENV Configuration
@@ -12,7 +13,6 @@ dotenv.config();
 // Database Configuration
 const { KnexAdapter: Adapter } = require("@keystonejs/adapter-knex");
 //const initialiseData = require("./initial-data");
-const PROJECT_NAME = process.env.PROJECT_NAME;
 const DATABASE_URL = process.env.DATABASE_URL;
 //console.log("Database: " + DATABASE_URL);
 const adapterConfig = {
@@ -20,6 +20,28 @@ const adapterConfig = {
     connection: DATABASE_URL,
   },
 };
+// S3 Configuration
+const { S3Adapter } = require("@keystonejs/file-adapters");
+const CF_DISTRIBUTION_ID = process.env.CF_DISTRIBUTION_ID;
+const S3_PATH = process.env.S3_PATH;
+const S3_BUCKET = process.env.S3_BUCKET;
+/*const fileAdapter = new S3Adapter({
+  bucket: S3_BUCKET,
+  folder: S3_PATH,
+  publicUrl: ({ id, filename, _meta }) =>
+    `https://${CF_DISTRIBUTION_ID}.cloudfront.net/${S3_PATH}/${filename}`,
+  s3Options: {
+    // Optional paramaters to be supplied directly to AWS.S3 constructor
+    accessKeyId: process.env.ACCESS_KEY_ID,
+    secretAccessKey: process.env.SECRET_ACCESS_KEY,
+    region: process.env.REGION,
+  },
+  uploadParams: ({ filename, id, mimetype, encoding }) => ({
+    Metadata: {
+      keystone_id: `${id}`,
+    },
+  }),
+});*/
 
 const keystone = new Keystone({
   cookieSecret: process.env.COOKIE_SECRET,
