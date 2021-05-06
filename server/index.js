@@ -45,6 +45,9 @@ const S3_BUCKET = process.env.S3_BUCKET;
 });*/
 
 const keystone = new Keystone({
+  appVersion: {
+    version: process.env.APP_VERSION,
+  },
   cookieSecret: process.env.COOKIE_SECRET,
   cookie: {
     secure: process.env.NODE_ENV === "production", // Default to true in production
