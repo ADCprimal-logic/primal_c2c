@@ -1,6 +1,6 @@
 {
   "name": "c2c-children-connect",
-  "description": "A NuxtJS example project.",
+  "description": "Proprietary Dashboard Software for C2C Kids",
   "private": true,
   "version": "0.1.0",
   "author": "primal. Development Team",
@@ -18,14 +18,6 @@
   },
   "repository": "https://github.com/keystonejs/keystone-5/tree/main/packages/create-keystone-5-app/example-projects/nuxt",
   "homepage": "https://github.com/keystonejs/keystone-5",
-  "babel": {
-    "plugins": [
-      "@babel/plugin-proposal-private-methods",
-      {
-        "loose": true
-      }
-    ]
-  },
   "dependencies": {
     "@keystonejs/adapter-knex": "^13.3.1",
     "@keystonejs/app-admin-ui": "^7.5.1",
@@ -51,8 +43,8 @@
   "devDependencies": {
     "node-sass": "^4.12.0",
     "nodemon": "^2.0.7",
-    "sass-loader": "^7.1.0",
-    "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.2"
+    "sass-loader": "^8.0.0",
+    "stylus": "^0.54.8",
+    "stylus-loader": "^4.0.0"
   }
 }
