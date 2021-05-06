@@ -25,8 +25,9 @@
           >
               <v-img
                 :src="logo"
-                height="34"
-                contain
+                height="50"
+                width="50"
+                
               />
             </v-list-tile-avatar>
             <v-list-tile-title class="title">
@@ -106,7 +107,12 @@
             icon: 'mdi-account',
             text: ' Update Staff Profile'
           },
-                    {
+          {
+            to: '/Schedule',
+            icon: 'mdi-application',
+            text: 'Schedule'
+          },
+          {
             to: '/icons',
             icon: 'mdi-chart-bubble',
             text: 'Icons'
