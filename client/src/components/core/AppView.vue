@@ -15,7 +15,7 @@
   export default {
     metaInfo () {
       return {
-        title: 'Vuetify Material Dashboard by CreativeTim'
+        title: 'Coast 2 Coast Kids Portal'
       }
     },
     components: {
