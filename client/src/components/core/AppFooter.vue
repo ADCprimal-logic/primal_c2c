@@ -18,13 +18,10 @@
     <span class="font-weight-light copyright">
       &copy;
       {{ (new Date()).getFullYear() }}
-      <a
-        href="https://www.creative-tim.com/"
-        target="_blank">Creative Tim</a>, made with
       <v-icon
         color="tertiary"
         size="17">mdi-heart</v-icon>
-      for a better web
+      Empowering a young generation!
     </span>
   </v-footer>
 </template>
@@ -33,10 +30,8 @@
 export default {
   data: () => ({
     links: [
-      { name: 'Dashboard', Link: '/dashboard' },
-      { name: 'Creative Tim', Link: 'https://www.creative-tim.com' },
-      { name: 'About Us', Link: 'https://creative-tim.com/presentation' },
-      { name: 'Blog', Link: 'https://blog.creative-tim.com' }
+      { name: 'C2C Webpage', Link: 'https://www.c2ckids.com/' },
+      { name: 'Dashboard by Primal.', Link: 'https://www.primal-logic.io/'}
     ]
   })
 }
