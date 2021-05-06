@@ -73,7 +73,13 @@
           {
             to: '/dashboard',
             icon: 'mdi-view-dashboard',
-            text: 'Staff Management Portal'
+            text: 'Staff Dash',
+            alt: 'Dashboard',
+          },
+          {
+            to: '/notifications',
+            icon: 'mdi-account-edit',
+            text: 'Inbox'
           },
           {
             to: '/table-list',
@@ -86,25 +92,31 @@
             text: 'Staff Time Clock'
           },
           {
-            to: '/icons',
-            icon: 'mdi-chart-bubble',
-            text: 'Icons'
-          },
-          {
-            to: '/maps',
-            icon: 'mdi-map-marker',
-            text: 'Maps'
+            to: '/',
+            icon: 'mdi-airplane-takeoff',
+            text: 'Time Off Requests'
           },
           {
             to: '/notifications',
-            icon: 'mdi-bell',
-            text: 'Notifications'
+            icon: 'mdi-account-edit',
+            text: 'Mass Messages'
           },
           {
             to: '/user-profile',
             icon: 'mdi-account',
             text: ' Update Staff Profile'
           },
+                    {
+            to: '/icons',
+            icon: 'mdi-chart-bubble',
+            text: 'Icons'
+          },
+          //This is a secondary function for maps integrations. Future use.
+          //{
+            //to: '/maps',
+            //icon: 'mdi-map-marker',
+            //text: 'Maps'
+          //},
         ],
         responsive: true
       }
