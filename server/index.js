@@ -4,12 +4,13 @@ const { Text, Checkbox, Password } = require("@keystonejs/fields");
 const { GraphQLApp } = require("@keystonejs/app-graphql");
 const { AdminUIApp } = require("@keystonejs/app-admin-ui");
 const { NuxtApp } = require("@keystonejs/app-nuxt");
-const PROJECT_NAME = process.env.PROJECT_NAME;
 // Nuxt Plugins
 var VuetifyLoaderPlugin = require("vuetify-loader/lib/plugin");
 // .ENV Configuration
 const dotenv = require("dotenv");
 dotenv.config();
+const PROJECT_NAME = process.env.PROJECT_NAME;
+//console.log(PROJECT_NAME);
 // Database Configuration
 const { KnexAdapter: Adapter } = require("@keystonejs/adapter-knex");
 //const initialiseData = require("./initial-data");
@@ -81,6 +82,7 @@ module.exports = {
     new GraphQLApp(),
     new AdminUIApp({
       name: PROJECT_NAME,
+      hooks: require.resolve("./server-ui"),
       authStrategy,
     }),
     new NuxtApp({

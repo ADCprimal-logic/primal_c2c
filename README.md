@@ -1,3 +1,8 @@
+<div align="center">
+<img src="client/src/static/vuetifylogo.png"  height="200" width="200">
+</div>
+<br>
+
 # Coast 2 Coast Children Connect
 
 To get setup for this project you will need to set up a handful of things.
@@ -18,7 +23,7 @@ Once run you will have a http://localhost:3000 url which would prompt your NuxtJ
 ```
 # Keystone Config
 PROJECT_NAME="C2C Children Connect"
-VERSION_NUMBER="0.0.1"
+VERSION_NUMBER="0.1.0"
 COOKIE_SECRET="bNLVPe1NIFSCeNRHEQ7CUyjcnVzko6MI"
 # AWS S3 Creds
 S3_PATH = 'uploads'
