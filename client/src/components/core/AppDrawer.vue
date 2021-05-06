@@ -31,7 +31,7 @@
               />
             </v-list-tile-avatar>
             <v-list-tile-title class="title">
-              Coast 2 Coast Kids
+              <h4>Coast 2 Coast Kids</h4>
             </v-list-tile-title>
           </v-list-tile>
         </v-list>
@@ -78,8 +78,8 @@
             alt: 'Dashboard',
           },
           {
-            to: '/notifications',
-            icon: 'mdi-account-edit',
+            to: '/Inbox',
+            icon: 'mdi-animation',
             text: 'Inbox'
           },
           {
@@ -93,7 +93,7 @@
             text: 'Staff Time Clock'
           },
           {
-            to: '/',
+            to: '/Time-off-requests',
             icon: 'mdi-airplane-takeoff',
             text: 'Time Off Requests'
           },
@@ -177,7 +177,7 @@
 
     .v-list__tile {
       border-radius: 4px;
-
+      font: 200
       &--buy {
         margin-top: auto;
         margin-bottom: 17px;
@@ -185,6 +185,7 @@
 
       &__title {
         color: #ffffff;
+        
       }
     }
 
@@ -197,6 +198,9 @@
       margin-bottom: 30px !important;
       padding-left: 15px;
       padding-right: 15px;
+    }
+    .font-weight-regular.font-italic{
+      font:200
     }
   }
 </style>
