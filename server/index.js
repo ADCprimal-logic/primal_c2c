@@ -13,7 +13,7 @@ const PROJECT_NAME = process.env.PROJECT_NAME;
 //console.log(PROJECT_NAME);
 // Database Configuration
 const { KnexAdapter: Adapter } = require("@keystonejs/adapter-knex");
-//const initialiseData = require("./initial-data");
+const initialiseData = require("./initial-data");
 const DATABASE_URL = process.env.DATABASE_URL;
 //console.log("Database: " + DATABASE_URL);
 const adapterConfig = {
@@ -55,7 +55,7 @@ const keystone = new Keystone({
     sameSite: false,
   },
   adapter: new Adapter(adapterConfig),
-  //onConnect: process.env.CREATE_TABLES !== "true" && initialiseData,
+  onConnect: process.env.CREATE_TABLES !== "true" && initialiseData,
 });
 
 // See Keystone Object

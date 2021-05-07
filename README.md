@@ -10,6 +10,7 @@ To get setup for this project you will need to set up a handful of things.
 1. Set up the .env as shown in the example below and put it in the server folder.
 2. Run `yarn install` to install all the dependancies from package.json on both the front-end & back-end
    - If running with a new database url, run `yarn create-tables` to initialize all the tables in your project found in the schema folder under server.
+   - IMPORTANT: Comment out lines 16 and 58 of index.js under server BEFORE you create tables, so that on `yarn dev` your Super Admin Object will be initialized
 3. Run `yarn dev` to initialize the project so it can be built and ran locally.
 
 Once run you will have a http://localhost:3000 url which would prompt your NuxtJS Front-End with http://localhost:3000/admin acting as your Administrative KeystoneJS Backend
