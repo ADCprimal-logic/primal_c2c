@@ -6,7 +6,7 @@ const { AdminUIApp } = require("@keystonejs/app-admin-ui");
 const { NuxtApp } = require("@keystonejs/app-nuxt");
 // Nuxt Plugins
 var VuetifyLoaderPlugin = require("vuetify-loader/lib/plugin");
-// .ENV Configuration
+// .ENV Configuration (ANY process.env.VARIABLE MUST be declared AFTER dotev.config();)
 const dotenv = require("dotenv");
 dotenv.config();
 const PROJECT_NAME = process.env.PROJECT_NAME;
