@@ -1,12 +1,15 @@
 <template>
+  
+  
   <v-content>
+    
     <v-container fluid fill-height>
       <v-layout align-center justify-center>
         <v-flex xs12 sm8 md4>
           <material-card
-            color="success"
+            color="dark gray"
             elevation="12"
-            title="Connexion"
+            title="Coast 2 Coast Kids Login Portal"
           >
             <v-card-text>
               <v-form>
@@ -16,7 +19,12 @@
             </v-card-text>
             <v-card-actions>
               <v-layout justify-center align-center>
-                <v-btn color="success" :disabled="isDisabled" @click.prevent="authenticate">Login</v-btn>
+                <v-btn color="blue" :disabled="isDisabled" @click.prevent="authenticate">Login</v-btn>
+              </v-layout>
+            </v-card-actions>
+            <v-card-actions>
+              <v-layout justify-center align-center>
+                <v-btn color="blue" :disabled="isDisabled" @click.prevent="authenticate">Forgot Password?</v-btn>
               </v-layout>
             </v-card-actions>
           </material-card>

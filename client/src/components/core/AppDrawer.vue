@@ -72,7 +72,7 @@
         logo: '/vuetifylogo.png',
         links: [
           {
-            to: '/dashboard',
+            to: '/Dashboard',
             icon: 'mdi-view-dashboard',
             text: 'Staff Dash',
             alt: 'Dashboard',
@@ -83,27 +83,27 @@
             text: 'Inbox'
           },
           {
-            to: '/table-list',
+            to: '/Child Check-In System',
             icon: 'mdi-clipboard-outline',
             text: 'Child Check-In System'
           },
           {
-            to: '/typography',
+            to: '/Time Clock',
             icon: 'mdi-alarm',
             text: 'Staff Time Clock'
           },
           {
-            to: '/Time-off-requests',
+            to: '/Time Off Requests',
             icon: 'mdi-airplane-takeoff',
             text: 'Time Off Requests'
           },
           {
-            to: '/notifications',
+            to: '/Mass Messages',
             icon: 'mdi-account-edit',
             text: 'Mass Messages'
           },
           {
-            to: '/user-profile',
+            to: '/Profile Editor',
             icon: 'mdi-account',
             text: ' Update Staff Profile'
           },

@@ -12,7 +12,7 @@
         md12
       >
         <material-card
-          color="green"
+          color="blue"
           title="Simple Table"
           text="Here is a subtitle for this table"
         >
