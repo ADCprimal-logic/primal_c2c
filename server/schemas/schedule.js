@@ -6,7 +6,13 @@ console.log("Creating Schedule");
 keystone.createList("Schedule", {
   fields: {
     type: { type: Select, options: "Staff, Child" },
-    createdFor: { type: Relationship, ref: "Location", many: false },
+    basedIn: {
+      type: Relationship,
+      ref: "Location",
+      many: false,
+      isRequired: true,
+    },
     contentId: { type: Text, isUnique: true },
   },
+  labelResolver: (item) => `SCH-${item.id}`,
 });

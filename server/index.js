@@ -67,11 +67,15 @@ exports.indexKey = keystone;
 const superAdminSchema = require("./schemas/superadmin");
 const staffSchema = require("./schemas/staff");
 const parentSchema = require("./schemas/parent");
+const approvedContactSchema = require("./schemas/approvedcontact");
 const childSchema = require("./schemas/child");
 // Object Schemas
 const locationSchema = require("./schemas/location");
 const scheduleSchema = require("./schemas/schedule");
-//const healthSchema = require("./schemas/schedule");
+const healthSchema = require("./schemas/health");
+// Test Schemas
+const tweedleDeeSchema = require("../reference/tweedledee");
+const tweedleDumSchema = require("../reference/tweedledum");
 
 const authStrategy = keystone.createAuthStrategy({
   type: PasswordAuthStrategy,

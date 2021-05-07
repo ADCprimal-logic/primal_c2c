@@ -31,6 +31,7 @@ keystone.createList("SuperAdmin", {
     email: {
       type: Text,
       isUnique: true,
+      isRequired: true,
     },
     phone: { type: Text },
     isAdmin: {
@@ -43,6 +44,7 @@ keystone.createList("SuperAdmin", {
     },
     password: {
       type: Password,
+      isRequired: true,
     },
   },
   labelResolver: (item) => `Admin ${item.id}`,
