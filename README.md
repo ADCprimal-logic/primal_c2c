@@ -31,16 +31,25 @@ Once run you will have a http://localhost:3000 url which would prompt your NuxtJ
 ```
 # Keystone Config
 PROJECT_NAME="C2C Children Connect"
-VERSION_NUMBER="0.1.0"
+VERSION_NUMBER="0.2.0"
 COOKIE_SECRET="bNLVPe1NIFSCeNRHEQ7CUyjcnVzko6MI"
 # AWS S3 Creds
 S3_PATH = 'uploads'
 S3_BUCKET ='bucket'
 CF_DISTRIBUTION_ID = 'cfid'
-ACCESS_KWY_ID = 'ACCESS_KEY_ID'
+ACCESS_KEY_ID = 'ACCESS_KEY_ID'
 SECRET_KEY_ID = 'SECRET_ACCESS_KEY'
 REGION = 'us-west-2'
-# Endpoint URLS
+# Twilio Creds
+TWILIO_ACCOUNT_SID = ""
+TWILIO_AUTH_TOKEN = ""
+TWILIO_NUMBER = ""
+# Stripe Creds
+SECRET_KEY = ""
+PUBLISH_KEY = ""
+TEST_SECRET_KEY = ""
+TEST_PUBLISH_KEY = ""
+# Database Config
 DATABASE_URL="postgres://primal_postgres:primal-squad@c2cdatabase.cqs5a6cxnjkx.us-east-1.rds.amazonaws.com:5432/devops"
 # Build Config
 NUXT_TELEMETRY_DISABLED=1
