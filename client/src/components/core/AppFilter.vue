@@ -74,7 +74,7 @@
               color="primary"
               block
             >
-              Documentation
+              www.c2ckids.com
             </v-btn>
           </v-flex>
           <v-flex xs12>

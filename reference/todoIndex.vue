@@ -34,7 +34,7 @@
         <!-- If there are some... -->
         <ul v-else class="list">
           <li v-for="todo in todos" :key="todo.id" class="list-item">
-            {{ todo.name }}
+            {{ todo.first_name }}
             <!-- Remove button -->
             <button @click="removeTodo(todo.id)" class="remove-item">
               <svg viewBox="0 0 14 16" class="delete-icon">

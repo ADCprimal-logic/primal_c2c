@@ -12,9 +12,9 @@
         md8
       >
         <material-card
-          color="green"
-          title="Edit Profile"
-          text="Complete your profile"
+          color="purple"
+          title="Edit Staff Profile"
+          text="Use this page to update your contact, personal information and system avatar."
         >
           <v-form>
             <v-container py-0>
@@ -24,23 +24,16 @@
                   md4
                 >
                   <v-text-field
-                    label="Company (disabled)"
-                    disabled/>
+                  :value= "todos[0].location.name"
+                    label="Work Location"
+                    class="purple-input"/>
                 </v-flex>
                 <v-flex
                   xs12
                   md4
                 >
                   <v-text-field
-                    class="purple-input"
-                    label="User Name"
-                  />
-                </v-flex>
-                <v-flex
-                  xs12
-                  md4
-                >
-                  <v-text-field
+                  :value= "todos[0].email"
                     label="Email Address"
                     class="purple-input"/>
                 </v-flex>
@@ -49,6 +42,7 @@
                   md6
                 >
                   <v-text-field
+                    :value= "todos[0].first_name"                 
                     label="First Name"
                     class="purple-input"/>
                 </v-flex>
@@ -57,6 +51,7 @@
                   md6
                 >
                   <v-text-field
+                    :value= "todos[0].last_name" 
                     label="Last Name"
                     class="purple-input"/>
                 </v-flex>
@@ -65,7 +60,14 @@
                   md12
                 >
                   <v-text-field
-                    label="Adress"
+                    label="Address"
+                    class="purple-input"/>
+                </v-flex>
+                <v-flex
+                  xs12
+                  md4>
+                <v-text-field
+                    label="State"
                     class="purple-input"/>
                 </v-flex>
                 <v-flex
@@ -79,6 +81,7 @@
                   xs12
                   md4>
                   <v-text-field
+                    :value= "todos[0].location.country"
                     label="Country"
                     class="purple-input"/>
                 </v-flex>
@@ -141,10 +144,49 @@
         </material-card>
       </v-flex>
     </v-layout>
+    <li v-for="todo in todos" :key="todo.id" class="list-item">
+            {{ todo.first_name }}
+          </li>
   </v-container>
 </template>
 
 <script>
+  const GET_TODOS = `
+	  query{
+    allStaffMembers(where: {email_contains: "@yahoo.com"}){
+    first_name
+    last_name
+    email
+    location {
+      name
+    }
+    location {
+      city
+    }
+    location {
+      state
+    }
+    location{
+      city
+    }
+    }
+  }
+	`;
+
+  function graphql(query = {}) {
+  return fetch("http://localhost:3000/admin/api", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      query,
+    }),
+  }).then(function (result) {
+    return result.json();
+  });
+  }
+
   import { mapGetters } from 'vuex'
   import materialCard from '~/components/material/AppCard'
 
@@ -158,6 +200,13 @@
         user: 'user/getUser',
         fullname: 'user/getFullname',
       })
-    }
+    },
+    // Get the todo items on server side
+  async asyncData() {
+    const { data } = await graphql(GET_TODOS);
+    return {
+      todos: data.allStaffMembers
+    };
+  },
   }
 </script>

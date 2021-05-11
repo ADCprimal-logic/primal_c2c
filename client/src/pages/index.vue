@@ -1,5 +1,7 @@
 <template>
+
   <v-content>
+    
     <v-container fluid fill-height>
       <v-layout align-center justify-center>
         <v-flex xs12 sm8 md4>
@@ -7,7 +9,8 @@
             color="dark gray"
             elevation="12"
             title="Coast 2 Coast Kids Login Portal"
-          >
+
+    >
             <v-card-text>
               <v-form>
                 <v-text-field
@@ -68,6 +71,7 @@ export default {
       username: "admin",
       password: "admin",
       defaultUserPassword: "admin",
+      bottomNav: 'recent'
     };
   },
   computed: {
