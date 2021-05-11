@@ -3,7 +3,6 @@ const {
   AuthedRelationship,
 } = require("@keystonejs/fields-authed-relationship");
 const { AutoIncrement } = require("@keystonejs/fields-auto-increment");
-const { Color } = require("@keystonejs/fields-color");
 const { Content } = require("@keystonejs/fields-content");
 const {
   Text,
@@ -40,7 +39,6 @@ keystone.createList("TweedledeeItem", {
       dateTo: "2020-05-20",
     },
     isEnabled: { type: Checkbox, isRequired: true },
-    heroColor: { type: Color },
     content: {
       type: Content,
       blocks: [

@@ -24,7 +24,6 @@
     "@keystonejs/fields": "^22.1.2",
     "@keystonejs/fields-authed-relationship": "^1.1.1",
     "@keystonejs/fields-auto-increment": "^8.2.1",
-    "@keystonejs/fields-color": "^1.1.1",
     "@keystonejs/fields-content": "^9.1.1",
     "@keystonejs/file-adapters": "^7.1.1",
     "@keystonejs/keystone": "^19.3.2",

@@ -26,7 +26,7 @@ const { S3Adapter } = require("@keystonejs/file-adapters");
 const CF_DISTRIBUTION_ID = process.env.CF_DISTRIBUTION_ID;
 const S3_PATH = process.env.S3_PATH;
 const S3_BUCKET = process.env.S3_BUCKET;
-/*const fileAdapter = new S3Adapter({
+const fileAdapter = new S3Adapter({
   bucket: S3_BUCKET,
   folder: S3_PATH,
   publicUrl: ({ id, filename, _meta }) =>
@@ -42,7 +42,7 @@ const S3_BUCKET = process.env.S3_BUCKET;
       keystone_id: `${id}`,
     },
   }),
-});*/
+});
 
 const keystone = new Keystone({
   appVersion: {
@@ -62,6 +62,7 @@ const keystone = new Keystone({
 //console.log(keystone);
 
 exports.indexKey = keystone;
+exports.s3Adapter = fileAdapter;
 
 // User Schemas
 const superAdminSchema = require("./schemas/superadmin");
