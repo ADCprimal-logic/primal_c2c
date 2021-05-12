@@ -83,7 +83,7 @@
         <nuxt-link
           v-ripple
           class="toolbar-items"
-          to="/user-profile"
+          to="/Profile Editor"
           title="User profile"
         >
           <v-icon color="tertiary">mdi-account</v-icon>
