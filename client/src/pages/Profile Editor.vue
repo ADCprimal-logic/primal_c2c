@@ -12,7 +12,7 @@
         md8
       >
         <material-card
-          color="purple"
+          color="mint"
           title="Edit Staff Profile"
           text="Use this page to update your contact, personal information and system avatar."
         >
@@ -106,7 +106,7 @@
                 >
                   <v-btn
                     class="mx-0 font-weight-light"
-                    color="success"
+                    color="mint"
                   >
                     Update Profile
                   </v-btn>
@@ -136,7 +136,7 @@
             <p class="card-description font-weight-light">{{ user.description }}</p>
             <blockquote class="blockquote">{{ user.citation }}</blockquote>
             <v-btn
-              color="success"
+              color="mint"
               round
               class="font-weight-light"
             >Follow</v-btn>

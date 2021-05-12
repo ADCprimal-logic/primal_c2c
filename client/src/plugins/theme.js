@@ -22,5 +22,5 @@ export default {
   success: '#5cb860',
   warning: '#ffa21a',
   bluebird: '#34495E',
-  
+  mint: '#41B883',
 }

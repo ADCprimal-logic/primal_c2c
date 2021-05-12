@@ -26,7 +26,7 @@
           >
           
         <v-icon
-        size="100px"
+        size="40px"
         large
         center
         >
@@ -124,41 +124,93 @@
                     value=""
                   />
                 </v-flex>
+                <v-layout
+                justify-center
+                wrap
+                >
                 <v-flex
                   xs12
-                  text-xs-right
-                >
+                  sm4>
                   <v-btn
-                    class="mx-0 font-weight-light"
+                    block
                     color="bluebird"
+                    @click="snack('top')"
                   >
-                    Submit Request
+                  Submit Request
                   </v-btn>
                 </v-flex>
+                </v-layout>
               </v-layout>
             </v-container>
+            <!-- -->
+            <v-snackbar
+              :color="color"
+              :bottom="bottom"
+              :top="top"
+              :left="left"
+              :right="right"
+              v-model="snackbar"
+              dark
+            >
+              <v-icon
+                color="white"
+                class="mr-3"
+              >
+                mdi-airplane
+              </v-icon>
+              <div>Great job! You have successfully submitted a time off request.</div>
+              <v-icon
+                size="16"
+                @click="snackbar = false"
+              >
+                mdi-close-circle
+              </v-icon>
+            </v-snackbar>
           </v-form>
         </material-card>
       </v-flex>
-
     </v-layout>
   </v-container>
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
   import materialCard from '~/components/material/AppCard'
+  import materialNotification from '~/components/material/AppNotification'
 
   export default {
     layout: 'dashboard',
     components: {
-      materialCard
+      materialCard,
+      materialNotification
     },
-    computed: {
-      ...mapGetters({
-        user: 'user/getUser',
-        fullname: 'user/getFullname',
-      })
+    data: () => ({
+      color: null,
+      colors: [
+        'bluebird',
+      ],
+      top: true,
+      bottom: false,
+      left: false,
+      right: false,
+      snackbar: false
+    }),
+
+    methods: {
+      snack (...args) {
+        this.top = false
+        this.bottom = false
+        this.left = false
+        this.right = false
+
+        for (const loc of args) {
+          this[loc] = true
+        }
+
+        this.color = this.colors[Math.floor(Math.random() * this.colors.length)]
+
+        this.snackbar = true
+      }
     }
   }
 </script>
+

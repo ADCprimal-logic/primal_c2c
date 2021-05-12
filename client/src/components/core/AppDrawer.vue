@@ -103,14 +103,19 @@
             text: 'Mass Messages'
           },
           {
-            to: '/Profile Editor',
-            icon: 'mdi-account',
-            text: ' Update Staff Profile'
-          },
-          {
             to: '/Schedule',
             icon: 'mdi-application',
             text: 'Schedule'
+          },
+          {
+            to: '/Students and Faculty',
+            icon: 'mdi-archive',
+            text: 'Student and Faculty Data'
+          },
+          {
+            to: '/Profile Editor',
+            icon: 'mdi-account',
+            text: ' Update Staff Profile'
           },
           {
             to: '/icons',

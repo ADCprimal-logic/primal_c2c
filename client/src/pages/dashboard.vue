@@ -1,9 +1,11 @@
 <template>
+
   <v-container
     fill-height
     fluid
     grid-list-xl
   >
+
     <v-layout wrap>
       <v-flex
         md12
@@ -62,6 +64,7 @@
         md6
         lg3
       >
+      
       </v-flex>
     </v-layout>
   </v-container>
