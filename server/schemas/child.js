@@ -7,6 +7,7 @@ const {
   Integer,
 } = require("@keystonejs/fields");
 const keystone = index.indexKey;
+const fileAdapter = index.s3Adapter;
 
 console.log("Creating Child");
 keystone.createList("Child", {

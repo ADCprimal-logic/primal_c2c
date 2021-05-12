@@ -7,6 +7,7 @@ const {
   DateTime,
 } = require("@keystonejs/fields");
 const keystone = index.indexKey;
+const fileAdapter = index.s3Adapter;
 
 console.log("Creating Staff");
 keystone.createList("StaffMember", {
