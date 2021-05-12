@@ -5,6 +5,7 @@ const {
   Relationship,
   DateTime,
   Integer,
+  CheckBox,
 } = require("@keystonejs/fields");
 const keystone = index.indexKey;
 const fileAdapter = index.s3Adapter;
