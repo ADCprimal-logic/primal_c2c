@@ -1,5 +1,5 @@
 <div align="center">
-<img src="client/src/static/vuetifylogo.png"  height="200" width="200">
+<img src="https://primal-c2c-images.s3.amazonaws.com/static/C2Clogowhite.png"  height="200" width="200">
 </div>
 <br>
 
