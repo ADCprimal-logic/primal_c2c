@@ -30,9 +30,8 @@ keystone.createList("Child", {
     location: { type: Relationship, ref: "Location", many: false },
     schedule: { type: Relationship, ref: "Schedule", many: false },
     medical_record: { type: Relationship, ref: "MedicalRecord", many: false },
+    time_card: { type: Relationship, ref: "ChildTimecard", many: false },
     pin_number: { type: Integer },
-    check_in: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
-    check_out: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
   },
   labelResolver: (item) => `${item.first_name} ${item.last_name}`,
 });

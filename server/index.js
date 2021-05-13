@@ -74,6 +74,8 @@ const childSchema = require("./schemas/child");
 const locationSchema = require("./schemas/location");
 const scheduleSchema = require("./schemas/schedule");
 const healthSchema = require("./schemas/health");
+const childCheckInSchema = require("./schemas/childcheckin");
+const staffCheckInSchema = require("./schemas/staffcheckin");
 // Test Schemas
 const tweedleDeeSchema = require("../reference/tweedledee");
 const tweedleDumSchema = require("../reference/tweedledum");
