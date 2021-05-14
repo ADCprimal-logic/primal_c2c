@@ -127,7 +127,7 @@
             size="130"
           >
             <img
-              src="https://demos.creative-tim.com/vue-material-dashboard/img/marc.aba54d65.jpg"
+              src=""
             >
           </v-avatar>
           <v-card-text class="text-xs-center">

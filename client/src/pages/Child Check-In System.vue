@@ -1,4 +1,7 @@
 <template>
+<v-container>
+<h2 justiy center>It is currently {time}.</h2>
+
   <v-container
     fill-height
     fluid
@@ -12,9 +15,9 @@
         md12
       >
         <material-card
-          color="blue"
-          title="Simple Table"
-          text="Here is a subtitle for this table"
+          color="bluebird"
+          title="Student Clock In Table"
+          text="Find the respective student and clock them in here."
         >
           <v-data-table
             :headers="headers"
@@ -46,11 +49,11 @@
         md12
       >
         <material-card
-          color="green"
+          color="mint"
           flat
           full-width
-          title="Table on Plain Background"
-          text="Here is a subtitle for this table"
+          title="Expanded Student Data"
+          text="This field shows attendance values for the week."
         >
           <v-data-table
             :headers="headers"
@@ -69,6 +72,7 @@
             <template
               slot="items"
               slot-scope="{ item }"
+              expanded
             >
               <td>{{ item.name }}</td>
               <td>{{ item.country }}</td>
@@ -80,6 +84,7 @@
       </v-flex>
     </v-layout>
   </v-container>
+</v-container>
 </template>
 
 <script>
@@ -93,23 +98,23 @@
     data: () => ({
     headers: [
       {
-        sortable: false,
-        text: 'Name',
+        sortable: true,
+        text: 'Student Name',
         value: 'name'
       },
       {
-        sortable: false,
-        text: 'Country',
+        sortable: true,
+        text: 'Location',
         value: 'country'
       },
       {
-        sortable: false,
-        text: 'City',
+        sortable: true,
+        text: 'Last Clock In',
         value: 'city'
       },
       {
-        sortable: false,
-        text: 'Salary',
+        sortable: true,
+        text: 'Clock In/Clock Out',
         value: 'salary',
         align: 'right'
       }
@@ -117,9 +122,9 @@
     items: [
       {
         name: 'Dakota Rice',
-        country: 'Niger',
+        country: 'Null',
         city: 'Oud-Tunrhout',
-        salary: '$35,738'
+        salary: '2307432'
       },
       {
         name: 'Minerva Hooper',

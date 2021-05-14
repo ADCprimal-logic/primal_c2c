@@ -12,9 +12,9 @@
         md12
       >
         <material-card
-          color="blue"
-          title="Simple Table"
-          text="Here is a subtitle for this table"
+          color="bluebird"
+          title="Inbox"
+          text="Recieved messages"
         >
           <v-data-table
             :headers="headers"
@@ -49,8 +49,8 @@
           color="green"
           flat
           full-width
-          title="Table on Plain Background"
-          text="Here is a subtitle for this table"
+          title="Outbox"
+          text="Sent and draft messages"
         >
           <v-data-table
             :headers="headers"
