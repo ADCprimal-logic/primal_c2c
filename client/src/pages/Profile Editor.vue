@@ -108,6 +108,7 @@
                   <v-btn
                     class="mx-0 font-weight-light"
                     color="mint"
+                    @click="createParent()"
                   >
                     Update Profile
                   </v-btn>
@@ -152,62 +153,75 @@
 </template>
 
 <script>
-  const GET_TODOS = `
-	  query{
+    const GET_TODOS = `
+	    query{
     allStaffMembers(where: {email_contains: "@yahoo.com"}){
     first_name
     last_name
     email
     location {
-      name
+        name
     }
     location {
-      city
+        city
     }
     location {
-      state
+        state
     }
     location{
-      city
+        city
     }
     }
-  }
+    }
+	`;
+    const ADD_PARENT = `
+	    mutation initialParent($firstname: String) {
+            createParent(data: {first_name: $firstname, last_name: "lemon" email: "zzz@zzz.com4", password: "Password123", phone: "12345676543"}) {
+              id
+            }
+          }
 	`;
 
-  function graphql(query = {}) {
-  return fetch("http://localhost:3000/admin/api", {
+    function graphql(query = {}) {
+    return fetch("http://localhost:3000/admin/api", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+        "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      query,
+        query,
     }),
-  }).then(function (result) {
+    }).then(function (result) {
     return result.json();
-  });
-  }
+    });
+    }
 
-  import { mapGetters } from 'vuex'
-  import materialCard from '~/components/material/AppCard'
+    import { mapGetters } from 'vuex'
+    import materialCard from '~/components/material/AppCard'
 
-  export default {
+    export default {
     layout: 'dashboard',
     components: {
-      materialCard
+        materialCard
+    },
+    methods: {
+        async createParent() {
+            await graphql(ADD_PARENT);
+
+        },
     },
     computed: {
-      ...mapGetters({
+        ...mapGetters({
         user: 'user/getUser',
         fullname: 'user/getFullname',
-      })
+        })
     },
     // Get the todo items on server side
-  async asyncData() {
+    async asyncData() {
     const { data } = await graphql(GET_TODOS);
     return {
-      todos: data.allStaffMembers
+        todos: data.allStaffMembers
     };
-  },
-  }
+    },
+    }
 </script>
