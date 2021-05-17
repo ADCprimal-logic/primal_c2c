@@ -1,4 +1,5 @@
 <template>
+<!-- Comment -->
 <v-container>
 <h2 justiy center>It is currently {time}.</h2>
 

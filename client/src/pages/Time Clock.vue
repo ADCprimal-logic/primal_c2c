@@ -1,4 +1,5 @@
 <template>
+<!-- Comment -->
   <v-container
     fill-height
     fluid
@@ -23,8 +24,6 @@
               <v-btn 
               color="mint" 
               fab large dark
-
-              @click="snack('top')"
                
               >
               <v-icon>alarm</v-icon>
@@ -41,8 +40,6 @@
               <v-btn 
               color="red" 
               fab large dark
-              
-              @click="snack('top')"
               > 
               <v-icon>mdi-alarm-off</v-icon>
             </v-btn>
@@ -56,106 +53,37 @@
     fluid
     grid-list-xl
   >
-  </v-container>
-
+      <v-layout
+      justify-center
+      align-center
+    >
   <div>
     <v-data-table
       :headers="headers"
-      :items="desserts"
+      :items="Times"
+      :pagination.sync="pagination"
+      :total-items="totalTimes"
+      :loading="loading"
+      class="elevation-1"
     >
       <template v-slot:items="props">
-        <td>
-          <v-edit-dialog
-            :return-value.sync="props.item.name"
-            lazy
-            @save="save"
-            @cancel="cancel"
-            @open="open"
-            @close="close"
-          > {{ props.item.name }}
-            <template v-slot:input>
-              <v-text-field
-                v-model="props.item.name"
-                :rules="[max25chars]"
-                label="Edit"
-                single-line
-                counter
-              ></v-text-field>
-            </template>
-          </v-edit-dialog>
-        </td>
-        <td class="text-xs-right">{{ props.item.calories }}</td>
-        <td class="text-xs-right">{{ props.item.fat }}</td>
-        <td class="text-xs-right">{{ props.item.carbs }}</td>
-        <td class="text-xs-right">{{ props.item.protein }}</td>
-        <td class="text-xs-right">
-          <v-edit-dialog
-            :return-value.sync="props.item.iron"
-            large
-            lazy
-            persistent
-            @save="save"
-            @cancel="cancel"
-            @open="open"
-            @close="close"
-          >
-            <div>{{ props.item.iron }}</div>
-            <template v-slot:input>
-              <div class="mt-3 title">Update Iron</div>
-            </template>
-            <template v-slot:input>
-              <v-text-field
-                v-model="props.item.iron"
-                :rules="[max25chars]"
-                label="Edit"
-                single-line
-                counter
-                autofocus
-              ></v-text-field>
-            </template>
-          </v-edit-dialog>
-        </td>
+        <td>{{ props.item.name }}</td>
+        <td class="text-xs-right">{{ props.item.Dates }}</td>
+        <td class="text-xs-right">{{ props.item.Times }}</td>
+        <td class="text-xs-right">{{ props.item.Location }}</td>
+        <td class="text-xs-right">{{ props.item.Status }}</td>
+        <td class="text-xs-right">{{ props.item.Hours }}</td>
       </template>
     </v-data-table>
-
-    <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
-      {{ snackText }}
-      <v-btn flat @click="snack = false">Close</v-btn>
-    </v-snackbar>
   </div>
-
-      </v-flex>
-              
-              <v-snackbar
-              :color="color"
-              :bottom="bottom"
-              :top="top"
-              :left="left"
-              :right="right"
-              v-model="snackbar"
-              dark
-            >
-
-            
-              <v-icon
-                color="white"
-                class="mr-3"
-              >
-                mdi-alarm
-              </v-icon>
-              <div>Great job! Your new clock time has been recorded successfully.</div>
-              <v-icon
-                size="16"
-                @click="snackbar = false"
-              >
-                mdi-close-circle
-              </v-icon>
-            </v-snackbar>
-              
-
-            </v-container>
-            
+      </v-layout>
+  </v-container>
+  </v-flex>
+  </v-container>
+  
 </template>
+
+ 
 
 
 <script>
@@ -168,202 +96,168 @@
       materialCard,
       materialNotification
     },
-    data: () => ({
-      color: null,
-      colors: [
-        'bluebird',
-      ],
-      top: true,
-      bottom: false,
-      left: false,
-      right: false,
-      snackbar: false,
-      headers: [
-      {
-        sortable: true,
-        text: 'Name',
-        value: 'name'
-      },
-      {
-        sortable: true,
-        text: 'Clocked In or Out',
-        value: 'country'
-      },
-      {
-        sortable: true,
-        text: 'Time Recorded',
-        value: 'city'
-      },
-      {
-        sortable: true,
-        text: 'Hours Worked',
-        value: 'salary',
-        align: 'right'
-      }
-    ],
-    items: [
- {
-          text: 'Dessert (100g serving)',
-          align: 'left',
-          sortable: false,
-          value: 'name'
-        },
-        { text: 'Calories', value: 'calories' },
-        { text: 'Fat (g)', value: 'fat' },
-        { text: 'Carbs (g)', value: 'carbs' },
-        { text: 'Protein (g)', value: 'protein' },
-        { text: 'Actions', value: 'name', sortable: false }
-    ],
-	desserts: [],
-      editedIndex: -1,
-      editedItem: {
-        name: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0
-      },
-      defaultItem: {
-        name: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0
-      }
-    }),
-	
-    computed: {
-      formTitle () {
-        return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+     data () {
+      return {
+        totalTimes: 0,
+        Times: [],
+        loading: true,
+        pagination: {},
+        headers: [
+          {
+            text: 'Staff Name',
+            align: 'left',
+            sortable: false,
+            value: 'name'
+          },
+          { text: 'Dates', value: 'Dates' },
+          { text: 'Times', value: 'Times' },
+          { text: 'Location', value: 'Location' },
+          { text: 'Status (I,O)', value: 'Status' },
+          { text: 'Hours', value: 'Hours' }
+        ]
       }
     },
-
     watch: {
-      dialog (val) {
-        val || this.close()
+      pagination: {
+        handler () {
+          this.getDataFromApi()
+            .then(data => {
+              this.Times = data.items
+              this.totalTimes = data.total
+            })
+        },
+        deep: true
       }
     },
-
-    created () {
-      this.initialize()
+    mounted () {
+      this.getDataFromApi()
+        .then(data => {
+          this.Times = data.items
+          this.totalTimes = data.total
+        })
     },
-	
     methods: {
-      snack (...args) {
-        this.top = false
-        this.bottom = false
-        this.left = false
-        this.right = false
+      getDataFromApi () {
+        this.loading = true
+        return new Promise((resolve, reject) => {
+          const { sortBy, descending, page, rowsPerPage } = this.pagination
 
-        for (const loc of args) {
-          this[loc] = true
-        }
+          let items = this.getTimes()
+          const total = items.length
 
-        this.color = this.colors[Math.floor(Math.random() * this.colors.length)]
+          if (this.pagination.sortBy) {
+            items = items.sort((a, b) => {
+              const sortA = a[sortBy]
+              const sortB = b[sortBy]
 
-        this.snackbar = true
+              if (descending) {
+                if (sortA < sortB) return 1
+                if (sortA > sortB) return -1
+                return 0
+              } else {
+                if (sortA < sortB) return -1
+                if (sortA > sortB) return 1
+                return 0
+              }
+            })
+          }
+
+          if (rowsPerPage > 0) {
+            items = items.slice((page - 1) * rowsPerPage, page * rowsPerPage)
+          }
+
+          setTimeout(() => {
+            this.loading = false
+            resolve({
+              items,
+              total
+            })
+          }, 1000)
+        })
       },
-	  initialize () {
-        this.desserts = [
+      getTimes () {
+        return [
           {
             name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-            protein: 4.0
+            Dates: 159,
+            Times: 6.0,
+            Location: 24,
+            Status: 4.0,
+            Hours: '1%'
           },
           {
             name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
-            protein: 4.3
+            Dates: 237,
+            Times: 9.0,
+            Location: 37,
+            Status: 4.3,
+            Hours: '1%'
           },
           {
             name: 'Eclair',
-            calories: 262,
-            fat: 16.0,
-            carbs: 23,
-            protein: 6.0
+            Dates: 262,
+            Times: 16.0,
+            Location: 23,
+            Status: 6.0,
+            Hours: '7%'
           },
           {
             name: 'Cupcake',
-            calories: 305,
-            fat: 3.7,
-            carbs: 67,
-            protein: 4.3
+            Dates: 305,
+            Times: 3.7,
+            Location: 67,
+            Status: 4.3,
+            Hours: '8%'
           },
           {
             name: 'Gingerbread',
-            calories: 356,
-            fat: 16.0,
-            carbs: 49,
-            protein: 3.9
+            Dates: 356,
+            Times: 16.0,
+            Location: 49,
+            Status: 3.9,
+            Hours: '16%'
           },
           {
             name: 'Jelly bean',
-            calories: 375,
-            fat: 0.0,
-            carbs: 94,
-            protein: 0.0
+            Dates: 375,
+            Times: 0.0,
+            Location: 94,
+            Status: 0.0,
+            Hours: '0%'
           },
           {
             name: 'Lollipop',
-            calories: 392,
-            fat: 0.2,
-            carbs: 98,
-            protein: 0
+            Dates: 392,
+            Times: 0.2,
+            Location: 98,
+            Status: 0,
+            Hours: '2%'
           },
           {
             name: 'Honeycomb',
-            calories: 408,
-            fat: 3.2,
-            carbs: 87,
-            protein: 6.5
+            Dates: 408,
+            Times: 3.2,
+            Location: 87,
+            Status: 6.5,
+            Hours: '45%'
           },
           {
             name: 'Donut',
-            calories: 452,
-            fat: 25.0,
-            carbs: 51,
-            protein: 4.9
+            Dates: 452,
+            Times: 25.0,
+            Location: 51,
+            Status: 4.9,
+            Hours: '22%'
           },
           {
             name: 'KitKat',
-            calories: 518,
-            fat: 26.0,
-            carbs: 65,
-            protein: 7
+            Dates: 518,
+            Times: 26.0,
+            Location: 65,
+            Status: 7,
+            Hours: '6%'
           }
         ]
-      },
-
-      editItem (item) {
-        this.editedIndex = this.desserts.indexOf(item)
-        this.editedItem = Object.assign({}, item)
-        this.dialog = true
-      },
-
-      deleteItem (item) {
-        const index = this.desserts.indexOf(item)
-        confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1)
-      },
-
-      close () {
-        this.dialog = false
-        setTimeout(() => {
-          this.editedItem = Object.assign({}, this.defaultItem)
-          this.editedIndex = -1
-        }, 300)
-      },
-
-      save () {
-        if (this.editedIndex > -1) {
-          Object.assign(this.desserts[this.editedIndex], this.editedItem)
-        } else {
-          this.desserts.push(this.editedItem)
-        }
-        this.close()
       }
     }
   }
@@ -372,7 +266,7 @@
 <style lang="scss">
   .tim-note {
     bottom: 10px;
-    color: #c0c1c2;
+    color: #849fb9;
     display: block;
     font-weight: 400;
     font-size: 13px;
