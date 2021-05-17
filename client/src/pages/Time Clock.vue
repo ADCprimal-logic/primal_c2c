@@ -57,81 +57,73 @@
     grid-list-xl
   >
   </v-container>
+
   <div>
-    <v-toolbar flat color="mint">
-      <v-toolbar-title>
-        Recent Time Card Data
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-dialog v-model="dialog" max-width="500px">
-        <template v-slot:activator="{ on }">
-          <v-btn color="red" @click="initialize">Reset Table</v-btn>
-          <v-btn color="bluebird" dark class="mb-2" v-on="on">Add new time Punch</v-btn>
-          <v-btn color= "red" dark class="mb-2" v-on="on">Update Database</v-btn>
-        </template>
-        <v-card>
-          <v-card-title>
-            <span class="headline">{{ formTitle }}</span>
-          </v-card-title>
-
-          <v-card-text>
-            <v-container grid-list-md>
-              <v-layout wrap>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.name" label="Staff Name"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.timeRecord" label="Time"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.InOrOut" label="In or Out"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.hoursWorked" label="Hours Worked"></v-text-field>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-card-text>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
-            <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </v-toolbar>
     <v-data-table
       :headers="headers"
       :items="desserts"
-      class="elevation-1"
     >
       <template v-slot:items="props">
-        <td>{{ props.item.name }}</td>
-        <td class="text-xs-left">{{ props.item.timeRecord }}</td>
-        <td class="text-xs-left">{{ props.item.InOrOut }}</td>
-        <td class="text-xs-right">{{ props.item.hoursWorked }}</td>
-        <td class=" flat layout px-0">
-          <v-icon
-            small
-            class="mr-2"
-            @click="editItem(props.item)"
+        <td>
+          <v-edit-dialog
+            :return-value.sync="props.item.name"
+            lazy
+            @save="save"
+            @cancel="cancel"
+            @open="open"
+            @close="close"
+          > {{ props.item.name }}
+            <template v-slot:input>
+              <v-text-field
+                v-model="props.item.name"
+                :rules="[max25chars]"
+                label="Edit"
+                single-line
+                counter
+              ></v-text-field>
+            </template>
+          </v-edit-dialog>
+        </td>
+        <td class="text-xs-right">{{ props.item.calories }}</td>
+        <td class="text-xs-right">{{ props.item.fat }}</td>
+        <td class="text-xs-right">{{ props.item.carbs }}</td>
+        <td class="text-xs-right">{{ props.item.protein }}</td>
+        <td class="text-xs-right">
+          <v-edit-dialog
+            :return-value.sync="props.item.iron"
+            large
+            lazy
+            persistent
+            @save="save"
+            @cancel="cancel"
+            @open="open"
+            @close="close"
           >
-            edit
-          </v-icon>
-          <v-icon
-            small
-            @click="deleteItem(props.item)"
-          >
-            delete
-          </v-icon>
+            <div>{{ props.item.iron }}</div>
+            <template v-slot:input>
+              <div class="mt-3 title">Update Iron</div>
+            </template>
+            <template v-slot:input>
+              <v-text-field
+                v-model="props.item.iron"
+                :rules="[max25chars]"
+                label="Edit"
+                single-line
+                counter
+                autofocus
+              ></v-text-field>
+            </template>
+          </v-edit-dialog>
         </td>
       </template>
-      <template v-slot:no-data>
-        <v-btn color="primary" @click="initialize">Reset</v-btn>
-      </template>
     </v-data-table>
+
+    <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
+      {{ snackText }}
+      <v-btn flat @click="snack = false">Close</v-btn>
+    </v-snackbar>
   </div>
+
       </v-flex>
               
               <v-snackbar
@@ -194,12 +186,12 @@
       },
       {
         sortable: true,
-        text: 'Time Recorded',
+        text: 'Clocked In or Out',
         value: 'country'
       },
       {
         sortable: true,
-        text: 'Clocked In or Out',
+        text: 'Time Recorded',
         value: 'city'
       },
       {
@@ -211,10 +203,14 @@
     ],
     items: [
  {
+          text: 'Dessert (100g serving)',
+          align: 'left',
+          sortable: false,
+          value: 'name'
         },
-        { text: 'timeRecord', value: 'timeRecord' },
-        { text: 'InOrOut (g)', value: 'InOrOut' },
-        { text: 'hoursWorked (g)', value: 'hoursWorked' },
+        { text: 'Calories', value: 'calories' },
+        { text: 'Fat (g)', value: 'fat' },
+        { text: 'Carbs (g)', value: 'carbs' },
         { text: 'Protein (g)', value: 'protein' },
         { text: 'Actions', value: 'name', sortable: false }
     ],
@@ -222,23 +218,23 @@
       editedIndex: -1,
       editedItem: {
         name: '',
-        timeRecord: 0,
-        InOrOut: 0,
-        hoursWorked: 0,
+        calories: 0,
+        fat: 0,
+        carbs: 0,
         protein: 0
       },
       defaultItem: {
         name: '',
-        timeRecord: 0,
-        InOrOut: 0,
-        hoursWorked: 0,
+        calories: 0,
+        fat: 0,
+        carbs: 0,
         protein: 0
       }
     }),
 	
     computed: {
       formTitle () {
-        return this.editedIndex === -1 ? 'Add a time clock entry' : 'Edit Item'
+        return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
       }
     },
 
@@ -270,64 +266,74 @@
 	  initialize () {
         this.desserts = [
           {
-            name: 'Corn Pop',
-            timeRecord: 159,
-            InOrOut: 'IN',
-            hoursWorked: 24,
+            name: 'Frozen Yogurt',
+            calories: 159,
+            fat: 6.0,
+            carbs: 24,
+            protein: 4.0
           },
           {
-            name: 'Corn Pop',
-            timeRecord: 237,
-            InOrOut: 'IN',
-            hoursWorked: 37,
+            name: 'Ice cream sandwich',
+            calories: 237,
+            fat: 9.0,
+            carbs: 37,
+            protein: 4.3
           },
           {
-            name: 'You know the thing',
-            timeRecord: 262,
-            InOrOut: 'IN',
-            hoursWorked: 23,
+            name: 'Eclair',
+            calories: 262,
+            fat: 16.0,
+            carbs: 23,
+            protein: 6.0
           },
           {
-            name: 'hairylegsinpool',
-            timeRecord: 305,
-            InOrOut: 'IN',
-            hoursWorked: 67,
+            name: 'Cupcake',
+            calories: 305,
+            fat: 3.7,
+            carbs: 67,
+            protein: 4.3
           },
           {
-            name: 'hidinbiden',
-            timeRecord: 356,
-            InOrOut: 'IN',
-            hoursWorked: 49,
+            name: 'Gingerbread',
+            calories: 356,
+            fat: 16.0,
+            carbs: 49,
+            protein: 3.9
           },
           {
             name: 'Jelly bean',
-            timeRecord: 375,
-            InOrOut: 'IN',
-            hoursWorked: 94,
+            calories: 375,
+            fat: 0.0,
+            carbs: 94,
+            protein: 0.0
           },
           {
             name: 'Lollipop',
-            timeRecord: 392,
-            InOrOut: 'IN',
-            hoursWorked: 98,
+            calories: 392,
+            fat: 0.2,
+            carbs: 98,
+            protein: 0
           },
           {
             name: 'Honeycomb',
-            timeRecord: 408,
-            InOrOut: 'IN',
-            hoursWorked: 87,
+            calories: 408,
+            fat: 3.2,
+            carbs: 87,
+            protein: 6.5
           },
           {
             name: 'Donut',
-            timeRecord: 452,
-            InOrOut: 25.0,
-            hoursWorked: 51,
+            calories: 452,
+            fat: 25.0,
+            carbs: 51,
+            protein: 4.9
           },
           {
             name: 'KitKat',
-            timeRecord: 518,
-            InOrOut: 26.0,
-            hoursWorked: 65,
+            calories: 518,
+            fat: 26.0,
+            carbs: 65,
+            protein: 7
           }
         ]
       },
