@@ -44,6 +44,9 @@ const fileAdapter = new S3Adapter({
   }),
 });
 
+// Defining the Express app
+const app = express();
+
 const keystone = new Keystone({
   appVersion: {
     version: process.env.APP_VERSION,
@@ -65,17 +68,17 @@ exports.indexKey = keystone;
 exports.s3Adapter = fileAdapter;
 
 // User Schemas
-const superAdminSchema = require("./schemas/superadmin");
-const staffSchema = require("./schemas/staff");
-const parentSchema = require("./schemas/parent");
-const approvedContactSchema = require("./schemas/approvedcontact");
-const childSchema = require("./schemas/child");
+const superAdminSchema = require("./schema/superadmin");
+const staffSchema = require("./schema/staff");
+const parentSchema = require("./schema/parent");
+const approvedContactSchema = require("./schema/approvedcontact");
+const childSchema = require("./schema/child");
 // Object Schemas
-const locationSchema = require("./schemas/location");
-const scheduleSchema = require("./schemas/schedule");
-const healthSchema = require("./schemas/health");
-const childCheckInSchema = require("./schemas/childcheckin");
-const staffCheckInSchema = require("./schemas/staffcheckin");
+const locationSchema = require("./schema/location");
+const scheduleSchema = require("./schema/schedule");
+const healthSchema = require("./schema/health");
+const childCheckInSchema = require("./schema/childcheckin");
+const staffCheckInSchema = require("./schema/staffcheckin");
 // Test Schemas
 const tweedleDeeSchema = require("../reference/tweedledee");
 const tweedleDumSchema = require("../reference/tweedledum");
@@ -86,8 +89,21 @@ const authStrategy = keystone.createAuthStrategy({
   config: { protectIdentities: process.env.NODE_ENV === "production" },
 });
 
+// General Error Handler
+app.use(function (err, req, res, next) {
+  console.log("Fatal error: " + JSON.stringify(err));
+  next(err);
+});
+
 module.exports = {
   keystone,
+  // Express Configuration (Optional)
+  /*configureExpress: (app) => {
+    app.get("/api", (req, res) => {
+      res.send("Connected to API...");
+      console.log("API Connection Set Via Keystone");
+    });
+  },*/
   apps: [
     new GraphQLApp(),
     new AdminUIApp({

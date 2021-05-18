@@ -1,17 +1,8 @@
 <template>
-<!-- Comment -->
-  <v-container
-    fill-height
-    fluid
-    grid-list-xl>
-    <v-layout
-      justify-center
-      wrap
-    >
-      <v-flex
-        xs12
-        md8
-      >
+  <!-- Comment -->
+  <v-container fill-height fluid grid-list-xl>
+    <v-layout justify-center wrap>
+      <v-flex xs12 md8>
         <material-card
           color="mint"
           title="Edit Staff Profile"
@@ -20,79 +11,56 @@
           <v-form>
             <v-container py-0>
               <v-layout wrap>
-                <v-flex
-                  xs12
-                  md4
-                >
+                <v-flex xs12 md4>
                   <v-text-field
-                  :value= "todos[0].location.name"
+                    :value="todos[0].location.name"
                     label="Work Location"
-                    class="purple-input"/>
+                    class="purple-input"
+                  />
                 </v-flex>
-                <v-flex
-                  xs12
-                  md4
-                >
+                <v-flex xs12 md4>
                   <v-text-field
-                  :value= "todos[0].email"
+                    :value="todos[0].email"
                     label="Email Address"
-                    class="purple-input"/>
+                    class="purple-input"
+                  />
                 </v-flex>
-                <v-flex
-                  xs12
-                  md6
-                >
+                <v-flex xs12 md6>
                   <v-text-field
-                    :value= "todos[0].first_name"                 
+                    :value="todos[0].first_name"
                     label="First Name"
-                    class="purple-input"/>
+                    class="purple-input"
+                  />
                 </v-flex>
-                <v-flex
-                  xs12
-                  md6
-                >
+                <v-flex xs12 md6>
                   <v-text-field
-                    :value= "todos[0].last_name" 
+                    :value="todos[0].last_name"
                     label="Last Name"
-                    class="purple-input"/>
+                    class="purple-input"
+                  />
                 </v-flex>
-                <v-flex
-                  xs12
-                  md12
-                >
+                <v-flex xs12 md12>
+                  <v-text-field label="Address" class="purple-input" />
+                </v-flex>
+                <v-flex xs12 md4>
+                  <v-text-field label="State" class="purple-input" />
+                </v-flex>
+                <v-flex xs12 md4>
+                  <v-text-field label="City" class="purple-input" />
+                </v-flex>
+                <v-flex xs12 md4>
                   <v-text-field
-                    label="Address"
-                    class="purple-input"/>
-                </v-flex>
-                <v-flex
-                  xs12
-                  md4>
-                <v-text-field
-                    label="State"
-                    class="purple-input"/>
-                </v-flex>
-                <v-flex
-                  xs12
-                  md4>
-                  <v-text-field
-                    label="City"
-                    class="purple-input"/>
-                </v-flex>
-                <v-flex
-                  xs12
-                  md4>
-                  <v-text-field
-                    :value= "todos[0].location.country"
+                    :value="todos[0].location.country"
                     label="Country"
-                    class="purple-input"/>
+                    class="purple-input"
+                  />
                 </v-flex>
-                <v-flex
-                  xs12
-                  md4>
+                <v-flex xs12 md4>
                   <v-text-field
                     class="purple-input"
                     label="Postal Code"
-                    type="number"/>
+                    type="number"
+                  />
                 </v-flex>
                 <v-flex xs12>
                   <v-textarea
@@ -101,10 +69,7 @@
                     value="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
                   />
                 </v-flex>
-                <v-flex
-                  xs12
-                  text-xs-right
-                >
+                <v-flex xs12 text-xs-right>
                   <v-btn
                     class="mx-0 font-weight-light"
                     color="mint"
@@ -118,63 +83,48 @@
           </v-form>
         </material-card>
       </v-flex>
-      <v-flex
-        xs12
-        md4
-      >
+      <v-flex xs12 md4>
         <material-card class="v-card-profile">
-          <v-avatar
-            slot="offset"
-            class="mx-auto d-block"
-            size="130"
-          >
-            <img
-              src=""
-            >
+          <v-avatar slot="offset" class="mx-auto d-block" size="130">
+            <img src="" />
           </v-avatar>
           <v-card-text class="text-xs-center">
-            <h6 class="category text-gray font-weight-thin mb-3">{{ user.function }}</h6>
+            <h6 class="category text-gray font-weight-thin mb-3">
+              {{ user.function }}
+            </h6>
             <h4 class="card-title font-weight-light">{{ fullname }}</h4>
-            <p class="card-description font-weight-light">{{ user.description }}</p>
+            <p class="card-description font-weight-light">
+              {{ user.description }}
+            </p>
             <blockquote class="blockquote">{{ user.citation }}</blockquote>
-            <v-btn
-              color="mint"
-              round
-              class="font-weight-light"
-            >Follow</v-btn>
+            <v-btn color="mint" round class="font-weight-light">Follow</v-btn>
           </v-card-text>
         </material-card>
       </v-flex>
     </v-layout>
     <li v-for="todo in todos" :key="todo.id" class="list-item">
-            {{ todo.first_name }}
-          </li>
+      {{ todo.first_name }}
+    </li>
   </v-container>
 </template>
 
 <script>
-    const GET_TODOS = `
+const GET_TODOS = `
 	    query{
-    allStaffMembers(where: {email_contains: "@yahoo.com"}){
-    first_name
-    last_name
-    email
-    location {
-        name
-    }
-    location {
-        city
-    }
-    location {
-        state
-    }
-    location{
-        city
-    }
-    }
-    }
+        allStaffMembers(where: {email_contains: "@yahoo.com"}){
+          first_name
+          last_name
+          email
+          location {
+            name
+            city
+            state
+            country
+          }
+        }
+      }
 	`;
-    const ADD_PARENT = `
+const ADD_PARENT = `
 	    mutation initialParent($firstname: String) {
             createParent(data: {first_name: $firstname, last_name: "lemon" email: "zzz@zzz.com4", password: "Password123", phone: "12345676543"}) {
               id
@@ -182,46 +132,45 @@
           }
 	`;
 
-    function graphql(query = {}) {
-    return fetch("http://localhost:3000/admin/api", {
+function graphql(query = {}) {
+  return fetch("http://localhost:3000/admin/api", {
     method: "POST",
     headers: {
-        "Content-Type": "application/json",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-        query,
+      query,
     }),
-    }).then(function (result) {
+  }).then(function (result) {
     return result.json();
-    });
-    }
+  });
+}
 
-    import { mapGetters } from 'vuex'
-    import materialCard from '~/components/material/AppCard'
+import { mapGetters } from "vuex";
+import materialCard from "~/components/material/AppCard";
 
-    export default {
-    layout: 'dashboard',
-    components: {
-        materialCard
+export default {
+  layout: "dashboard",
+  components: {
+    materialCard,
+  },
+  methods: {
+    async createParent() {
+      await graphql(ADD_PARENT);
     },
-    methods: {
-        async createParent() {
-            await graphql(ADD_PARENT);
-
-        },
-    },
-    computed: {
-        ...mapGetters({
-        user: 'user/getUser',
-        fullname: 'user/getFullname',
-        })
-    },
-    // Get the todo items on server side
-    async asyncData() {
+  },
+  computed: {
+    ...mapGetters({
+      user: "user/getUser",
+      fullname: "user/getFullname",
+    }),
+  },
+  // Get the todo items on server side
+  async asyncData() {
     const { data } = await graphql(GET_TODOS);
     return {
-        todos: data.allStaffMembers
+      todos: data.allStaffMembers,
     };
-    },
-    }
+  },
+};
 </script>
