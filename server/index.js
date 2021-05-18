@@ -44,9 +44,6 @@ const fileAdapter = new S3Adapter({
   }),
 });
 
-// Defining the Express app
-const app = express();
-
 const keystone = new Keystone({
   appVersion: {
     version: process.env.APP_VERSION,
@@ -87,12 +84,6 @@ const authStrategy = keystone.createAuthStrategy({
   type: PasswordAuthStrategy,
   list: "SuperAdmin",
   config: { protectIdentities: process.env.NODE_ENV === "production" },
-});
-
-// General Error Handler
-app.use(function (err, req, res, next) {
-  console.log("Fatal error: " + JSON.stringify(err));
-  next(err);
 });
 
 module.exports = {
