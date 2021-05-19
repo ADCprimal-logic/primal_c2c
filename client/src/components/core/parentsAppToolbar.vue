@@ -29,17 +29,10 @@
         layout
         py-2
       >
-        <v-text-field
-          v-if="responsiveInput"
-          class="mr-4 mt-2 purple-input"
-          label="Search..."
-          hide-details
-          color="purple"
-        />
         <nuxt-link
           v-ripple
           class="toolbar-items"
-          to="/"
+          to="/Parents-Dashboard"
           title="Dashboard"
         >
           <v-icon color="tertiary">mdi-view-dashboard</v-icon>
@@ -54,7 +47,7 @@
             v-ripple
             slot="activator"
             class="toolbar-items"
-            to="/Inbox"
+            to="/Parents-Inbox"
           >
             <v-badge
               color="error"
@@ -83,7 +76,7 @@
         <nuxt-link
           v-ripple
           class="toolbar-items"
-          to="/Profile Editor"
+          to="/Parents-Child-Profile-Editor"
           title="User profile"
         >
           <v-icon color="tertiary">mdi-account</v-icon>
@@ -115,7 +108,7 @@
         'Another One'
         //A variable can also be added
       ],
-      title: 'Dashboard',
+      title: '',
       responsive: true,
       responsiveInput: true
     }),
