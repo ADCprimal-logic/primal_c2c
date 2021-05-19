@@ -13,7 +13,6 @@ const PROJECT_NAME = process.env.PROJECT_NAME;
 // Database Configuration
 const { KnexAdapter: Adapter } = require("@keystonejs/adapter-knex");
 const initialiseData = require("./initial-data");
-const clientAuth = require("./client-auth");
 const DATABASE_URL = process.env.DATABASE_URL;
 const adapterConfig = {
   knexOptions: {
@@ -43,6 +42,10 @@ const fileAdapter = new S3Adapter({
   }),
 });
 
+//Utils Initialize
+const clientAuth = require("./util/client-auth");
+const email = require("./util/email");
+
 const keystone = new Keystone({
   appVersion: {
     version: process.env.APP_VERSION,
@@ -62,6 +65,7 @@ const keystone = new Keystone({
 
 exports.indexKey = keystone;
 exports.s3Adapter = fileAdapter;
+exports.indexEnv = dotenv.config();
 
 // User Schemas
 const superAdminSchema = require("./schema/superadmin");
