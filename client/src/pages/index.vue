@@ -9,8 +9,9 @@
             color="dark gray"
             elevation="12"
             title="Coast 2 Coast Kids Login Portal"
-
-    >
+            height="400"
+            width="400"
+        >
             <v-card-text>
               <v-form>
                 <v-text-field

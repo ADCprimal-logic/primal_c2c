@@ -21,6 +21,7 @@
       <v-icon
         color="tertiary"
         size="17">mdi-heart</v-icon>
+      Empowering a young generation!
     </span>
   </v-footer>
 </template>

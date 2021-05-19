@@ -84,7 +84,7 @@ export default {
     async authenticate() {
       if (!this.isDisabled) {
         await this.setUsername(this.defaultUserPassword);
-        this.$router.push({ path: "dashboard" });
+        this.$router.push({ path: "Parents-Dashboard" });
       }
     },
   },
