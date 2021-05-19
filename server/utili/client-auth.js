@@ -3,6 +3,8 @@ const index = require("../index");
 const postgres = require("postgres");
 // SMS Integration
 const twilio = require("twilio");
+const crypto = require("crypto");
+const randomString = () => crypto.randomBytes(6).hexSlice();
 // Password Hashing
 const bcrypt = require("bcrypt");
 // Initialize .ENV
