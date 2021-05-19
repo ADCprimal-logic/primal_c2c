@@ -43,7 +43,7 @@ const fileAdapter = new S3Adapter({
 
 //Utils Initialize
 const clientAuth = require("./util/client-auth");
-const initialiseData = require(".util/initial-data");
+const initialiseData = require("./util/initial-data");
 const email = require("./util/email");
 const stripe = require("./util/stripe");
 
@@ -64,7 +64,6 @@ const keystone = new Keystone({
 // Index Exports
 exports.indexKey = keystone;
 exports.s3Adapter = fileAdapter;
-exports.indexEnv = dotenv.config();
 
 // User Schemas
 const superAdminSchema = require("./schema/superadmin");
