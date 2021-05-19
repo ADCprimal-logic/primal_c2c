@@ -1,21 +1,20 @@
 const { Keystone } = require("@keystonejs/keystone");
-const { PasswordAuthStrategy } = require("@keystonejs/auth-password");
-const { Text, Checkbox, Password } = require("@keystonejs/fields");
 const { GraphQLApp } = require("@keystonejs/app-graphql");
 const { AdminUIApp } = require("@keystonejs/app-admin-ui");
 const { NuxtApp } = require("@keystonejs/app-nuxt");
+// Admin UI Auth
+const { PasswordAuthStrategy } = require("@keystonejs/auth-password");
 // Nuxt Plugins
 var VuetifyLoaderPlugin = require("vuetify-loader/lib/plugin");
 // .ENV Configuration (ANY process.env.VARIABLE MUST be declared AFTER dotev.config();)
 const dotenv = require("dotenv");
 dotenv.config();
 const PROJECT_NAME = process.env.PROJECT_NAME;
-//console.log(PROJECT_NAME);
 // Database Configuration
 const { KnexAdapter: Adapter } = require("@keystonejs/adapter-knex");
 const initialiseData = require("./initial-data");
+const clientAuth = require("./client-auth");
 const DATABASE_URL = process.env.DATABASE_URL;
-//console.log("Database: " + DATABASE_URL);
 const adapterConfig = {
   knexOptions: {
     connection: DATABASE_URL,
@@ -89,12 +88,12 @@ const authStrategy = keystone.createAuthStrategy({
 module.exports = {
   keystone,
   // Express Configuration (Optional)
-  /*configureExpress: (app) => {
+  configureExpress: (app) => {
     app.get("/api", (req, res) => {
       res.send("Connected to API...");
       console.log("API Connection Set Via Keystone");
     });
-  },*/
+  },
   apps: [
     new GraphQLApp(),
     new AdminUIApp({
@@ -139,7 +138,6 @@ module.exports = {
       modules: [
         // Doc: https://axios.nuxtjs.org/usage
         "@nuxtjs/axios",
-        "@nuxtjs/auth-next",
       ],
       /*
        ** Axios module configuration

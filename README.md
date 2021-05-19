@@ -33,6 +33,7 @@ Once run you will have a http://localhost:3000 url which would prompt your NuxtJ
 PROJECT_NAME="C2C Children Connect"
 VERSION_NUMBER="0.2.0"
 COOKIE_SECRET="bNLVPe1NIFSCeNRHEQ7CUyjcnVzko6MI"
+SITE_NAME=""
 # AWS S3 Creds
 S3_PATH = 'primal-c2c-images.s3.amazonaws.com'
 S3_BUCKET ='primal-c2c-images'
@@ -53,6 +54,7 @@ TEST_PUBLISH_KEY = ""
 DATABASE_URL="postgres://primal_postgres:primal-squad@c2cdatabase.cqs5a6cxnjkx.us-east-1.rds.amazonaws.com:5432/dev1"
 # Build Config
 NUXT_TELEMETRY_DISABLED=1
+CREATE_TABLES=""
 ```
 
 ## Documentation for further development:
