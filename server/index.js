@@ -12,7 +12,6 @@ dotenv.config();
 const PROJECT_NAME = process.env.PROJECT_NAME;
 // Database Configuration
 const { KnexAdapter: Adapter } = require("@keystonejs/adapter-knex");
-const initialiseData = require("./initial-data");
 const DATABASE_URL = process.env.DATABASE_URL;
 const adapterConfig = {
   knexOptions: {
@@ -44,7 +43,9 @@ const fileAdapter = new S3Adapter({
 
 //Utils Initialize
 const clientAuth = require("./util/client-auth");
+const initialiseData = require(".util/initial-data");
 const email = require("./util/email");
+const stripe = require("./util/stripe");
 
 const keystone = new Keystone({
   appVersion: {
@@ -60,9 +61,7 @@ const keystone = new Keystone({
   onConnect: process.env.CREATE_TABLES !== "true" && initialiseData,
 });
 
-// See Keystone Object
-//console.log(keystone);
-
+// Index Exports
 exports.indexKey = keystone;
 exports.s3Adapter = fileAdapter;
 exports.indexEnv = dotenv.config();
@@ -93,10 +92,12 @@ module.exports = {
   keystone,
   // Express Configuration (Optional)
   configureExpress: (app) => {
+    //* START *//
     app.get("/api", (req, res) => {
       res.send("Connected to API...");
       console.log("API Connection Set Via Keystone");
     });
+    //* END *//
   },
   apps: [
     new GraphQLApp(),
