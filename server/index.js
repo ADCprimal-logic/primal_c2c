@@ -29,7 +29,7 @@ const fileAdapter = new S3Adapter({
   publicUrl: ({ id, filename, _meta }) =>
     `https://${CF_DISTRIBUTION_ID}.cloudfront.net/${S3_PATH}/${filename}`,
   s3Options: {
-    // Optional paramaters to be supplied directly to AWS.S3 constructor
+    // Optional parameters to be supplied directly to AWS.S3 constructor
     accessKeyId: process.env.ACCESS_KEY_ID,
     secretAccessKey: process.env.SECRET_ACCESS_KEY,
     region: process.env.REGION,
@@ -150,10 +150,6 @@ module.exports = {
       axios: {
         // See https://github.com/nuxt-community/axios-module#options
       },
-      /*router: {
-        middleware: ["auth"],
-      },*/
-
       /*
        ** Build configuration
        */
