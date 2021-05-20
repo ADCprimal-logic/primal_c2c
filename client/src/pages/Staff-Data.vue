@@ -1,12 +1,9 @@
 <!-- Comment -->
 <template>
   <div>
-    <v-toolbar flat color="gray">
-      <v-toolbar-title>Student Data</v-toolbar-title>
+    <v-toolbar color="#B0BEC5">
+      <v-toolbar-title>Staff Data<br></v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn color="primary" dark @click="expand = !expand">
-        {{ expand ? 'Close' : 'Keep' }} other rows
-      </v-btn>
     </v-toolbar>
     <v-data-table
       :headers="headers"
@@ -18,11 +15,11 @@
       <template v-slot:items="props">
         <tr @click="props.expanded = !props.expanded">
           <td>{{ props.item.name }}</td>
-          <td class="text-xs-right">{{ props.item.calories }}</td>
-          <td class="text-xs-right">{{ props.item.fat }}</td>
-          <td class="text-xs-right">{{ props.item.carbs }}</td>
-          <td class="text-xs-right">{{ props.item.protein }}</td>
-          <td class="text-xs-right">{{ props.item.iron }}</td>
+          <td class="text-xs-right">{{ props.item.Gender }}</td>
+          <td class="text-xs-right">{{ props.item.DOB }}</td>
+          <td class="text-xs-right">{{ props.item.Location }}</td>
+          <td class="text-xs-right">{{ props.item.Allergies }}</td>
+          <td class="text-xs-right">{{ props.item.Status }}</td>
         </tr>
       </template>
       <template v-slot:expand="props">
@@ -40,21 +37,8 @@
             fill-height
           >
             <v-card-title>
-              <v-btn dark icon>
-                <v-icon>chevron_left</v-icon>
-              </v-btn>
-
               <v-spacer></v-spacer>
-
-              <v-btn dark icon class="mr-3">
-                <v-icon>edit</v-icon>
-              </v-btn>
-
-              <v-btn dark icon>
-                <v-icon>more_vert</v-icon>
-              </v-btn>
             </v-card-title>
-
             <v-spacer></v-spacer>
 
             <v-card-title class="white--text pl-5 pt-5">
@@ -92,7 +76,6 @@
             </v-list-tile-action>
           </v-list-tile>
 
-          <v-divider inset></v-divider>
 
           <v-list-tile @click="">
             <v-list-tile-action>
@@ -153,92 +136,92 @@
             sortable: true,
             value: 'name'
           },
-          { text: 'Calories', value: 'calories' },
-          { text: 'Fat (g)', value: 'fat' },
-          { text: 'Carbs (g)', value: 'carbs' },
-          { text: 'Protein (g)', value: 'protein' },
-          { text: 'Iron (%)', value: 'iron' }
+          { text: 'Gender', value: 'Gender' },
+          { text: 'DOB (g)', value: 'DOB' },
+          { text: 'Location (g)', value: 'Location' },
+          { text: 'Allergies (g)', value: 'Allergies' },
+          { text: 'Status (%)', value: 'Status' }
         ],
         desserts: [
           {
             name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-            protein: 4.0,
-            iron: '1%'
+            Gender: 159,
+            DOB: 6.0,
+            Location: 24,
+            Allergies: 4.0,
+            Status: '1%'
           },
           {
             name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
-            protein: 4.3,
-            iron: '1%'
+            Gender: 237,
+            DOB: 9.0,
+            Location: 37,
+            Allergies: 4.3,
+            Status: '1%'
           },
           {
             name: 'Eclair',
-            calories: 262,
-            fat: 16.0,
-            carbs: 23,
-            protein: 6.0,
-            iron: '7%'
+            Gender: 262,
+            DOB: 16.0,
+            Location: 23,
+            Allergies: 6.0,
+            Status: '7%'
           },
           {
             name: 'Cupcake',
-            calories: 305,
-            fat: 3.7,
-            carbs: 67,
-            protein: 4.3,
-            iron: '8%'
+            Gender: 305,
+            DOB: 3.7,
+            Location: 67,
+            Allergies: 4.3,
+            Status: '8%'
           },
           {
             name: 'Gingerbread',
-            calories: 356,
-            fat: 16.0,
-            carbs: 49,
-            protein: 3.9,
-            iron: '16%'
+            Gender: 356,
+            DOB: 16.0,
+            Location: 49,
+            Allergies: 3.9,
+            Status: '16%'
           },
           {
             name: 'Jelly bean',
-            calories: 375,
-            fat: 0.0,
-            carbs: 94,
-            protein: 0.0,
-            iron: '0%'
+            Gender: 375,
+            DOB: 0.0,
+            Location: 94,
+            Allergies: 0.0,
+            Status: '0%'
           },
           {
             name: 'Lollipop',
-            calories: 392,
-            fat: 0.2,
-            carbs: 98,
-            protein: 0,
-            iron: '2%'
+            Gender: 392,
+            DOB: 0.2,
+            Location: 98,
+            Allergies: 0,
+            Status: '2%'
           },
           {
             name: 'Honeycomb',
-            calories: 408,
-            fat: 3.2,
-            carbs: 87,
-            protein: 6.5,
-            iron: '45%'
+            Gender: 408,
+            DOB: 3.2,
+            Location: 87,
+            Allergies: 6.5,
+            Status: '45%'
           },
           {
             name: 'Donut',
-            calories: 452,
-            fat: 25.0,
-            carbs: 51,
-            protein: 4.9,
-            iron: '22%'
+            Gender: 452,
+            DOB: 25.0,
+            Location: 51,
+            Allergies: 4.9,
+            Status: '22%'
           },
           {
             name: 'KitKat',
-            calories: 518,
-            fat: 26.0,
-            carbs: 65,
-            protein: 7,
-            iron: '6%'
+            Gender: 518,
+            DOB: 26.0,
+            Location: 65,
+            Allergies: 7,
+            Status: '6%'
           }
         ],
   })

@@ -26,7 +26,7 @@ Once run you will have a http://localhost:3000 url which would prompt your NuxtJ
 
 > This is using Keystone 5, the most stable release of KeystoneJS. Keystone 6, or Keystone Next, is the next stage for KeystoneJS. Unfortunately there is no telling when the next version will be released and this version becomes deprecated, but this is used for more active development to be released to production.
 
-## Environment Set (.env)
+## EnvStatusment Set (.env)
 
 ```
 # Keystone Config
