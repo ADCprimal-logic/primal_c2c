@@ -1,6 +1,5 @@
 const index = require("../index");
 const { Text, Relationship, Password, Select } = require("@keystonejs/fields");
-const Stripe = require("stripe");
 const keystone = index.indexKey;
 
 console.log("Creating Parent");
