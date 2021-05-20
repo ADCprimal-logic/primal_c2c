@@ -92,7 +92,7 @@
             text: 'New User Registration'
           },
           {
-            to: '/Child Check-In System',
+            to: '/Organization-Registration',
             icon: 'mdi-android-studio',
             text: 'Organization Registration',
           }

@@ -108,9 +108,14 @@
             text: 'Schedule'
           },
           {
-            to: '/Students and Faculty',
+            to: '/Students-Data',
             icon: 'mdi-archive',
-            text: 'Student and Faculty Data'
+            text: 'Student Data'
+          },
+          {
+            to: '/Staff-Data',
+            icon: 'mdi-apple',
+            text: 'Staff Data'
           },
           {
             to: '/Profile Editor',
