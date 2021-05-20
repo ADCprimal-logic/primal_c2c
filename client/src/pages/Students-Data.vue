@@ -35,7 +35,7 @@
             <v-card>
             <v-img
           src="https://cdn.vuetifyjs.com/images/lists/ali.png"
-          height="300px"
+          height="200px"
             >
             <v-layout
               column
@@ -121,6 +121,59 @@
               <v-list-tile-sub-title>Known Allergies</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
+          <v-divider inset></v-divider>
+<!-- Field Divider --> 
+            
+            <v-list-tile @click="">
+            <v-list-tile-action>
+              <v-icon color= #43A047>mdi-currency-usd</v-icon>
+            </v-list-tile-action>
+
+            <v-list-tile-content>
+              <v-list-tile-title>Tuition Paid: () Tuition Owed: ()</v-list-tile-title>
+              <v-list-tile-sub-title>Balance</v-list-tile-sub-title>
+            </v-list-tile-content>
+          </v-list-tile>
+          <v-divider inset></v-divider>
+<!-- Field Divider --> 
+            
+            <v-list-tile @click="">
+            <v-list-tile-action>
+              <v-icon color= 'bluebird'>mdi-hospital-marker</v-icon>
+            </v-list-tile-action>
+
+            <v-list-tile-content>
+              <v-list-tile-title>Location goes here</v-list-tile-title>
+              <v-list-tile-sub-title>Homeroom</v-list-tile-sub-title>
+            </v-list-tile-content>
+          </v-list-tile>
+          <v-divider inset></v-divider>
+<!-- Field Divider --> 
+            
+            <v-list-tile @click="">
+            <v-list-tile-action>
+              <v-icon color= #AEEA00>mdi-needle</v-icon>
+            </v-list-tile-action>
+
+            <v-list-tile-content>
+              <v-list-tile-title>Click here to expand immuniziations</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+          <v-divider inset></v-divider>
+<!-- Field Divider --> 
+            
+            <v-list-tile @click="">
+            <v-list-tile-action>
+              <v-icon color= 'bluebird'>mdi-hospital-marker</v-icon>
+            </v-list-tile-action>
+
+            <v-list-tile-content>
+              <v-list-tile-title>Special Notes</v-list-tile-title>
+              <v-list-tile-sub-title>Child Notes Go Here</v-list-tile-sub-title>
+            </v-list-tile-content>
+          </v-list-tile>
+          <v-divider inset></v-divider>
+
 <!-- End of Fields -->
         </v-list>
       </v-card>
