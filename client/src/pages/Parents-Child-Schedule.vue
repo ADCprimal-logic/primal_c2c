@@ -17,8 +17,8 @@
       >
         <material-card
           color="bluebird"
-          title="Student Clock In Table"
-          text="Find the respective student and clock them in here."
+          title="Child Clock In Table"
+          text="Use this to chart to see when your child was clocked in."
         >
           <v-data-table
             :headers="headers"
@@ -49,39 +49,6 @@
       <v-flex
         md12
       >
-        <material-card
-          color="mint"
-          flat
-          full-width
-          title="Expanded Student Data"
-          text="This field shows attendance values for the week."
-        >
-          <v-data-table
-            :headers="headers"
-            :items="items.slice(0, 7)"
-            hide-actions
-          >
-            <template
-              slot="headerCell"
-              slot-scope="{ header }"
-            >
-              <span
-                class="subheading font-weight-light text--darken-3"
-                v-text="header.text"
-              />
-            </template>
-            <template
-              slot="items"
-              slot-scope="{ item }"
-              expanded
-            >
-              <td>{{ item.name }}</td>
-              <td>{{ item.country }}</td>
-              <td>{{ item.city }}</td>
-              <td class="text-xs-right">{{ item.salary }}</td>
-            </template>
-          </v-data-table>
-        </material-card>
       </v-flex>
     </v-layout>
   </v-container>
@@ -110,7 +77,7 @@
       },
       {
         sortable: true,
-        text: 'Last Clock In',
+        text: 'Time Stamp',
         value: 'city'
       },
       {

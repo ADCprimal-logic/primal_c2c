@@ -15,7 +15,7 @@
         <material-card
           color="bluebird"
           title="Inbox"
-          text="Recieved messages"
+          text="Messages from staff will appear here!"
         >
           <v-data-table
             :headers="headers"
@@ -46,38 +46,6 @@
       <v-flex
         md12
       >
-        <material-card
-          color="green"
-          flat
-          full-width
-          title="Outbox"
-          text="Sent and draft messages"
-        >
-          <v-data-table
-            :headers="headers"
-            :items="items.slice(0, 7)"
-            hide-actions
-          >
-            <template
-              slot="headerCell"
-              slot-scope="{ header }"
-            >
-              <span
-                class="subheading font-weight-light text--darken-3"
-                v-text="header.text"
-              />
-            </template>
-            <template
-              slot="items"
-              slot-scope="{ item }"
-            >
-              <td>{{ item.name }}</td>
-              <td>{{ item.country }}</td>
-              <td>{{ item.city }}</td>
-              <td class="text-xs-right">{{ item.salary }}</td>
-            </template>
-          </v-data-table>
-        </material-card>
       </v-flex>
     </v-layout>
   </v-container>
@@ -95,22 +63,22 @@
     headers: [
       {
         sortable: false,
-        text: 'Name',
+        text: 'Staff Name',
         value: 'name'
       },
       {
         sortable: false,
-        text: 'Country',
+        text: 'Subject',
         value: 'country'
       },
       {
         sortable: false,
-        text: 'City',
+        text: 'Content',
         value: 'city'
       },
       {
         sortable: false,
-        text: 'Salary',
+        text: 'Time',
         value: 'salary',
         align: 'right'
       }

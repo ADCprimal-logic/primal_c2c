@@ -25,8 +25,8 @@
           >
               <v-img
                 :src="logo"
-                height="50"
-                width="50"
+                height="58"
+                width="58"
                 
               />
             </v-list-tile-avatar>

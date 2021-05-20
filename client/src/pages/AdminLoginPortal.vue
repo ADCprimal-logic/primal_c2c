@@ -4,8 +4,8 @@
           <material-card
             color="dark gray"
             elevation="12"
-            title="Welcome Staff!"
-            full-width
+            title="Welcome Administrator!"
+
     >
             <v-card-text>
               <v-form>
@@ -84,7 +84,7 @@ export default {
     async authenticate() {
       if (!this.isDisabled) {
         await this.setUsername(this.defaultUserPassword);
-        this.$router.push({ path: "dashboard" });
+        this.$router.push({ path: "Admin-Dashboard" });
       }
     },
   },

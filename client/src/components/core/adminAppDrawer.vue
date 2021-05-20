@@ -25,8 +25,8 @@
           >
               <v-img
                 :src="logo"
-                height="58"
-                width="58"
+                height="50"
+                width="50"
                 
               />
             </v-list-tile-avatar>
@@ -72,30 +72,21 @@
         logo: '/vuetifylogo.png',
         links: [
           {
-            to: '/Parent-Login-Portal',
-            icon: 'mdi-account-multiple-outline',
-            text: 'Parent Login'
+            to: '/Dashboard',
+            icon: 'mdi-view-dashboard',
+            text: 'Admin Dash',
+            alt: 'Dashboard',
           },
           {
-            to: '/Staff-Login-Portal',
-            icon: 'mdi-clipboard-outline',
-            text: 'Staff Login'
+            to: '/Profile Editor',
+            icon: 'mdi-account',
+            text: 'Staff Data'
           },
           {
-            to: '/AdminLoginPortal',
-            icon: 'mdi-angularjs',
-            text: 'Administrator Portal'
+            to: '/icons',
+            icon: 'mdi-chart-bubble',
+            text: 'Icons'
           },
-          {
-            to: '/New-Child-Registration',
-            icon: 'mdi-account-plus',
-            text: 'New User Registration'
-          },
-          {
-            to: '/Child Check-In System',
-            icon: 'mdi-android-studio',
-            text: 'Organization Registration',
-          }
           //This is a secondary function for maps integrations. Future use.
           //{
             //to: '/maps',
