@@ -8,5 +8,5 @@ const randomString = () => crypto.randomBytes(6).hexSlice();
 // Password Hashing
 const bcrypt = require("bcrypt");
 // Initialize .ENV
-const configEnv = index.indexEnv;
-configEnv;
+const dotenv = require("dotenv");
+dotenv.config();

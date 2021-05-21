@@ -32,6 +32,7 @@ keystone.createList("Child", {
     medical_record: { type: Relationship, ref: "MedicalRecord", many: false },
     time_card: { type: Relationship, ref: "ChildTimecard", many: false },
     pin_number: { type: Integer },
+    enrollment_status: { type: Select, options: "Active, Inactive" },
   },
   labelResolver: (item) => `${item.first_name} ${item.last_name}`,
 });
