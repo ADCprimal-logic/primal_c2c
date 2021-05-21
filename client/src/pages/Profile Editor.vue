@@ -43,8 +43,11 @@
                   />
                 </v-flex>
                 <v-flex xs12 md12>
+                  <v-text-field label="Phone Number" class="purple-input" :value="my_phone = todos[0].location.phone" @input="my_phone = $event"
+                /></v-flex>
+                <v-flex xs12 md12>
                   <v-text-field label="Address" class="purple-input" :value="my_address = todos[0].location.street_Address" @input="my_address = $event"
- />
+                />
                 </v-flex>
                 <v-flex xs12 md4>
                   <v-text-field label="City" class="purple-input" :value="todos[0].location.city"/>
@@ -118,6 +121,7 @@ const GET_TODOS = `
           first_name
           last_name
           email
+          phone
           location {
             name
             street_Address
@@ -130,8 +134,8 @@ const GET_TODOS = `
       }
 	`;
 const UPDATE_STAFF = `
-	    mutation upStaff($my_id: ID!, $firstname: String, $lastname: String, $myemail: String) {
-            updateStaffMember(id: $my_id, data: {first_name: $firstname, last_name: $lastname, email: $myemail, password: "Password123", phone: "12345676543"}) {
+	    mutation upStaff($my_id: ID!, $firstname: String, $lastname: String, $myemail: String, $myphone: String) {
+            updateStaffMember(id: $my_id, data: {first_name: $firstname, last_name: $lastname, email: $myemail, password: "Password123", phone: $myphone}) {
               id
             }
           }
@@ -163,6 +167,7 @@ export default {
             fname: '',
             lname: '',
             my_email: '',
+            my_phone: '',
         };
     },
     components: {
@@ -170,7 +175,7 @@ export default {
     },
     methods: {
         async updateStaff() {
-            await graphql(UPDATE_STAFF, { my_id: this.id, firstname: this.fname, lastname: this.lname, myemail: this.my_email });
+            await graphql(UPDATE_STAFF, { my_id: this.id, firstname: this.fname, lastname: this.lname, myemail: this.my_email, myphone: this.my_phone });
             console.log("i am updating id: " + this.id + " for " + this.fname + " " + this.lname);
     },
     },
