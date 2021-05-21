@@ -6,6 +6,7 @@ Payment Client = `stripe`
 Database Connection = `postgres`
 
 Article: https://codeburst.io/nuxt-authentication-from-scratch-a7a024c7201b
+
 # Documentation for Assessed Packages
 
 - Nodemailer: https://nodemailer.com/about/
