@@ -156,24 +156,23 @@
             </v-list-tile-action>
 
             <v-list-tile-content>
-              <v-list-tile-title>Click here to expand immuniziations</v-list-tile-title>
+              <v-list-tile-title>Immuniziations</v-list-tile-title>
+              <v-list-tile-sub-title>Click here to expand immuniziations</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
           <v-divider inset></v-divider>
-<!-- Field Divider --> 
-            
+<!-- Field Divider -->   
             <v-list-tile @click="">
             <v-list-tile-action>
-              <v-icon color= 'bluebird'>mdi-hospital-marker</v-icon>
+              <v-icon color= 'bluebird'>mdi-message-bulleted</v-icon>
             </v-list-tile-action>
 
             <v-list-tile-content>
-              <v-list-tile-title>Special Notes</v-list-tile-title>
-              <v-list-tile-sub-title>Child Notes Go Here</v-list-tile-sub-title>
+              <v-list-tile-title>Approved Contacts</v-list-tile-title>
+              <v-list-tile-sub-title>Click here to expand</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
           <v-divider inset></v-divider>
-
 <!-- End of Fields -->
         </v-list>
       </v-card>
