@@ -20,7 +20,7 @@
         <tr @click="props.expanded = !props.expanded">
           <td>{{ props.item.name }}</td>
           <td class="text-xs-left">{{ props.item.Gender }}</td>
-          <td class="text-xs-left">{{ props.item.DOB }}</td>
+          <td class="text-xs-left">{{ props.item.dateofBirth }}</td>
           <td class="text-xs-left">{{ props.item.Location }}</td>
           <td class="text-xs-left">{{ props.item.Allergies }}</td>
           <td class="text-xs-left">{{ props.item.Status }}</td>
@@ -36,6 +36,7 @@
             <v-img
           src="https://cdn.vuetifyjs.com/images/lists/ali.png"
           height="200px"
+          rounded-circle
             >
             <v-layout
               column
@@ -202,7 +203,7 @@
             value: 'name'
           },
           { text: 'Gender(M/F)', value: 'Gender' },
-          { text: 'DOB (M-D-Y)', value: 'DOB' },
+          { text: 'Date of Birth (M-D-Y)', value: 'dateofBirth' },
           { text: 'Location', value: 'Location' },
           { text: 'Allergies (Y/N)', value: 'Allergies' },
           { text: 'Status (In/Out)', value: 'Status' }
@@ -211,7 +212,7 @@
           {
             name: 'Frozen Yogurt',
             Gender: 159,
-            DOB: 6.0,
+            dateofBirth: 6.0,
             Location: 24,
             Allergies: 4.0,
             Status: '1%'
@@ -219,7 +220,7 @@
           {
             name: 'Ice cream sandwich',
             Gender: 237,
-            DOB: 9.0,
+            dateofBirth: 9.0,
             Location: 37,
             Allergies: 4.3,
             Status: '1%'
@@ -227,7 +228,7 @@
           {
             name: 'Eclair',
             Gender: 262,
-            DOB: 16.0,
+            dateofBirth: 16.0,
             Location: 23,
             Allergies: 6.0,
             Status: '7%'
@@ -235,7 +236,7 @@
           {
             name: 'Cupcake',
             Gender: 305,
-            DOB: 3.7,
+            dateofBirth: 3.7,
             Location: 67,
             Allergies: 4.3,
             Status: '8%'
@@ -243,7 +244,7 @@
           {
             name: 'Gingerbread',
             Gender: 356,
-            DOB: 16.0,
+            dateofBirth: 16.0,
             Location: 49,
             Allergies: 3.9,
             Status: '16%'
@@ -251,7 +252,7 @@
           {
             name: 'Jelly bean',
             Gender: 375,
-            DOB: 0.0,
+            dateofBirth: 0.0,
             Location: 94,
             Allergies: 0.0,
             Status: '0%'
@@ -259,7 +260,7 @@
           {
             name: 'Lollipop',
             Gender: 392,
-            DOB: 0.2,
+            dateofBirth: 0.2,
             Location: 98,
             Allergies: 0,
             Status: '2%'
@@ -267,7 +268,7 @@
           {
             name: 'Honeycomb',
             Gender: 408,
-            DOB: 3.2,
+            dateofBirth: 3.2,
             Location: 87,
             Allergies: 6.5,
             Status: '45%'
@@ -275,7 +276,7 @@
           {
             name: 'Donut',
             Gender: 452,
-            DOB: 25.0,
+            dateofBirth: 25.0,
             Location: 51,
             Allergies: 4.9,
             Status: '22%'
@@ -283,7 +284,87 @@
           {
             name: 'KitKat',
             Gender: 518,
-            DOB: 26.0,
+            dateofBirth: 26.0,
+            Location: 65,
+            Allergies: 7,
+            Status: '6%'
+          },
+          {
+            name: 'Frozen Yogurt',
+            Gender: 159,
+            dateofBirth: 6.0,
+            Location: 24,
+            Allergies: 4.0,
+            Status: '1%'
+          },
+          {
+            name: 'Ice cream sandwich',
+            Gender: 237,
+            dateofBirth: 9.0,
+            Location: 37,
+            Allergies: 4.3,
+            Status: '1%'
+          },
+          {
+            name: 'Eclair',
+            Gender: 262,
+            dateofBirth: 16.0,
+            Location: 23,
+            Allergies: 6.0,
+            Status: '7%'
+          },
+          {
+            name: 'Cupcake',
+            Gender: 305,
+            dateofBirth: 3.7,
+            Location: 67,
+            Allergies: 4.3,
+            Status: '8%'
+          },
+          {
+            name: 'Gingerbread',
+            Gender: 356,
+            dateofBirth: 16.0,
+            Location: 49,
+            Allergies: 3.9,
+            Status: '16%'
+          },
+          {
+            name: 'Jelly bean',
+            Gender: 375,
+            dateofBirth: 0.0,
+            Location: 94,
+            Allergies: 0.0,
+            Status: '0%'
+          },
+          {
+            name: 'Lollipop',
+            Gender: 392,
+            dateofBirth: 0.2,
+            Location: 98,
+            Allergies: 0,
+            Status: '2%'
+          },
+          {
+            name: 'Honeycomb',
+            Gender: 408,
+            dateofBirth: 3.2,
+            Location: 87,
+            Allergies: 6.5,
+            Status: '45%'
+          },
+          {
+            name: 'Donut',
+            Gender: 452,
+            dateofBirth: 25.0,
+            Location: 51,
+            Allergies: 4.9,
+            Status: '22%'
+          },
+          {
+            name: 'KitKat',
+            Gender: 518,
+            dateofBirth: 26.0,
             Location: 65,
             Allergies: 7,
             Status: '6%'
