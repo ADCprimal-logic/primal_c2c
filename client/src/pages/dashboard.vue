@@ -66,6 +66,8 @@
       >
       
       </v-flex>
+      <v-divider></v-divider>
+      
     </v-layout>
   </v-container>
 </template>
