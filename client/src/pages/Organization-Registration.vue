@@ -9,12 +9,10 @@
   <v-layout
       justify-center
       wrap
-      fill-width
       text-center
       fluid
-      fill-height
     >
-    <v-img src="https://primal-c2c-images.s3.amazonaws.com/static/campinthebox.png"></v-img>
+    <v-img src="https://primal-c2c-images.s3.amazonaws.com/static/campinthebox.png" fluid></v-img>
     </v-layout>
   <v-layout
       justify-center
@@ -24,68 +22,75 @@
       color="#66848e"
       fluid
     >
-    <h2>Welcome to the organization registration page!</h2>
+     <v-toolbar
+    color="C2Corange"
+    dark
+  >
+
+  </v-toolbar>
     <v-layout justify-center wrap>
-    <h3> Use the forms below to sign up for services.</h3><br>
+    <h2>Welcome to the church and organization registration page!</h2>
+    <br/>
     </v-layout>
     <v-container fill-height fluid grid-list-xl>
     <v-layout justify-center wrap>
       <v-flex xs12 md8>
-        <material-card
-          color="mint"
-          title="Edit Staff Profile"
-          text="Use this page to update your contact, personal information and system avatar."
-        >
           <v-form>
             <v-container py-0>
               <v-layout wrap>
                 <v-flex xs12 md4>
                   <v-text-field
                     label="Organization Name"
-                    class="mint-input"
+                    class="purple-input"
                   />
                 </v-flex>
+                <br/>
                 <v-flex xs12 md4>
                   <v-text-field
-                    label="Email Address"
+                    label="Organization Email Address"
                     class="purple-input"
                   />
                 </v-flex>
                 <v-flex xs12 md6>
                   <v-text-field
-                    label="First Name"
+                    label="Organization Phone Number"
                     class="purple-input"
-
                   />
+                </v-flex>
+                
+                <v-flex xs12 md6>
                 </v-flex>
                 <v-flex xs12 md6>
                   <v-text-field
-
-                    label="Last Name"
+                    label="Director First Name"
                     class="purple-input"
                   />
                 </v-flex>
-                <v-flex xs12 md4>
+                
+                <v-flex xs12 md6>
                   <v-text-field
-
-                    label="Country"
+                    label="Director Last Name"
                     class="purple-input"
-                  />
-                </v-flex>
-                <v-flex xs12 md4>
-                  <v-text-field
-                    class="purple-input"
-                    label="Postal Code"
-                    type="number"
                   />
                 </v-flex>
                 <v-flex xs12>
                   <v-textarea
                     class="purple-input"
-                    label="About Me"
-                    value="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                    label="Organization Street Address and Zip Code"
+                    hint="In the event the organization has multiple addresses, please separate them with a comma and select the respective states."
                   />
                 </v-flex>
+                      <v-flex xs12 sm6>
+                <v-select
+                  v-model="e6"
+                  :items="states"
+                  :menu-props="{ maxHeight: '400' }"
+                  label="Select"
+                  multiple
+                  hint="Pick which state or states the organization resides in."
+                  persistent-hint
+                ></v-select>
+              </v-flex>
                 <v-flex xs12 text-xs-right>
                   <v-btn
                     class="mx-0 font-weight-light"
@@ -97,7 +102,6 @@
               </v-layout>
             </v-container>
           </v-form>
-        </material-card>
       </v-flex>
     </v-layout>
     
@@ -107,6 +111,7 @@
 </template>
 
 <script>
+
   export default {
     layout: 'registrationdashboard',
 
@@ -115,7 +120,25 @@
         e6: 1,
         myStyle:{
             backgroundColor:"white" 
-            }
+            },
+        e6: [],
+        e7: [],
+        states: [
+          'Alabama', 'Alaska', 'American Samoa', 'Arizona',
+          'Arkansas', 'California', 'Colorado', 'Connecticut',
+          'Delaware', 'District of Columbia', 'Federated States of Micronesia',
+          'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho',
+          'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
+          'Louisiana', 'Maine', 'Marshall Islands', 'Maryland',
+          'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
+          'Missouri', 'Montana', 'Nebraska', 'Nevada',
+          'New Hampshire', 'New Jersey', 'New Mexico', 'New York',
+          'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Ohio',
+          'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico',
+          'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee',
+          'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia',
+          'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+        ]
       }
     },
   }
