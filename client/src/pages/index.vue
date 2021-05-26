@@ -3,7 +3,7 @@
   <v-content>
     
     <v-container fluid fill-height>
-      <v-layout align-center justify-center>
+      <v-layout>
         <v-flex xs12 sm8 md4>
           <material-card
             color="dark gray"
