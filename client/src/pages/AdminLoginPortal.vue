@@ -5,7 +5,8 @@
             color="dark gray"
             elevation="12"
             title="Welcome Administrator!"
-
+            height="400"
+            width="400"
     >
             <v-card-text>
               <v-form>
