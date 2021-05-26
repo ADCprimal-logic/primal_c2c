@@ -296,7 +296,7 @@ import materialCard from '~/components/material/AppCard'
           }
         ]
       },
-
+      
       editItem (item) {
         this.editedIndex = this.desserts.indexOf(item)
         this.editedItem = Object.assign({}, item)

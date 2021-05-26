@@ -23,4 +23,6 @@ export default {
   warning: '#ffa21a',
   bluebird: '#34495E',
   mint: '#41B883',
+  C2Corange: '#eb6e23',
+  C2Cblue: '#66848e',
 }

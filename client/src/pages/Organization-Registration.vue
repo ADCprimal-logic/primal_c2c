@@ -10,121 +10,112 @@
       justify-center
       wrap
       fill-width
-
+      text-center
+      fluid
+      fill-height
     >
-    <v-stepper
-    v-model="e6"
-    vertical
-    fill-width
-  >
-    <v-stepper-step
-      :complete="e6 > 1"
-      step="1"
+    <v-img src="https://primal-c2c-images.s3.amazonaws.com/static/campinthebox.png"></v-img>
+    </v-layout>
+  <v-layout
+      justify-center
+      wrap
+      fill-width
+      fill-height
+      color="#66848e"
+      fluid
     >
-      Profile Data Creation
-      <small>Summarize if needed</small>
-    </v-stepper-step>
+    <h2>Welcome to the organization registration page!</h2>
+    <v-layout justify-center wrap>
+    <h3> Use the forms below to sign up for services.</h3><br>
+    </v-layout>
+    <v-container fill-height fluid grid-list-xl>
+    <v-layout justify-center wrap>
+      <v-flex xs12 md8>
+        <material-card
+          color="mint"
+          title="Edit Staff Profile"
+          text="Use this page to update your contact, personal information and system avatar."
+        >
+          <v-form>
+            <v-container py-0>
+              <v-layout wrap>
+                <v-flex xs12 md4>
+                  <v-text-field
+                    label="Organization Name"
+                    class="mint-input"
+                  />
+                </v-flex>
+                <v-flex xs12 md4>
+                  <v-text-field
+                    label="Email Address"
+                    class="purple-input"
+                  />
+                </v-flex>
+                <v-flex xs12 md6>
+                  <v-text-field
+                    label="First Name"
+                    class="purple-input"
 
-    <v-stepper-content step="1">
-      <v-card
-        color="grey lighten-1"
-        class="mb-12"
-        height="200px"
-        width="2000px"
-      ></v-card>
-      <v-btn
-        color="primary"
-        @click="e6 = 2"
-      >
-        Continue
-      </v-btn>
-      <v-btn text>
-        Cancel
-      </v-btn>
-    </v-stepper-content>
+                  />
+                </v-flex>
+                <v-flex xs12 md6>
+                  <v-text-field
 
-    <v-stepper-step
-      :complete="e6 > 2"
-      step="2"
-    >
-      Configure analytics for this app
-    </v-stepper-step>
+                    label="Last Name"
+                    class="purple-input"
+                  />
+                </v-flex>
+                <v-flex xs12 md4>
+                  <v-text-field
 
-    <v-stepper-content step="2">
-      <v-card
-        color="grey lighten-1"
-        class="mb-12"
-        height="200px"
-        width="2000px"
-      ></v-card>
-      <v-btn
-        color="primary"
-        @click="e6 = 3"
-      >
-        Continue
-      </v-btn>
-      <v-btn text>
-        Cancel
-      </v-btn>
-    </v-stepper-content>
-
-    <v-stepper-step
-      :complete="e6 > 3"
-      step="3"
-    >
-      Select an ad format and name ad unit
-    </v-stepper-step>
-
-    <v-stepper-content step="3">
-      <v-card
-        color="grey lighten-1"
-        class="mb-12"
-        height="200px"
-        width="2000px"
-      ></v-card>
-      <v-btn
-        color="primary"
-        @click="e6 = 4"
-      >
-        Continue
-      </v-btn>
-      <v-btn text>
-        Cancel
-      </v-btn>
-    </v-stepper-content>
-
-    <v-stepper-step step="4">
-      View setup instructions
-    </v-stepper-step>
-    <v-stepper-content step="4">
-      <v-card
-        color="grey lighten-1"
-        class="mb-12"
-        height="200px"
-        width="2000px"
-      ></v-card>
-      <v-btn
-        color="primary"
-        @click="e6 = 1"
-      >
-        Continue
-      </v-btn>
-      <v-btn text>
-        Cancel
-      </v-btn>
-    </v-stepper-content>
-  </v-stepper>
+                    label="Country"
+                    class="purple-input"
+                  />
+                </v-flex>
+                <v-flex xs12 md4>
+                  <v-text-field
+                    class="purple-input"
+                    label="Postal Code"
+                    type="number"
+                  />
+                </v-flex>
+                <v-flex xs12>
+                  <v-textarea
+                    class="purple-input"
+                    label="About Me"
+                    value="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                  />
+                </v-flex>
+                <v-flex xs12 text-xs-right>
+                  <v-btn
+                    class="mx-0 font-weight-light"
+                    color="mint"
+                  >
+                    Update Profile
+                  </v-btn>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-form>
+        </material-card>
+      </v-flex>
+    </v-layout>
+    
+  </v-container>
   </v-layout>
   </v-container>
 </template>
 
 <script>
   export default {
-    layout: 'logindashboard',
+    layout: 'registrationdashboard',
 
     data () {
       return {
         e6: 1,
+        myStyle:{
+            backgroundColor:"white" 
+            }
       }
     },
   }
