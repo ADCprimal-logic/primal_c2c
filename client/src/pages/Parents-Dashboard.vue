@@ -66,8 +66,6 @@
       >
       
       </v-flex>
-      <v-divider></v-divider>
-      
     </v-layout>
   </v-container>
 </template>
@@ -78,7 +76,7 @@
   import materialStatsCard from '~/components/material/AppStatsCard'
 
   export default {
-    layout: 'dashboard',
+    layout: 'parentsdashboard',
     middleware: 'authentication',
     components: {
       materialCard,

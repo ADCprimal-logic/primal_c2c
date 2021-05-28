@@ -1,17 +1,13 @@
 <template>
 <!-- Comment -->
-  <v-content>
-    
-    <v-container fluid fill-height>
-      <v-layout>
-        <v-flex xs12 sm8 md4>
+      <v-layout justify-center>
           <material-card
             color="dark gray"
             elevation="12"
-            title="Coast 2 Coast Kids Login Portal"
+            title="Welcome Staff!"
             height="400"
             width="400"
-        >
+    >
             <v-card-text>
               <v-form>
                 <v-text-field
@@ -19,7 +15,7 @@
                   v-model="username"
                   prepend-icon="person"
                   name="username"
-                  label="Login"
+                  label="Email"
                   :placeholder="defaultUserPassword"
                 ></v-text-field>
                 <v-text-field
@@ -52,11 +48,8 @@
                 >
               </v-layout>
             </v-card-actions>
-          </material-card>
-        </v-flex>
+         </material-card>
       </v-layout>
-    </v-container>
-  </v-content>
 </template>
 
 <script>

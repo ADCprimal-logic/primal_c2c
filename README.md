@@ -13,11 +13,11 @@ To get setup for this project you will need to set up a handful of things.
    - IMPORTANT: Comment out lines 16 and 58 of index.js under server BEFORE you create tables, so that on `yarn dev` your Super Admin Object will be initialized
 3. Run `yarn dev` to initialize the project so it can be built and ran locally.
 
-> To connect to [demo database](postgres://primal_postgres:primal-squad@c2cdatabase.cqs5a6cxnjkx.us-east-1.rds.amazonaws.com:5432/devops) that includes ALL project schema use this username and password:
+> To connect to [demo database](postgres://primal_postgres:primal-squad@c2cdatabase.cqs5a6cxnjkx.us-east-1.rds.amazonaws.com:5432/dev1) that includes ALL project schema use this username and password:
 
 ```
 email: c2cSuper@admin.net
-password: 16d7f5e8629c
+password: #primalPass
 ```
 
 Once run you will have a http://localhost:3000 url which would prompt your NuxtJS Front-End with http://localhost:3000/admin acting as your Administrative KeystoneJS Backend
@@ -33,6 +33,7 @@ Once run you will have a http://localhost:3000 url which would prompt your NuxtJ
 PROJECT_NAME="C2C Children Connect"
 VERSION_NUMBER="0.2.0"
 COOKIE_SECRET="bNLVPe1NIFSCeNRHEQ7CUyjcnVzko6MI"
+SITE_NAME=""
 # AWS S3 Creds
 S3_PATH = 'primal-c2c-images.s3.amazonaws.com'
 S3_BUCKET ='primal-c2c-images'
@@ -50,9 +51,10 @@ PUBLISH_KEY = ""
 TEST_SECRET_KEY = ""
 TEST_PUBLISH_KEY = ""
 # Database Config
-DATABASE_URL="postgres://primal_postgres:primal-squad@c2cdatabase.cqs5a6cxnjkx.us-east-1.rds.amazonaws.com:5432/devops"
+DATABASE_URL="postgres://primal_postgres:primal-squad@c2cdatabase.cqs5a6cxnjkx.us-east-1.rds.amazonaws.com:5432/dev1"
 # Build Config
 NUXT_TELEMETRY_DISABLED=1
+CREATE_TABLES=""
 ```
 
 ## Documentation for further development:

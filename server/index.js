@@ -1,21 +1,18 @@
 const { Keystone } = require("@keystonejs/keystone");
-const { PasswordAuthStrategy } = require("@keystonejs/auth-password");
-const { Text, Checkbox, Password } = require("@keystonejs/fields");
 const { GraphQLApp } = require("@keystonejs/app-graphql");
 const { AdminUIApp } = require("@keystonejs/app-admin-ui");
 const { NuxtApp } = require("@keystonejs/app-nuxt");
+// Admin UI Auth
+const { PasswordAuthStrategy } = require("@keystonejs/auth-password");
 // Nuxt Plugins
 var VuetifyLoaderPlugin = require("vuetify-loader/lib/plugin");
 // .ENV Configuration (ANY process.env.VARIABLE MUST be declared AFTER dotev.config();)
 const dotenv = require("dotenv");
 dotenv.config();
 const PROJECT_NAME = process.env.PROJECT_NAME;
-//console.log(PROJECT_NAME);
 // Database Configuration
 const { KnexAdapter: Adapter } = require("@keystonejs/adapter-knex");
-const initialiseData = require("./initial-data");
 const DATABASE_URL = process.env.DATABASE_URL;
-//console.log("Database: " + DATABASE_URL);
 const adapterConfig = {
   knexOptions: {
     connection: DATABASE_URL,
@@ -32,7 +29,7 @@ const fileAdapter = new S3Adapter({
   publicUrl: ({ id, filename, _meta }) =>
     `https://${CF_DISTRIBUTION_ID}.cloudfront.net/${S3_PATH}/${filename}`,
   s3Options: {
-    // Optional paramaters to be supplied directly to AWS.S3 constructor
+    // Optional parameters to be supplied directly to AWS.S3 constructor
     accessKeyId: process.env.ACCESS_KEY_ID,
     secretAccessKey: process.env.SECRET_ACCESS_KEY,
     region: process.env.REGION,
@@ -43,6 +40,12 @@ const fileAdapter = new S3Adapter({
     },
   }),
 });
+
+//Utils Initialize
+const clientAuth = require("./util/client-auth");
+const initialiseData = require("./util/initial-data");
+const email = require("./util/email");
+const stripe = require("./util/stripe");
 
 const keystone = new Keystone({
   appVersion: {
@@ -58,22 +61,23 @@ const keystone = new Keystone({
   onConnect: process.env.CREATE_TABLES !== "true" && initialiseData,
 });
 
-// See Keystone Object
-//console.log(keystone);
-
+// Index Exports
 exports.indexKey = keystone;
 exports.s3Adapter = fileAdapter;
 
 // User Schemas
-const superAdminSchema = require("./schemas/superadmin");
-const staffSchema = require("./schemas/staff");
-const parentSchema = require("./schemas/parent");
-const approvedContactSchema = require("./schemas/approvedcontact");
-const childSchema = require("./schemas/child");
+const superAdminSchema = require("./schema/superadmin");
+const staffSchema = require("./schema/staff");
+const parentSchema = require("./schema/parent");
+const approvedContactSchema = require("./schema/approvedcontact");
+const childSchema = require("./schema/child");
 // Object Schemas
-const locationSchema = require("./schemas/location");
-const scheduleSchema = require("./schemas/schedule");
-const healthSchema = require("./schemas/health");
+const locationSchema = require("./schema/location");
+const roomSchema = require("./schema/room");
+const scheduleSchema = require("./schema/schedule");
+const healthSchema = require("./schema/health");
+const childCheckInSchema = require("./schema/childcheckin");
+const staffCheckInSchema = require("./schema/staffcheckin");
 // Test Schemas
 const tweedleDeeSchema = require("../reference/tweedledee");
 const tweedleDumSchema = require("../reference/tweedledum");
@@ -86,6 +90,15 @@ const authStrategy = keystone.createAuthStrategy({
 
 module.exports = {
   keystone,
+  // Express Configuration (Optional)
+  configureExpress: (app) => {
+    //* START *//
+    app.get("/api", (req, res) => {
+      res.send("Connected to API...");
+      console.log("API Connection Set Via Keystone");
+    });
+    //* END *//
+  },
   apps: [
     new GraphQLApp(),
     new AdminUIApp({
@@ -129,8 +142,8 @@ module.exports = {
        */
       modules: [
         // Doc: https://axios.nuxtjs.org/usage
-        "@nuxtjs/axios",
-        "@nuxtjs/auth-next",
+        '@nuxtjs/axios',
+        '@nuxtjs/auth-next'
       ],
       /*
        ** Axios module configuration
@@ -138,15 +151,11 @@ module.exports = {
       axios: {
         // See https://github.com/nuxt-community/axios-module#options
       },
-      /*router: {
-        middleware: ["auth"],
-      },*/
-
       /*
        ** Build configuration
        */
       build: {
-        transpile: ["vuetify/lib"],
+        transpile: ["vuetify/lib", /@fullcalendar.*/,],
         plugins: [new VuetifyLoaderPlugin()],
         loaders: {},
         /*

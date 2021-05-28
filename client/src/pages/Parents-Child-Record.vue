@@ -1,4 +1,5 @@
 <template>
+<!-- Comment -->
   <v-container
     fill-height
     fluid
@@ -86,7 +87,7 @@
   import materialCard from '~/components/material/AppCard'
 
   export default {
-    layout: 'dashboard',
+    layout: 'parentsdashboard',
     components: {
       materialCard
     },

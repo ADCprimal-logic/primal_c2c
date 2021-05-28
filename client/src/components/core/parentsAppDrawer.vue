@@ -25,8 +25,8 @@
           >
               <v-img
                 :src="logo"
-                height="50"
-                width="50"
+                height="58"
+                width="58"
                 
               />
             </v-list-tile-avatar>
@@ -72,60 +72,45 @@
         logo: '/vuetifylogo.png',
         links: [
           {
-            to: '/Dashboard',
+            to: '/Parents-Dashboard',
             icon: 'mdi-view-dashboard',
-            text: 'Staff Dash',
+            text: 'Parents Dashoard',
             alt: 'Dashboard',
           },
           {
-            to: '/Inbox',
+            to: '/Parents-Inbox',
             icon: 'mdi-animation',
             text: 'Inbox'
           },
           {
-            to: '/Child-Check-In-System',
+            to: '/Parents-Child-Schedule',
             icon: 'mdi-clipboard-outline',
-            text: 'Child Check-In System'
+            text: 'Child Time Sheet'
           },
           {
-            to: '/Time Clock',
-            icon: 'mdi-alarm',
-            text: 'Staff Time Clock'
+            to: '/Parents-Financials',
+            icon: 'mdi-arrange-bring-to-front',
+            text: 'Financials'
           },
           {
-            to: '/Time Off Requests',
-            icon: 'mdi-airplane-takeoff',
-            text: 'Time Off Requests'
+            to: '/Parents-Child-Record',
+            icon: 'mdi-account-box-multiple',
+            text: 'Child Records'
           },
           {
-            to: '/Mass Messages',
+            to: '/Parents-Child-Profile-Editor',
             icon: 'mdi-account-edit',
-            text: 'Mass Messages'
+            text: 'Child Profile'
           },
           {
-            to: '/Schedule',
+            to: '/Parents-Child-Packages',
             icon: 'mdi-application',
-            text: 'Schedule'
+            text: 'Packages'
           },
           {
-            to: '/Students-Data',
+            to: '/Parents-Faculty-Contact',
             icon: 'mdi-archive',
-            text: 'Student Data'
-          },
-          {
-            to: '/Staff-Data',
-            icon: 'mdi-apple',
-            text: 'Staff Data'
-          },
-          {
-            to: '/Profile Editor',
-            icon: 'mdi-account',
-            text: ' Update Staff Profile'
-          },
-          {
-            to: '/icons',
-            icon: 'mdi-chart-bubble',
-            text: 'Icons'
+            text: 'Faculty Contacts'
           },
           //This is a secondary function for maps integrations. Future use.
           //{

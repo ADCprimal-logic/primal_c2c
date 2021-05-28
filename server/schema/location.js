@@ -1,5 +1,5 @@
 const index = require("../index");
-const { Text } = require("@keystonejs/fields");
+const { Text, Relationship } = require("@keystonejs/fields");
 const keystone = index.indexKey;
 
 console.log("Creating Location");
@@ -12,6 +12,7 @@ keystone.createList("Location", {
     state: { type: Text },
     zip: { type: Text },
     country: { type: Text },
+    room: { type: Relationship, ref: "Room", many: true },
   },
   labelResolver: (item) => `${item.name}`,
 });

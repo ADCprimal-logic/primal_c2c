@@ -5,12 +5,18 @@ const {
   Password,
   Relationship,
   DateTime,
+  File,
 } = require("@keystonejs/fields");
 const keystone = index.indexKey;
+const fileAdapter = index.s3Adapter;
 
 console.log("Creating Staff");
 keystone.createList("StaffMember", {
   fields: {
+    profile_pic: {
+      type: File,
+      adapter: fileAdapter,
+    },
     first_name: { type: Text },
     last_name: { type: Text },
     email: {
@@ -25,8 +31,7 @@ keystone.createList("StaffMember", {
     phone: { type: Text },
     location: { type: Relationship, ref: "Location", many: false },
     schedule: { type: Relationship, ref: "Schedule", many: false },
-    check_in: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
-    check_out: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+    time_card: { type: Relationship, ref: "StaffTimecard", many: false },
   },
   labelResolver: (item) => `${item.first_name} ${item.last_name}`,
 });

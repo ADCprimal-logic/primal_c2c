@@ -15,13 +15,26 @@
       <v-flex xs12>
         <material-card
           color="bluebird"
-          title="Use the buttons below to clock in and out."
+          title="First select a roster. Next, select the respective student from the roster and clock them in."
         >
+      <!-- Space about clock buttons -->  
+      <v-layout
+        justify-center
+        align-center
+        >
+      <v-flex xs12 sm6 d-flex>
+        <v-select
+          :items="items"
+          label="Student Rosters"
+          outline
+        ></v-select>
+      </v-flex>
+      </v-layout>
       <!-- Creates the clock in button -->
       <v-layout
-                  justify-center
-                  align-center
-            >
+        justify-center
+        align-center
+      >
       <h2 class="font-weight-light mb-4">Clock In </h2><br>      
       <v-dialog v-model="dialog" max-width="500px">
         <template v-slot:activator="{ on }">
@@ -76,7 +89,7 @@
                   justify-center
                   align-center
             >
-             <h2 class="font-weight-light mb-4">Clock Out </h2><br>
+             <h2 class="font-weight-light mb-4">Clock Out</h2><br>
             
               <v-btn 
               color="red" 
@@ -103,22 +116,16 @@
     >
     <!-- End of chart sizing params -->
   <div>
-    <v-toolbar flat color="white">
-      <v-toolbar-title> Time Card Data </v-toolbar-title>
+    <v-toolbar color="mint">
+      <v-title align-center> Roster Time Clock History </v-title>
       <!-- Clock in Chart Title  -->
-      <v-divider
-        class="mx-2"
-        inset
-        vertical
-      ></v-divider>
-      <v-spacer></v-spacer>
       <!-- Constructor for the pop out diag allowing for edits to the fields -->
     </v-toolbar>
     <!-- Binds to object creation and defines header and item data. Elevations define data chart shadow-->
     <v-data-table
       :headers="headers"
       :items="desserts"
-      class="elevation-1"
+      class="elevation-20"
     >
     <!-- Constructor for visulation of data. These are the real headers of the chart. -->
       <template v-slot:items="props">
@@ -170,7 +177,7 @@ import materialCard from '~/components/material/AppCard'
       dialog: false,
       headers: [
         {
-          text: 'Staff Name',
+          text: 'Child Name',
           align: 'left',
           sortable: false,
           value: 'name'
@@ -178,7 +185,6 @@ import materialCard from '~/components/material/AppCard'
         { text: 'Date', value: 'Date' },
         { text: 'Time Recorded', value: 'Time' },
         { text: 'Status (In/Out)', value: 'Status' },
-        { text: 'Hours', value: 'Hours' },
         { text: 'Actions', value: 'name', sortable: false }
       ],
       desserts: [],
@@ -290,7 +296,7 @@ import materialCard from '~/components/material/AppCard'
           }
         ]
       },
-
+      
       editItem (item) {
         this.editedIndex = this.desserts.indexOf(item)
         this.editedItem = Object.assign({}, item)

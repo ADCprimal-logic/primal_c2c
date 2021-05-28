@@ -5,8 +5,10 @@ const {
   Relationship,
   DateTime,
   Integer,
+  CheckBox,
 } = require("@keystonejs/fields");
 const keystone = index.indexKey;
+const fileAdapter = index.s3Adapter;
 
 console.log("Creating Child");
 keystone.createList("Child", {
@@ -25,12 +27,12 @@ keystone.createList("Child", {
       ref: "ApprovedContact",
       many: true,
     },
-    location: { type: Relationship, ref: "Location", many: false },
+    room: { type: Relationship, ref: "Room", many: false },
     schedule: { type: Relationship, ref: "Schedule", many: false },
     medical_record: { type: Relationship, ref: "MedicalRecord", many: false },
+    time_card: { type: Relationship, ref: "ChildTimecard", many: false },
     pin_number: { type: Integer },
-    check_in: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
-    check_out: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+    enrollment_status: { type: Select, options: "Active, Inactive" },
   },
   labelResolver: (item) => `${item.first_name} ${item.last_name}`,
 });

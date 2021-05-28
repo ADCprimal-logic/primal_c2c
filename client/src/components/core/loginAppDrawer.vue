@@ -25,8 +25,8 @@
           >
               <v-img
                 :src="logo"
-                height="50"
-                width="50"
+                height="58"
+                width="58"
                 
               />
             </v-list-tile-avatar>
@@ -72,61 +72,30 @@
         logo: '/vuetifylogo.png',
         links: [
           {
-            to: '/Dashboard',
-            icon: 'mdi-view-dashboard',
-            text: 'Staff Dash',
-            alt: 'Dashboard',
+            to: '/Parent-Login-Portal',
+            icon: 'mdi-account-multiple-outline',
+            text: 'Parent Login'
           },
           {
-            to: '/Inbox',
-            icon: 'mdi-animation',
-            text: 'Inbox'
-          },
-          {
-            to: '/Child-Check-In-System',
+            to: '/Staff-Login-Portal',
             icon: 'mdi-clipboard-outline',
-            text: 'Child Check-In System'
+            text: 'Staff Login'
           },
           {
-            to: '/Time Clock',
-            icon: 'mdi-alarm',
-            text: 'Staff Time Clock'
+            to: '/AdminLoginPortal',
+            icon: 'mdi-angularjs',
+            text: 'Administrator Portal'
           },
           {
-            to: '/Time Off Requests',
-            icon: 'mdi-airplane-takeoff',
-            text: 'Time Off Requests'
+            to: '/New-Child-Registration',
+            icon: 'mdi-account-plus',
+            text: 'New User Registration'
           },
           {
-            to: '/Mass Messages',
-            icon: 'mdi-account-edit',
-            text: 'Mass Messages'
-          },
-          {
-            to: '/Schedule',
-            icon: 'mdi-application',
-            text: 'Schedule'
-          },
-          {
-            to: '/Students-Data',
-            icon: 'mdi-archive',
-            text: 'Student Data'
-          },
-          {
-            to: '/Staff-Data',
-            icon: 'mdi-apple',
-            text: 'Staff Data'
-          },
-          {
-            to: '/Profile Editor',
-            icon: 'mdi-account',
-            text: ' Update Staff Profile'
-          },
-          {
-            to: '/icons',
-            icon: 'mdi-chart-bubble',
-            text: 'Icons'
-          },
+            to: '/Organization-Registration',
+            icon: 'mdi-android-studio',
+            text: 'Organization Registration',
+          }
           //This is a secondary function for maps integrations. Future use.
           //{
             //to: '/maps',

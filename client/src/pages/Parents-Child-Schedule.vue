@@ -1,5 +1,8 @@
 <template>
 <!-- Comment -->
+<v-container>
+<h2 justiy center>It is currently {time}.</h2>
+
   <v-container
     fill-height
     fluid
@@ -14,8 +17,8 @@
       >
         <material-card
           color="bluebird"
-          title="Inbox"
-          text="Recieved messages"
+          title="Child Clock In Table"
+          text="Use this to chart to see when your child was clocked in."
         >
           <v-data-table
             :headers="headers"
@@ -46,71 +49,40 @@
       <v-flex
         md12
       >
-        <material-card
-          color="green"
-          flat
-          full-width
-          title="Outbox"
-          text="Sent and draft messages"
-        >
-          <v-data-table
-            :headers="headers"
-            :items="items.slice(0, 7)"
-            hide-actions
-          >
-            <template
-              slot="headerCell"
-              slot-scope="{ header }"
-            >
-              <span
-                class="subheading font-weight-light text--darken-3"
-                v-text="header.text"
-              />
-            </template>
-            <template
-              slot="items"
-              slot-scope="{ item }"
-            >
-              <td>{{ item.name }}</td>
-              <td>{{ item.country }}</td>
-              <td>{{ item.city }}</td>
-              <td class="text-xs-right">{{ item.salary }}</td>
-            </template>
-          </v-data-table>
-        </material-card>
       </v-flex>
     </v-layout>
   </v-container>
+</v-container>
 </template>
 
 <script>
   import materialCard from '~/components/material/AppCard'
 
   export default {
-    layout: 'dashboard',
+    layout: 'parentsdashboard',
     components: {
       materialCard
     },
     data: () => ({
     headers: [
       {
-        sortable: false,
-        text: 'Name',
+        sortable: true,
+        text: 'Student Name',
         value: 'name'
       },
       {
-        sortable: false,
-        text: 'Country',
+        sortable: true,
+        text: 'Location',
         value: 'country'
       },
       {
-        sortable: false,
-        text: 'City',
+        sortable: true,
+        text: 'Time Stamp',
         value: 'city'
       },
       {
-        sortable: false,
-        text: 'Salary',
+        sortable: true,
+        text: 'Clock In/Clock Out',
         value: 'salary',
         align: 'right'
       }
@@ -118,9 +90,9 @@
     items: [
       {
         name: 'Dakota Rice',
-        country: 'Niger',
+        country: 'Null',
         city: 'Oud-Tunrhout',
-        salary: '$35,738'
+        salary: '2307432'
       },
       {
         name: 'Minerva Hooper',

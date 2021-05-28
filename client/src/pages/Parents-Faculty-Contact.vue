@@ -14,8 +14,8 @@
       >
         <material-card
           color="bluebird"
-          title="Inbox"
-          text="Recieved messages"
+          title="Students"
+          text="Master list of student data"
         >
           <v-data-table
             :headers="headers"
@@ -47,11 +47,11 @@
         md12
       >
         <material-card
-          color="green"
+          color="mint"
           flat
           full-width
-          title="Outbox"
-          text="Sent and draft messages"
+          title="Faculty and staff"
+          text="Master list of faculty data"
         >
           <v-data-table
             :headers="headers"
@@ -87,40 +87,61 @@
   import materialCard from '~/components/material/AppCard'
 
   export default {
-    layout: 'dashboard',
+    layout: 'parentsdashboard',
     components: {
       materialCard
     },
     data: () => ({
     headers: [
       {
-        sortable: false,
+        sortable: true,
         text: 'Name',
         value: 'name'
       },
       {
-        sortable: false,
+        sortable: true,
         text: 'Country',
         value: 'country'
       },
       {
-        sortable: false,
+        sortable: true,
         text: 'City',
         value: 'city'
       },
       {
-        sortable: false,
+        sortable: true,
         text: 'Salary',
         value: 'salary',
         align: 'right'
       }
     ],
     items: [
+
       {
-        name: 'Dakota Rice',
-        country: 'Niger',
-        city: 'Oud-Tunrhout',
-        salary: '$35,738'
+        name: 'Minerva Hooper',
+        country: 'Curaçao',
+        city: 'Sinaai-Waas',
+        salary: '$23,738'
+      }, {
+        name: 'Sage Rodriguez',
+        country: 'Netherlands',
+        city: 'Overland Park',
+        salary: '$56,142'
+      }, {
+        name: 'Philip Chanley',
+        country: 'Korea, South',
+        city: 'Gloucester',
+        salary: '$38,735'
+      }, {
+        name: 'Doris Greene',
+        country: 'Malawi',
+        city: 'Feldkirchen in Kārnten',
+        salary: '$63,542'
+      }, {
+        name: 'Mason Porter',
+        country: 'Chile',
+        city: 'Gloucester',
+        salary: '$78,615'
       },
       {
         name: 'Minerva Hooper',
@@ -148,6 +169,7 @@
         city: 'Gloucester',
         salary: '$78,615'
       }
+      
     ]
   })
   }

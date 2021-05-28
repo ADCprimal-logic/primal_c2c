@@ -20,40 +20,33 @@
                 </v-flex>
                 <v-flex xs12 md4>
                   <v-text-field
-                    :value="my_email = todos[0].email"
-                    @input="my_email = $event"
+                    :value="todos[0].email"
                     label="Email Address"
                     class="purple-input"
                   />
                 </v-flex>
                 <v-flex xs12 md6>
                   <v-text-field
+                    :value="todos[0].first_name"
                     label="First Name"
                     class="purple-input"
-                    @input="fname = $event"
-                    :value="fname = todos[0].first_name"
                   />
                 </v-flex>
                 <v-flex xs12 md6>
                   <v-text-field
-                    :value="lname = todos[0].last_name"
-                    @input="lname = $event"
+                    :value="todos[0].last_name"
                     label="Last Name"
                     class="purple-input"
                   />
                 </v-flex>
                 <v-flex xs12 md12>
-                  <v-text-field label="Phone Number" class="purple-input" :value="my_phone = todos[0].location.phone" @input="my_phone = $event"
-                /></v-flex>
-                <v-flex xs12 md12>
-                  <v-text-field label="Address" class="purple-input" :value="my_address = todos[0].location.street_Address" @input="my_address = $event"
-                />
+                  <v-text-field label="Address" class="purple-input" />
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-text-field label="City" class="purple-input" :value="todos[0].location.city"/>
+                  <v-text-field label="State" class="purple-input" />
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-text-field label="State" class="purple-input" :value="todos[0].location.state"/>
+                  <v-text-field label="City" class="purple-input" />
                 </v-flex>
                 <v-flex xs12 md4>
                   <v-text-field
@@ -67,7 +60,6 @@
                     class="purple-input"
                     label="Postal Code"
                     type="number"
-                    :value="todos[0].location.zip"
                   />
                 </v-flex>
                 <v-flex xs12>
@@ -81,7 +73,7 @@
                   <v-btn
                     class="mx-0 font-weight-light"
                     color="mint"
-                    @click="updateStaff()"
+                    @click="createParent()"
                   >
                     Update Profile
                   </v-btn>
@@ -110,7 +102,9 @@
         </material-card>
       </v-flex>
     </v-layout>
-    
+    <li v-for="todo in todos" :key="todo.id" class="list-item">
+      {{ todo.first_name }}
+    </li>
   </v-container>
 </template>
 
@@ -121,35 +115,31 @@ const GET_TODOS = `
           first_name
           last_name
           email
-          phone
           location {
             name
-            street_Address
             city
             state
             country
-            zip
           }
         }
       }
 	`;
-const UPDATE_STAFF = `
-	    mutation upStaff($my_id: ID!, $firstname: String, $lastname: String, $myemail: String, $myphone: String) {
-            updateStaffMember(id: $my_id, data: {first_name: $firstname, last_name: $lastname, email: $myemail, password: "Password123", phone: $myphone}) {
+const ADD_PARENT = `
+	    mutation initialParent($firstname: String) {
+            createParent(data: {first_name: $firstname, last_name: "lemon" email: "zzz@zzz.com4", password: "Password123", phone: "12345676543"}) {
               id
             }
           }
 	`;
 
-function graphql(query, variables = {}) {
+function graphql(query = {}) {
   return fetch("http://localhost:3000/admin/api", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-        variables,
-        query,
+      query,
     }),
   }).then(function (result) {
     return result.json();
@@ -160,37 +150,27 @@ import { mapGetters } from "vuex";
 import materialCard from "~/components/material/AppCard";
 
 export default {
-    layout: "dashboard",
-    data() {
-        return {
-            id: 6,
-            fname: '',
-            lname: '',
-            my_email: '',
-            my_phone: '',
-        };
-    },
-    components: {
+  layout: "parentsdashboard",
+  components: {
     materialCard,
+  },
+  methods: {
+    async createParent() {
+      await graphql(ADD_PARENT);
     },
-    methods: {
-        async updateStaff() {
-            await graphql(UPDATE_STAFF, { my_id: this.id, firstname: this.fname, lastname: this.lname, myemail: this.my_email, myphone: this.my_phone });
-            console.log("i am updating id: " + this.id + " for " + this.fname + " " + this.lname);
-    },
-    },
-    computed: {
+  },
+  computed: {
     ...mapGetters({
-        user: "user/getUser",
-        fullname: "user/getFullname",
+      user: "user/getUser",
+      fullname: "user/getFullname",
     }),
-    },
-    // Get the todo items on server side
-    async asyncData() {
+  },
+  // Get the todo items on server side
+  async asyncData() {
     const { data } = await graphql(GET_TODOS);
     return {
-        todos: data.allStaffMembers,
+      todos: data.allStaffMembers,
     };
-    },
+  },
 };
 </script>

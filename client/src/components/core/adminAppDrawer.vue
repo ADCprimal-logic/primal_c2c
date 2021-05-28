@@ -74,53 +74,13 @@
           {
             to: '/Dashboard',
             icon: 'mdi-view-dashboard',
-            text: 'Staff Dash',
+            text: 'Admin Dash',
             alt: 'Dashboard',
-          },
-          {
-            to: '/Inbox',
-            icon: 'mdi-animation',
-            text: 'Inbox'
-          },
-          {
-            to: '/Child-Check-In-System',
-            icon: 'mdi-clipboard-outline',
-            text: 'Child Check-In System'
-          },
-          {
-            to: '/Time Clock',
-            icon: 'mdi-alarm',
-            text: 'Staff Time Clock'
-          },
-          {
-            to: '/Time Off Requests',
-            icon: 'mdi-airplane-takeoff',
-            text: 'Time Off Requests'
-          },
-          {
-            to: '/Mass Messages',
-            icon: 'mdi-account-edit',
-            text: 'Mass Messages'
-          },
-          {
-            to: '/Schedule',
-            icon: 'mdi-application',
-            text: 'Schedule'
-          },
-          {
-            to: '/Students-Data',
-            icon: 'mdi-archive',
-            text: 'Student Data'
-          },
-          {
-            to: '/Staff-Data',
-            icon: 'mdi-apple',
-            text: 'Staff Data'
           },
           {
             to: '/Profile Editor',
             icon: 'mdi-account',
-            text: ' Update Staff Profile'
+            text: 'Staff Data'
           },
           {
             to: '/icons',
