@@ -25,8 +25,8 @@
           >
               <v-img
                 :src="logo"
-                height="58"
-                width="58"
+                height="50"
+                width="50"
                 
               />
             </v-list-tile-avatar>
@@ -65,41 +65,68 @@
 <script>
   // Utilities
   import { mapActions, mapGetters } from 'vuex'
+
   export default {
     data() {
       return {
         logo: '/vuetifylogo.png',
         links: [
           {
-            to: '/Parent-Login-Portal',
-            icon: 'mdi-account-multiple-outline',
-            text: 'Parent Login'
+            to: '/Dashboard',
+            icon: 'mdi-view-dashboard',
+            text: 'Staff Dash',
+            alt: 'Dashboard',
           },
           {
-            to: '/Staff-Login-Portal',
+            to: '/Inbox',
+            icon: 'mdi-animation',
+            text: 'Inbox'
+          },
+          {
+            to: '/Child-Check-In-System',
             icon: 'mdi-clipboard-outline',
-            text: 'Staff Login'
-          },
-          { 
-            to: '/Front-Desk-Login-Portal',
-            icon: 'mdi-desk',
-            text: 'Front Desk Portal',
+            text: 'Child Check-In System'
           },
           {
-            to: '/AdminLoginPortal',
-            icon: 'mdi-angularjs',
-            text: 'Administrator Portal'
+            to: '/Time Clock',
+            icon: 'mdi-alarm',
+            text: 'Staff Time Clock'
           },
           {
-            to: '/New-Child-Registration',
-            icon: 'mdi-account-plus',
-            text: 'New User Registration'
+            to: '/Time Off Requests',
+            icon: 'mdi-airplane-takeoff',
+            text: 'Time Off Requests'
           },
           {
-            to: '/Organization-Registration',
-            icon: 'mdi-android-studio',
-            text: 'Organization Registration',
-          }
+            to: '/Mass Messages',
+            icon: 'mdi-account-edit',
+            text: 'Mass Messages'
+          },
+          {
+            to: '/Schedule',
+            icon: 'mdi-application',
+            text: 'Schedule'
+          },
+          {
+            to: '/Students-Data',
+            icon: 'mdi-archive',
+            text: 'Student Data'
+          },
+          {
+            to: '/Staff-Data',
+            icon: 'mdi-apple',
+            text: 'Staff Data'
+          },
+          {
+            to: '/Profile Editor',
+            icon: 'mdi-account',
+            text: ' Update Staff Profile'
+          },
+          {
+            to: '/icons',
+            icon: 'mdi-chart-bubble',
+            text: 'Icons'
+          },
           //This is a secondary function for maps integrations. Future use.
           //{
             //to: '/maps',

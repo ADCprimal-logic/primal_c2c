@@ -1,12 +1,8 @@
 <!-- Comment -->
 <template>
   <div>
-    <v-toolbar flat color="#00E5FF">
-      <v-toolbar-title>Student Data</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn color="primary" dark @click="expand = !expand">
-        {{ expand ? 'Close' : 'Keep' }} other rows
-      </v-btn>
+    <v-toolbar color="gray">
+      <v-toolbar-title><h4 color = "C2Corange">Student Data</h4></v-toolbar-title>
     </v-toolbar>
     <!-- Start of Data Table-->
     <v-data-table
@@ -36,7 +32,7 @@
             <v-img
           src="https://cdn.vuetifyjs.com/images/lists/ali.png"
           height="200px"
-          rounded-circle
+          rounded
             >
             <v-layout
               column
