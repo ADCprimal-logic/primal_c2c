@@ -1,28 +1,44 @@
 <!-- Comment -->
 <template>
   <div>
-    <v-toolbar color="gray">
-      <v-toolbar-title><h4 color = "C2Corange">Student Data</h4></v-toolbar-title>
-    </v-toolbar>
+
     <!-- Start of Data Table-->
+
+    <v-card-title>
+      List of all children and students
+      <v-spacer></v-spacer>
+      <v-text-field
+        v-model="search"
+        append-icon="search"
+        label="Search by any associated data"
+        single-line
+        hide-details
+      ></v-text-field>
+    </v-card-title>
     <v-data-table
       :headers="headers"
-      :items="desserts"
+      :items="staffData"
       :expand="expand"
       item-key="name"
       loading = true
+      :search="search"
     >
       <template v-slot:items="props">
         <tr @click="props.expanded = !props.expanded">
           <td>{{ props.item.name }}</td>
           <td class="text-xs-left">{{ props.item.Gender }}</td>
-          <td class="text-xs-left">{{ props.item.dateofBirth }}</td>
           <td class="text-xs-left">{{ props.item.Location }}</td>
-          <td class="text-xs-left">{{ props.item.Allergies }}</td>
+          <td class="text-xs-left">{{ props.item.Phone }}</td>
+          <td class="text-xs-left">{{ props.item.Email }}</td>
           <td class="text-xs-left">{{ props.item.Status }}</td>
         </tr>
       </template>
       <!-- Expansion Data -->
+      <template v-slot:no-results>
+        <v-alert :value="true" color="error" icon="warning">
+          Your search for "{{ search }}" found no results.
+        </v-alert>
+      </template>
       <template v-slot:expand="props">
       <v-responsive :aspect-ratio="16/9">
         <v-card-text>
@@ -54,8 +70,8 @@
             </v-list-tile-action>
 <!-- A line of expanded data in the table -->
             <v-list-tile-content>
-              <v-list-tile-title>Parent/Guardian Name</v-list-tile-title>
-              <v-list-tile-sub-title>Parent/Guardian Name</v-list-tile-sub-title>
+              <v-list-tile-title>Staff name goes here</v-list-tile-title>
+              <v-list-tile-sub-title>Staff Full Name</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
 <!-- Start of a field -->
@@ -66,7 +82,7 @@
 
             <v-list-tile-content>
               <v-list-tile-title>(650) 555-1234</v-list-tile-title>
-              <v-list-tile-sub-title>Parent Mobile Number</v-list-tile-sub-title>
+              <v-list-tile-sub-title>Staff Mobile Number</v-list-tile-sub-title>
             
             </v-list-tile-content>
           </v-list-tile>
@@ -77,7 +93,7 @@
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title>(323) 555-6789</v-list-tile-title>
-              <v-list-tile-sub-title>Parent Work Number</v-list-tile-sub-title>
+              <v-list-tile-sub-title>Staff Work Number</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
 <!-- Field Divider -->
@@ -90,7 +106,7 @@
 
             <v-list-tile-content>
               <v-list-tile-title>aliconnors@example.com</v-list-tile-title>
-              <v-list-tile-sub-title>Parent Email</v-list-tile-sub-title>
+              <v-list-tile-sub-title>Staff Email</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
 <!-- Field Divider -->
@@ -115,7 +131,7 @@
 
             <v-list-tile-content>
               <v-list-tile-title>Some Allergy goes here</v-list-tile-title>
-              <v-list-tile-sub-title>Known Allergies</v-list-tile-sub-title>
+              <v-list-tile-sub-title>Known Phone</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
           <v-divider inset></v-divider>
@@ -177,11 +193,11 @@
   </v-layout>
         </v-card-text>
       </v-responsive>
+      
       </template>
     </v-data-table>
   </div>
 </template>
-<!-- Begin script here -->
 <script>
   import materialCard from '~/components/material/AppCard'
 
@@ -191,180 +207,48 @@
       materialCard
     },
     data: () => ({
+    search: '',
     headers: [
       {
-            text: 'Student Name',
+            text: 'Staff Name',
             align: 'left',
             sortable: true,
             value: 'name'
           },
-          { text: 'Gender(M/F)', value: 'Gender' },
-          { text: 'Date of Birth (M-D-Y)', value: 'dateofBirth' },
+          { text: 'Gender(M/F)', value: 'Gender',},
           { text: 'Location', value: 'Location' },
-          { text: 'Allergies (Y/N)', value: 'Allergies' },
+          { text: 'Phone Number', value: 'Phone' },
+          { text: 'Email', value: 'Email' },
           { text: 'Status (In/Out)', value: 'Status' }
         ],
-        desserts: [
+        staffData: [
           {
-            name: 'Frozen Yogurt',
-            Gender: 159,
-            dateofBirth: 6.0,
-            Location: 24,
-            Allergies: 4.0,
-            Status: '1%'
+            name: 'Chris Cooper',
+            Gender: 'Male',
+            dateofBirth: '9/6/1992',
+            Location: 'Homeroom',
+            Phone: '843-324-1344',
+            Email: 'cooperc2606@gmail.com',
+            Status: 'Clocked In'
+          },
+           {
+            name: 'Chris Cooper3',
+            Gender: 'Male',
+            dateofBirth: '9/6/1992',
+            Location: 'Homeroom 6',
+            Phone: '843-324-1344',
+            Email: 'cooperc2606@gmail.com',
+            Status: 'Clocked In'
           },
           {
-            name: 'Ice cream sandwich',
-            Gender: 237,
-            dateofBirth: 9.0,
-            Location: 37,
-            Allergies: 4.3,
-            Status: '1%'
+            name: 'Chris Cooper2',
+            Gender: 'Male',
+            dateofBirth: '9/6/1992',
+            Location: 'Homeroom 77',
+            Phone: '843-324-1344',
+            Email: 'cooperc2606@gmail.com',
+            Status: 'Clocked In'
           },
-          {
-            name: 'Eclair',
-            Gender: 262,
-            dateofBirth: 16.0,
-            Location: 23,
-            Allergies: 6.0,
-            Status: '7%'
-          },
-          {
-            name: 'Cupcake',
-            Gender: 305,
-            dateofBirth: 3.7,
-            Location: 67,
-            Allergies: 4.3,
-            Status: '8%'
-          },
-          {
-            name: 'Gingerbread',
-            Gender: 356,
-            dateofBirth: 16.0,
-            Location: 49,
-            Allergies: 3.9,
-            Status: '16%'
-          },
-          {
-            name: 'Jelly bean',
-            Gender: 375,
-            dateofBirth: 0.0,
-            Location: 94,
-            Allergies: 0.0,
-            Status: '0%'
-          },
-          {
-            name: 'Lollipop',
-            Gender: 392,
-            dateofBirth: 0.2,
-            Location: 98,
-            Allergies: 0,
-            Status: '2%'
-          },
-          {
-            name: 'Honeycomb',
-            Gender: 408,
-            dateofBirth: 3.2,
-            Location: 87,
-            Allergies: 6.5,
-            Status: '45%'
-          },
-          {
-            name: 'Donut',
-            Gender: 452,
-            dateofBirth: 25.0,
-            Location: 51,
-            Allergies: 4.9,
-            Status: '22%'
-          },
-          {
-            name: 'KitKat',
-            Gender: 518,
-            dateofBirth: 26.0,
-            Location: 65,
-            Allergies: 7,
-            Status: '6%'
-          },
-          {
-            name: 'Frozen Yogurt',
-            Gender: 159,
-            dateofBirth: 6.0,
-            Location: 24,
-            Allergies: 4.0,
-            Status: '1%'
-          },
-          {
-            name: 'Ice cream sandwich',
-            Gender: 237,
-            dateofBirth: 9.0,
-            Location: 37,
-            Allergies: 4.3,
-            Status: '1%'
-          },
-          {
-            name: 'Eclair',
-            Gender: 262,
-            dateofBirth: 16.0,
-            Location: 23,
-            Allergies: 6.0,
-            Status: '7%'
-          },
-          {
-            name: 'Cupcake',
-            Gender: 305,
-            dateofBirth: 3.7,
-            Location: 67,
-            Allergies: 4.3,
-            Status: '8%'
-          },
-          {
-            name: 'Gingerbread',
-            Gender: 356,
-            dateofBirth: 16.0,
-            Location: 49,
-            Allergies: 3.9,
-            Status: '16%'
-          },
-          {
-            name: 'Jelly bean',
-            Gender: 375,
-            dateofBirth: 0.0,
-            Location: 94,
-            Allergies: 0.0,
-            Status: '0%'
-          },
-          {
-            name: 'Lollipop',
-            Gender: 392,
-            dateofBirth: 0.2,
-            Location: 98,
-            Allergies: 0,
-            Status: '2%'
-          },
-          {
-            name: 'Honeycomb',
-            Gender: 408,
-            dateofBirth: 3.2,
-            Location: 87,
-            Allergies: 6.5,
-            Status: '45%'
-          },
-          {
-            name: 'Donut',
-            Gender: 452,
-            dateofBirth: 25.0,
-            Location: 51,
-            Allergies: 4.9,
-            Status: '22%'
-          },
-          {
-            name: 'KitKat',
-            Gender: 518,
-            dateofBirth: 26.0,
-            Location: 65,
-            Allergies: 7,
-            Status: '6%'
-          }
         ],
   })
   }
