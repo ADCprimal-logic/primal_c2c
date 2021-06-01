@@ -1,125 +1,138 @@
 <!-- Comment -->
 <template>
   <div>
-    <v-toolbar color="#B0BEC5">
-      <v-toolbar-title>Staff Data<br></v-toolbar-title>
+
+    <!-- Start of Data Table-->
+
+    <v-card-title>
+      List of all staff members
       <v-spacer></v-spacer>
-    </v-toolbar>
+      <v-text-field
+        v-model="search"
+        append-icon="search"
+        label="Search for a staff member by name"
+        single-line
+        hide-details
+      ></v-text-field>
+    </v-card-title>
     <v-data-table
       :headers="headers"
-      :items="desserts"
+      :items="staffData"
       :expand="expand"
       item-key="name"
       loading = true
+      :search="search"
     >
       <template v-slot:items="props">
         <tr @click="props.expanded = !props.expanded">
           <td>{{ props.item.name }}</td>
-          <td class="text-xs-right">{{ props.item.Gender }}</td>
-          <td class="text-xs-right">{{ props.item.DOB }}</td>
-          <td class="text-xs-right">{{ props.item.Location }}</td>
-          <td class="text-xs-right">{{ props.item.Allergies }}</td>
-          <td class="text-xs-right">{{ props.item.Status }}</td>
+          <td class="text-xs-left">{{ props.item.Gender }}</td>
+          <td class="text-xs-left">{{ props.item.Location }}</td>
+          <td class="text-xs-left">{{ props.item.Phone }}</td>
+          <td class="text-xs-left">{{ props.item.Email }}</td>
+          <td class="text-xs-left">{{ props.item.Status }}</td>
         </tr>
+      </template>
+      <!-- Expansion Data -->
+      <template v-slot:no-results>
+        <v-alert :value="true" color="error" icon="warning">
+          Your search for "{{ search }}" found no results.
+        </v-alert>
       </template>
       <template v-slot:expand="props">
       <v-responsive :aspect-ratio="16/9">
         <v-card-text>
-  <v-layout row>
-    <v-flex xs12 sm6 offset-sm3>
-      <v-card>
-        <v-img
-          src="https://cdn.vuetifyjs.com/images/lists/ali.png"
-          height="300px"
-        >
-          <v-layout
-            column
-            fill-height
-          >
-            <v-card-title>
-              <v-spacer></v-spacer>
-            </v-card-title>
-            <v-spacer></v-spacer>
+          <v-layout row>
+            <v-flex xs12 sm6 offset-sm3>
+            <v-card>
+            <v-layout
+              column
+              fill-height
+            >
 
-            <v-card-title class="white--text pl-5 pt-5">
-              <div class="display-1 pl-5 pt-5">Ali Conners</div>
-            </v-card-title>
+            <v-spacer></v-spacer>
+        <!-- Name over Image -->
+            
           </v-layout>
         </v-img>
-
+<!-- Defines the two lines in each data field -->
         <v-list two-line>
           <v-list-tile @click="">
             <v-list-tile-action>
-              <v-icon color="indigo">phone</v-icon>
+             <v-icon color="bluebird">mdi-account</v-icon> 
+            </v-list-tile-action>
+<!-- A line of expanded data in the table -->
+            <v-list-tile-content>
+              <v-list-tile-title>Staff name goes here</v-list-tile-title>
+              <v-list-tile-sub-title>Staff Full Name</v-list-tile-sub-title>
+            </v-list-tile-content>
+          </v-list-tile>
+<!-- Start of a field -->
+            <v-list-tile @click="">
+            <v-list-tile-action>
+              <v-icon color="bluebird">phone</v-icon>
             </v-list-tile-action>
 
             <v-list-tile-content>
               <v-list-tile-title>(650) 555-1234</v-list-tile-title>
-              <v-list-tile-sub-title>Mobile</v-list-tile-sub-title>
+              <v-list-tile-sub-title>Staff Mobile Number</v-list-tile-sub-title>
+            
             </v-list-tile-content>
-
-            <v-list-tile-action>
-              <v-icon>chat</v-icon>
-            </v-list-tile-action>
           </v-list-tile>
-
+          <v-divider inset></v-divider>
+<!-- Field Divider -->
           <v-list-tile @click="">
-            <v-list-tile-action></v-list-tile-action>
-
+            <v-list-tile-action>
+              <v-icon color="bluebird">phone</v-icon>
+            </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title>(323) 555-6789</v-list-tile-title>
-              <v-list-tile-sub-title>Work</v-list-tile-sub-title>
-            </v-list-tile-content>
-
-            <v-list-tile-action>
-              <v-icon>chat</v-icon>
-            </v-list-tile-action>
-          </v-list-tile>
-
-
-          <v-list-tile @click="">
-            <v-list-tile-action>
-              <v-icon color="indigo">mail</v-icon>
-            </v-list-tile-action>
-
-            <v-list-tile-content>
-              <v-list-tile-title>aliconnors@example.com</v-list-tile-title>
-              <v-list-tile-sub-title>Personal</v-list-tile-sub-title>
+              <v-list-tile-sub-title>Staff Work Number</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
-
-          <v-list-tile @click="">
-            <v-list-tile-action></v-list-tile-action>
-
-            <v-list-tile-content>
-              <v-list-tile-title>ali_connors@example.com</v-list-tile-title>
-              <v-list-tile-sub-title>Work</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
-
+<!-- Field Divider -->
           <v-divider inset></v-divider>
 
           <v-list-tile @click="">
             <v-list-tile-action>
-              <v-icon color="indigo">location_on</v-icon>
+              <v-icon color="bluebird">mail</v-icon>
             </v-list-tile-action>
 
             <v-list-tile-content>
-              <v-list-tile-title>1400 Main Street</v-list-tile-title>
-              <v-list-tile-sub-title>Orlando, FL 79938</v-list-tile-sub-title>
+              <v-list-tile-title>aliconnors@example.com</v-list-tile-title>
+              <v-list-tile-sub-title>Staff Email</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
+<!-- Field Divider -->
+          <v-divider inset></v-divider>
+
+<!-- Field Divider --> 
+          
+            
+            <v-list-tile @click="">
+            <v-list-tile-action>
+              <v-icon color= 'bluebird'>mdi-hospital-marker</v-icon>
+            </v-list-tile-action>
+
+            <v-list-tile-content>
+              <v-list-tile-title>Location goes here</v-list-tile-title>
+              <v-list-tile-sub-title>Homeroom</v-list-tile-sub-title>
+            </v-list-tile-content>
+          </v-list-tile>
+          <v-divider inset></v-divider>
+        
+<!-- End of Fields -->
         </v-list>
       </v-card>
     </v-flex>
   </v-layout>
         </v-card-text>
       </v-responsive>
+      
       </template>
     </v-data-table>
   </div>
 </template>
-
 <script>
   import materialCard from '~/components/material/AppCard'
 
@@ -129,100 +142,30 @@
       materialCard
     },
     data: () => ({
+    search: '',
     headers: [
       {
-            text: 'Dessert (100g serving)',
+            text: 'Staff Name',
             align: 'left',
             sortable: true,
             value: 'name'
           },
-          { text: 'Gender', value: 'Gender' },
-          { text: 'DOB (g)', value: 'DOB' },
-          { text: 'Location (g)', value: 'Location' },
-          { text: 'Allergies (g)', value: 'Allergies' },
-          { text: 'Status (%)', value: 'Status' }
+          { text: 'Gender(M/F)', value: 'Gender',},
+          { text: 'Location', value: 'Location' },
+          { text: 'Phone Number', value: 'Phone' },
+          { text: 'Email', value: 'Email' },
+          { text: 'Status (In/Out)', value: 'Status' }
         ],
-        desserts: [
+        staffData: [
           {
-            name: 'Frozen Yogurt',
-            Gender: 159,
-            DOB: 6.0,
-            Location: 24,
-            Allergies: 4.0,
-            Status: '1%'
+            name: 'Chris Cooper',
+            Gender: 'Male',
+            dateofBirth: '9/6/1992',
+            Location: 'Homeroom',
+            Phone: '843-324-1344',
+            Email: 'cooperc2606@gmail.com',
+            Status: 'Clocked In'
           },
-          {
-            name: 'Ice cream sandwich',
-            Gender: 237,
-            DOB: 9.0,
-            Location: 37,
-            Allergies: 4.3,
-            Status: '1%'
-          },
-          {
-            name: 'Eclair',
-            Gender: 262,
-            DOB: 16.0,
-            Location: 23,
-            Allergies: 6.0,
-            Status: '7%'
-          },
-          {
-            name: 'Cupcake',
-            Gender: 305,
-            DOB: 3.7,
-            Location: 67,
-            Allergies: 4.3,
-            Status: '8%'
-          },
-          {
-            name: 'Gingerbread',
-            Gender: 356,
-            DOB: 16.0,
-            Location: 49,
-            Allergies: 3.9,
-            Status: '16%'
-          },
-          {
-            name: 'Jelly bean',
-            Gender: 375,
-            DOB: 0.0,
-            Location: 94,
-            Allergies: 0.0,
-            Status: '0%'
-          },
-          {
-            name: 'Lollipop',
-            Gender: 392,
-            DOB: 0.2,
-            Location: 98,
-            Allergies: 0,
-            Status: '2%'
-          },
-          {
-            name: 'Honeycomb',
-            Gender: 408,
-            DOB: 3.2,
-            Location: 87,
-            Allergies: 6.5,
-            Status: '45%'
-          },
-          {
-            name: 'Donut',
-            Gender: 452,
-            DOB: 25.0,
-            Location: 51,
-            Allergies: 4.9,
-            Status: '22%'
-          },
-          {
-            name: 'KitKat',
-            Gender: 518,
-            DOB: 26.0,
-            Location: 65,
-            Allergies: 7,
-            Status: '6%'
-          }
         ],
   })
   }
