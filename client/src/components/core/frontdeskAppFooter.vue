@@ -4,7 +4,7 @@
     absolute
     height="82"
     prominent
-    style="background: #eb6f24;"
+    style="background: bluebird;"
   >
     <div class="footer-items">
       <span

@@ -72,55 +72,45 @@
         logo: '/vuetifylogo.png',
         links: [
           {
-            to: '/Dashboard',
+            to: '/Front-Desk-Dashboard',
             icon: 'mdi-view-dashboard',
-            text: 'Staff Dash',
-            alt: 'Dashboard',
+            text: 'Front Desk Dashboard',
+            alt: 'Front Desk Dashboard',
           },
           {
-            to: '/Inbox',
-            icon: 'mdi-animation',
-            text: 'Inbox'
-          },
-          {
-            to: '/Child-Check-In-System',
+            to: '/Front-Desk-Early-Signout',
             icon: 'mdi-clipboard-outline',
-            text: 'Child Check-In System'
+            text: 'Early Sign Out'
           },
           {
-            to: '/Time Clock',
+            to: '/Front-Desk-Time-Clock',
             icon: 'mdi-alarm',
-            text: 'Staff Time Clock'
+            text: 'Front Desk Time Clock'
           },
           {
-            to: '/Time Off Requests',
+            to: '/Front-Desk-Timeoff-Requests',
             icon: 'mdi-airplane-takeoff',
             text: 'Time Off Requests'
           },
           {
-            to: '/Mass Messages',
-            icon: 'mdi-account-edit',
-            text: 'Mass Messages'
-          },
-          {
-            to: '/Schedule',
+            to: '/Front-Desk-Schedule',
             icon: 'mdi-application',
             text: 'Schedule'
           },
           {
-            to: '/Students-Data',
+            to: '/Front-Desk-Student-Data',
             icon: 'mdi-archive',
             text: 'Student Data'
           },
           {
-            to: '/Staff-Data',
+            to: '/Front-Desk-Staff-Data',
             icon: 'mdi-apple',
             text: 'Staff Data'
           },
           {
-            to: '/Profile Editor',
+            to: '/Front-Desk-Profile-Editor',
             icon: 'mdi-account',
-            text: ' Update Staff Profile'
+            text: ' Update Front Desk Profile'
           },
           {
             to: '/icons',

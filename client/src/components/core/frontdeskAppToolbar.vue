@@ -2,7 +2,7 @@
   <v-toolbar
     id="core-toolbar"
     prominent
-    style="background: #eb6f24;"
+    style="background: #E3F2FD;"
   >
     <div class="v-toolbar-title">
       <v-toolbar-title
@@ -11,13 +11,13 @@
         <v-btn
           v-if="responsive"
           class="default v-btn--simple"
-          dark
+          light
           icon
           @click.stop="onClickBtn"
         >
           <v-icon>mdi-view-list</v-icon>
         </v-btn>
-        Registration
+        Front Desk
       </v-toolbar-title>
     </div>
 
@@ -38,7 +38,7 @@
         'Another One'
         //A variable can also be added
       ],
-      title: 'Dashboard',
+      title: 'Front Desk Dashboard',
       responsive: true,
       responsiveInput: true
     }),
