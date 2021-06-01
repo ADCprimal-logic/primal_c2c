@@ -10,10 +10,10 @@ To get setup for this project you will need to set up a handful of things.
 1. Set up the .env as shown in the example below and put it in the server folder.
 2. Run `yarn install` to install all the dependancies from package.json on both the front-end & back-end
    - If running with a new database url, run `yarn create-tables` to initialize all the tables in your project found in the schema folder under server.
-   - IMPORTANT: Comment out lines 16 and 58 of index.js under server BEFORE you create tables, so that on `yarn dev` your Super Admin Object will be initialized
+   - IMPORTANT: Comment out `onConnect` of index.js under server BEFORE you create tables, so that on `yarn dev` your Super Admin Object will be initialized
 3. Run `yarn dev` to initialize the project so it can be built and ran locally.
 
-> To connect to [demo database](postgres://primal_postgres:primal-squad@c2cdatabase.cqs5a6cxnjkx.us-east-1.rds.amazonaws.com:5432/dev1) that includes ALL project schema use this username and password:
+> To connect to [demo database](postgres://primal_postgres:primal-squad@c2cdatabase.cqs5a6cxnjkx.us-east-1.rds.amazonaws.com:5432/dev2) that includes ALL project schema use this username and password:
 
 ```
 email: c2cSuper@admin.net

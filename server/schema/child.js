@@ -6,6 +6,7 @@ const {
   DateTime,
   Integer,
   CheckBox,
+  Virtual
 } = require("@keystonejs/fields");
 const keystone = index.indexKey;
 const fileAdapter = index.s3Adapter;
@@ -15,6 +16,10 @@ keystone.createList("Child", {
   fields: {
     first_name: { type: Text },
     last_name: { type: Text },
+    full_name: {
+      type: Virtual,
+      resolver: item => `${item.first_name} ${item.last_name}`
+    },
     gender: { type: Select, options: "Male, Female" },
     school_attended: { type: Text },
     school_grade: {

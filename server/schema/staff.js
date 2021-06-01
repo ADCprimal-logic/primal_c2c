@@ -6,6 +6,7 @@ const {
   Relationship,
   DateTime,
   File,
+  Virtual
 } = require("@keystonejs/fields");
 const keystone = index.indexKey;
 const fileAdapter = index.s3Adapter;
@@ -19,6 +20,10 @@ keystone.createList("StaffMember", {
     },
     first_name: { type: Text },
     last_name: { type: Text },
+    full_name: {
+      type: Virtual,
+      resolver: item => `${item.first_name} ${item.last_name}`
+    },
     email: {
       type: Text,
       isUnique: true,
