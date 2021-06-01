@@ -12,10 +12,16 @@ const {
 const keystone = index.indexKey;
 const fileAdapter = index.s3Adapter;
 
+const options = [
+  { value: 1, label: "General" },
+  { value: 2, label: "Front-Desk" },
+  { value: 3, label: "Director" },
+];
+
 console.log("Creating Staff");
 keystone.createList("StaffMember", {
   fields: {
-    role: { type: Select, options: "General, Front-Desk, Director" },
+    role: { type: Select, options, dataType: "integer" },
     profile_pic: {
       type: File,
       adapter: fileAdapter,
