@@ -6,7 +6,8 @@ const {
   Relationship,
   DateTime,
   File,
-  Virtual
+  Select,
+  Virtual,
 } = require("@keystonejs/fields");
 const keystone = index.indexKey;
 const fileAdapter = index.s3Adapter;
@@ -14,6 +15,7 @@ const fileAdapter = index.s3Adapter;
 console.log("Creating Staff");
 keystone.createList("StaffMember", {
   fields: {
+    role: { type: Select, options: "General, Front-Desk, Director" },
     profile_pic: {
       type: File,
       adapter: fileAdapter,
@@ -22,7 +24,7 @@ keystone.createList("StaffMember", {
     last_name: { type: Text },
     full_name: {
       type: Virtual,
-      resolver: item => `${item.first_name} ${item.last_name}`
+      resolver: (item) => `${item.first_name} ${item.last_name}`,
     },
     email: {
       type: Text,
