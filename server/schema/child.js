@@ -27,7 +27,7 @@ keystone.createList("Child", {
       ref: "ApprovedContact",
       many: true,
     },
-    location: { type: Relationship, ref: "Location", many: false },
+    room: { type: Relationship, ref: "Room", many: false },
     schedule: { type: Relationship, ref: "Schedule", many: false },
     medical_record: { type: Relationship, ref: "MedicalRecord", many: false },
     time_card: { type: Relationship, ref: "ChildTimecard", many: false },

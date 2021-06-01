@@ -8,7 +8,7 @@ keystone.createList("Schedule", {
     type: { type: Select, options: "Staff, Child" },
     basedIn: {
       type: Relationship,
-      ref: "Location",
+      ref: "Location.name",
       many: false,
       isRequired: true,
     },

@@ -73,6 +73,7 @@ const approvedContactSchema = require("./schema/approvedcontact");
 const childSchema = require("./schema/child");
 // Object Schemas
 const locationSchema = require("./schema/location");
+const roomSchema = require("./schema/room");
 const scheduleSchema = require("./schema/schedule");
 const healthSchema = require("./schema/health");
 const childCheckInSchema = require("./schema/childcheckin");
@@ -141,7 +142,8 @@ module.exports = {
        */
       modules: [
         // Doc: https://axios.nuxtjs.org/usage
-        "@nuxtjs/axios",
+        '@nuxtjs/axios',
+        '@nuxtjs/auth-next'
       ],
       /*
        ** Axios module configuration
