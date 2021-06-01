@@ -1,5 +1,6 @@
 <!-- Comment -->
 <template>
+
   <div>
 
     <!-- Start of Data Table-->
@@ -17,7 +18,7 @@
     </v-card-title>
     <v-data-table
       :headers="headers"
-      :items="staffData"
+      :items="studentData"
       :expand="expand"
       item-key="name"
       loading = true
@@ -27,9 +28,9 @@
         <tr @click="props.expanded = !props.expanded">
           <td>{{ props.item.name }}</td>
           <td class="text-xs-left">{{ props.item.Gender }}</td>
+          <td class="text-xs-left">{{ props.item.dateofBirth }}</td>
           <td class="text-xs-left">{{ props.item.Location }}</td>
-          <td class="text-xs-left">{{ props.item.Phone }}</td>
-          <td class="text-xs-left">{{ props.item.Email }}</td>
+          <td class="text-xs-left">{{ props.item.Allergies }}</td>
           <td class="text-xs-left">{{ props.item.Status }}</td>
         </tr>
       </template>
@@ -70,8 +71,8 @@
             </v-list-tile-action>
 <!-- A line of expanded data in the table -->
             <v-list-tile-content>
-              <v-list-tile-title>Staff name goes here</v-list-tile-title>
-              <v-list-tile-sub-title>Staff Full Name</v-list-tile-sub-title>
+              <v-list-tile-title>Child name goes here</v-list-tile-title>
+              <v-list-tile-sub-title>Childs Full Name</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
 <!-- Start of a field -->
@@ -82,7 +83,7 @@
 
             <v-list-tile-content>
               <v-list-tile-title>(650) 555-1234</v-list-tile-title>
-              <v-list-tile-sub-title>Staff Mobile Number</v-list-tile-sub-title>
+              <v-list-tile-sub-title>Guardian Full Name / Guardian Mobile Number</v-list-tile-sub-title>
             
             </v-list-tile-content>
           </v-list-tile>
@@ -93,7 +94,7 @@
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title>(323) 555-6789</v-list-tile-title>
-              <v-list-tile-sub-title>Staff Work Number</v-list-tile-sub-title>
+              <v-list-tile-sub-title>Guardian Full Name / Guardian Mobile Number</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
 <!-- Field Divider -->
@@ -106,7 +107,7 @@
 
             <v-list-tile-content>
               <v-list-tile-title>aliconnors@example.com</v-list-tile-title>
-              <v-list-tile-sub-title>Staff Email</v-list-tile-sub-title>
+              <v-list-tile-sub-title>Guardian Email</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
 <!-- Field Divider -->
@@ -185,7 +186,6 @@
               <v-list-tile-sub-title>Click here to expand</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
-          <v-divider inset></v-divider>
 <!-- End of Fields -->
         </v-list>
       </v-card>
@@ -210,26 +210,35 @@
     search: '',
     headers: [
       {
-            text: 'Staff Name',
+            text: 'Student Name',
             align: 'left',
             sortable: true,
             value: 'name'
           },
           { text: 'Gender(M/F)', value: 'Gender',},
+          { text: 'Date of Birth', value: 'Dateofbirth' },
           { text: 'Location', value: 'Location' },
-          { text: 'Phone Number', value: 'Phone' },
-          { text: 'Email', value: 'Email' },
+          { text: 'Allergies', value: 'Allergies' },
           { text: 'Status (In/Out)', value: 'Status' }
         ],
-        staffData: [
+        studentData: [
           {
             name: 'Chris Cooper',
             Gender: 'Male',
             dateofBirth: '9/6/1992',
             Location: 'Homeroom',
-            Phone: '843-324-1344',
+            Allergies: 'Peanuts',
             Email: 'cooperc2606@gmail.com',
-            Status: 'Clocked In'
+            Status: 'Clocked In',
+            TuitionBalance: '0',
+            Medications: '0',
+            approvedcontactName: 'asdf',
+            approvedcontactPhone: '0',
+            approvedcontactEmail: '0',
+            apporvedcontactAddress: '0',
+            approvedcontactRelationship: '0',
+            approvedcontactPIN: '0',
+
           },
            {
             name: 'Chris Cooper3',
