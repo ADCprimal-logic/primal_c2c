@@ -29,7 +29,7 @@
           <td class="text-xs-left">
             {{ props.item.medical_record.birthdate }}
           </td>
-          <td class="text-xs-left">{{ props.item.room }}</td>
+          <td class="text-xs-left">{{ props.item._id }}</td>
           <td class="text-xs-left">{{ props.item.Allergies }}</td>
           <td class="text-xs-left">{{ props.item.enrollment_status }}</td>
         </tr>
@@ -55,7 +55,9 @@
                       <v-spacer></v-spacer>
                       <!-- Name over Image -->
                       <v-card-title class="white--text pl-5 pt-5">
-                        <div class="display-1 pl-5 pt-5">Ali Conners</div>
+                        <div class="display-1 pl-5 pt-5">
+                          {{ props.item.full_name }}
+                        </div>
                       </v-card-title>
                     </v-layout>
                   </v-img>
@@ -292,7 +294,7 @@ export default {
       },
       { text: "Gender(M/F)", value: "gender" },
       { text: "Date of Birth", value: "medical_record.birthdate" },
-      { text: "Location", value: "room" },
+      { text: "Location", value: "_id" },
       { text: "Allergies", value: "medical_record.allergies" },
       { text: "Status (In/Out)", value: "enrollment_status" },
     ],
