@@ -1,0 +1,18 @@
+      
+      
+This function gets the info for the news reel.
+
+      return {
+        expand: false,
+        headers: [
+          {
+            text: 'Subject',
+            align: 'left',
+            sortable: false,
+            value: 'subject'
+          },
+          { text: 'Date Posted', value: 'dateposted' },
+          { text: 'Time Posted', value: 'timeposted' },
+        ],
+
+We need subject, content, dateposted,timeposted.
