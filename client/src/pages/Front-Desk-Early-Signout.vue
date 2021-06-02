@@ -29,8 +29,7 @@
         <tr @click="props.expanded = !props.expanded">
           <td>{{ props.item.full_name }}</td>
           <td class="text-xs-left">{{ props.item.gender }}</td>
-          <td class="text-xs-left">
-            {{ props.item.medical_record.birthdate }}
+          <td class="text-xs-left">{{ props.item.medical_record.birthdate }}
           </td>
           <td class="text-xs-left">{{ props.item._id }}</td>
           <td class="text-xs-left">{{ props.item.Allergies }}</td>

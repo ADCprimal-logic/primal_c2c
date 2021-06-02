@@ -14,14 +14,10 @@
     >
 <template v-slot:items="props">
         <tr @click="props.expanded = !props.expanded">
-          <td>{{ props.item.full_name }}</td>
-          <td class="text-xs-left">{{ props.item.gender }}</td>
-          <td class="text-xs-left">
-            {{ props.item.medical_record.birthdate }}
+          <td>{{ props.item.subject }}</td>
+          <td class="text-xs-left">{{ props.item.dateposted }}</td>
+          <td class="text-xs-left">{{ props.item.timeposted }}
           </td>
-          <td class="text-xs-left">{{ props.item._id }}</td>
-          <td class="text-xs-left">{{ props.item.Allergies }}</td>
-          <td class="text-xs-left">{{ props.item.enrollment_status }}</td>
         </tr>
       </template>
       <template v-slot:expand="props">
