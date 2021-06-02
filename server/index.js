@@ -142,8 +142,8 @@ module.exports = {
        */
       modules: [
         // Doc: https://axios.nuxtjs.org/usage
-        '@nuxtjs/axios',
-        '@nuxtjs/auth-next'
+        "@nuxtjs/axios",
+        "@nuxtjs/auth-next",
       ],
       /*
        ** Axios module configuration
@@ -151,11 +151,34 @@ module.exports = {
       axios: {
         // See https://github.com/nuxt-community/axios-module#options
       },
+      router: {
+        //middleware: ['auth']
+      },
+      auth: {
+        strategies: {
+          local: {
+            token: {
+              property: "token",
+              // required: true,
+              // type: 'Bearer'
+            },
+            user: {
+              property: "user",
+              // autoFetch: true
+            },
+            endpoints: {
+              login: { url: "/api/auth/login", method: "post" },
+              logout: { url: "/api/auth/logout", method: "post" },
+              user: { url: "/api/auth/user", method: "get" },
+            },
+          },
+        },
+      },
       /*
        ** Build configuration
        */
       build: {
-        transpile: ["vuetify/lib", /@fullcalendar.*/,],
+        transpile: ["vuetify/lib", /@fullcalendar.*/],
         plugins: [new VuetifyLoaderPlugin()],
         loaders: {},
         /*
