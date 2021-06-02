@@ -10,3 +10,8 @@ const bcrypt = require("bcrypt");
 // Initialize .ENV
 const dotenv = require("dotenv");
 dotenv.config();
+
+exports.login = async (req, res) => {};
+exports.logout = async (req, res) => {};
+exports.forgotPassword = async (req, res) => {};
+exports.user = async (req, res) => {};
