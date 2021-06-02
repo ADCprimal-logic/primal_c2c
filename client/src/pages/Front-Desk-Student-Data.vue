@@ -43,24 +43,18 @@
       <template v-slot:expand="props">
         <v-responsive :aspect-ratio="16 / 9">
           <v-card-text>
-            <v-layout row>
+            <v-layout row wrap align-right>
               <v-flex xs12 sm6 offset-sm3>
-                <v-card>
-                  <v-img
-                    src="https://cdn.vuetifyjs.com/images/lists/ali.png"
-                    height="200px"
-                    rounded
-                  >
+                <v-card color = '#698390'>
                     <v-layout column fill-height>
-                      <v-spacer></v-spacer>
                       <!-- Name over Image -->
-                      <v-card-title class="white--text pl-5 pt-5">
+                      <v-card-title class="black--text pl-5 pt-5" row wrap align-right>
                         <div class="display-1 pl-5 pt-5">
                           {{ props.item.full_name }}
                         </div>
+                        
                       </v-card-title>
                     </v-layout>
-                  </v-img>
                   <!-- Defines the two lines in each data field -->
                   <v-list two-line>
                     <v-list-tile @click="">

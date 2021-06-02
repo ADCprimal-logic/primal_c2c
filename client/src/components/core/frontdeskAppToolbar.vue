@@ -2,7 +2,7 @@
   <v-toolbar
     id="core-toolbar"
     prominent
-    style="background: #E3F2FD;"
+    style="background: #eb6f24;"
   >
     <div class="v-toolbar-title">
       <v-toolbar-title

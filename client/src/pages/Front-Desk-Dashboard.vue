@@ -1,13 +1,38 @@
 <template>
 <!-- Comment -->
-  <v-container
-    fill-height
-    fluid
-  >
+  <div>
+    <v-toolbar color="#698390">
+      <v-text color="#ffcf32">Recent News</v-text>
+      <v-spacer></v-spacer>
 
-  </v-container>
-  <!-- Closes out the page area and scripts begin next-->
+    </v-toolbar>
+    <v-data-table
+      :headers="headers"
+      :items="desserts"
+      :expand="expand"
+      item-key="subject"
+    >
+<template v-slot:items="props">
+        <tr @click="props.expanded = !props.expanded">
+          <td>{{ props.item.full_name }}</td>
+          <td class="text-xs-left">{{ props.item.gender }}</td>
+          <td class="text-xs-left">
+            {{ props.item.medical_record.birthdate }}
+          </td>
+          <td class="text-xs-left">{{ props.item._id }}</td>
+          <td class="text-xs-left">{{ props.item.Allergies }}</td>
+          <td class="text-xs-left">{{ props.item.enrollment_status }}</td>
+        </tr>
+      </template>
+      <template v-slot:expand="props">
+        <v-card flat>
+          <v-card-text>Peek-a-boo!</v-card-text>
+        </v-card>
+      </template>
+    </v-data-table>
+  </div>
 </template>
+  <!-- Closes out the page area and scripts begin next-->
 
  
 
@@ -18,171 +43,102 @@ import materialCard from '~/components/material/AppCard'
     components: {
       materialCard
     },
-    data: () => ({
-      dialog: false,
-      headers: [
-        {
-          text: 'Child Name',
-          align: 'left',
-          sortable: false,
-          value: 'name'
-        },
-        { text: 'Date', value: 'Date' },
-        { text: 'Time Recorded', value: 'Time' },
-        { text: 'Status (In/Out)', value: 'Status' },
-        { text: 'Actions', value: 'name', sortable: false }
-      ],
-      desserts: [],
-      editedIndex: -1,
-      editedItem: {
-        name: 'Staff Name',
-        Date: '01-02-2021',
-        Time: '1200',
-        Status: 'In',
-        Hours: 0
-      },
-      defaultItem: {
-        name: '',
-        Date: 0,
-        Time: 0,
-        Status: 0,
-        Hours: 0
-      }
-    }),
-
-    computed: {
-      formTitle () {
-        return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-      }
-    },
-
-    watch: {
-      dialog (val) {
-        val || this.close()
-      }
-    },
-
-    created () {
-      this.initialize()
-    },
-
-    methods: {
-      initialize () {
-        this.desserts = [
+    data () {
+      return {
+        expand: false,
+        headers: [
           {
-            name: 'Frozen Yogurt',
-            Date: 159,
-            Time: 6.0,
-            Status: 24,
-            Hours: 4.0
+            text: 'Subject',
+            align: 'left',
+            sortable: false,
+            value: 'subject'
+          },
+          { text: 'Date Posted', value: 'dateposted' },
+          { text: 'Time Posted', value: 'timeposted' },
+        ],
+        desserts: [
+          {
+            name: '',
+            calories: 159,
+            fat: 6.0,
+            carbs: 24,
+            protein: 4.0,
+            iron: '1%'
           },
           {
             name: 'Ice cream sandwich',
-            Date: 237,
-            Time: 9.0,
-            Status: 37,
-            Hours: 4.3
+            calories: 237,
+            fat: 9.0,
+            carbs: 37,
+            protein: 4.3,
+            iron: '1%'
           },
           {
             name: 'Eclair',
-            Date: 262,
-            Time: 16.0,
-            Status: 23,
-            Hours: 6.0
+            calories: 262,
+            fat: 16.0,
+            carbs: 23,
+            protein: 6.0,
+            iron: '7%'
           },
           {
             name: 'Cupcake',
-            Date: 305,
-            Time: 3.7,
-            Status: 67,
-            Hours: 4.3
+            calories: 305,
+            fat: 3.7,
+            carbs: 67,
+            protein: 4.3,
+            iron: '8%'
           },
           {
             name: 'Gingerbread',
-            Date: 356,
-            Time: 16.0,
-            Status: 49,
-            Hours: 3.9
+            calories: 356,
+            fat: 16.0,
+            carbs: 49,
+            protein: 3.9,
+            iron: '16%'
           },
           {
             name: 'Jelly bean',
-            Date: 375,
-            Time: 0.0,
-            Status: 94,
-            Hours: 0.0
+            calories: 375,
+            fat: 0.0,
+            carbs: 94,
+            protein: 0.0,
+            iron: '0%'
           },
           {
             name: 'Lollipop',
-            Date: 392,
-            Time: 0.2,
-            Status: 98,
-            Hours: 0
+            calories: 392,
+            fat: 0.2,
+            carbs: 98,
+            protein: 0,
+            iron: '2%'
           },
           {
             name: 'Honeycomb',
-            Date: 408,
-            Time: 3.2,
-            Status: 87,
-            Hours: 6.5
+            calories: 408,
+            fat: 3.2,
+            carbs: 87,
+            protein: 6.5,
+            iron: '45%'
           },
           {
             name: 'Donut',
-            Date: 452,
-            Time: 25.0,
-            Status: 51,
-            Hours: 4.9
+            calories: 452,
+            fat: 25.0,
+            carbs: 51,
+            protein: 4.9,
+            iron: '22%'
           },
           {
             name: 'KitKat',
-            Date: 518,
-            Time: 26.0,
-            Status: 65,
-            Hours: 7
+            calories: 518,
+            fat: 26.0,
+            carbs: 65,
+            protein: 7,
+            iron: '6%'
           }
         ]
-      },
-      
-      editItem (item) {
-        this.editedIndex = this.desserts.indexOf(item)
-        this.editedItem = Object.assign({}, item)
-        this.dialog = true
-      },
-
-      deleteItem (item) {
-        const index = this.desserts.indexOf(item)
-        confirm('Are you sure you want to delete this time record?') && this.desserts.splice(index, 1)
-      },
-
-      close () {
-        this.dialog = false
-        setTimeout(() => {
-          this.editedItem = Object.assign({}, this.defaultItem)
-          this.editedIndex = -1
-        }, 300)
-      },
-
-      save () {
-        if (this.editedIndex > -1) {
-          Object.assign(this.desserts[this.editedIndex], this.editedItem)
-        } else {
-          this.desserts.push(this.editedItem)
-        }
-        this.close()
       }
     }
   }
 </script>
-
-<style lang="scss">
-  .tim-note {
-    bottom: 10px;
-    color: #849fb9;
-    display: block;
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 13px;
-    left: 0;
-    margin-left: 20px;
-    width: 260px;
-  }
-</style>

@@ -125,7 +125,7 @@
     <v-data-table
       :headers="headers"
       :items="desserts"
-      class="elevation-20"
+      class="elevation-10"
     >
     <!-- Constructor for visulation of data. These are the real headers of the chart. -->
       <template v-slot:items="props">
