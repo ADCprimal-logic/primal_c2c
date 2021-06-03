@@ -70,6 +70,7 @@
             </v-btn>
             </v-list-tile-action>
             </v-layout>
+            <v-divider inset full-width></v-divider>
 <!-- A line of expanded data in the table -->
             <v-list-tile >
             <v-list-tile-content>
@@ -77,15 +78,15 @@
                 <v-text-field
                   type="text"
                   v-model="username"
-                  prepend-icon="person"
+                  prepend-icon="mdi-cellphone-lock"
                   name="username"
-                  label="Email"
+                  label="Enter one time PIN"
                   :placeholder="defaultUserPassword"
                 ></v-text-field>
             </v-list-tile-content>
           </v-list-tile>
           </v-list-tile>
-          <v-divider inset></v-divider>
+        
           <v-list-tile>
                <v-layout justify-center align-center>
                 <v-btn
@@ -94,12 +95,26 @@
                   >Login</v-btn
                 >
             </v-layout>
+            
 <!-- A line of expanded data in the table -->
             <v-list-tile >
             <v-list-tile-content>
             </v-list-tile-content>
           </v-list-tile>
           </v-list-tile>
+          <v-divider inset></v-divider>
+
+          <v-list-tile @click="">
+            <v-list-tile-action>
+              <v-icon color="yellow">mdi-alphbetical</v-icon>
+            </v-list-tile-action>
+
+            <v-list-tile-content>
+              <v-list-tile-title>Blue Falcon</v-list-tile-title>
+              <v-list-tile-sub-title>Code Word Goes here</v-list-tile-sub-title>
+            </v-list-tile-content>
+          </v-list-tile>
+          <v-divider inset></v-divider>
 <!-- Start of a field -->
             <v-list-tile @click="">
             <v-list-tile-action>
@@ -139,40 +154,14 @@
 
           <v-list-tile @click="">
             <v-list-tile-action>
-              <v-icon color="bluebird">mdi-pill</v-icon>
+              <v-icon color="bluebird">mail</v-icon>
             </v-list-tile-action>
 
             <v-list-tile-content>
-              <v-list-tile-title>Some medication is imported here</v-list-tile-title>
-              <v-list-tile-sub-title>Known Medications</v-list-tile-sub-title>
+              <v-list-tile-title>aliconnors@example.com</v-list-tile-title>
+              <v-list-tile-sub-title>Guardian Email</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
-          <v-divider inset></v-divider>
-<!-- Field Divider -->
-          <v-list-tile @click="">
-            <v-list-tile-action>
-              <v-icon color= #FF1744>mdi-alert-decagram</v-icon>
-            </v-list-tile-action>
-
-            <v-list-tile-content>
-              <v-list-tile-title>Some Allergy goes here</v-list-tile-title>
-              <v-list-tile-sub-title>Known Phone</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
-          <v-divider inset></v-divider>
-<!-- Field Divider --> 
-            
-            <v-list-tile @click="">
-            <v-list-tile-action>
-              <v-icon color= #43A047>mdi-currency-usd</v-icon>
-            </v-list-tile-action>
-
-            <v-list-tile-content>
-              <v-list-tile-title>Tuition Paid: () Tuition Owed: ()</v-list-tile-title>
-              <v-list-tile-sub-title>Balance</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
-          <v-divider inset></v-divider>
 <!-- Field Divider --> 
             
             <v-list-tile @click="">
@@ -188,16 +177,6 @@
           <v-divider inset></v-divider>
 <!-- Field Divider --> 
             
-            <v-list-tile @click="">
-            <v-list-tile-action>
-              <v-icon color= #AEEA00>mdi-needle</v-icon>
-            </v-list-tile-action>
-
-            <v-list-tile-content>
-              <v-list-tile-title>Immuniziations</v-list-tile-title>
-              <v-list-tile-sub-title>Click here to expand immuniziations</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
           <v-divider inset></v-divider>
 <!-- Field Divider -->   
             <v-list-tile @click="">
