@@ -58,7 +58,7 @@ const keystone = new Keystone({
     sameSite: false,
   },
   adapter: new Adapter(adapterConfig),
-  onConnect: process.env.CREATE_TABLES !== "true" && initialiseData,
+  //onConnect: process.env.CREATE_TABLES !== "true" && initialiseData,
 });
 
 // Index Exports
@@ -76,6 +76,7 @@ const locationSchema = require("./schema/location");
 const roomSchema = require("./schema/room");
 const scheduleSchema = require("./schema/schedule");
 const healthSchema = require("./schema/health");
+const newsletterSchema = require("./schema/newsletter");
 const childCheckInSchema = require("./schema/childcheckin");
 const staffCheckInSchema = require("./schema/staffcheckin");
 // Test Schemas
