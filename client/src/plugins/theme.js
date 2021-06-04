@@ -13,7 +13,7 @@ import colors from 'vuetify/es5/util/colors'
  */
 
 export default {
-  primary: '#4caf50',
+  primary: '#34495E',
   secondary: '#4caf50',
   tertiary: '#495057',
   accent: '#82B1FF',
@@ -23,6 +23,7 @@ export default {
   warning: '#ffa21a',
   bluebird: '#34495E',
   mint: '#41B883',
-  C2Corange: '#eb6e23',
-  C2Cblue: '#66848e',
+  C2Corange: '#eb6f24',
+  C2Cblue: '#0b3542',
+  C2Cyellow: '#ffcf32',
 }
