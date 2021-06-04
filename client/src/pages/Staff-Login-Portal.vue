@@ -2,9 +2,9 @@
 <!-- Comment -->
       <v-layout justify-center>
           <material-card
-            color="dark gray"
+            color="bluebird"
             elevation="12"
-            title="Welcome Staff!"
+            title="Welcome to the Staff Login Portal!"
             height="400"
             width="400"
     >
@@ -31,7 +31,7 @@
             <v-card-actions>
               <v-layout justify-center align-center>
                 <v-btn
-                  color="blue"
+                  color="bluebird"
                   :disabled="isDisabled"
                   @click.prevent="authenticate"
                   >Login</v-btn
@@ -41,7 +41,7 @@
             <v-card-actions>
               <v-layout justify-center align-center>
                 <v-btn
-                  color="blue"
+                  color="bluebird"
                   :disabled="isDisabled"
                   @click.prevent="authenticate"
                   >Forgot Password?</v-btn

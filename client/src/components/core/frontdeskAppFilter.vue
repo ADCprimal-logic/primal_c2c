@@ -130,7 +130,7 @@
         'https://primal-c2c-images.s3.amazonaws.com/static/forest.jpg',
         'https://primal-c2c-images.s3.amazonaws.com/static/lake.jpg',
         'https://primal-c2c-images.s3.amazonaws.com/static/ridge.jpg',
-        'https://primal-c2c-images.s3.amazonaws.com/static/forestbg.jpg',
+        'https://primal-c2c-images.s3.amazonaws.com/static/bluetheme.jpg',
       ]
     }),
 
