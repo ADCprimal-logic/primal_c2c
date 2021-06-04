@@ -31,16 +31,17 @@ Once run you will have a http://localhost:3000 url which would prompt your NuxtJ
 ```
 # Keystone Config
 PROJECT_NAME="C2C Children Connect"
-VERSION_NUMBER="0.2.0"
+VERSION_NUMBER="0.7.0"
 COOKIE_SECRET="bNLVPe1NIFSCeNRHEQ7CUyjcnVzko6MI"
 SITE_NAME=""
 # AWS S3 Creds
-S3_PATH = 'primal-c2c-images.s3.amazonaws.com'
+S3_PATH = 'user-profiles'
 S3_BUCKET ='primal-c2c-images'
 CF_DISTRIBUTION_ID = "E3ITN9Q4LXOLYC"
 ACCESS_KEY_ID = 'AKIAYEDJQHVO4YE5KGFE'
 SECRET_KEY_ID = 'SzaE2ZGAMhVFCaSE5s54EPdBgyyNz+abstpzPb52'
 REGION = 'us-west-1'
+
 # Twilio Creds
 TWILIO_ACCOUNT_SID = ""
 TWILIO_AUTH_TOKEN = ""
