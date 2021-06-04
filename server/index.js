@@ -42,10 +42,10 @@ const fileAdapter = new S3Adapter({
 });
 
 //Utils Initialize
-const clientAuth = require("./util/client-auth");
+const auth = require("./util/auth");
 const initialiseData = require("./util/initial-data");
-const email = require("./util/email");
-const stripe = require("./util/stripe");
+const contact = require("./util/contact");
+const payment = require("./util/payment");
 
 const keystone = new Keystone({
   appVersion: {
