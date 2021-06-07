@@ -8,5 +8,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 exports.getCustomer = async (req, res) => {};
+
 exports.updateCustomer = async (req, res) => {};
+
 exports.removeCustomer = async (req, res) => {};

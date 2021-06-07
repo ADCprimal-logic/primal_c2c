@@ -94,10 +94,9 @@ module.exports = {
   // Express Configuration (Optional)
   configureExpress: (app) => {
     //* START *//
-    app.get("/api", (req, res) => {
-      res.send("Connected to API...");
-      console.log("API Connection Set Via Keystone");
-    });
+    app.use("/api/auth/login", auth.login);
+    app.use("/api/auth/logout", auth.logout);
+    app.use("/api/auth/user", auth.user);
     //* END *//
   },
   apps: [
