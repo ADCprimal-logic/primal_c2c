@@ -23,7 +23,7 @@
         <material-card
           color="bluebird"
           title="Student Data"
-          text="Expands to show detailed data on the child."
+          text="Expands to show detailed data on the child. For faster access, keep open in another tab!"
         >
           <v-data-table
                   :headers="headers"
