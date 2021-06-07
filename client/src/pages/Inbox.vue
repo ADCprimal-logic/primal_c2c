@@ -67,12 +67,10 @@
         >
           <v-data-table
             :headers="headers"
-            :items="items.slice(0, 7)"
             hide-actions
           >
             <template
               slot="headerCell"
-              slot-scope="{ header }"
             >
               <span
                 class="subheading font-weight-light text--darken-3"
@@ -80,13 +78,11 @@
               />
             </template>
             <template
-              slot="items"
-              slot-scope="{ item }"
             >
-              <td>{{ item.name }}</td>
-              <td>{{ item.country }}</td>
-              <td>{{ item.city }}</td>
-              <td class="text-xs-right">{{ item.salary }}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td class="text-xs-right"></td>
             </template>
           </v-data-table>
         </material-card>
