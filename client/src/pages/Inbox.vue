@@ -72,10 +72,6 @@
             <template
               slot="headerCell"
             >
-              <span
-                class="subheading font-weight-light text--darken-3"
-                v-text="header.text"
-              />
             </template>
             <template
             >
