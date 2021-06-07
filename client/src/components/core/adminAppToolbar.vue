@@ -18,7 +18,7 @@
         >
           <v-icon>mdi-view-list</v-icon>
         </v-btn>
-        {{ title }}
+        You are logged in as Administrator!
       </v-toolbar-title>
     </div>
 

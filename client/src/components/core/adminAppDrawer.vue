@@ -78,10 +78,26 @@
             alt: 'Dashboard',
           },
           {
-            to: '/Profile Editor',
+            to: '/Admin-Staff-Data',
             icon: 'mdi-account',
             text: 'Staff Data'
           },
+          {
+            to: '/Admin-Student-Data',
+            icon: 'mdi-account-multiple',
+            text: 'Child Data'
+          },
+          {
+            to: '/Admin-Time-Clock',
+            icon: 'mdi-alarm',
+            text: 'Time Clocks'
+          },
+          {
+            to: '/Admin-Financials',
+            icon: 'mdi-account-cash',
+            text: 'Financials'
+          },
+
           {
             to: '/icons',
             icon: 'mdi-chart-bubble',

@@ -32,7 +32,7 @@
                 v-for="c in colors"
                 :key="c"
                 :class="[c === color ? 'color-active color-' + c: 'color-' + c]"
-                size="23"
+                size="40"
 
                 @click="setColor(c)"
               />
@@ -79,7 +79,7 @@
           </v-flex>
           <v-flex xs12>
             <div class="text-xs-center body-2 text-uppercase">
-              <div class=" sidebar-filter">
+              <div class="sidebar-filter">
                 Thank You for Sharing!
               </div>
 
@@ -127,10 +127,10 @@
         'danger'
       ],
       images: [
-        '/stock.png',
-        '/ridge.jpg',
-        '/lake.jpg',
-        '/forest.jpg',
+        'https://primal-c2c-images.s3.amazonaws.com/static/forest.jpg',
+        'https://primal-c2c-images.s3.amazonaws.com/static/lake.jpg',
+        'https://primal-c2c-images.s3.amazonaws.com/static/ridge.jpg',
+        'https://primal-c2c-images.s3.amazonaws.com/static/bluetheme.jpg',
       ]
     }),
 
