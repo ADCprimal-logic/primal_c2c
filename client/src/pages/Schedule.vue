@@ -3,12 +3,12 @@
   <v-container>
       <div class='app'>
           <v-toolbar color="#B0BEC5">
-              
+
           </v-toolbar>
-          <FullCalendar :options='calendarOptions'/>
+          <FullCalendar :options='calendarOptions' />
           <br />
-          <FullCalendar :options="calendarOptions2"/>
-      </div>
+          <FullCalendar :options="calendarOptions2" />
+          <iframe src="https://calendar.google.com/calendar/embed?src=annee%40carolinaoneplus.com&ctz=America%2FNew_York" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>      </div>
   </v-container>
 </template>
 
