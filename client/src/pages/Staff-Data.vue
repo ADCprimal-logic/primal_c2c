@@ -1,229 +1,145 @@
-<!-- Comment -->
 <template>
-  <div>
-    <v-toolbar color="#B0BEC5">
-      <v-toolbar-title>Staff Data<br></v-toolbar-title>
-      <v-spacer></v-spacer>
-    </v-toolbar>
-    <v-data-table
-      :headers="headers"
-      :items="desserts"
-      :expand="expand"
-      item-key="name"
-      loading = true
+  <v-card>
+    <v-card-title class="bluebird white--text headline">
+      Staff
+    </v-card-title>
+    <v-layout
+      justify-space-between
+      pa-3
     >
-      <template v-slot:items="props">
-        <tr @click="props.expanded = !props.expanded">
-          <td>{{ props.item.name }}</td>
-          <td class="text-xs-right">{{ props.item.Gender }}</td>
-          <td class="text-xs-right">{{ props.item.DOB }}</td>
-          <td class="text-xs-right">{{ props.item.Location }}</td>
-          <td class="text-xs-right">{{ props.item.Allergies }}</td>
-          <td class="text-xs-right">{{ props.item.Status }}</td>
-        </tr>
-      </template>
-      <template v-slot:expand="props">
-      <v-responsive :aspect-ratio="16/9">
-        <v-card-text>
-  <v-layout row>
-    <v-flex xs12 sm6 offset-sm3>
-      <v-card>
-        <v-img
-          src="https://cdn.vuetifyjs.com/images/lists/ali.png"
-          height="300px"
+      <v-flex xs5>
+        <v-treeview
+          :active.sync="active"
+          :items="items"
+          :load-children="fetchUsers"
+          :open.sync="open"
+          activatable
+          active-class="primary--text"
+          class="grey lighten-5"
+          open-on-click
+          transition
         >
-          <v-layout
-            column
-            fill-height
+          <template v-slot:prepend="{ item, active }">
+            <v-icon
+              v-if="!item.children"
+              :color="active ? 'primary' : ''"
+            >
+              mdi-account
+            </v-icon>
+          </template>
+        </v-treeview>
+      </v-flex>
+      <v-flex
+        d-flex
+        text-xs-center
+      >
+        <v-scroll-y-transition mode="out-in">
+          <div
+            v-if="!selected"
+            class="title grey--text text--lighten-1 font-weight-light"
+            style="align-self: center;"
           >
-            <v-card-title>
-              <v-spacer></v-spacer>
-            </v-card-title>
-            <v-spacer></v-spacer>
-
-            <v-card-title class="white--text pl-5 pt-5">
-              <div class="display-1 pl-5 pt-5">Ali Conners</div>
-            </v-card-title>
-          </v-layout>
-        </v-img>
-
-        <v-list two-line>
-          <v-list-tile @click="">
-            <v-list-tile-action>
-              <v-icon color="indigo">phone</v-icon>
-            </v-list-tile-action>
-
-            <v-list-tile-content>
-              <v-list-tile-title>(650) 555-1234</v-list-tile-title>
-              <v-list-tile-sub-title>Mobile</v-list-tile-sub-title>
-            </v-list-tile-content>
-
-            <v-list-tile-action>
-              <v-icon>chat</v-icon>
-            </v-list-tile-action>
-          </v-list-tile>
-
-          <v-list-tile @click="">
-            <v-list-tile-action></v-list-tile-action>
-
-            <v-list-tile-content>
-              <v-list-tile-title>(323) 555-6789</v-list-tile-title>
-              <v-list-tile-sub-title>Work</v-list-tile-sub-title>
-            </v-list-tile-content>
-
-            <v-list-tile-action>
-              <v-icon>chat</v-icon>
-            </v-list-tile-action>
-          </v-list-tile>
-
-
-          <v-list-tile @click="">
-            <v-list-tile-action>
-              <v-icon color="indigo">mail</v-icon>
-            </v-list-tile-action>
-
-            <v-list-tile-content>
-              <v-list-tile-title>aliconnors@example.com</v-list-tile-title>
-              <v-list-tile-sub-title>Personal</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
-
-          <v-list-tile @click="">
-            <v-list-tile-action></v-list-tile-action>
-
-            <v-list-tile-content>
-              <v-list-tile-title>ali_connors@example.com</v-list-tile-title>
-              <v-list-tile-sub-title>Work</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
-
-          <v-divider inset></v-divider>
-
-          <v-list-tile @click="">
-            <v-list-tile-action>
-              <v-icon color="indigo">location_on</v-icon>
-            </v-list-tile-action>
-
-            <v-list-tile-content>
-              <v-list-tile-title>1400 Main Street</v-list-tile-title>
-              <v-list-tile-sub-title>Orlando, FL 79938</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
-        </v-list>
-      </v-card>
-    </v-flex>
-  </v-layout>
-        </v-card-text>
-      </v-responsive>
-      </template>
-    </v-data-table>
-  </div>
+            Select a staff member!
+          </div>
+          <v-card
+            v-else
+            :key="selected.id"
+            class="pt-4 mx-auto"
+            flat
+            max-width="400" 
+          >
+            <v-card-text>
+              <v-avatar
+                v-if="avatar"
+                size="88"
+              >
+                <v-img
+                  :src="`https://avataaars.io/${avatar}`"
+                  class="mb-4"
+                ></v-img>
+              </v-avatar>
+              <h3 class="headline mb-2">
+                {{ selected.name }}
+              </h3>
+              <div class="blue--text mb-2">{{ selected.email }}</div>
+              <div class="blue--text subheading font-weight-bold">{{ selected.username }}</div>
+            </v-card-text>
+            <v-divider></v-divider>
+            <v-layout
+              tag="v-card-text"
+              text-xs-left
+              wrap
+            >
+              <v-flex tag="strong" xs5 text-xs-right mr-3 mb-2>Role:</v-flex>
+              <v-flex>{{ selected.company.name }}</v-flex>
+              <v-flex tag="strong" xs5 text-xs-right mr-3 mb-2>Phone:</v-flex>
+              <v-flex>{{ selected.phone }}</v-flex>
+              <v-flex tag="strong" xs5 text-xs-right mr-3 mb-2>Tenure:</v-flex>
+              <v-flex>{{ selected.phone }}</v-flex>
+            </v-layout>
+          </v-card>
+        </v-scroll-y-transition>
+      </v-flex>
+    </v-layout>
+  </v-card>
 </template>
 
 <script>
-  import materialCard from '~/components/material/AppCard'
+  const avatars = [
+    '?accessoriesType=Blank&avatarStyle=Circle&clotheColor=PastelGreen&clotheType=ShirtScoopNeck&eyeType=Wink&eyebrowType=UnibrowNatural&facialHairColor=Black&facialHairType=MoustacheMagnum&hairColor=Platinum&mouthType=Concerned&skinColor=Tanned&topType=Turban',
+    '?accessoriesType=Sunglasses&avatarStyle=Circle&clotheColor=Gray02&clotheType=ShirtScoopNeck&eyeType=EyeRoll&eyebrowType=RaisedExcited&facialHairColor=Red&facialHairType=BeardMagestic&hairColor=Red&hatColor=White&mouthType=Twinkle&skinColor=DarkBrown&topType=LongHairBun',
+    '?accessoriesType=Prescription02&avatarStyle=Circle&clotheColor=Black&clotheType=ShirtVNeck&eyeType=Surprised&eyebrowType=Angry&facialHairColor=Blonde&facialHairType=Blank&hairColor=Blonde&hatColor=PastelOrange&mouthType=Smile&skinColor=Black&topType=LongHairNotTooLong',
+    '?accessoriesType=Round&avatarStyle=Circle&clotheColor=PastelOrange&clotheType=Overall&eyeType=Close&eyebrowType=AngryNatural&facialHairColor=Blonde&facialHairType=Blank&graphicType=Pizza&hairColor=Black&hatColor=PastelBlue&mouthType=Serious&skinColor=Light&topType=LongHairBigHair',
+    '?accessoriesType=Kurt&avatarStyle=Circle&clotheColor=Gray01&clotheType=BlazerShirt&eyeType=Surprised&eyebrowType=Default&facialHairColor=Red&facialHairType=Blank&graphicType=Selena&hairColor=Red&hatColor=Blue02&mouthType=Twinkle&skinColor=Pale&topType=LongHairCurly'
+  ]
+
+  const pause = ms => new Promise(resolve => setTimeout(resolve, ms))
 
   export default {
-    layout: 'dashboard',
-    components: {
-      materialCard
-    },
+    layout: 'frontdeskdashboard',
     data: () => ({
-    headers: [
-      {
-            text: 'Dessert (100g serving)',
-            align: 'left',
-            sortable: true,
-            value: 'name'
-          },
-          { text: 'Gender', value: 'Gender' },
-          { text: 'DOB (g)', value: 'DOB' },
-          { text: 'Location (g)', value: 'Location' },
-          { text: 'Allergies (g)', value: 'Allergies' },
-          { text: 'Status (%)', value: 'Status' }
-        ],
-        desserts: [
+      active: [],
+      avatar: null,
+      open: [],
+      users: []
+    }),
+
+    computed: {
+      items () {
+        return [
           {
-            name: 'Frozen Yogurt',
-            Gender: 159,
-            DOB: 6.0,
-            Location: 24,
-            Allergies: 4.0,
-            Status: '1%'
-          },
-          {
-            name: 'Ice cream sandwich',
-            Gender: 237,
-            DOB: 9.0,
-            Location: 37,
-            Allergies: 4.3,
-            Status: '1%'
-          },
-          {
-            name: 'Eclair',
-            Gender: 262,
-            DOB: 16.0,
-            Location: 23,
-            Allergies: 6.0,
-            Status: '7%'
-          },
-          {
-            name: 'Cupcake',
-            Gender: 305,
-            DOB: 3.7,
-            Location: 67,
-            Allergies: 4.3,
-            Status: '8%'
-          },
-          {
-            name: 'Gingerbread',
-            Gender: 356,
-            DOB: 16.0,
-            Location: 49,
-            Allergies: 3.9,
-            Status: '16%'
-          },
-          {
-            name: 'Jelly bean',
-            Gender: 375,
-            DOB: 0.0,
-            Location: 94,
-            Allergies: 0.0,
-            Status: '0%'
-          },
-          {
-            name: 'Lollipop',
-            Gender: 392,
-            DOB: 0.2,
-            Location: 98,
-            Allergies: 0,
-            Status: '2%'
-          },
-          {
-            name: 'Honeycomb',
-            Gender: 408,
-            DOB: 3.2,
-            Location: 87,
-            Allergies: 6.5,
-            Status: '45%'
-          },
-          {
-            name: 'Donut',
-            Gender: 452,
-            DOB: 25.0,
-            Location: 51,
-            Allergies: 4.9,
-            Status: '22%'
-          },
-          {
-            name: 'KitKat',
-            Gender: 518,
-            DOB: 26.0,
-            Location: 65,
-            Allergies: 7,
-            Status: '6%'
+            name: 'Staff Directory',
+            children: this.users
           }
-        ],
-  })
+        ]
+      },
+      selected () {
+        if (!this.active.length) return undefined
+
+        const id = this.active[0]
+
+        return this.users.find(user => user.id === id)
+      }
+    },
+
+    watch: {
+      selected: 'randomAvatar'
+    },
+
+    methods: {
+      async fetchUsers (item) {
+        // Remove in 6 months and say
+        // you've made optimizations! :)
+        await pause(1500)
+
+        return fetch('https://jsonplaceholder.typicode.com/users')
+          .then(res => res.json())
+          .then(json => (item.children.push(...json)))
+          .catch(err => console.warn(err))
+      },
+      randomAvatar () {
+        this.avatar = avatars[Math.floor(Math.random() * avatars.length)]
+      }
+    }
   }
 </script>

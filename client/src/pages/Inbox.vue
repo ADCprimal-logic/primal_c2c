@@ -12,13 +12,13 @@
       <v-flex
         md12
       >
-      <v-text-field
-        v-model="search"
-        append-icon="search"
-        label="Search for a student by any associated data."
-        single-line
-        hide-details
-      ></v-text-field>
+        <v-text-field
+          v-model="search"
+          append-icon="search"
+          label="Search for a student by any associated data."
+          single-line
+          hide-details
+        ></v-text-field>
         <material-card
           color="bluebird"
           title="Student Data"
@@ -51,13 +51,13 @@
           <td class="text-xs-left">{{ props.item.Allergies }}</td>
           <td class="text-xs-left">{{ props.item.enrollment_status }}</td>
         </tr>
-      </template>
+        </template>
            <template v-slot:no-results>
         <v-alert :value="true" color="error" icon="warning">
           Your search for "{{ search }}" found no results.
         </v-alert>
-      </template>
-      <template v-slot:expand="props">
+        </template>
+        <template v-slot:expand="props">
         <v-responsive :aspect-ratio="16 / 9">
           <v-card-text>
             <v-layout row wrap align-right>
@@ -230,38 +230,11 @@
             </v-layout>
           </v-card-text>
         </v-responsive>
-      </template>
+        </template>
           </v-data-table>
         </material-card>
       </v-flex>
-      <v-flex
-        md12
-      >
-        <material-card
-          color="green"
-          flat
-          full-width
-          title="Outbox"
-          text="Sent and draft messages"
-        >
-          <v-data-table
-            :headers="headers"
-            hide-actions
-          >
-            <template
-              slot="headerCell"
-            >
-            </template>
-            <template
-            >
-              <td></td>
-              <td></td>
-              <td></td>
-              <td class="text-xs-right"></td>
-            </template>
-          </v-data-table>
-        </material-card>
-      </v-flex>
+      
     </v-layout>
   </v-container>
 </template>
