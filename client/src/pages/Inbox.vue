@@ -16,11 +16,22 @@
           color="bluebird"
           title="Inbox"
           text="Recieved messages"
+          
         >
+        <v-text-field
+        v-model="search"
+        append-icon="search"
+        label="Search by any associated data"
+        single-line
+        hide-details
+      ></v-text-field>
           <v-data-table
-            :headers="headers"
-            :items="items"
-            hide-actions
+          :headers="headers"
+          :items="children"
+          :expand="expand"
+          item-key="full_name"
+          loading="true"
+          :search="search"
           >
             <template
               slot="headerCell"
@@ -31,15 +42,34 @@
                 v-text="header.text"
               />
             </template>
-            <template
-              slot="items"
-              slot-scope="{ item }"
-            >
-              <td>{{ item.name }}</td>
-              <td>{{ item.country }}</td>
-              <td>{{ item.city }}</td>
-              <td class="text-xs-right">{{ item.salary }}</td>
-            </template>
+            <template v-slot:items="props">
+                    <tr @click="props.expanded = !props.expanded">
+                      <td>{{ props.item.full_name }}</td>
+                      <td class="text-xs-left">{{ props.item.gender }}</td>
+                      <td class="text-xs-left">{{ props.item.medical_record.birthdate }}
+                      </td>
+                      <td class="text-xs-left">{{ props.item._id }}</td>
+                      <td class="text-xs-left">{{ props.item.Allergies }}</td>
+                      <td class="text-xs-left">{{ props.item.enrollment_status }}</td>
+                    </tr>
+                  </template>
+                  <template v-slot:no-results>
+        <v-alert :value="true" color="error" icon="warning">
+          Your search for "{{ search }}" found no results.
+        </v-alert>
+      </template>
+      <template v-slot:expand="props">
+      <v-responsive :aspect-ratio="16/9">
+        <v-card-text>
+          <v-layout row wrap align-right>
+              <v-flex xs12 sm6 offset-sm3>
+                <v-card color = '#698390'>
+                    <v-layout column fill-height>
+                      <!-- Name over Image -->
+                      <v-card-title class="bluebird--text pl-5 pt-5" row wrap align-right>
+                        <div class="display-1 pl-5 pt-5">
+                          {{ props.item.full_name }}
+                        </div>
           </v-data-table>
         </material-card>
       </v-flex>
@@ -83,72 +113,131 @@
   </v-container>
 </template>
 
-<script>
-  import materialCard from '~/components/material/AppCard'
 
-  export default {
-    layout: 'dashboard',
-    components: {
-      materialCard
+<script>
+import materialCard from '~/components/material/AppCard'
+const ALL_CHILD = `
+query{
+  allChildren{
+    full_name
+    gender
+    parent{
+      full_name
+      email
+      home_phone
+      mobile_phone
+      work_phone
+    }
+    approved_contact{
+      full_name
+      phone
+      relation
+    }
+    room{
+      name
+    }
+    medical_record{
+      allergies
+      medications
+      birthdate
+    }
+    pin_number
+    enrollment_status
+  }
+}
+`;
+
+function graphql(query, variables = {}) {
+  return fetch("http://localhost:3000/admin/api", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
     },
-    data: () => ({
+    body: JSON.stringify({
+      variables,
+      query,
+    }),
+  }).then(function (result) {
+    return result.json();
+  });
+}
+
+import materialCard from "~/components/material/AppCard";
+
+export default {
+  layout: "dashboard",
+  components: {
+    materialCard,
+  },
+  async asyncData() {
+    const { data } = await graphql(ALL_CHILD);
+    return {
+      children: data.allChildren,
+    };
+  },
+  data: () => ({
+    search: "",
     headers: [
       {
-        sortable: false,
-        text: 'Name',
-        value: 'name'
+        text: "Student Name",
+        align: "left",
+        sortable: true,
+        value: "full_name",
       },
-      {
-        sortable: false,
-        text: 'Country',
-        value: 'country'
-      },
-      {
-        sortable: false,
-        text: 'City',
-        value: 'city'
-      },
-      {
-        sortable: false,
-        text: 'Salary',
-        value: 'salary',
-        align: 'right'
-      }
+      { text: "Gender(M/F)", value: "gender" },
+      { text: "Date of Birth", value: "medical_record.birthdate" },
+      { text: "Location", value: "_id" },
+      { text: "Allergies", value: "medical_record.allergies" },
+      { text: "Status (In/Out)", value: "enrollment_status" },
     ],
-    items: [
+    studentData: [
       {
-        name: 'Dakota Rice',
-        country: 'Niger',
-        city: 'Oud-Tunrhout',
-        salary: '$35,738'
+        name: "Chris Cooper",
+        Gender: "Male",
+        dateofBirth: "9/6/1992",
+        Location: "Homeroom",
+        Allergies: "Peanuts",
+        Email: "cooperc2606@gmail.com",
+        Status: "Clocked In",
+        TuitionBalance: "0",
+        Medications: "0",
+        approvedcontactName: "asdf",
+        approvedcontactPhone: "0",
+        approvedcontactEmail: "0",
+        apporvedcontactAddress: "0",
+        approvedcontactRelationship: "0",
+        approvedcontactPIN: "0",
       },
       {
-        name: 'Minerva Hooper',
-        country: 'Curaçao',
-        city: 'Sinaai-Waas',
-        salary: '$23,738'
-      }, {
-        name: 'Sage Rodriguez',
-        country: 'Netherlands',
-        city: 'Overland Park',
-        salary: '$56,142'
-      }, {
-        name: 'Philip Chanley',
-        country: 'Korea, South',
-        city: 'Gloucester',
-        salary: '$38,735'
-      }, {
-        name: 'Doris Greene',
-        country: 'Malawi',
-        city: 'Feldkirchen in Kārnten',
-        salary: '$63,542'
-      }, {
-        name: 'Mason Porter',
-        country: 'Chile',
-        city: 'Gloucester',
-        salary: '$78,615'
-      }
-    ]
-  })
-  }
+        name: "Chris Cooper3",
+        Gender: "Male",
+        dateofBirth: "9/6/1992",
+        Location: "Homeroom 6",
+        Phone: "843-324-1344",
+        Email: "cooperc2606@gmail.com",
+        Status: "Clocked In",
+      },
+      {
+        name: "Chris Cooper2",
+        Gender: "Male",
+        dateofBirth: "9/6/1992",
+        Location: "Homeroom 77",
+        Phone: "843-324-1344",
+        Email: "cooperc2606@gmail.com",
+        Status: "Clocked In",
+      },
+    ],
+    onetimepin: "admin",
+
+    bottomNav: 'recent',
+    computed: {
+    isDisabled() {
+      return (
+        this.otp !== this.onetimepin
+      );
+    },
+  },
+  }),
+};
+
 </script>
