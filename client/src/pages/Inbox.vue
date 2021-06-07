@@ -22,12 +22,7 @@
         <material-card
           color="bluebird"
           title="Inbox"
-          v-model="search"
-          append-icon="search"
-          label="Search by any associated data"
-          single-line
-          hide-details
-      
+          text="Recieved messages"
         >
           <v-data-table
                   :headers="headers"
