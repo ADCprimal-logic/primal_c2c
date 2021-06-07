@@ -37,7 +37,7 @@
               slot-scope="{ header }"
             >
               <span
-                class="subheading font-weight-light text-success text--darken-3"
+                class="subheading font-weight-light text-C2Corange"
                 v-text="header.text"
               />
             </template>
