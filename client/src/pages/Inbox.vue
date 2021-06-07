@@ -15,14 +15,14 @@
       <v-text-field
         v-model="search"
         append-icon="search"
-        label="Search by any associated data"
+        label="Search for a student by any associated data."
         single-line
         hide-details
       ></v-text-field>
         <material-card
           color="bluebird"
-          title="Inbox"
-          text="Recieved messages"
+          title="Student Data"
+          text="Expands to show detailed data on the child."
         >
           <v-data-table
                   :headers="headers"
