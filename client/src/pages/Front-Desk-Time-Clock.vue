@@ -15,26 +15,13 @@
       <v-flex xs12>
         <material-card
           color="bluebird"
-          title="First select a roster. Next, select the respective student from the roster and clock them in."
+          title="Use the buttons below to clock in and out."
         >
-      <!-- Space about clock buttons -->  
-      <v-layout
-        justify-center
-        align-center
-        >
-      <v-flex xs12 sm6 d-flex>
-        <v-select
-          :items="items"
-          label="Student Rosters"
-          outline
-        ></v-select>
-      </v-flex>
-      </v-layout>
       <!-- Creates the clock in button -->
       <v-layout
-        justify-center
-        align-center
-      >
+                  justify-center
+                  align-center
+            >
       <h2 class="font-weight-light mb-4">Clock In </h2><br>      
       <v-dialog v-model="dialog" max-width="500px">
         <template v-slot:activator="{ on }">
@@ -67,9 +54,7 @@
                 <v-flex xs12 sm6 md4>
                   <v-text-field v-model="editedItem.Status" label="Status (g)"></v-text-field>
                 </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.Hours" label="Hours (g)"></v-text-field>
-                </v-flex>
+
               </v-layout>
             </v-container>
           </v-card-text>
@@ -89,7 +74,7 @@
                   justify-center
                   align-center
             >
-             <h2 class="font-weight-light mb-4">Clock Out</h2><br>
+             <h2 class="font-weight-light mb-4">Clock Out </h2><br>
             
               <v-btn 
               color="red" 
@@ -116,16 +101,19 @@
     >
     <!-- End of chart sizing params -->
   <div>
-    <v-toolbar color="mint">
-      <v-title align-center> Roster Time Clock History </v-title>
+    <v-toolbar flat color="white">
+
+      <v-toolbar-title>Time Card</v-toolbar-title>
       <!-- Clock in Chart Title  -->
+
+      <v-spacer></v-spacer>
       <!-- Constructor for the pop out diag allowing for edits to the fields -->
     </v-toolbar>
     <!-- Binds to object creation and defines header and item data. Elevations define data chart shadow-->
     <v-data-table
       :headers="headers"
       :items="desserts"
-      class="elevation-10"
+      class="elevation-1"
     >
     <!-- Constructor for visulation of data. These are the real headers of the chart. -->
       <template v-slot:items="props">
@@ -133,23 +121,6 @@
         <td class="text-xs-right">{{ props.item.Date }}</td>
         <td class="text-xs-right">{{ props.item.Time }}</td>
         <td class="text-xs-right">{{ props.item.Status }}</td>
-        <td class="text-xs-right">{{ props.item.Hours }}</td>
-        <td class="justify-center layout px-0">
-          <v-icon
-            small
-            class="mr-2"
-            @click="editItem(props.item)"
-          >
-            edit
-          </v-icon>
-          <!-- Defines what is done when trash can is clicked-->
-          <v-icon
-            small
-            @click="deleteItem(props.item)"
-          >
-            delete
-          </v-icon>
-        </td>
       </template>
       <!-- Defines what is done when there is no data in availble. Initialize refills the data from the server -->
       <template v-slot:no-data>
@@ -177,7 +148,7 @@ import materialCard from '~/components/material/AppCard'
       dialog: false,
       headers: [
         {
-          text: 'Child Name',
+          text: 'Staff Name',
           align: 'left',
           sortable: false,
           value: 'name'
@@ -185,7 +156,6 @@ import materialCard from '~/components/material/AppCard'
         { text: 'Date', value: 'Date' },
         { text: 'Time Recorded', value: 'Time' },
         { text: 'Status (In/Out)', value: 'Status' },
-        { text: 'Actions', value: 'name', sortable: false }
       ],
       desserts: [],
       editedIndex: -1,
@@ -296,7 +266,7 @@ import materialCard from '~/components/material/AppCard'
           }
         ]
       },
-      
+
       editItem (item) {
         this.editedIndex = this.desserts.indexOf(item)
         this.editedItem = Object.assign({}, item)

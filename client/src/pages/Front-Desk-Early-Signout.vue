@@ -92,7 +92,7 @@
                 <v-btn
                   color="blue"
                   :disabled="isDisabled"
-                  >Login</v-btn
+                  >Signout Student</v-btn
                 >
             </v-layout>
             
@@ -106,7 +106,7 @@
 
           <v-list-tile @click="">
             <v-list-tile-action>
-              <v-icon color="yellow">mdi-alphbetical</v-icon>
+              <v-icon color="red">mdi-alphabetical</v-icon>
             </v-list-tile-action>
 
             <v-list-tile-content>
@@ -126,6 +126,7 @@
             
             </v-list-tile-content>
           </v-list-tile>
+          <v-divider inset></v-divider>
 <!-- Field Divider -->
           <v-list-tile @click="">
             <v-list-tile-action>
@@ -162,6 +163,7 @@
               <v-list-tile-sub-title>Guardian Email</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
+          <v-divider inset></v-divider>
 <!-- Field Divider --> 
             
             <v-list-tile @click="">
@@ -174,7 +176,6 @@
               <v-list-tile-sub-title>Homeroom</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
-          <v-divider inset></v-divider>
 <!-- Field Divider --> 
             
           <v-divider inset></v-divider>
