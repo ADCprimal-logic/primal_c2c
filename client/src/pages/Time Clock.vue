@@ -104,13 +104,9 @@
     <!-- End of chart sizing params -->
   <div>
     <v-toolbar flat color="white">
+
       <v-toolbar-title> Time Card Data </v-toolbar-title>
       <!-- Clock in Chart Title  -->
-      <v-divider
-        class="mx-2"
-        inset
-        vertical
-      ></v-divider>
       <v-spacer></v-spacer>
       <!-- Constructor for the pop out diag allowing for edits to the fields -->
     </v-toolbar>
