@@ -96,7 +96,7 @@
   const pause = ms => new Promise(resolve => setTimeout(resolve, ms))
 
   export default {
-    layout: 'frontdeskdashboard',
+    layout: 'admindashboard',
     data: () => ({
       active: [],
       avatar: null,

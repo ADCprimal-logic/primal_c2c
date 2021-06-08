@@ -1,63 +1,46 @@
-<template>
 <!-- Comment -->
-  <v-container
-    fill-height
-    fluid
-    grid-list-xl
-  >
-    <v-layout
-      justify-center
-      wrap
+<template>
+  <div>
+    <!-- Start of Data Table-->
+
+    <v-card-title>
+      List of all children and students
+      <v-spacer></v-spacer>
+      <v-text-field
+        v-model="search"
+        append-icon="search"
+        label="Search by any associated data"
+        single-line
+        hide-details
+      ></v-text-field>
+    </v-card-title>
+    <v-data-table
+      :headers="headers"
+      :items="children"
+      :expand="expand"
+      item-key="full_name"
+      loading="true"
+      :search="search"
     >
-      <v-flex
-        md12
-      >
-        <v-text-field
-          v-model="search"
-          append-icon="search"
-          label="Search for a student by any associated data."
-          single-line
-          hide-details
-        ></v-text-field>
-        <material-card
-          color="bluebird"
-          title="Student Data"
-          text="Expands to show detailed data on the child."
-        >
-          <v-data-table
-                  :headers="headers"
-                  :items="children"
-                  :expand="expand"
-                  item-key="full_name"
-                  loading="true"
-                  :search="search"
-          >
-            <template
-              slot="headerCell"
-              slot-scope="{ header }"
-            >
-              <span
-                class="subheading font-weight-light text-success text--darken-3"
-                v-text="header.text"
-              />
-            </template>
-          <template v-slot:items="props">
-          <tr @click="props.expanded = !props.expanded">
+      <template v-slot:items="props">
+        <tr @click="props.expanded = !props.expanded">
           <td>{{ props.item.full_name }}</td>
           <td class="text-xs-left">{{ props.item.gender }}</td>
-          <td class="text-xs-left">{{ props.item.medical_record.birthdate }}
+          <td class="text-xs-left">
+            {{ props.item.medical_record.birthdate }}
           </td>
           <td class="text-xs-left">{{ props.item._id }}</td>
           <td class="text-xs-left">{{ props.item.Allergies }}</td>
           <td class="text-xs-left">{{ props.item.enrollment_status }}</td>
         </tr>
-        </template>
-           <template v-slot:no-results>
+      </template>
+      <!-- Expansion Data -->
+      <template v-slot:no-results>
         <v-alert :value="true" color="error" icon="warning">
           Your search for "{{ search }}" found no results.
         </v-alert>
-        </template>
-        <template v-slot:expand="props">
+      </template>
+      <template v-slot:expand="props">
         <v-responsive :aspect-ratio="16 / 9">
           <v-card-text>
             <v-layout row wrap align-right>
@@ -230,13 +213,9 @@
             </v-layout>
           </v-card-text>
         </v-responsive>
-        </template>
-          </v-data-table>
-        </material-card>
-      </v-flex>
-      
-    </v-layout>
-  </v-container>
+      </template>
+    </v-data-table>
+  </div>
 </template>
 <script>
 const ALL_CHILD = `
@@ -288,7 +267,7 @@ function graphql(query, variables = {}) {
 import materialCard from "~/components/material/AppCard";
 
 export default {
-  layout: "dashboard",
+  layout: "admindashboard",
   components: {
     materialCard,
   },
@@ -353,4 +332,3 @@ export default {
   }),
 };
 </script>
-<!--Comment-->
