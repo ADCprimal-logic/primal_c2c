@@ -178,7 +178,7 @@ module.exports = {
        ** Build configuration
        */
       build: {
-        transpile: ["vuetify/lib", /@fullcalendar.*/],
+          transpile: ["vuetify/lib", /@fullcalendar.*/, 'vee-validate'],
         plugins: [new VuetifyLoaderPlugin()],
         loaders: {},
         /*
