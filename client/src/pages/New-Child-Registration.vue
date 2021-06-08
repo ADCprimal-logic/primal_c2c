@@ -197,7 +197,7 @@
 
 
     export default {
-        layout: "dashboard",
+        layout: "logindashboard",
         data() {
             return {
                 fname: '',
