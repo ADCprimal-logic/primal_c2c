@@ -1,6 +1,10 @@
 const index = require("../index");
 // DB Package Connection
 const postgres = require("postgres");
+// SMS Integration
+const twilio = require("twilio");
+// Random String Generator
+const crypto = require("crypto");
 // Password Hashing
 const bcrypt = require("bcrypt");
 // Initialize .ENV
@@ -15,38 +19,36 @@ const cookieParser = require("cookie-parser");
 
 exports.login = async (req, res) => {
   //console.log(req.body);
-  // Set Variables
+  // Delcare Variables
   const email = "first@parent.net";
+  const password = "#primalPass";
   const role = "Parent";
-  const expiresIn = 15;
-  const user = null;
-  // SQL Query Switch
+  var user = null;
+  let isValidPassword;
   const sql = postgres(process.env.DATABASE_URL);
-  switch (role) {
-    case "Parent":
-      console.log(role);
-      user = await sql`SELECT email, password FROM public."Parent"
-			WHERE email =  '${email}'`;
-      break;
-    case "Staff":
-      user = await sql`SELECT email, password FROM public."StaffMember"
-			WHERE email =  '${email}'`;
-      break;
+  // SQL Query Switch
+  if (role === "Parent") {
+    user = await sql`SELECT email, password FROM public."Parent"
+    WHERE email =  ${email}`;
+  } else if (role === "Staff") {
+    user = await sql`SELECT email, password FROM public."StaffMember"
+    WHERE email =  ${email}`;
+  } else if (role === "SuperAdmin") {
+    user = await sql`SELECT email, password FROM public."StaffMember"
+    WHERE email =  ${email}`;
   }
-  // User Validation
-  console.log(user[0].email);
-  console.log(user[0].password);
-  /*let isValidPassword;
-  try {
-    isValidPassword = await bcrypt.compare("#primalPass", user[0].password);
+  // Password Check
+  /*try {
+    isValidPassword = await bcrypt.compare(password, user[0].password);
+    console.log(isValidPassword);
   } catch (err) {
     console.log(err); // TypeError: failed to fetch
-  }*/
-
-  // Set Access Token
+  }
+  
+  
   /*const accessToken = jsonwebtoken.sign(
     {
-      user[0].email,
+      email,
       scope: ["user", role],
     },
     process.env.JWT_TOKEN,
