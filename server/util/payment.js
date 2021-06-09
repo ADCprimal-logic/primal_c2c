@@ -7,6 +7,8 @@ const stripe = require("stripe");
 const dotenv = require("dotenv");
 dotenv.config();
 
+exports.createCustomer = async (req, res) => {};
+
 exports.getCustomer = async (req, res) => {};
 
 exports.updateCustomer = async (req, res) => {};

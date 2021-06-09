@@ -36,7 +36,6 @@ exports.login = async (req, res) => {
   // User Logic Check
   if (user.count === 0) {
     //console.log("No User Exists");
-    res.status(500);
     res.json({
       status: 500,
       message: "No User Exists",
@@ -61,20 +60,19 @@ exports.login = async (req, res) => {
           expiresIn,
         }
       );
-      res.status(200);
       res.json({
         status: 200,
         message: "Access Granted!",
         token: {
           accessToken,
-        },
-        user: {
-          email,
+          user: {
+            email,
+            scope: ["user", role],
+          },
         },
       });
     } else {
       console.log("Invalid Password");
-      res.status(401);
       res.json({
         status: 401,
         message: "Invalid Password",
@@ -89,7 +87,10 @@ exports.user = async (req, res) => {
   console.log("USER OBJ ENDPOINT");
   console.log(req.user);
   res.json({
-    user: {},
+    user: {
+      email: "X",
+      id: 1,
+    },
   });
 };
 

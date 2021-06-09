@@ -110,7 +110,7 @@ module.exports = {
         secret: JWT_TOKEN,
         algorithms: ["sha1", "RS256", "HS256"],
       }).unless({
-        path: ["/api/auth/login"],
+        path: ['/api/auth/login', '/api/auth/refresh']
       })
     );*/
 
@@ -178,6 +178,10 @@ module.exports = {
           local: {
             token: {
               property: "token.accessToken",
+            },
+            user: {
+              property: "user",
+              //autoFetch: true
             },
             endpoints: {
               login: { url: "/api/auth/login", method: "post" },
