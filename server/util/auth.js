@@ -26,7 +26,7 @@ exports.login = async (req, res) => {
     user = await sql`SELECT email, password FROM public."Parent"
     WHERE email =  ${email}`;
   } else if (role === "Staff") {
-    user = await sql`SELECT email, password FROM public."StaffMember"
+    user = await sql`SELECT email, password, id FROM public."StaffMember"
     WHERE email =  ${email}`;
   } else if (role === "SuperAdmin") {
     user = await sql`SELECT email, password FROM public."SuperAdmin"
@@ -42,6 +42,7 @@ exports.login = async (req, res) => {
     });
   } else {
     //console.log("User Exists");
+    var id = user[0].id;
     // Password Check
     try {
       isValidPassword = await bcrypt.compare(password, user[0].password);
@@ -66,6 +67,7 @@ exports.login = async (req, res) => {
         token: {
           accessToken,
           user: {
+            id,
             email,
             scope: ["user", role],
           },
@@ -79,19 +81,6 @@ exports.login = async (req, res) => {
       });
     }
   }
-};
-
-exports.user = async (req, res) => {
-  console.log("USER BODY ENDPOINT");
-  console.log(req.body);
-  console.log("USER OBJ ENDPOINT");
-  console.log(req.user);
-  res.json({
-    user: {
-      email: "X",
-      id: 1,
-    },
-  });
 };
 
 exports.forgotPassword = async (req, res) => {
