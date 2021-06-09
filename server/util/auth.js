@@ -11,18 +11,13 @@ const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 dotenv.config();
 // JsonWebToken Config
-const jwt = require("express-jwt");
 const jsonwebtoken = require("jsonwebtoken");
-// Express Middleware
-const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
 
 exports.login = async (req, res) => {
   //console.log(req.body);
-  // Delcare Variables
-  const email = "first@parent.net";
-  const password = "#primalPass";
-  const role = "Parent";
+  // Declare Variables
+  const { email, password, role } = req.body;
+  const expiresIn = 15;
   var user = null;
   let isValidPassword;
   const sql = postgres(process.env.DATABASE_URL);
@@ -34,39 +29,70 @@ exports.login = async (req, res) => {
     user = await sql`SELECT email, password FROM public."StaffMember"
     WHERE email =  ${email}`;
   } else if (role === "SuperAdmin") {
-    user = await sql`SELECT email, password FROM public."StaffMember"
+    user = await sql`SELECT email, password FROM public."SuperAdmin"
     WHERE email =  ${email}`;
   }
-  // Password Check
-  /*try {
-    isValidPassword = await bcrypt.compare(password, user[0].password);
-    console.log(isValidPassword);
-  } catch (err) {
-    console.log(err); // TypeError: failed to fetch
-  }
-  
-  
-  /*const accessToken = jsonwebtoken.sign(
-    {
-      email,
-      scope: ["user", role],
-    },
-    process.env.JWT_TOKEN,
-    {
-      expiresIn,
+  //console.log(user);
+  // User Logic Check
+  if (user.count === 0) {
+    //console.log("No User Exists");
+    res.status(500);
+    res.json({
+      status: 500,
+      message: "No User Exists",
+    });
+  } else {
+    //console.log("User Exists");
+    // Password Check
+    try {
+      isValidPassword = await bcrypt.compare(password, user[0].password);
+    } catch (err) {
+      console.log(err);
     }
-  );
-  res.json({
-    token: {
-      accessToken,
-    },
-  });*/
+    if (isValidPassword === true) {
+      // Sign and Send Token
+      const accessToken = jsonwebtoken.sign(
+        {
+          email,
+          scope: ["user", role],
+        },
+        process.env.JWT_TOKEN,
+        {
+          expiresIn,
+        }
+      );
+      res.status(200);
+      res.json({
+        status: 200,
+        message: "Access Granted!",
+        token: {
+          accessToken,
+        },
+        user: {
+          email,
+        },
+      });
+    } else {
+      console.log("Invalid Password");
+      res.status(401);
+      res.json({
+        status: 401,
+        message: "Invalid Password",
+      });
+    }
+  }
 };
 
-exports.logout = async (req, res) => {};
+exports.user = async (req, res) => {
+  console.log("USER BODY ENDPOINT");
+  console.log(req.body);
+  console.log("USER OBJ ENDPOINT");
+  console.log(req.user);
+  res.json({
+    user: {},
+  });
+};
 
 exports.forgotPassword = async (req, res) => {
   const { password } = req.body;
 };
-
-exports.user = async (req, res) => {};

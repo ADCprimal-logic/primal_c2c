@@ -46,6 +46,10 @@ const auth = require("./util/auth");
 const initialiseData = require("./util/initial-data");
 const contact = require("./util/contact");
 const payment = require("./util/payment");
+// Express Packages
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const jwt = require("express-jwt");
 
 const keystone = new Keystone({
   appVersion: {
@@ -94,9 +98,24 @@ module.exports = {
   // Express Configuration (Optional)
   configureExpress: (app) => {
     //* START *//
-    app.use("/api/auth/login", auth.login);
-    app.use("/api/auth/logout", auth.logout);
-    app.use("/api/auth/user", auth.user);
+    // Express Middleware
+    app.use(cookieParser());
+    app.use(bodyParser.json());
+
+    const JWT_TOKEN = process.env.JWT_TOKEN;
+
+    // JWT middleware
+    app.use(
+      jwt({
+        secret: JWT_TOKEN,
+        algorithms: ["sha1", "RS256", "HS256"],
+      }).unless({
+        path: ["/api/auth/login"],
+      })
+    );
+
+    app.post("/api/auth/login", auth.login);
+    app.get("/api/auth/user", auth.user);
     //* END *//
   },
   apps: [
@@ -151,34 +170,33 @@ module.exports = {
       axios: {
         // See https://github.com/nuxt-community/axios-module#options
       },
-      router: {
-        //middleware: ['auth']
-      },
+      /*router: {
+        middleware: ["auth"],
+      },*/
       auth: {
         strategies: {
           local: {
             token: {
-              property: "token",
-              // required: true,
-              // type: 'Bearer'
-            },
-            user: {
-              property: "user",
-              // autoFetch: true
+              property: "token.accessToken",
             },
             endpoints: {
               login: { url: "/api/auth/login", method: "post" },
-              logout: { url: "/api/auth/logout", method: "post" },
               user: { url: "/api/auth/user", method: "get" },
             },
           },
+        },
+        redirect: {
+          login: "/",
+        },
+        localStorage: {
+          prefix: "auth.",
         },
       },
       /*
        ** Build configuration
        */
       build: {
-          transpile: ["vuetify/lib", /@fullcalendar.*/, 'vee-validate'],
+        transpile: ["vuetify/lib", /@fullcalendar.*/],
         plugins: [new VuetifyLoaderPlugin()],
         loaders: {},
         /*
