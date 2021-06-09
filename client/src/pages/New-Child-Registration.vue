@@ -12,8 +12,8 @@
                        fill-width>
                 <v-stepper-step :complete="e6 > 1"
                                 step="1">
-                    Profile Data Creation
-                    <small>Summarize if needed</small>
+                    Parent Registration
+                    <small>If you already have a parent account, please log in and register in the parent portal</small>
                 </v-stepper-step>
 
                 <v-stepper-content step="1">
@@ -67,10 +67,13 @@
                             <v-btn class="mr-4"
                                    type="submit"
                                    :disabled="invalid"
+                                   color="secondary"
                                    @click="createParent(); e6 = 2">
                                 submit
                             </v-btn>
-                            <v-btn @click="clear">
+                            <v-btn outlined 
+                                   @click="clear"
+                                   color="accent">
                                 clear
                             </v-btn>
                         </form>
@@ -79,7 +82,7 @@
 
                 <v-stepper-step :complete="e6 > 2"
                                 step="2">
-                    Configure analytics for this app
+                    Child Registration
                 </v-stepper-step>
 
                 <v-stepper-content step="2">
@@ -91,14 +94,15 @@
                            @click="e6 = 3">
                         Continue
                     </v-btn>
-                    <v-btn text>
+                    <v-btn text
+                           @click="e6 = 1">
                         Cancel
                     </v-btn>
                 </v-stepper-content>
 
                 <v-stepper-step :complete="e6 > 3"
                                 step="3">
-                    Select an ad format and name ad unit
+                    Camp Registration
                 </v-stepper-step>
 
                 <v-stepper-content step="3">
@@ -116,7 +120,7 @@
                 </v-stepper-content>
 
                 <v-stepper-step step="4">
-                    View setup instructions
+                    Payment and Waivers
                 </v-stepper-step>
                 <v-stepper-content step="4">
                     <v-card color="grey lighten-1"
@@ -193,7 +197,7 @@
 
 
     export default {
-        layout: "dashboard",
+        layout: "logindashboard",
         data() {
             return {
                 fname: '',
