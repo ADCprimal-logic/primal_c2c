@@ -105,14 +105,14 @@ module.exports = {
     const JWT_TOKEN = process.env.JWT_TOKEN;
 
     // JWT middleware
-    app.use(
+    /*app.use(
       jwt({
         secret: JWT_TOKEN,
         algorithms: ["sha1", "RS256", "HS256"],
       }).unless({
         path: ["/api/auth/login"],
       })
-    );
+    );*/
 
     app.post("/api/auth/login", auth.login);
     app.get("/api/auth/user", auth.user);
@@ -170,9 +170,9 @@ module.exports = {
       axios: {
         // See https://github.com/nuxt-community/axios-module#options
       },
-      /*router: {
+      router: {
         middleware: ["auth"],
-      },*/
+      },
       auth: {
         strategies: {
           local: {
