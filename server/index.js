@@ -102,7 +102,7 @@ module.exports = {
     app.use(cookieParser());
     app.use(bodyParser.json());
 
-    const JWT_TOKEN = process.env.JWT_TOKEN;
+    //const JWT_TOKEN = process.env.JWT_TOKEN;
 
     // JWT middleware
     /*app.use(
@@ -115,7 +115,7 @@ module.exports = {
     );*/
 
     app.post("/api/auth/login", auth.login);
-    app.get("/api/auth/user", auth.user);
+    //app.get("/api/auth/user", auth.user);
     //* END *//
   },
   apps: [
@@ -162,7 +162,7 @@ module.exports = {
       modules: [
         // Doc: https://axios.nuxtjs.org/usage
         "@nuxtjs/axios",
-        "@nuxtjs/auth-next",
+        //"@nuxtjs/auth-next",
       ],
       /*
        ** Axios module configuration
@@ -170,18 +170,15 @@ module.exports = {
       axios: {
         // See https://github.com/nuxt-community/axios-module#options
       },
+      // START - This is auth middleware not being used but may need to be removed //
       /*router: {
         middleware: ["auth"],
       },*/
-      auth: {
+      /*auth: {
         strategies: {
           local: {
             token: {
               property: "token.accessToken",
-            },
-            user: {
-              property: "user",
-              //autoFetch: true
             },
             endpoints: {
               login: { url: "/api/auth/login", method: "post" },
@@ -196,6 +193,7 @@ module.exports = {
           prefix: "auth.",
         },
       },
+      // END - This is auth middleware not being used but may need to be removed //
       /*
        ** Build configuration
        */
