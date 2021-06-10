@@ -23,7 +23,7 @@
                             <validation-provider v-slot="{ errors }"
                                                  name="First Name"
                                                  rules="required">
-                                <v-text-field v-model="fname"
+                                <v-text-field v-model="parentFname"
                                               :error-messages="errors"
                                               label="First Name"
                                               required></v-text-field>
@@ -31,7 +31,7 @@
                             <validation-provider v-slot="{ errors }"
                                                  name="Last Name"
                                                  rules="required">
-                                <v-text-field v-model="lname"
+                                <v-text-field v-model="parentLname"
                                               :error-messages="errors"
                                               label="Last Name"
                                               required></v-text-field>
@@ -71,8 +71,8 @@
                                    @click="createParent(); e6 = 2">
                                 submit
                             </v-btn>
-                            <v-btn outlined 
-                                   @click="clear"
+                            <v-btn outlined
+                                   @click="e6 = 2"
                                    color="accent">
                                 clear
                             </v-btn>
@@ -83,21 +83,84 @@
                 <v-stepper-step :complete="e6 > 2"
                                 step="2">
                     Child Registration
+                    <small>If you are registering a returning camper, please log in to the parent portal and register the returning camper there</small>
                 </v-stepper-step>
 
                 <v-stepper-content step="2">
-                    <v-card color="grey lighten-1"
-                            class="mb-12"
-                            height="200px"
-                            width="2000px"></v-card>
-                    <v-btn color="primary"
-                           @click="e6 = 3">
-                        Continue
-                    </v-btn>
-                    <v-btn text
-                           @click="e6 = 1">
-                        Cancel
-                    </v-btn>
+                    <v-card class="mb-12">
+                        <validation-observer ref="observer2"
+                                             v-slot="{ invalid }">
+                            <form @submit.prevent="submit">
+                                <validation-provider v-slot="{ errors }"
+                                                     name="parentID"
+                                                     rules="required">
+                                    <v-text-field v-model="childFname"
+                                                  :error-messages="errors"
+                                                  label="First Name"
+                                                  required></v-text-field>
+                                </validation-provider>
+                                <validation-provider v-slot="{ errors }"
+                                                     name="Last Name"
+                                                     rules="required">
+                                    <v-text-field v-model="childLname"
+                                                  :error-messages="errors"
+                                                  label="Last Name"
+                                                  required></v-text-field>
+                                </validation-provider>
+                                <validation-provider v-slot="{ errors }"
+                                                     name="Child's Gender"
+                                                     rules="required">
+                                    <v-select v-model="childGender"
+                                              :items="genders"
+                                              :error-messages="errors"
+                                              label="Select Child's Gender"
+                                              data-vv-name="genders"
+                                              required></v-select>
+                                </validation-provider>
+                                <validation-provider v-slot="{ errors }"
+                                                     name="Date of Birth (MM/DD/YYYY)"
+                                                     :rules="{
+                                                              required: true,
+                                                              length: 10
+                                                            }">
+                                    <v-text-field v-model="childDOB"
+                                                  :error-messages="errors"
+                                                  label="Date of Birth"
+                                                  required></v-text-field>
+                                </validation-provider>
+                                <validation-provider v-slot="{ errors }"
+                                                     name="School Attended (2020-2021)"
+                                                     rules="required">
+                                    <v-text-field v-model="childAttended"
+                                                  :error-messages="errors"
+                                                  label="School Attended (2020-2021)"
+                                                  required></v-text-field>
+                                </validation-provider>
+                                <validation-provider v-slot="{ errors }"
+                                                     name="Child's Grade (2020-2021)"
+                                                     rules="required">
+                                    <v-select v-model="childGrade"
+                                              :items="grades"
+                                              :error-messages="errors"
+                                              label="Select Child's Grade"
+                                              data-vv-name="grades"
+                                              required></v-select>
+                                </validation-provider>
+                                <v-btn class="mr-4"
+                                       type="submit"
+                                       :disabled="invalid"
+                                       color="secondary"
+                                       @click="createChild(); e6 = 3">
+                                    submit
+                                </v-btn>
+                                <v-btn outlined
+                                       @click="clear"
+                                       color="accent">
+                                    clear
+                                </v-btn>
+                            </form>
+                        </validation-observer>
+                    </v-card>
                 </v-stepper-content>
 
                 <v-stepper-step :complete="e6 > 3"
@@ -149,6 +212,14 @@
           }
     `;
 
+    const CREATE_CHILD = `
+        mutation createChild($firstname: String, $lastname: String, $myGender: ChildGenderType, $myGrade: ChildSchoolGradeType, $myAttended: String, $myParent: ParentRelateToManyInput) {
+            createChild(data: {first_name: $firstname, last_name: $lastname, gender: $myGender, school_grade: $myGrade, school_attended: $myAttended, parent: $myParent}) {
+              id
+            }
+          }
+    `;
+
     function graphql(query, variables = {}) {
         return fetch("http://localhost:3000/admin/api", {
             method: "POST",
@@ -166,13 +237,17 @@
 
     import { mapGetters } from "vuex";
     import materialCard from "~/components/material/AppCard";
-    import { required, digits, email, max, regex, min } from 'vee-validate/dist/rules'
+    import { required, digits, email, max, regex, min, length } from 'vee-validate/dist/rules'
     import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
-   
+
     setInteractionMode('eager')
     extend('digits', {
         ...digits,
         message: '{_field_} needs to be {length} digits. ({_value_})',
+    })
+    extend('length', {
+        ...length,
+        message: '{_field_} needs to be in MM/DD/YYY Format. ({_value_})',
     })
     extend('required', {
         ...required,
@@ -200,11 +275,31 @@
         layout: "logindashboard",
         data() {
             return {
-                fname: '',
-                lname: '',
+                parentid: '',
+                parentFname: '',
+                parentLname: '',
                 phoneNumber: '',
                 email: '',
                 pw: '',
+                childFname: '',
+                childLname: '',
+                childGender: '',
+                genders: [
+                    'Male',
+                    'Female',
+                    
+                ],
+                childGrade: '',
+                grades: [
+                    'Kindergarden',
+                    'First',
+                    'Second',
+                    'Third',
+                    'Fourth',
+                    'Fifth',
+                ],
+                childAttended: '',
+                childDOB: '',
                 e6: 1,
             };
         },
@@ -216,8 +311,20 @@
 
         methods: {
             async createParent() {
-                await graphql(CREATE_PARENT, { firstname: this.fname, lastname: this.lname, myemail: this.email, myphone: this.phoneNumber, mypassword: this.pw });
-                console.log("Parent created: " + this.fname + " " + this.lname);
+                const { data } = await graphql(CREATE_PARENT, {
+                    firstname: this.parentFname, lastname: this.parentLname,
+                    myemail: this.email, myphone: this.phoneNumber, mypassword: this.pw
+                });
+                this.parentid = data;
+                console.log(this.parentid.createParent.id);
+                
+
+            },
+            async createChild() {
+                await graphql(CREATE_CHILD, {
+                    firstname: this.childFname, lastname: this.childLname, myGender: this.childGender,
+                    myGrade: this.childGrade, myAttended: this.childAttended, myParent: this.parentID
+                })
             },
             submit() {
                 this.$refs.observer.validate()
@@ -230,7 +337,7 @@
                 this.checkbox = null
                 this.$refs.observer.reset()
             },
-           
+
         },
         computed: {
             ...mapGetters({
@@ -238,5 +345,6 @@
                 fullname: "user/getFullname",
             }),
         },
+
     };
 </script>
