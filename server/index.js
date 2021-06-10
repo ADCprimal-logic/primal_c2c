@@ -49,7 +49,6 @@ const payment = require("./util/payment");
 // Express Packages
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const jwt = require("express-jwt");
 
 const keystone = new Keystone({
   appVersion: {
@@ -62,7 +61,7 @@ const keystone = new Keystone({
     sameSite: false,
   },
   adapter: new Adapter(adapterConfig),
-  //onConnect: process.env.CREATE_TABLES !== "true" && initialiseData,
+  onConnect: process.env.CREATE_TABLES !== "true" && initialiseData,
 });
 
 // Index Exports
@@ -101,21 +100,9 @@ module.exports = {
     // Express Middleware
     app.use(cookieParser());
     app.use(bodyParser.json());
-
-    //const JWT_TOKEN = process.env.JWT_TOKEN;
-
-    // JWT middleware
-    /*app.use(
-      jwt({
-        secret: JWT_TOKEN,
-        algorithms: ["sha1", "RS256", "HS256"],
-      }).unless({
-        path: ['/api/auth/login', '/api/auth/refresh']
-      })
-    );*/
-
+    // Express Routes
     app.post("/api/auth/login", auth.login);
-    //app.get("/api/auth/user", auth.user);
+    app.post("/api/auth/user", auth.user);
     //* END *//
   },
   apps: [

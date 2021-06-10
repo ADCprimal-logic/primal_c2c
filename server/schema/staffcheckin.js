@@ -15,6 +15,8 @@ keystone.createList("StaffTimecard", {
     days_worked: { type: Integer },
     isLate: { type: Select, options, dataType: "integer" },
     isAbsent: { type: Select, options, dataType: "integer" },
+    clock_in: { type: Select, options: "Yes, No" },
+    clock_out: { type: Select, options: "Yes, No" },
   },
   labelResolver: (item) => `TimeCard-S${item.id}`,
 });

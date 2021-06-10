@@ -13,7 +13,7 @@ To get setup for this project you will need to set up a handful of things.
    - IMPORTANT: Comment out `onConnect` of index.js under server BEFORE you create tables, so that on `yarn dev` your Super Admin Object will be initialized
 3. Run `yarn dev` to initialize the project so it can be built and ran locally.
 
-> To connect to [demo database](postgres://primal_postgres:primal-squad@c2cdatabase.cqs5a6cxnjkx.us-east-1.rds.amazonaws.com:5432/dev2) that includes ALL project schema use this username and password:
+> To connect to [demo database](postgres://primal_postgres:primal-squad@c2cdatabase.cqs5a6cxnjkx.us-east-1.rds.amazonaws.com:5432/development) that includes ALL project schema use this username and password:
 
 ```
 email: c2cSuper@admin.net
@@ -41,7 +41,6 @@ CF_DISTRIBUTION_ID = "E3ITN9Q4LXOLYC"
 ACCESS_KEY_ID = 'AKIAYEDJQHVO4YE5KGFE'
 SECRET_KEY_ID = 'SzaE2ZGAMhVFCaSE5s54EPdBgyyNz+abstpzPb52'
 REGION = 'us-west-1'
-
 # Twilio Creds
 TWILIO_ACCOUNT_SID = ""
 TWILIO_AUTH_TOKEN = ""
@@ -52,10 +51,11 @@ PUBLISH_KEY = ""
 TEST_SECRET_KEY = ""
 TEST_PUBLISH_KEY = ""
 # Database Config
-DATABASE_URL="postgres://primal_postgres:primal-squad@c2cdatabase.cqs5a6cxnjkx.us-east-1.rds.amazonaws.com:5432/dev1"
+DATABASE_URL="postgres://primal_postgres:primal-squad@c2cdatabase.cqs5a6cxnjkx.us-east-1.rds.amazonaws.com:5432/development"
 # Build Config
 NUXT_TELEMETRY_DISABLED=1
 CREATE_TABLES=""
+JWT_TOKEN="primalC2C"
 ```
 
 ## Documentation for further development:
