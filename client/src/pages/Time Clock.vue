@@ -113,7 +113,7 @@
     <!-- Binds to object creation and defines header and item data. Elevations define data chart shadow-->
     <v-data-table
       :headers="headers"
-      :items="desserts"
+      :items="childTimecard"
       class="elevation-1"
     >
     <!-- Constructor for visulation of data. These are the real headers of the chart. -->
@@ -177,7 +177,7 @@ import materialCard from '~/components/material/AppCard'
         { text: 'Hours', value: 'Hours' },
         { text: 'Actions', value: 'name', sortable: false }
       ],
-      desserts: [],
+      childTimecard: [],
       editedIndex: -1,
       editedItem: {
         name: 'Staff Name',
@@ -213,7 +213,7 @@ import materialCard from '~/components/material/AppCard'
 
     methods: {
       initialize () {
-        this.desserts = [
+        this.childTimecard = [
           {
             name: 'Frozen Yogurt',
             Date: 159,
@@ -288,14 +288,14 @@ import materialCard from '~/components/material/AppCard'
       },
 
       editItem (item) {
-        this.editedIndex = this.desserts.indexOf(item)
+        this.editedIndex = this.childTimecard.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialog = true
       },
 
       deleteItem (item) {
-        const index = this.desserts.indexOf(item)
-        confirm('Are you sure you want to delete this time record?') && this.desserts.splice(index, 1)
+        const index = this.childTimecard.indexOf(item)
+        confirm('Are you sure you want to delete this time record?') && this.childTimecard.splice(index, 1)
       },
 
       close () {
@@ -308,9 +308,9 @@ import materialCard from '~/components/material/AppCard'
 
       save () {
         if (this.editedIndex > -1) {
-          Object.assign(this.desserts[this.editedIndex], this.editedItem)
+          Object.assign(this.childTimecard[this.editedIndex], this.editedItem)
         } else {
-          this.desserts.push(this.editedItem)
+          this.childTimecard.push(this.editedItem)
         }
         this.close()
       }

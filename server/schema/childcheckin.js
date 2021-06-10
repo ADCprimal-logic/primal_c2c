@@ -1,5 +1,5 @@
 const index = require("../index");
-const { DateTime, Integer, Select } = require("@keystonejs/fields");
+const { Text, DateTime, Integer, Select } = require("@keystonejs/fields");
 const keystone = index.indexKey;
 
 const options = [
@@ -15,6 +15,7 @@ keystone.createList("ChildTimecard", {
     isPresent: { type: Select, options, dataType: "integer" },
     isLate: { type: Select, options, dataType: "integer" },
     isAbsent: { type: Select, options, dataType: "integer" },
+    clockedIO: {type: Text}
   },
   labelResolver: (item) => `TimeCard-C${item.id}`,
 });
