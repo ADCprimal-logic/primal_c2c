@@ -61,7 +61,7 @@ const keystone = new Keystone({
     sameSite: false,
   },
   adapter: new Adapter(adapterConfig),
-  //onConnect: process.env.CREATE_TABLES !== "true" && initialiseData,
+  onConnect: process.env.CREATE_TABLES !== "true" && initialiseData,
 });
 
 // Index Exports
@@ -100,7 +100,7 @@ module.exports = {
     // Express Middleware
     app.use(cookieParser());
     app.use(bodyParser.json());
-
+    // Express Routes
     app.post("/api/auth/login", auth.login);
     app.post("/api/auth/user", auth.user);
     //* END *//

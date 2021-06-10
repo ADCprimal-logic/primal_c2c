@@ -15,6 +15,9 @@ keystone.createList("ChildTimecard", {
     isPresent: { type: Select, options, dataType: "integer" },
     isLate: { type: Select, options, dataType: "integer" },
     isAbsent: { type: Select, options, dataType: "integer" },
+    days_present: { type: Integer },
+    clock_in: { type: Select, options: "Yes, No" },
+    clock_out: { type: Select, options: "Yes, No" },
   },
   labelResolver: (item) => `TimeCard-C${item.id}`,
 });
