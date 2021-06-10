@@ -90,7 +90,9 @@
       text-center
       fluid
     >
-    <v-btn round color="bluebird" dark>Proceed to Stripe dashboard</v-btn>
+    
+    <v-btn color = "bluebird" href="https://dashboard.stripe.com/login"> Proceed to Stripe dashboard</v-btn>
+    
     </v-layout>
     <v-card></v-card>
     </v-container>
