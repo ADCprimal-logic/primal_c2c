@@ -15,4 +15,17 @@ This function gets the info for the news reel.
           { text: 'Time Posted', value: 'timeposted' },
         ],
 
+
+check_in: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+check_out: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+isPresent: { type: Select, options, dataType: "integer" },
+isLate: { type: Select, options, dataType: "integer" },
+isAbsent: { type: Select, options, dataType: "integer" },
+
+//timeclock schema  
+clockedIN: {type: Select, options, dataType: "string"}    (IN)
+clockedOUT: {type: Select, options, dataType: "string"}   (OUT)
+
+      
+
 We need subject, content, dateposted,timeposted.

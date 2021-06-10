@@ -48,7 +48,7 @@
           <td class="text-xs-left">{{ props.item.gender }}</td>
           <td class="text-xs-left">{{ props.item.medical_record.birthdate }}
           </td>
-          <td class="text-xs-left">{{ props.item._id }}</td>
+          <td class="text-xs-left">{{ props.item.room.name }}</td>
           <td class="text-xs-left">{{ props.item.Allergies }}</td>
           <td class="text-xs-left">{{ props.item.enrollment_status }}</td>
         </tr>
@@ -58,176 +58,69 @@
           Your search for "{{ search }}" found no results.
         </v-alert>
         </template>
-        <template v-slot:expand="props">
+        <template v-slot:expand="expandedprops">
         <v-responsive :aspect-ratio="16 / 9">
           <v-card-text>
             <v-layout row wrap align-right>
-              <v-flex xs12 sm6 offset-sm3>
-                <v-card color = '#698390'>
-                    <v-layout column fill-height>
-                      <!-- Name over Image -->
-                      <v-card-title class="black--text pl-5 pt-5" row wrap align-right>
-                        <div class="display-1 pl-5 pt-5">
-                          {{ props.item.full_name }}
-                        </div>
-                        
-                      </v-card-title>
-                    </v-layout>
-                  <!-- Defines the two lines in each data field -->
-                  <v-list two-line>
-                    <v-list-tile @click="">
-                      <v-list-tile-action> </v-list-tile-action>
-                      <!-- A line of expanded data in the table -->
-                      <v-list-tile-content>
-                        <v-list-tile-title
-                          >Child name goes here</v-list-tile-title
-                        >
-                        <v-list-tile-sub-title
-                          >Childs Full Name</v-list-tile-sub-title
-                        >
-                      </v-list-tile-content>
-                    </v-list-tile>
-                    <!-- Start of a field -->
-                    <v-list-tile @click="">
-                      <v-list-tile-action>
-                        <v-icon color="bluebird">phone</v-icon>
-                      </v-list-tile-action>
+              <v-container
+    fill-height
+    fluid
+    grid-list-xl
+  >
+      <v-layout
+      justify-center
+      align-center
+      span
+      wrap
+    >
+    <!-- End of chart sizing params -->
+  <div>
+    <v-toolbar flat color="white">
 
-                      <v-list-tile-content>
-                        <v-list-tile-title>(650) 555-1234</v-list-tile-title>
-                        <v-list-tile-sub-title
-                          >Guardian Full Name / Guardian Mobile
-                          Number</v-list-tile-sub-title
-                        >
-                      </v-list-tile-content>
-                    </v-list-tile>
-                    <!-- Field Divider -->
-                    <v-list-tile @click="">
-                      <v-list-tile-action>
-                        <v-icon color="bluebird">phone</v-icon>
-                      </v-list-tile-action>
-                      <v-list-tile-content>
-                        <v-list-tile-title>(323) 555-6789</v-list-tile-title>
-                        <v-list-tile-sub-title
-                          >Guardian Full Name / Guardian Mobile
-                          Number</v-list-tile-sub-title
-                        >
-                      </v-list-tile-content>
-                    </v-list-tile>
-                    <!-- Field Divider -->
-                    <v-divider inset></v-divider>
-
-                    <v-list-tile @click="">
-                      <v-list-tile-action>
-                        <v-icon color="bluebird">mail</v-icon>
-                      </v-list-tile-action>
-
-                      <v-list-tile-content>
-                        <v-list-tile-title
-                          >aliconnors@example.com</v-list-tile-title
-                        >
-                        <v-list-tile-sub-title
-                          >Guardian Email</v-list-tile-sub-title
-                        >
-                      </v-list-tile-content>
-                    </v-list-tile>
-                    <!-- Field Divider -->
-                    <v-divider inset></v-divider>
-
-                    <v-list-tile @click="">
-                      <v-list-tile-action>
-                        <v-icon color="bluebird">mdi-pill</v-icon>
-                      </v-list-tile-action>
-
-                      <v-list-tile-content>
-                        <v-list-tile-title
-                          >Some medication is imported here</v-list-tile-title
-                        >
-                        <v-list-tile-sub-title
-                          >Known Medications</v-list-tile-sub-title
-                        >
-                      </v-list-tile-content>
-                    </v-list-tile>
-                    <v-divider inset></v-divider>
-                    <!-- Field Divider -->
-                    <v-list-tile @click="">
-                      <v-list-tile-action>
-                        <v-icon color="#FF1744">mdi-alert-decagram</v-icon>
-                      </v-list-tile-action>
-
-                      <v-list-tile-content>
-                        <v-list-tile-title
-                          >Some Allergy goes here</v-list-tile-title
-                        >
-                        <v-list-tile-sub-title
-                          >Known Phone</v-list-tile-sub-title
-                        >
-                      </v-list-tile-content>
-                    </v-list-tile>
-                    <v-divider inset></v-divider>
-                    <!-- Field Divider -->
-
-                    <v-list-tile @click="">
-                      <v-list-tile-action>
-                        <v-icon color="#43A047">mdi-currency-usd</v-icon>
-                      </v-list-tile-action>
-
-                      <v-list-tile-content>
-                        <v-list-tile-title
-                          >Tuition Paid: () Tuition Owed: ()</v-list-tile-title
-                        >
-                        <v-list-tile-sub-title>Balance</v-list-tile-sub-title>
-                      </v-list-tile-content>
-                    </v-list-tile>
-                    <v-divider inset></v-divider>
-                    <!-- Field Divider -->
-
-                    <v-list-tile @click="">
-                      <v-list-tile-action>
-                        <v-icon color="bluebird">mdi-hospital-marker</v-icon>
-                      </v-list-tile-action>
-
-                      <v-list-tile-content>
-                        <v-list-tile-title
-                          >Location goes here</v-list-tile-title
-                        >
-                        <v-list-tile-sub-title>Homeroom</v-list-tile-sub-title>
-                      </v-list-tile-content>
-                    </v-list-tile>
-                    <v-divider inset></v-divider>
-                    <!-- Field Divider -->
-
-                    <v-list-tile @click="">
-                      <v-list-tile-action>
-                        <v-icon color="#AEEA00">mdi-needle</v-icon>
-                      </v-list-tile-action>
-
-                      <v-list-tile-content>
-                        <v-list-tile-title>Immuniziations</v-list-tile-title>
-                        <v-list-tile-sub-title
-                          >Click here to expand
-                          immuniziations</v-list-tile-sub-title
-                        >
-                      </v-list-tile-content>
-                    </v-list-tile>
-                    <v-divider inset></v-divider>
-                    <!-- Field Divider -->
-                    <v-list-tile @click="">
-                      <v-list-tile-action>
-                        <v-icon color="bluebird">mdi-message-bulleted</v-icon>
-                      </v-list-tile-action>
-
-                      <v-list-tile-content>
-                        <v-list-tile-title>Approved Contacts</v-list-tile-title>
-                        <v-list-tile-sub-title
-                          >Click here to expand</v-list-tile-sub-title
-                        >
-                      </v-list-tile-content>
-                    </v-list-tile>
-                    <!-- End of Fields -->
-                  </v-list>
-                </v-card>
-              </v-flex>
+      <v-toolbar-title> Time Card Data </v-toolbar-title>
+      <!-- Clock in Chart Title  -->
+      <v-spacer></v-spacer>
+      <!-- Constructor for the pop out diag allowing for edits to the fields -->
+    </v-toolbar>
+    <!-- Binds to object creation and defines header and item data. Elevations define data chart shadow-->
+    <v-data-table
+      :headers="headers"
+      :items="desserts"
+      class="elevation-1"
+    >
+    <!-- Constructor for visulation of data. These are the real headers of the chart. -->
+      <template v-slot:items="props">
+        <td>{{ props.item.name }}</td>
+        <td class="text-xs-right">{{ props.item.Date }}</td>
+        <td class="text-xs-right">{{ props.item.Time }}</td>
+        <td class="text-xs-right">{{ props.item.Status }}</td>
+        <td class="text-xs-right">{{ props.item.Hours }}</td>
+        <td class="justify-center layout px-0">
+          <v-icon
+            small
+            class="mr-2"
+            @click="editItem(props.item)"
+          >
+            edit
+          </v-icon>
+          <!-- Defines what is done when trash can is clicked-->
+          <v-icon
+            small
+            @click="deleteItem(props.item)"
+          >
+            delete
+          </v-icon>
+        </td>
+      </template>
+      <!-- Defines what is done when there is no data in availble. Initialize refills the data from the server -->
+      <template v-slot:no-data>
+        <v-btn color="primary" @click="initialize">Reset</v-btn>
+      </template>
+    </v-data-table>
+  </div>
+      </v-layout>
+  </v-container>
+  
             </v-layout>
           </v-card-text>
         </v-responsive>

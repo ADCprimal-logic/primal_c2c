@@ -196,7 +196,7 @@ export default {
         value: "full_name",
       },
       { text: "Check-In", value: "time_card.check_in" },
-      { text: "Check-Out", value: "time_card.check_in" },
+      { text: "Check-Out", value: "time_card.check_out" },
       { text: "Status (In/Out)", value: "time_card.isPresent" },
       { text: "Actions", value: "full_name", sortable: false },
     ],
