@@ -97,6 +97,12 @@
             icon: 'mdi-account-cash',
             text: 'Financials'
           },
+          {
+            to: '/Admin-Newsletter',
+            icon: 'mdi-newspaper-variant',
+            text: 'News Letters'
+          },
+
 
           {
             to: '/icons',

@@ -5,6 +5,8 @@
     fill-height
     fluid
     grid-list-xl
+    dark
+    class
   >
     <v-layout
       justify-center

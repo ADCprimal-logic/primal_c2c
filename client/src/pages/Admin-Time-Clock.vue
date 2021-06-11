@@ -23,6 +23,7 @@
             item-key="full_name"
             loading="true"
             :search="search"
+            
           >
             <template slot="headerCell" slot-scope="{ header }">
               <span
@@ -50,7 +51,7 @@
             </template>
             <template v-slot:expand="expandedprops">
               <v-responsive :aspect-ratio="16 / 9">
-                <v-card-text>
+                <v-card-text outlined shaped>
                   <v-layout row wrap align-right>
                     <v-container fill-height fluid grid-list-xl>
                       <v-layout justify-center align-center span wrap>
@@ -252,7 +253,7 @@ export default {
     search: "",
     headers: [
       {
-        text: "Student Name",
+        text: "Student Time Card Data",
         align: "left",
         sortable: true,
         value: "full_name",
@@ -260,16 +261,9 @@ export default {
       { text: "Gender(M/F)", value: "gender" },
       { text: "Date of Birth", value: "medical_record.birthdate" },
       { text: "Location", value: "_id" },
-      { text: "Enrollment Status", value: "enrollment_status" },
     ],
     nestedtableHeaders: [
-      {
-        text: "Student Time Clock",
-        align: "left",
-        sortable: false,
-        value: "name",
-      },
-      { text: "Date", value: "Date" },
+      { text: "Date Recorded", value: "Date" },
       { text: "Time Recorded", value: "Time" },
       { text: "Status (In/Out)", value: "time_card.clockedIO" },
       { text: "Hours", value: "Hours" },
