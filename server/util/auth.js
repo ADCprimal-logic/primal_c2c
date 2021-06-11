@@ -30,13 +30,16 @@ exports.login = async (req, res) => {
       await sql`SELECT email, password, id, first_name FROM public."SuperAdmin"
     WHERE email =  ${email}`;
   }
-  //console.log(user);
+  console.log(user);
   // User Logic Check
   if (user.count === 0 || user === null) {
-    //console.log("No User Exists");
-    res.status(500);
+    console.log("No User Exists");
+    res.send({
+      status: 500,
+      message: "No User Exists!",
+    });
   } else {
-    //console.log("User Exists");
+    console.log("User Exists");
     var id = user[0].id;
     var name = user[0].first_name;
     // Password Check
@@ -59,7 +62,6 @@ exports.login = async (req, res) => {
           expiresIn,
         }
       );
-      res.status(200);
       res.send({
         status: 200,
         message: "Access Granted!",
@@ -67,7 +69,10 @@ exports.login = async (req, res) => {
       });
     } else {
       console.log("Invalid Password");
-      res.status(401);
+      res.send({
+        status: 401,
+        message: "Invalid Password!",
+      });
     }
   }
 };

@@ -33,7 +33,7 @@
           <v-btn
             color="bluebird"
             :disabled="isDisabled"
-            @click.prevent="authenticate"
+            @click.prevent="userLogin"
             >Login</v-btn
           >
         </v-layout>
@@ -43,7 +43,7 @@
           <v-btn
             color="bluebird"
             :disabled="isDisabled"
-            @click.prevent="authenticate"
+            @click.prevent="userLogin"
             >Forgot Password?</v-btn
           >
         </v-layout>
@@ -114,18 +114,17 @@ export default {
     async userLogin() {
       console.log("Running Login");
       try {
-        let response = await login(this.login);
-        console.log(response);
-        if (response.status === 200) {
+        let responseLogin = await login(this.login);
+        console.log(responseLogin);
+        if (responseLogin.status === 200) {
           console.log("Go to Dashboard");
-          localStorage.setItem("auth_token", response.accessToken);
-          var token = localStorage.getItem("auth_token");
-          let responseUser = await getUser(token);
+          localStorage.setItem("auth_token", responseLogin.accessToken);
+          let responseUser = await getUser(responseLogin.accessToken);
           console.log(responseUser);
-          await this.setUsername(responseUser.name);
-          this.$router.push({ path: "/dashboard" });
+          await this.setUsername(responseUser.decoded.name);
+          this.$router.push({ path: "dashboard" });
         } else {
-          console.log(response);
+          console.log(responseLogin);
         }
       } catch (err) {
         console.log(err);
