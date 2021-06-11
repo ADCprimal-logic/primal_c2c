@@ -72,7 +72,7 @@
                             <template v-slot:items="props">
                               <td>{{ props.item.name }}</td>
                               <td class="text-xs-right">
-                                {{ props.item.time_card }}
+                                {{ props.item.Date }}
                               </td>
                               <td class="text-xs-right">
                                 {{ props.item.Time }}
