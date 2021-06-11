@@ -68,7 +68,7 @@
                                    type="submit"
                                    :disabled="invalid"
                                    color="secondary"
-                                   @click="createParent(); e6 = 2">
+                                   @click="createParent();">
                                 submit
                             </v-btn>
                             <v-btn outlined
@@ -316,8 +316,14 @@
                     myemail: this.email, myphone: this.phoneNumber, mypassword: this.pw
                 });
                 this.parentid = data;
-                console.log(this.parentid.createParent.id);
-                
+                try {
+                    if (this.parentid.createParent.id !== null) {
+                        this.e6 = 2;
+                    };
+                }
+                catch (err) {
+                    this.email = this.email.concat(" this email is already in the database please use another");
+                }
 
             },
             async createChild() {
