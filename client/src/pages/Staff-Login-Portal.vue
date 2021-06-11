@@ -12,7 +12,7 @@
         <v-form>
           <v-text-field
             type="text"
-            v-model="username"
+            v-model="login.email"
             prepend-icon="person"
             name="username"
             label="Email"
@@ -20,7 +20,7 @@
           ></v-text-field>
           <v-text-field
             type="password"
-            v-model="password"
+            v-model="login.password"
             prepend-icon="lock"
             name="password"
             label="Password"
@@ -33,7 +33,7 @@
           <v-btn
             color="bluebird"
             :disabled="isDisabled"
-            @click.prevent="authenticate"
+            @click.prevent="userlogin"
             >Login</v-btn
           >
         </v-layout>
@@ -43,7 +43,7 @@
           <v-btn
             color="bluebird"
             :disabled="isDisabled"
-            @click.prevent="authenticate"
+            @click.prevent="userlogin"
             >Forgot Password?</v-btn
           >
         </v-layout>
@@ -98,7 +98,7 @@ export default {
       login: {
         email: "",
         password: "",
-        role: "Staff",
+        role: "SuperAdmin",
       },
     };
   },

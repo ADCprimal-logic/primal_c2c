@@ -48,7 +48,7 @@
           <td class="text-xs-left">{{ props.item.gender }}</td>
           <td class="text-xs-left">{{ props.item.medical_record.birthdate }}</td>
           <td class="text-xs-left">{{ props.item.room.name }}</td>
-          <td class="text-xs-left">{{ props.item.enrollment_status }}</td>
+          <td class="text-xs-left">{{ props.item.time_card.clockedIO }}</td>
         </tr>
         </template>
            <template v-slot:no-results>
@@ -91,7 +91,7 @@
         <td>{{ props.item.name }}</td>
         <td class="text-xs-right">{{ props.item.Date }}</td>
         <td class="text-xs-right">{{ props.item.Time }}</td>
-        <td class="text-xs-right">{{ props.item.Status }}</td>
+        <td class="text-xs-right">{{ props.item.time_card.clockedIO}}</td>
         <td class="text-xs-right">{{ props.item.Hours }}</td>
         <td class="justify-center layout px-0">
         <v-dialog v-model="dialog" max-width="500px">
@@ -115,10 +115,10 @@
               <v-layout wrap>
                 <!-- Constructor data for editing fields -->
                 <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.name" label="Staff Name"></v-text-field>
+                  <v-text-field v-model="editedItem.name" label="Time clocked In"></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.Date" label="Date"></v-text-field>
+                  <v-text-field v-model="editedItem.Date" label="Time Clocked Out"></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm6 md4>
                   <v-text-field v-model="editedItem.Time" label="Time (g)"></v-text-field>
@@ -191,8 +191,9 @@ query{
       name
     }
     time_card{
-      isPresent
-      isAbsent
+      clockedIO
+      check_in
+      check_out
     }
     medical_record{
       allergies
@@ -245,7 +246,7 @@ export default {
       { text: "Gender(M/F)", value: "gender" },
       { text: "Date of Birth", value: "medical_record.birthdate" },
       { text: "Location", value: "_id" },
-      { text: "Status (In/Out)", value: "enrollment_status" },
+      { text: "Enrollment Status", value: "enrollment_status" },
     ],
     nestedtableHeaders:[  
       {
@@ -256,7 +257,7 @@ export default {
         },
       { text: 'Date', value: 'Date' },
       { text: 'Time Recorded', value: 'Time' },
-      { text: 'Status (In/Out)', value: 'Status' },
+      { text: 'Status (In/Out)', value: 'time_card.clockedIO' },
       { text: 'Hours', value: 'Hours' },
       { text: 'Actions', value: 'name', sortable: false }
     ],
