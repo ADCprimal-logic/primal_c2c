@@ -115,6 +115,7 @@ export default {
       console.log("Running Login");
       try {
         let response = await login(this.login);
+        console.log(response);
         if (response.status === 200) {
           console.log("Go to Dashboard");
           localStorage.setItem("auth_token", response.accessToken);

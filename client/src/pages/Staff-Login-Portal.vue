@@ -33,7 +33,7 @@
           <v-btn
             color="bluebird"
             :disabled="isDisabled"
-            @click.prevent="userlogin"
+            @click.prevent="authenticate"
             >Login</v-btn
           >
         </v-layout>
@@ -43,7 +43,7 @@
           <v-btn
             color="bluebird"
             :disabled="isDisabled"
-            @click.prevent="userlogin"
+            @click.prevent="authenticate"
             >Forgot Password?</v-btn
           >
         </v-layout>
@@ -98,7 +98,7 @@ export default {
       login: {
         email: "",
         password: "",
-        role: "SuperAdmin",
+        role: "Staff",
       },
     };
   },
@@ -115,6 +115,7 @@ export default {
       console.log("Running Login");
       try {
         let response = await login(this.login);
+        console.log(response);
         if (response.status === 200) {
           console.log("Go to Dashboard");
           localStorage.setItem("auth_token", response.accessToken);
