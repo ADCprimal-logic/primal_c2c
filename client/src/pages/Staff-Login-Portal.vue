@@ -32,6 +32,7 @@
         <v-layout justify-center align-center>
           <v-btn
             color="bluebird"
+            @click="snackbar = true"
             :disabled="isDisabled"
             @click.prevent="userLogin"
             >Login</v-btn
@@ -49,7 +50,24 @@
         </v-layout>
       </v-card-actions>
     </material-card>
+      <v-snackbar
+      v-model="snackbar"
+      :color="color"
+      :multi-line="mode === 'multi-line'"
+      :timeout="timeout"
+      :vertical="mode === 'vertical'"
+    >
+      {{ text }}
+      <v-btn
+        dark
+        flat
+        @click="snackbar = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
   </v-layout>
+  
 </template>
 
 <script>
@@ -100,6 +118,11 @@ export default {
         password: "",
         role: "Staff",
       },
+    snackbar: {
+        show: false,
+        message: null,
+        color: null
+    }
     };
   },
   computed: {
@@ -126,9 +149,14 @@ export default {
         } else {
           console.log(responseLogin);
         }
-      } catch (err) {
+        if (responseLogin.status === 500){
+          console.log("This is in case user is invalid.");
+        }
+      }
+      catch (err) {
         console.log(err);
       }
+      d
     },
   },
 };

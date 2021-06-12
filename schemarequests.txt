@@ -28,4 +28,6 @@ clockedOUT: {type: Select, options, dataType: "string"}   (OUT)
 
       
 
-We need subject, content, dateposted,timeposted.
+We need subject, content, dateposted, timeposted.
+
+variable = child[5],

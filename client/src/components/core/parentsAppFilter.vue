@@ -9,15 +9,17 @@
     offset-x
     transition="slide-y-transition"
   >
+  
     <v-btn
       slot="activator"
       class="elevation-0"
-      color="black"
+      color="C2Cblue"
       dark
       fab
       fixed
       style="top: 96px;"
       top
+      title="Color Palette!"
     >
       <v-icon>mdi-auto-fix</v-icon>
     </v-btn>
@@ -32,7 +34,7 @@
                 v-for="c in colors"
                 :key="c"
                 :class="[c === color ? 'color-active color-' + c: 'color-' + c]"
-                size="23"
+                size="40"
 
                 @click="setColor(c)"
               />
@@ -58,33 +60,25 @@
           </v-flex>
           <v-flex xs12>
             <v-btn
-              href="https://www.creative-tim.com/product/vuetify-material-dashboard"
+              href="https://www.c2ckids.com"
               target="_blank"
-              color="success"
+              class="C2Cblue--text"
+              color="C2Corange"
               block
-            >
-              Free Download
-            </v-btn>
-          </v-flex>
-          <v-flex xs12>
-            <v-btn
-              href="https://demos.creative-tim.com/vuetify-material-dashboard/documentation"
-              target="_blank"
-              class="white--text"
-              color="primary"
-              block
+              rounded
             >
               www.c2ckids.com
             </v-btn>
           </v-flex>
           <v-flex xs12>
             <div class="text-xs-center body-2 text-uppercase">
-              <div class=" sidebar-filter">
-                Thank You for Sharing!
+              <div class="sidebar-filter">
+                Visit our Facebook and Website!
               </div>
 
               <div>
                 <v-btn
+                  href="https://www.facebook.com/c2ckids"
                   color="indigo"
                   class="mr-2 v-btn-facebook"
                   fab
@@ -94,15 +88,15 @@
                 >
                   <v-icon>mdi-facebook</v-icon>
                 </v-btn>
-                <v-btn
-                  color="cyan"
-                  class="v-btn-twitter"
+                 <v-btn
+                  href="https://www.c2ckids.com"
+                  color="mint"
                   fab
                   icon
                   small
                   round
                 >
-                  <v-icon>mdi-twitter</v-icon>
+                  <v-icon>mdi-earth-arrow-right</v-icon>
                 </v-btn>
               </div>
             </div>
@@ -127,10 +121,10 @@
         'danger'
       ],
       images: [
-        '/stock.png',
-        '/ridge.jpg',
-        '/lake.jpg',
-        '/forest.jpg',
+        'https://primal-c2c-images.s3.amazonaws.com/static/forest.jpg',
+        'https://primal-c2c-images.s3.amazonaws.com/static/lake.jpg',
+        'https://primal-c2c-images.s3.amazonaws.com/static/ridge.jpg',
+        'https://primal-c2c-images.s3.amazonaws.com/static/bluetheme.jpg',
       ]
     }),
 

@@ -34,6 +34,7 @@
                   item-key="full_name"
                   loading="true"
                   :search="search"
+
           >
             <template
               slot="headerCell"
