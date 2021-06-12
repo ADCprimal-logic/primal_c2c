@@ -92,7 +92,7 @@
                                              v-slot="{ invalid }">
                             <form @submit.prevent="submit">
                                 <validation-provider v-slot="{ errors }"
-                                                     name="parentID"
+                                                     name="First Name"
                                                      rules="required">
                                     <v-text-field v-model="childFname"
                                                   :error-messages="errors"
@@ -118,12 +118,12 @@
                                               required></v-select>
                                 </validation-provider>
                                 <validation-provider v-slot="{ errors }"
-                                                     name="Date of Birth (MM/DD/YYYY)"
+                                                     name="Date of Birth (YYYY-MM-DD)"
                                                      :rules="{
-                                                              required: true,
-                                                              length: 10
+                                                              required: true
                                                             }">
                                     <v-text-field v-model="childDOB"
+                                                  type="date"
                                                   :error-messages="errors"
                                                   label="Date of Birth"
                                                   required></v-text-field>
@@ -146,11 +146,55 @@
                                               data-vv-name="grades"
                                               required></v-select>
                                 </validation-provider>
+                                <validation-provider v-slot="{ errors }"
+                                                     name="Child's Allergies ( if you child has no allergies, write 'n/a' )"
+                                                     rules="required">
+                                    <v-text-field v-model="childAllergy"
+                                                  :error-messages="errors"
+                                                  label="List Child's Allergies"
+                                                  required></v-text-field>
+                                </validation-provider>
+                                <validation-provider v-slot="{ errors }"
+                                                     name="Child's Medications ( if you child does not take medication, write 'n/a' ) "
+                                                     rules="required">
+                                    <v-text-field v-model="childMeds"
+                                                  :error-messages="errors"
+                                                  label="List Child's Medications"
+                                                  required></v-text-field>
+                                </validation-provider>
+                                <validation-provider v-slot="{ errors }"
+                                                     name="Child's Doctor's First Name"
+                                                     rules="required">
+                                    <v-text-field v-model="childDocFname"
+                                                  :error-messages="errors"
+                                                  label="Child's Doctor's First Name"
+                                                  required></v-text-field>
+                                </validation-provider>
+                                <validation-provider v-slot="{ errors }"
+                                                     name="Child's Doctor's Last Name"
+                                                     rules="required">
+                                    <v-text-field v-model="childDocLname"
+                                                  :error-messages="errors"
+                                                  label="Child's Doctor's Last Name"
+                                                  required></v-text-field>
+                                </validation-provider>
+                                <validation-provider v-slot="{ errors }"
+                                                     name="Doctor's Phone Number"
+                                                     :rules="{
+                                                          required: true,
+                                                          digits: 10,
+                                                        }">
+                                    <v-text-field v-model="childDocNum"
+                                                  :counter="10"
+                                                  :error-messages="errors"
+                                                  label="Doctor's Phone Number"
+                                                  required></v-text-field>
+                                </validation-provider>
                                 <v-btn class="mr-4"
                                        type="submit"
                                        :disabled="invalid"
                                        color="secondary"
-                                       @click="createChild(); e6 = 3">
+                                       @click="createChild();e6 = 3">
                                     submit
                                 </v-btn>
                                 <v-btn outlined
@@ -220,6 +264,22 @@
           }
     `;
 
+    const CREATE_MEDS = `
+        mutation createMedicalRecord($docFname: String, $docLname: String, $docPhone: String, $birthday: String, $childAllergy: String, $childMeds: String, $mychild: ChildRelateToOneInput) {
+            createMedicalRecord(data: {doctor_first_name: $docFname, doctor_last_name: $docLname, doctor_phone: $docPhone, birthdate: $birthday, allergies: $childAllergy, medications: $childMeds, child: $mychild}) {
+              id
+            }
+          }
+    `;
+
+    const UPDATE_CHILD = `
+        mutation updateChild($myChild: ID!, $myMeds: MedicalRecordRelateToOneInput) {
+            updateChild(id: $myChild, data: {medical_record: $myMeds}) {
+              id
+            }
+          }
+    `;
+
     function graphql(query, variables = {}) {
         return fetch("http://localhost:3000/admin/api", {
             method: "POST",
@@ -276,6 +336,8 @@
         data() {
             return {
                 parentid: '',
+                childid: '',
+                medid: '',
                 parentFname: '',
                 parentLname: '',
                 phoneNumber: '',
@@ -300,6 +362,12 @@
                 ],
                 childAttended: '',
                 childDOB: '',
+                childAllergy: '',
+                childMeds: '',
+                childDocFname: '',
+                childDocLname: '',
+                childDocNum: '',
+
                 e6: 1,
             };
         },
@@ -320,6 +388,7 @@
                     if (this.parentid.createParent.id !== null) {
                         this.e6 = 2;
                     };
+                    console.log("Parent ID: " + this.parentid.createParent.id);
                 }
                 catch (err) {
                     this.email = this.email.concat(" this email is already in the database please use another");
@@ -327,10 +396,30 @@
 
             },
             async createChild() {
-                await graphql(CREATE_CHILD, {
+                const { data } = await graphql(CREATE_CHILD, {
                     firstname: this.childFname, lastname: this.childLname, myGender: this.childGender,
-                    myGrade: this.childGrade, myAttended: this.childAttended, myParent: this.parentID
-                })
+                    myGrade: this.childGrade, myAttended: this.childAttended, myParent: { connect: { id: this.parentid.createParent.id } }
+                });
+                this.childid = data;
+                console.log("Child ID: " + this.childid.createChild.id);
+
+                this.createMeds();
+            },
+            async createMeds() {
+                const { data } = await graphql(CREATE_MEDS, {
+                    docFname: this.childDocFname, docLname: this.childDocLname, docPhone: this.childDocNum, childMeds: this.childMeds,
+                    birthday: this.childDOB, childAllergy: this.childAllergy, mychild: { connect: { id: this.childid.createChild.id } }
+                });
+                this.medid = data;
+
+                console.log(this.childid.createChild.id + " and " + this.medid.createMedicalRecord.id);
+
+                this.connectMed2Child();
+            },
+            async connectMed2Child() {
+                await graphql(UPDATE_CHILD, {
+                    myChild: this.childid.createChild.id, myMeds: { connect: { id: this.medid.createMedicalRecord.id } }
+                });
             },
             submit() {
                 this.$refs.observer.validate()
