@@ -19,7 +19,7 @@
       fixed
       style="top: 96px;"
       top
-      title="Color Palette!"
+      title="Color Palette"
     >
       <v-icon>mdi-auto-fix</v-icon>
     </v-btn>

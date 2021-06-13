@@ -1,145 +1,305 @@
 <template>
-  <v-card>
-    <v-card-title class="bluebird white--text headline">
-      Staff
-    </v-card-title>
-    <v-layout
-      justify-space-between
-      pa-3
-    >
-      <v-flex xs5>
-        <v-treeview
-          :active.sync="active"
-          :items="items"
-          :load-children="fetchUsers"
-          :open.sync="open"
-          activatable
-          active-class="primary--text"
-          class="grey lighten-5"
-          open-on-click
-          transition
+  <div>
+    <v-toolbar color="C2Cblue">
+
+    <v-text-field
+          v-model="search"
+          append-icon="search"
+          label="Search for a student by any associated data."
+          single-line
+          hide-details
+          dark
+          class
+        ></v-text-field>
+      <v-spacer></v-spacer>
+      <v-dialog v-model="dialog" max-width="500px">
+        <template v-slot:activator="{ on }">
+          <v-btn rounded color="C2Corange" dark class="mb-2" v-on="on">New Staff Member</v-btn>
+        </template>
+        <v-card>
+          <v-card-title>
+            <span class="headline">{{ formTitle }}</span>
+          </v-card-title>
+
+          <v-card-text>
+            <v-container grid-list-md>
+              <v-layout wrap>
+                <v-flex xs12 sm6 md4>
+                  <v-text-field v-model="editedItem.name" label="Dessert name"></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm6 md4>
+                  <v-text-field v-model="editedItem.calories" label="Calories"></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm6 md4>
+                  <v-text-field v-model="editedItem.fat" label="Fat (g)"></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm6 md4>
+                  <v-text-field v-model="editedItem.carbs" label="Carbs (g)"></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm6 md4>
+                  <v-text-field v-model="editedItem.protein" label="Protein (g)"></v-text-field>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
+            <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-toolbar>
+
+        <material-card
+          color="C2Cblue"
+          title="Student Data"
+          text="Expands to show detailed data on the child. For faster access, keep open in another tab!"
+        
         >
-          <template v-slot:prepend="{ item, active }">
-            <v-icon
-              v-if="!item.children"
-              :color="active ? 'primary' : ''"
+
+    <v-data-table
+      :headers="headers"
+      :items="desserts"
+      class="elevation-1"
+      :expand="expand"
+      item-key="full_name"
+      loading="true"
+      :search="search"
+      dark
+    >
+            <template
+              slot="headerCell"
+              slot-scope="{ header }"
             >
-              mdi-account
-            </v-icon>
-          </template>
-        </v-treeview>
-      </v-flex>
-      <v-flex
-        d-flex
-        text-xs-center
-      >
-        <v-scroll-y-transition mode="out-in">
-          <div
-            v-if="!selected"
-            class="title grey--text text--lighten-1 font-weight-light"
-            style="align-self: center;"
+              <span
+                class="subheading font-weight-light text-success text--darken-3"
+                v-text="header.text"
+              />
+            </template>
+      <template v-slot:items="props">
+        <td>{{ props.item.name }}</td>
+        <td class="text-xs-right">{{ props.item.calories }}</td>
+        <td class="text-xs-right">{{ props.item.fat }}</td>
+        <td class="text-xs-right">{{ props.item.carbs }}</td>
+        <td class="text-xs-right">{{ props.item.protein }}</td>
+        <td class="text-xs-left"><v-small-text-field
+          v-model="search"
+          append-icon="search"
+          label="Search for a student by any associated data."
+          single-line
+          hide-details
+        ></v-small-text-field>
+        </td>
+        <td class="justify-center layout px-0">
+          <v-icon
+            small
+            class="mr-2"
+            @click="editItem(props.item)"
           >
-            Select a staff member!
-          </div>
-          <v-card
-            v-else
-            :key="selected.id"
-            class="pt-4 mx-auto"
-            flat
-            max-width="400" 
+            edit
+          </v-icon>
+          <v-icon
+            small
+            @click="deleteItem(props.item)"
           >
-            <v-card-text>
-              <v-avatar
-                v-if="avatar"
-                size="88"
-              >
-                <v-img
-                  :src="`https://avataaars.io/${avatar}`"
-                  class="mb-4"
-                ></v-img>
-              </v-avatar>
-              <h3 class="headline mb-2">
-                {{ selected.name }}
-              </h3>
-              <div class="blue--text mb-2">{{ selected.email }}</div>
-              <div class="blue--text subheading font-weight-bold">{{ selected.username }}</div>
-            </v-card-text>
-            <v-divider></v-divider>
-            <v-layout
-              tag="v-card-text"
-              text-xs-left
-              wrap
-            >
-              <v-flex tag="strong" xs5 text-xs-right mr-3 mb-2>Role:</v-flex>
-              <v-flex>{{ selected.company.name }}</v-flex>
-              <v-flex tag="strong" xs5 text-xs-right mr-3 mb-2>Phone:</v-flex>
-              <v-flex>{{ selected.phone }}</v-flex>
-              <v-flex tag="strong" xs5 text-xs-right mr-3 mb-2>Tenure:</v-flex>
-              <v-flex>{{ selected.phone }}</v-flex>
-            </v-layout>
-          </v-card>
-        </v-scroll-y-transition>
-      </v-flex>
-    </v-layout>
-  </v-card>
+            delete
+          </v-icon>
+        </td>
+      </template>
+      <template v-slot:no-data>
+        <v-btn color="primary" @click="initialize">Reset</v-btn>
+      </template>
+ 
+    </v-data-table>
+    </material-card>
+    </div>
+  
 </template>
 
 <script>
-  const avatars = [
-    '?accessoriesType=Blank&avatarStyle=Circle&clotheColor=PastelGreen&clotheType=ShirtScoopNeck&eyeType=Wink&eyebrowType=UnibrowNatural&facialHairColor=Black&facialHairType=MoustacheMagnum&hairColor=Platinum&mouthType=Concerned&skinColor=Tanned&topType=Turban',
-    '?accessoriesType=Sunglasses&avatarStyle=Circle&clotheColor=Gray02&clotheType=ShirtScoopNeck&eyeType=EyeRoll&eyebrowType=RaisedExcited&facialHairColor=Red&facialHairType=BeardMagestic&hairColor=Red&hatColor=White&mouthType=Twinkle&skinColor=DarkBrown&topType=LongHairBun',
-    '?accessoriesType=Prescription02&avatarStyle=Circle&clotheColor=Black&clotheType=ShirtVNeck&eyeType=Surprised&eyebrowType=Angry&facialHairColor=Blonde&facialHairType=Blank&hairColor=Blonde&hatColor=PastelOrange&mouthType=Smile&skinColor=Black&topType=LongHairNotTooLong',
-    '?accessoriesType=Round&avatarStyle=Circle&clotheColor=PastelOrange&clotheType=Overall&eyeType=Close&eyebrowType=AngryNatural&facialHairColor=Blonde&facialHairType=Blank&graphicType=Pizza&hairColor=Black&hatColor=PastelBlue&mouthType=Serious&skinColor=Light&topType=LongHairBigHair',
-    '?accessoriesType=Kurt&avatarStyle=Circle&clotheColor=Gray01&clotheType=BlazerShirt&eyeType=Surprised&eyebrowType=Default&facialHairColor=Red&facialHairType=Blank&graphicType=Selena&hairColor=Red&hatColor=Blue02&mouthType=Twinkle&skinColor=Pale&topType=LongHairCurly'
-  ]
 
-  const pause = ms => new Promise(resolve => setTimeout(resolve, ms))
+
+import materialCard from "~/components/material/AppCard";
 
   export default {
-    layout: 'admindashboard',
+  layout: "admindashboard",
+  components: {
+    materialCard,
+  },
     data: () => ({
-      active: [],
-      avatar: null,
-      open: [],
-      users: []
+      search: "",
+      dialog: false,
+      dialogDelete: false,
+      headers: [
+        {
+          text: 'Dessert (100g serving)',
+          align: 'start',
+          sortable: true,
+          value: 'name',
+        },
+        { text: 'Calories', value: 'calories' },
+        { text: 'Fat (g)', value: 'fat' },
+        { text: 'Carbs (g)', value: 'carbs' },
+        { text: 'Protein (g)', value: 'protein' },
+        { text: 'Actions', value: 'actions', sortable: false },
+      ],
+      desserts: [],
+      editedIndex: -1,
+      editedItem: {
+        name: '',
+        calories: 0,
+        fat: 0,
+        carbs: 0,
+        protein: 0,
+      },
+      defaultItem: {
+        name: '',
+        calories: 0,
+        fat: 0,
+        carbs: 0,
+        protein: 0,
+      },
     }),
 
     computed: {
-      items () {
-        return [
-          {
-            name: 'Staff Directory',
-            children: this.users
-          }
-        ]
+      formTitle () {
+        return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
       },
-      selected () {
-        if (!this.active.length) return undefined
-
-        const id = this.active[0]
-
-        return this.users.find(user => user.id === id)
-      }
     },
 
     watch: {
-      selected: 'randomAvatar'
+      dialog (val) {
+        val || this.close()
+      },
+      dialogDelete (val) {
+        val || this.closeDelete()
+      },
+    },
+
+    created () {
+      this.initialize()
     },
 
     methods: {
-      async fetchUsers (item) {
-        // Remove in 6 months and say
-        // you've made optimizations! :)
-        await pause(1500)
-
-        return fetch('https://jsonplaceholder.typicode.com/users')
-          .then(res => res.json())
-          .then(json => (item.children.push(...json)))
-          .catch(err => console.warn(err))
+      initialize () {
+        this.desserts = [
+          {
+            name: 'Frozen Yogurt',
+            calories: 159,
+            fat: 6.0,
+            carbs: 24,
+            protein: 4.0,
+          },
+          {
+            name: 'Ice cream sandwich',
+            calories: 237,
+            fat: 9.0,
+            carbs: 37,
+            protein: 4.3,
+          },
+          {
+            name: 'Eclair',
+            calories: 262,
+            fat: 16.0,
+            carbs: 23,
+            protein: 6.0,
+          },
+          {
+            name: 'Cupcake',
+            calories: 305,
+            fat: 3.7,
+            carbs: 67,
+            protein: 4.3,
+          },
+          {
+            name: 'Gingerbread',
+            calories: 356,
+            fat: 16.0,
+            carbs: 49,
+            protein: 3.9,
+          },
+          {
+            name: 'Jelly bean',
+            calories: 375,
+            fat: 0.0,
+            carbs: 94,
+            protein: 0.0,
+          },
+          {
+            name: 'Lollipop',
+            calories: 392,
+            fat: 0.2,
+            carbs: 98,
+            protein: 0,
+          },
+          {
+            name: 'Honeycomb',
+            calories: 408,
+            fat: 3.2,
+            carbs: 87,
+            protein: 6.5,
+          },
+          {
+            name: 'Donut',
+            calories: 452,
+            fat: 25.0,
+            carbs: 51,
+            protein: 4.9,
+          },
+          {
+            name: 'KitKat',
+            calories: 518,
+            fat: 26.0,
+            carbs: 65,
+            protein: 7,
+          },
+        ]
       },
-      randomAvatar () {
-        this.avatar = avatars[Math.floor(Math.random() * avatars.length)]
-      }
-    }
+
+      editItem (item) {
+        this.editedIndex = this.desserts.indexOf(item)
+        this.editedItem = Object.assign({}, item)
+        this.dialog = true
+      },
+
+      deleteItem (item) {
+        this.editedIndex = this.desserts.indexOf(item)
+        this.editedItem = Object.assign({}, item)
+        this.dialogDelete = true
+      },
+
+      deleteItemConfirm () {
+        this.desserts.splice(this.editedIndex, 1)
+        this.closeDelete()
+      },
+
+      close () {
+        this.dialog = false
+        this.$nextTick(() => {
+          this.editedItem = Object.assign({}, this.defaultItem)
+          this.editedIndex = -1
+        })
+      },
+
+      closeDelete () {
+        this.dialogDelete = false
+        this.$nextTick(() => {
+          this.editedItem = Object.assign({}, this.defaultItem)
+          this.editedIndex = -1
+        })
+      },
+
+      save () {
+        if (this.editedIndex > -1) {
+          Object.assign(this.desserts[this.editedIndex], this.editedItem)
+        } else {
+          this.desserts.push(this.editedItem)
+        }
+        this.close()
+      },
+    },
   }
 </script>
+
