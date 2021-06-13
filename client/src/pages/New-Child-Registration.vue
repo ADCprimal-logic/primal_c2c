@@ -280,6 +280,14 @@
           }
     `;
 
+    const UPDATE_PARENT = `
+        mutation updateParent($myParent: ID!, $myChild: ChildRelateToManyInput) {
+            updateParent(id: $myParent, data: {child: $myChild}) {
+              id
+            }
+          }
+    `;
+
     function graphql(query, variables = {}) {
         return fetch("http://localhost:3000/admin/api", {
             method: "POST",
@@ -419,6 +427,13 @@
             async connectMed2Child() {
                 await graphql(UPDATE_CHILD, {
                     myChild: this.childid.createChild.id, myMeds: { connect: { id: this.medid.createMedicalRecord.id } }
+                });
+
+                this.connectParent2Child();
+            },
+            async connectParent2Child() {
+                await graphql(UPDATE_PARENT, {
+                    myParent: this.parentid.createParent.id, myChild: { connect: { id: this.childid.createChild.id } }
                 });
             },
             submit() {
