@@ -1,100 +1,66 @@
 <template>
-<!-- Comment -->
-  <v-container
-    fluid
-    fill-height
-  >
-
-    <v-container
-    >
-  
-    <v-layout wrap>
-      <v-flex
-        sm6
-        xs12
-        md6
-        lg3
-
-      >
-        <material-stats-card
-          color="green"
-          icon="mdi-cash"
-          title="Total Revenue"
-          value="65,000"
-          small-value="$"
-          sub-icon="mdi-calendar"
-          sub-text="Annual"
-        />
-      </v-flex>
-      <v-flex
-        sm6
-        xs12
-        md6
-        lg3
-      >
-        <material-stats-card
-          color="bluebird"
-          icon="mdi-cash"
-          title="Pending Payments"
-          small-value="$"
-          value="5200"
-          sub-icon="mdi-alert"
-          sub-icon-color="gray"
-          sub-text="Get More Space..."
-          sub-text-color="text-primary"
-        />
-      </v-flex>
-      <v-flex
-        sm6
-        xs12
-        md6
-        lg3
-      >
-        <material-stats-card
-          color="red"
-          icon="mdi-alert"
-          title="Past Due"
-          value="7500"
-          small-value="$"
-          sub-icon="mdi-tag"
-          sub-text="Tracked from Stripe"
-        />
-      </v-flex>
-      <v-flex
-        sm6
-        xs12
-        md6
-        lg3
-      >
-        <material-stats-card
-          color="info"
-          icon="mdi-twitter"
-          title="Followers"
-          value="+245"
-          sub-icon="mdi-update"
-          sub-text="Just Updated"
-        />
-      </v-flex>
-    </v-layout>
-     <v-layout
-      justify-center
-      wrap
-      text-center
-      fluid
-    >
-    <v-img src="https://primal-c2c-images.s3.amazonaws.com/static/Stripe+Dashboard.JPG" fluid></v-img>
-    </v-layout>
-    <v-layout
-      justify-center
-      wrap
-      text-center
-      fluid
-    >
-    
-    <v-btn color = "bluebird" href="https://dashboard.stripe.com/login"> Proceed to Stripe dashboard</v-btn>
-    
-    </v-layout>
-    <v-card></v-card>
+  <!-- Comment -->
+  <v-container fluid fill-height>
+    <v-container>
+      <v-layout wrap>
+        <v-flex sm6 xs12 md6 lg3>
+          <material-stats-card
+            color="green"
+            icon="mdi-cash"
+            title="Total Revenue"
+            value="65,000"
+            small-value="$"
+            sub-icon="mdi-calendar"
+            sub-text="Annual"
+          />
+        </v-flex>
+        <v-flex sm6 xs12 md6 lg3>
+          <material-stats-card
+            color="bluebird"
+            icon="mdi-cash"
+            title="Pending Payments"
+            small-value="$"
+            value="5200"
+            sub-icon="mdi-alert"
+            sub-icon-color="gray"
+            sub-text="Get More Space..."
+            sub-text-color="text-primary"
+          />
+        </v-flex>
+        <v-flex sm6 xs12 md6 lg3>
+          <material-stats-card
+            color="red"
+            icon="mdi-alert"
+            title="Past Due"
+            value="7500"
+            small-value="$"
+            sub-icon="mdi-tag"
+            sub-text="Tracked from Stripe"
+          />
+        </v-flex>
+        <v-flex sm6 xs12 md6 lg3>
+          <material-stats-card
+            color="info"
+            icon="mdi-twitter"
+            title="Followers"
+            value="+245"
+            sub-icon="mdi-update"
+            sub-text="Just Updated"
+          />
+        </v-flex>
+      </v-layout>
+      <v-layout justify-center wrap text-center fluid>
+        <v-img
+          src="https://primal-c2c-images.s3.amazonaws.com/static/Stripe+Dashboard.JPG"
+          fluid
+        ></v-img>
+      </v-layout>
+      <v-layout justify-center wrap text-center fluid>
+        <v-btn color="bluebird" href="https://dashboard.stripe.com/login">
+          Proceed to Stripe dashboard</v-btn
+        >
+      </v-layout>
+      <v-card></v-card>
     </v-container>
   </v-container>
 </template>
@@ -131,19 +97,19 @@ query{
 }
 `;
 
-  import materialCard from '~/components/material/AppCard'
-  import materialChartCard from '~/components/material/AppChartCard'
-  import materialStatsCard from '~/components/material/AppStatsCard'
+import materialCard from "~/components/material/AppCard";
+import materialChartCard from "~/components/material/AppChartCard";
+import materialStatsCard from "~/components/material/AppStatsCard";
 
-  export default {
-    layout: 'admindashboard',
-    middleware: 'authentication',
-    components: {
-      materialCard,
-      materialChartCard,
-      materialStatsCard
-    },
- data: () => ({
+export default {
+  layout: "admindashboard",
+  middleware: "authentication",
+  components: {
+    materialCard,
+    materialChartCard,
+    materialStatsCard,
+  },
+  data: () => ({
     search: "",
     headers: [
       {

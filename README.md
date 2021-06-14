@@ -10,14 +10,13 @@ To get setup for this project you will need to set up a handful of things.
 1. Set up the .env as shown in the example below and put it in the server folder.
 2. Run `yarn install` to install all the dependancies from package.json on both the front-end & back-end
    - If running with a new database url, run `yarn create-tables` to initialize all the tables in your project found in the schema folder under server.
-   - IMPORTANT: Comment out `onConnect` of index.js under server BEFORE you create tables, so that on `yarn dev` your Super Admin Object will be initialized
 3. Run `yarn dev` to initialize the project so it can be built and ran locally.
 
 > To connect to [demo database](postgres://primal_postgres:primal-squad@c2cdatabase.cqs5a6cxnjkx.us-east-1.rds.amazonaws.com:5432/development) that includes ALL project schema use this username and password:
 
 ```
 email: c2cSuper@admin.net
-password: #primalPass
+password: #primalPassAdmin
 ```
 
 Once run you will have a http://localhost:3000 url which would prompt your NuxtJS Front-End with http://localhost:3000/admin acting as your Administrative KeystoneJS Backend
@@ -31,7 +30,7 @@ Once run you will have a http://localhost:3000 url which would prompt your NuxtJ
 ```
 # Keystone Config
 PROJECT_NAME="C2C Children Connect"
-VERSION_NUMBER="0.7.0"
+VERSION_NUMBER="1.0.0"
 COOKIE_SECRET="bNLVPe1NIFSCeNRHEQ7CUyjcnVzko6MI"
 SITE_NAME=""
 # AWS S3 Creds
@@ -45,16 +44,10 @@ REGION = 'us-west-1'
 TWILIO_ACCOUNT_SID = ""
 TWILIO_AUTH_TOKEN = ""
 TWILIO_NUMBER = ""
-# Stripe Creds
-SECRET_KEY = ""
-PUBLISH_KEY = ""
-TEST_SECRET_KEY = ""
-TEST_PUBLISH_KEY = ""
 # Database Config
-DATABASE_URL="postgres://primal_postgres:primal-squad@c2cdatabase.cqs5a6cxnjkx.us-east-1.rds.amazonaws.com:5432/development"
+DATABASE_URL="postgres://primal_postgres:primal-squad@c2cdatabase.cqs5a6cxnjkx.us-east-1.rds.amazonaws.com:5432/production"
 # Build Config
 NUXT_TELEMETRY_DISABLED=1
-CREATE_TABLES=""
 JWT_TOKEN="primalC2C"
 ```
 

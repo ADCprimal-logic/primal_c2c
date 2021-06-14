@@ -10,7 +10,7 @@
     "start": "cd server && cross-env NODE_ENV=production keystone start",
     "build-test": "cd server && cross-env NODE_ENV=testing keystone build",
     "start-test": "cd server && cross-env NODE_ENV=testing keystone start",
-    "create-tables": "cd server && cross-env keystone create-tables",
+    "create-tables": "cd server && cross-env CREATE_TABLES=true keystone create-tables",
     "matchmaker": "cd server && cross-env keystone upgrade-relationships",
     "matchmaker-date": "cd server && cross-env keystone upgrade-relationships --migration",
     "prod-log": "yarn build && nodemon"

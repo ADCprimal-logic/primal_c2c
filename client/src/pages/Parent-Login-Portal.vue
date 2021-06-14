@@ -119,7 +119,8 @@ export default {
         if (responseLogin.status === 200) {
           console.log("Go to Dashboard");
           localStorage.setItem("auth_token", responseLogin.accessToken);
-          let responseUser = await getUser(responseLogin.accessToken);
+          var token = localStorage.getItem("auth_token");
+          let responseUser = await getUser(token);
           console.log(responseUser);
           await this.setUsername(responseUser.decoded.name);
           this.$router.push({ path: "Parents-Dashboard" });

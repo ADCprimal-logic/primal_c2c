@@ -1,5 +1,11 @@
 const index = require("../index");
-const { Text, Relationship, Password, Select, Virtual } = require("@keystonejs/fields");
+const {
+  Text,
+  Relationship,
+  Password,
+  Select,
+  Virtual,
+} = require("@keystonejs/fields");
 const keystone = index.indexKey;
 
 console.log("Creating Parent");
@@ -10,7 +16,7 @@ keystone.createList("Parent", {
     last_name: { type: Text },
     full_name: {
       type: Virtual,
-      resolver: item => `${item.first_name} ${item.last_name}`
+      resolver: (item) => `${item.first_name} ${item.last_name}`,
     },
     email: {
       type: Text,
@@ -30,7 +36,6 @@ keystone.createList("Parent", {
       ref: "ApprovedContact",
       many: true,
     },
-    stripeId: { type: Text },
   },
   labelResolver: (item) => `${item.suffix}. ${item.last_name}`,
 });

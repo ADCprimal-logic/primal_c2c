@@ -1,22 +1,122 @@
 const index = require("../index");
-const { DateTime, Integer, Select } = require("@keystonejs/fields");
+const { Virtual, DateTime, Integer, Select } = require("@keystonejs/fields");
 const keystone = index.indexKey;
-
-const options = [
-  { value: 1, label: "Yes" },
-  { value: 0, label: "No" },
-];
 
 console.log("Creating Staff Timecard");
 keystone.createList("StaffTimecard", {
   fields: {
-    check_in: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
-    check_out: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
-    days_worked: { type: Integer },
-    isLate: { type: Select, options, dataType: "integer" },
-    isAbsent: { type: Select, options, dataType: "integer" },
-    clock_in: { type: Select, options: "Yes, No" },
-    clock_out: { type: Select, options: "Yes, No" },
+    day1: {
+      type: Virtual,
+      resolver: (item) => `1st Monday`,
+    },
+    time_PunchIn1: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+    time_PunchOut1: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+    hours_worked1: { type: Integer },
+    clockedIO1: { type: Select, options: "In, Out" },
+    day2: {
+      type: Virtual,
+      resolver: (item) => `1st Tuesday`,
+    },
+    time_PunchIn2: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+    time_PunchOut2: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+    hours_worked2: { type: Integer },
+    clockedIO2: { type: Select, options: "In, Out" },
+    day3: {
+      type: Virtual,
+      resolver: (item) => `1st Wednesday`,
+    },
+    time_PunchIn3: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+    time_PunchOut3: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+    hours_worked3: { type: Integer },
+    clockedIO3: { type: Select, options: "In, Out" },
+    day4: {
+      type: Virtual,
+      resolver: (item) => `1st Thursday`,
+    },
+    time_PunchIn4: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+    time_PunchOut4: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+    hours_worked4: { type: Integer },
+    clockedIO4: { type: Select, options: "In, Out" },
+    day5: {
+      type: Virtual,
+      resolver: (item) => `1st Friday`,
+    },
+    time_PunchIn5: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+    time_PunchOut5: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+    hours_worked5: { type: Integer },
+    clockedIO5: { type: Select, options: "In, Out" },
+    day6: {
+      type: Virtual,
+      resolver: (item) => `1st Saturday`,
+    },
+    time_PunchIn6: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+    time_PunchOut6: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+    hours_worked6: { type: Integer },
+    clockedIO6: { type: Select, options: "In, Out" },
+    day7: {
+      type: Virtual,
+      resolver: (item) => `1st Sunday`,
+    },
+    time_PunchIn7: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+    time_PunchOut7: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+    hours_worked7: { type: Integer },
+    clockedIO7: { type: Select, options: "In, Out" },
+    day8: {
+      type: Virtual,
+      resolver: (item) => `2nd Monday`,
+    },
+    time_PunchIn8: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+    time_PunchOut8: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+    hours_worked8: { type: Integer },
+    clockedIO8: { type: Select, options: "In, Out" },
+    day9: {
+      type: Virtual,
+      resolver: (item) => `2nd Tuesday`,
+    },
+    time_PunchIn9: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+    time_PunchOut9: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+    hours_worked9: { type: Integer },
+    clockedIO9: { type: Select, options: "In, Out" },
+    day10: {
+      type: Virtual,
+      resolver: (item) => `2nd Wednesday`,
+    },
+    time_PunchIn10: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+    time_PunchOut10: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+    hours_worked10: { type: Integer },
+    clockedIO10: { type: Select, options: "In, Out" },
+    day11: {
+      type: Virtual,
+      resolver: (item) => `2nd Thursday`,
+    },
+    time_PunchIn11: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+    time_PunchOut11: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+    hours_worked11: { type: Integer },
+    clockedIO11: { type: Select, options: "In, Out" },
+    day12: {
+      type: Virtual,
+      resolver: (item) => `2nd Friday`,
+    },
+    time_PunchIn12: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+    time_PunchOut12: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+    hours_worked12: { type: Integer },
+    clockedIO12: { type: Select, options: "In, Out" },
+    day13: {
+      type: Virtual,
+      resolver: (item) => `2nd Saturday`,
+    },
+    time_PunchIn13: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+    time_PunchOut13: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+    hours_worked13: { type: Integer },
+    clockedIO13: { type: Select, options: "In, Out" },
+    day14: {
+      type: Virtual,
+      resolver: (item) => `2nd Sunday`,
+    },
+    time_PunchIn14: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+    time_PunchOut14: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
+    hours_worked14: { type: Integer },
+    clockedIO14: { type: Select, options: "In, Out" },
   },
   labelResolver: (item) => `TimeCard-S${item.id}`,
 });

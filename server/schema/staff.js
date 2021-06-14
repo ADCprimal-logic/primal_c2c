@@ -43,7 +43,7 @@ keystone.createList("StaffMember", {
     },
     phone: { type: Text },
     location: { type: Relationship, ref: "Location", many: false },
-    schedule: { type: Relationship, ref: "Schedule", many: false },
+    room: { type: Relationship, ref: "Room", many: false },
     time_card: { type: Relationship, ref: "StaffTimecard", many: false },
   },
   labelResolver: (item) => `${item.first_name} ${item.last_name}`,

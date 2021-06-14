@@ -45,7 +45,6 @@ const fileAdapter = new S3Adapter({
 const auth = require("./util/auth");
 const initialiseData = require("./util/initial-data");
 const contact = require("./util/contact");
-const payment = require("./util/payment");
 // Express Packages
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
@@ -77,14 +76,10 @@ const childSchema = require("./schema/child");
 // Object Schemas
 const locationSchema = require("./schema/location");
 const roomSchema = require("./schema/room");
-const scheduleSchema = require("./schema/schedule");
 const healthSchema = require("./schema/health");
 const newsletterSchema = require("./schema/newsletter");
 const childCheckInSchema = require("./schema/childcheckin");
 const staffCheckInSchema = require("./schema/staffcheckin");
-// Test Schemas
-const tweedleDeeSchema = require("../reference/tweedledee");
-const tweedleDumSchema = require("../reference/tweedledum");
 
 const authStrategy = keystone.createAuthStrategy({
   type: PasswordAuthStrategy,
@@ -149,7 +144,6 @@ module.exports = {
       modules: [
         // Doc: https://axios.nuxtjs.org/usage
         "@nuxtjs/axios",
-        //"@nuxtjs/auth-next",
       ],
       /*
        ** Axios module configuration
@@ -157,35 +151,16 @@ module.exports = {
       axios: {
         // See https://github.com/nuxt-community/axios-module#options
       },
-      // START - This is auth middleware not being used but may need to be removed //
-      /*router: {
-        middleware: ["auth"],
-      },*/
-      /*auth: {
-        strategies: {
-          local: {
-            token: {
-              property: "token.accessToken",
-            },
-            endpoints: {
-              login: { url: "/api/auth/login", method: "post" },
-              user: { url: "/api/auth/user", method: "get" },
-            },
-          },
-        },
-        redirect: {
-          login: "/",
-        },
-        localStorage: {
-          prefix: "auth.",
-        },
-      },
-      // END - This is auth middleware not being used but may need to be removed //
       /*
        ** Build configuration
        */
       build: {
-          transpile: ["vuetify/lib", /@fullcalendar.*/, 'vee-validate', "vee-validate/dist/rules"],
+        transpile: [
+          "vuetify/lib",
+          "@fullcalendar",
+          "vee-validate",
+          "vee-validate/dist/rules",
+        ],
         plugins: [new VuetifyLoaderPlugin()],
         loaders: {},
         /*
