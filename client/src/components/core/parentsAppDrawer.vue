@@ -112,6 +112,11 @@
             icon: 'mdi-archive',
             text: 'Faculty Contacts'
           },
+          {
+            to: '/Parents-Child-Registration',
+            icon: 'mdi-clipboard-outline',
+            text: 'Child Registration'
+          },
           //This is a secondary function for maps integrations. Future use.
           //{
             //to: '/maps',
