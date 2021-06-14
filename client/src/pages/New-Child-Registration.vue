@@ -198,7 +198,7 @@
                                     submit
                                 </v-btn>
                                 <v-btn outlined
-                                       @click="clear"
+                                       @click="e6 = 3"
                                        color="accent">
                                     clear
                                 </v-btn>
@@ -213,10 +213,39 @@
                 </v-stepper-step>
 
                 <v-stepper-content step="3">
-                    <v-card color="grey lighten-1"
-                            class="mb-12"
-                            height="200px"
-                            width="2000px"></v-card>
+                    <v-card class="mb-12">
+                        <validation-provider v-slot="{ errors }"
+                                             name="C2C Location"
+                                             rules="required">
+                            <v-select v-model="thislocation"
+                                      :items="locations"
+                                      :error-messages="errors"
+                                      label="C2C Location"
+                                      data-vv-name="locations"
+                                      required></v-select>
+                        </validation-provider>
+                        <validation-provider v-slot="{ errors }"
+                                             name="C2C Programs"
+                                             rules="required">
+                            <v-select v-model="thisprogram"
+                                      :items="programs"
+                                      :error-messages="errors"
+                                      label="What program are you enrolling your child in?"
+                                      data-vv-name="programs"
+                                      required></v-select>
+                        </validation-provider>
+                        <validation-provider v-slot="{ errors }"
+                                             name="Expected Start Date"
+                                             :rules="{
+                                                              required: true
+                                                            }">
+                            <v-text-field v-model="expectedDate"
+                                          type="date"
+                                          :error-messages="errors"
+                                          label="Expected Start Date"
+                                          required></v-text-field>
+                        </validation-provider>
+                    </v-card>
                     <v-btn color="primary"
                            @click="e6 = 4">
                         Continue
@@ -375,7 +404,21 @@
                 childDocFname: '',
                 childDocLname: '',
                 childDocNum: '',
-
+                locations: [
+                    'Greenville',
+                    'Spartanburg',
+                ],
+                programs: [
+                    'C2C Virtual School (5 Full Days)',
+                    'Hybrid E-learning (Full days/school pick ups as needed due to schools schedule)',
+                    'After School Only (School pick up-6pm only)',
+                    'Drop-In Attendance (Summer Camp Only)',
+                    'Summer Camp Only (2021)',
+                    'Annual Contract (June 2021 - May 2022)',
+                ],
+                thislocation: '',
+                thisprogram: '',
+                expectedDate: '',
                 e6: 1,
             };
         },
