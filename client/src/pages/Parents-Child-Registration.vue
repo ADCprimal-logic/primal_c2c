@@ -547,7 +547,6 @@ export default {
     try {
       var token = await localStorage.getItem("auth_token");
       var responseUser = await getUser(token);
-      //console.log(responseUser);
       var childrenData = await graphql(GET_CHILDREN, {
         myParent: responseUser.decoded.id,
       });
