@@ -59,21 +59,26 @@
                                                       filled
                                                       round
                                                       label="Subject"
-                                                      :value=props.item.subject
+                                                      :value="mySubject = props.item.subject"
+                                                      @input="mySubject = $event"
                                                       style="min-height: 96px"></v-text-field>
                                         <v-textarea outlined
                                                     name="Content"
                                                     label="Enter content here"
-                                                    :value=props.item.content>
-                                        </v-textarea>
+                                                    :value="myContent = props.item.content"
+                                                    @input="myContent = $event"
+                                                    ></v-textarea>
                                         <v-text-field color="C2Cblue"
                                                       label="Update Date Posted"
-                                                      :value=props.item.date_posted></v-text-field>
+                                                      :value="myDate = props.item.date_posted"
+                                                      @input="myDate = $event"
+                                        ></v-text-field>
                                         <v-textarea auto-grow
                                                     filled
                                                     color="C2Cblue"
                                                     label="Update Time Posted"
-                                                    :value=props.item.time_posted
+                                                    :value="myTime = props.item.time_posted"
+                                                    @input = "myTime = $event"
                                                     rows="1"></v-textarea>
                                     </v-form>
                                     <v-divider></v-divider>
