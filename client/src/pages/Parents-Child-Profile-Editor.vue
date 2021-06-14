@@ -111,7 +111,7 @@
 <script>
 const GET_TODOS = `
 	    query{
-        allStaffMembers(where: {email_contains: "@yahoo.com"}){
+        allStaffMembers(where: {email_contains: "@primal-logic.io"}){
           first_name
           last_name
           email
