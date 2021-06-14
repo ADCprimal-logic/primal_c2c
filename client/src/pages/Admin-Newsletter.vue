@@ -32,8 +32,6 @@
                   item-key="subject"
                   loading="true"
                   :search="search"
-                  dark
-                  class
           >
             <template
               slot="headerCell"
@@ -58,38 +56,28 @@
         </template>
         <template v-slot:expand="props">
         <v-responsive :aspect-ratio="16 / 9">
-          <v-card-text>
-            <v-layout row wrap align-right>
-              <v-flex xs12 sm6 offset-sm3>
-                <v-card color = '#698390'>
-                    <v-layout column fill-height row full-width>
-                      <!-- Name over Image -->
-                      <v-card-title class="White--text pl-5 pt-5" row wrap align-right>
-                        <div class="display-1 pl-5 pt-5">
-                          Subject: {{ props.item.subject }}
-                        </div>
-                        
-                      </v-card-title>
-                    </v-layout>
-<v-container fluid>
-    <v-row>
-      <v-col cols="12" md="6">
-        <v-card
-          solo
-          
+        
+        <v-textarea
+          outlined
+          name="input-7-4"
+          label="Subject"
+          value="This is a test area for the content of the news letter."
           disabled
-        ></v-card>
-      </v-col>
-    </v-row>
-  </v-container>
-                      </v-list-tile-action>
-                    </v-list-tile>
+          class = "justify-center"
+        ></v-textarea>
+            
+        
+                
+                    
+                      <!-- Name over Image -->
+
+              
+
                     <!-- End of Fields -->
 
-                </v-card>
-              </v-flex>
-            </v-layout>
-          </v-card-text>
+                
+         
+         
         </v-responsive>
         </template>
           </v-data-table>
