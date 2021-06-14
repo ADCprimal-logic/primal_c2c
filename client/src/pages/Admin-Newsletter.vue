@@ -162,6 +162,14 @@
     import materialCard from "~/components/material/AppCard";
 
     export default {
+        data() {
+            return {
+                mySubject: '',
+                myContent: '',
+                myDate: '',
+                myTime: '',
+            };
+        },
         layout: "admindashboard",
         components: {
             materialCard,
