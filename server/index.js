@@ -151,6 +151,7 @@ module.exports = {
       axios: {
         // See https://github.com/nuxt-community/axios-module#options
       },
+      ssr: false,
       /*
        ** Build configuration
        */

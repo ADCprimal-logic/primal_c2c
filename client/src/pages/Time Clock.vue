@@ -14,9 +14,9 @@
         <v-layout justify-center align-center>
           <h2 class="font-weight-light mb-4">Clock In</h2>
           <br />
-          <v-dialog v-model="dialog" max-width="500px">
-            <template v-slot:activator="{ on }">
-              <v-btn color="mint" fab large dark v-on="on">
+          <v-dialog v-model="clockInDialog" max-width="500px">
+            <template v-slot:activator="clockIn">
+              <v-btn color="mint" fab large dark v-on="clockIn.on">
                 <v-icon>mdi-alarm</v-icon>
               </v-btn>
             </template>
@@ -31,19 +31,19 @@
                     <!-- Constructor data for editing fields -->
                     <v-flex xs12 sm6 md4>
                       <v-text-field
-                        v-model="editedItem.day"
+                        v-model="defaultItem.day"
                         label="Day"
                       ></v-text-field>
                     </v-flex>
                     <v-flex xs12 sm6 md4>
                       <v-text-field
-                        v-model="editedItem.ClockIn"
+                        v-model="defaultItem.ClockIn"
                         label="Clock In"
                       ></v-text-field>
                     </v-flex>
                     <v-flex xs12 sm6 md4>
                       <v-select
-                        v-model="editedItem.Status"
+                        v-model="defaultItem.Status"
                         :items="statusSelect"
                         label="Status (In/Out)"
                       ></v-select>
@@ -66,9 +66,9 @@
             <v-layout justify-center align-center>
               <h2 class="font-weight-light mb-4">Clock Out</h2>
               <br />
-              <v-dialog v-model="dialog" max-width="500px">
-                <template v-slot:activator="{ on }">
-                  <v-btn color="red" fab large dark v-on="on">
+              <v-dialog v-model="clockOutDialog" max-width="500px">
+                <template v-slot:activator="clockOut">
+                  <v-btn color="red" fab large dark v-on="clockOut.on">
                     <v-icon>mdi-alarm-off</v-icon>
                   </v-btn>
                 </template>
@@ -83,19 +83,20 @@
                         <!-- Constructor data for editing fields -->
                         <v-flex xs12 sm6 md4>
                           <v-text-field
-                            v-model="editedItem.day"
+                            v-model="defaultItem.day"
                             label="Day"
                           ></v-text-field>
                         </v-flex>
                         <v-flex xs12 sm6 md4>
                           <v-text-field
-                            v-model="editedItem.ClockOut"
+                            v-model="defaultItem.ClockOut"
+                            :value="timeStamp"
                             label="Clock Out"
                           ></v-text-field>
                         </v-flex>
                         <v-flex xs12 sm6 md4>
                           <v-select
-                            v-model="editedItem.Status"
+                            v-model="defaultItem.Status"
                             :items="statusSelect"
                             label="Status (In/Out)"
                           ></v-select>
@@ -143,10 +144,6 @@
                 <td class="justify-center layout px-0">
                   <v-icon small class="mr-2" @click="editItem(props.item)">
                     edit
-                  </v-icon>
-                  <!-- Defines what is done when trash can is clicked-->
-                  <v-icon small @click="deleteItem(props.item)">
-                    delete
                   </v-icon>
                 </td>
               </template>
@@ -268,6 +265,13 @@ function getUser(data) {
   });
 }
 
+const currentDate = new Date();
+const currentDayOfMonth = currentDate.getDate();
+const currentMonth = currentDate.getMonth(); // Be careful! January is 0, not 1
+const currentYear = currentDate.getFullYear();
+const dateString =
+  currentDayOfMonth + "-" + (currentMonth + 1) + "-" + currentYear;
+
 import materialCard from "~/components/material/AppCard";
 export default {
   layout: "dashboard",
@@ -275,7 +279,8 @@ export default {
     materialCard,
   },
   data: () => ({
-    dialog: false,
+    clockOutDialog: false,
+    clockInDialog: false,
     headers: [
       {
         text: "Day",
@@ -289,17 +294,16 @@ export default {
       { text: "Hours", value: "Hours" },
       { text: "Actions", value: "name", sortable: false },
     ],
-    selectIn: ["In"],
-    selectIn: ["Out"],
     statusSelect: ["In", "Out"],
+    timeStamp: dateString,
     childTimecard: [],
     allStaffTimeCards: [],
     editedIndex: -1,
     editedItem: {
-      day: "Staff Name",
-      ClockIn: "01-02-2021",
-      ClockOut: "1200",
-      Status: "In",
+      day: "",
+      ClockIn: "",
+      ClockOut: "",
+      Status: "",
       Hours: 0,
     },
     defaultItem: {
@@ -313,7 +317,7 @@ export default {
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "New Item" : "Edit Item";
+      return this.editedIndex === -1 ? "New Time Punch" : "Edit Time Punch";
     },
   },
 
@@ -329,6 +333,7 @@ export default {
 
   methods: {
     async updateStaff() {
+      console.log(this.timeStamp);
       try {
         let responseUser = await getUser(responseLogin.accessToken);
         console.log(responseUser);
@@ -453,8 +458,16 @@ export default {
         this.childTimecard.splice(index, 1);
     },
 
-    close() {
-      this.dialog = false;
+    closeClockIn() {
+      this.clockInDialog = false;
+      setTimeout(() => {
+        this.editedItem = Object.assign({}, this.defaultItem);
+        this.editedIndex = -1;
+      }, 300);
+    },
+
+    closeClockOut() {
+      this.clockOutDialog = false;
       setTimeout(() => {
         this.editedItem = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;
