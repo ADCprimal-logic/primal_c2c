@@ -31,33 +31,22 @@
                     <!-- Constructor data for editing fields -->
                     <v-flex xs12 sm6 md4>
                       <v-text-field
-                        v-model="editedItem.name"
-                        label="Staff Name"
+                        v-model="editedItem.day"
+                        label="Day"
                       ></v-text-field>
                     </v-flex>
                     <v-flex xs12 sm6 md4>
                       <v-text-field
-                        v-model="editedItem.Date"
-                        label="Date"
+                        v-model="editedItem.ClockIn"
+                        label="Clock In"
                       ></v-text-field>
                     </v-flex>
                     <v-flex xs12 sm6 md4>
-                      <v-text-field
-                        v-model="editedItem.Time"
-                        label="Time (g)"
-                      ></v-text-field>
-                    </v-flex>
-                    <v-flex xs12 sm6 md4>
-                      <v-text-field
+                      <v-select
                         v-model="editedItem.Status"
-                        label="Status (g)"
-                      ></v-text-field>
-                    </v-flex>
-                    <v-flex xs12 sm6 md4>
-                      <v-text-field
-                        v-model="editedItem.Hours"
-                        label="Hours (g)"
-                      ></v-text-field>
+                        :items="statusSelect"
+                        label="Status (In/Out)"
+                      ></v-select>
                     </v-flex>
                   </v-layout>
                 </v-container>
@@ -77,10 +66,51 @@
             <v-layout justify-center align-center>
               <h2 class="font-weight-light mb-4">Clock Out</h2>
               <br />
-
-              <v-btn color="red" fab large dark>
-                <v-icon>mdi-alarm-off</v-icon>
-              </v-btn>
+              <v-dialog v-model="dialog" max-width="500px">
+                <template v-slot:activator="{ on }">
+                  <v-btn color="red" fab large dark v-on="on">
+                    <v-icon>mdi-alarm-off</v-icon>
+                  </v-btn>
+                </template>
+                <v-card>
+                  <v-card-title>
+                    <span class="headline">{{ formTitle }}</span>
+                  </v-card-title>
+                  <!-- End of edit field constructor -->
+                  <v-card-text>
+                    <v-container grid-list-md fill-height fluid>
+                      <v-layout wrap>
+                        <!-- Constructor data for editing fields -->
+                        <v-flex xs12 sm6 md4>
+                          <v-text-field
+                            v-model="editedItem.day"
+                            label="Day"
+                          ></v-text-field>
+                        </v-flex>
+                        <v-flex xs12 sm6 md4>
+                          <v-text-field
+                            v-model="editedItem.ClockOut"
+                            label="Clock Out"
+                          ></v-text-field>
+                        </v-flex>
+                        <v-flex xs12 sm6 md4>
+                          <v-select
+                            v-model="editedItem.Status"
+                            :items="statusSelect"
+                            label="Status (In/Out)"
+                          ></v-select>
+                        </v-flex>
+                      </v-layout>
+                    </v-container>
+                  </v-card-text>
+                  <!-- Below indicates action when user closes edit box -->
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue darken-1" @click="close">Cancel</v-btn>
+                    <v-btn color="blue darken-1" @click="save">Save</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
             </v-layout>
             <!-- End of clock buttons -->
           </v-card-text>
@@ -121,9 +151,9 @@
                 </td>
               </template>
               <!-- Defines what is done when there is no data in availble. Initialize refills the data from the server -->
-              <template v-slot:no-data>
+              <!--<template v-slot:no-data>
                 <v-btn color="primary" @click="initialize">Reset</v-btn>
-              </template>
+              </template>-->
             </v-data-table>
           </div>
         </v-layout>
@@ -259,21 +289,24 @@ export default {
       { text: "Hours", value: "Hours" },
       { text: "Actions", value: "name", sortable: false },
     ],
+    selectIn: ["In"],
+    selectIn: ["Out"],
+    statusSelect: ["In", "Out"],
     childTimecard: [],
     allStaffTimeCards: [],
     editedIndex: -1,
     editedItem: {
-      name: "Staff Name",
-      Date: "01-02-2021",
-      Time: "1200",
+      day: "Staff Name",
+      ClockIn: "01-02-2021",
+      ClockOut: "1200",
       Status: "In",
       Hours: 0,
     },
     defaultItem: {
-      name: "",
-      Date: 0,
-      Time: 0,
-      Status: 0,
+      day: "",
+      ClockIn: "",
+      ClockOut: "",
+      Status: "",
       Hours: 0,
     },
   }),
