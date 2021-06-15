@@ -45,11 +45,7 @@
                                         </ul>
                                     </li>
                                 </ul>
-                                <v-flex xs12>
-                                    <v-textarea class="purple-input"
-                                                label="About Me"
-                                                value="about me text field: This doesnt get saved anywhere should we remove it?" />
-                                </v-flex>
+                                
                                 <v-flex xs12 text-xs-right>
                                     <v-btn class="mx-0 font-weight-light"
                                            color="mint"
@@ -62,24 +58,7 @@
                     </v-form>
                 </material-card>
             </v-flex>
-            <v-flex xs12 md4>
-                <material-card class="v-card-profile">
-                    <v-avatar slot="offset" class="mx-auto d-block" size="130">
-                        <img src="" />
-                    </v-avatar>
-                    <v-card-text class="text-xs-center">
-                        <h6 class="category text-gray font-weight-thin mb-3">
-                            {{ user.function }}
-                        </h6>
-                        <h4 class="card-title font-weight-light">{{ fullname }}</h4>
-                        <p class="card-description font-weight-light">
-                            {{ user.description }}
-                        </p>
-                        <blockquote class="blockquote">{{ user.citation }}</blockquote>
-                        <v-btn color="mint" round class="font-weight-light">Follow</v-btn>
-                    </v-card-text>
-                </material-card>
-            </v-flex>
+            
         </v-layout>
 
     </v-container>
