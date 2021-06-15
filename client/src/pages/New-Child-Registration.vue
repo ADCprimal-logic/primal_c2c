@@ -2,335 +2,266 @@
   <!-- Comment -->
   <v-container fill-height fill-width fluid style="flex-wrap: wrap">
     <v-layout justify-center wrap fill-width>
-      <v-stepper v-model="e6" vertical fill-width>
-        <v-stepper-step :complete="e6 > 1" step="1">
-          Parent Registration
-          <small
-            >If you already have a parent account, please log in and register in
-            the parent portal</small
-          >
-        </v-stepper-step>
+        <v-stepper v-model="e6" vertical fill-width>
+            <v-stepper-step :complete="e6 > 1" step="1">
+                Parent Registration
+                <small>
+                    If you already have a parent account, please log in and register in
+                    the parent portal
+                </small>
+            </v-stepper-step>
 
-        <v-stepper-content step="1">
-          <validation-observer ref="observer" v-slot="{ invalid }">
-            <form @submit.prevent="submit">
-              <validation-provider
-                v-slot="{ errors }"
-                name="First Name"
-                rules="required"
-              >
-                <v-text-field
-                  v-model="parentFname"
-                  :error-messages="errors"
-                  label="First Name"
-                  required
-                ></v-text-field>
-              </validation-provider>
-              <validation-provider
-                v-slot="{ errors }"
-                name="Last Name"
-                rules="required"
-              >
-                <v-text-field
-                  v-model="parentLname"
-                  :error-messages="errors"
-                  label="Last Name"
-                  required
-                ></v-text-field>
-              </validation-provider>
-              <validation-provider
-                v-slot="{ errors }"
-                name="Phone Number"
-                :rules="{
+            <v-stepper-content step="1">
+                <validation-observer ref="observer" v-slot="{ invalid }">
+                    <form @submit.prevent="submit">
+                        <validation-provider v-slot="{ errors }"
+                                             name="First Name"
+                                             rules="required">
+                            <v-text-field v-model="parentFname"
+                                          :error-messages="errors"
+                                          label="First Name"
+                                          required></v-text-field>
+                        </validation-provider>
+                        <validation-provider v-slot="{ errors }"
+                                             name="Last Name"
+                                             rules="required">
+                            <v-text-field v-model="parentLname"
+                                          :error-messages="errors"
+                                          label="Last Name"
+                                          required></v-text-field>
+                        </validation-provider>
+                        <validation-provider v-slot="{ errors }"
+                                             name="Phone Number"
+                                             :rules="{
                   required: true,
                   digits: 10,
-                }"
-              >
-                <v-text-field
-                  v-model="phoneNumber"
-                  :counter="10"
-                  :error-messages="errors"
-                  label="Phone Number"
-                  required
-                ></v-text-field>
-              </validation-provider>
-              <validation-provider
-                v-slot="{ errors }"
-                name="Email"
-                rules="required|email"
-              >
-                <v-text-field
-                  v-model="email"
-                  :error-messages="errors"
-                  label="E-mail"
-                  required
-                ></v-text-field>
-              </validation-provider>
-              <validation-provider
-                v-slot="{ errors }"
-                name="Password"
-                rules="required|min:8"
-              >
-                <v-text-field
-                  v-model="pw"
-                  :error-messages="errors"
-                  label="Password"
-                  required
-                ></v-text-field>
-              </validation-provider>
-              <v-btn
-                class="mr-4"
-                type="submit"
-                :disabled="invalid"
-                color="secondary"
-                @click="createParent()"
-              >
-                submit
-              </v-btn>
-              <v-btn outlined @click="e6 = 2" color="accent"> clear </v-btn>
-            </form>
-          </validation-observer>
-        </v-stepper-content>
+                }">
+                            <v-text-field v-model="phoneNumber"
+                                          :counter="10"
+                                          :error-messages="errors"
+                                          label="Phone Number"
+                                          required></v-text-field>
+                        </validation-provider>
+                        <validation-provider v-slot="{ errors }"
+                                             name="Email"
+                                             rules="required|email">
+                            <v-text-field v-model="email"
+                                          :error-messages="errors"
+                                          label="E-mail"
+                                          required></v-text-field>
+                        </validation-provider>
+                        <validation-provider v-slot="{ errors }"
+                                             name="Password"
+                                             rules="required|min:8">
+                            <v-text-field v-model="pw"
+                                          :error-messages="errors"
+                                          label="Password"
+                                          required></v-text-field>
+                        </validation-provider>
+                        <v-btn class="mr-4"
+                               type="submit"
+                               :disabled="invalid"
+                               color="secondary"
+                               @click="createParent()">
+                            submit
+                        </v-btn>
+                        <v-btn outlined @click="e6 = 2" color="accent"> clear </v-btn>
+                    </form>
+                </validation-observer>
+            </v-stepper-content>
 
-        <v-stepper-step :complete="e6 > 2" step="2">
-          Child Registration
-          <small
-            >If you are registering a returning camper, please log in to the
-            parent portal and register the returning camper there</small
-          >
-        </v-stepper-step>
+            <v-stepper-step :complete="e6 > 2" step="2">
+                Child Registration
+                <small>
+                    If you are registering a returning camper, please log in to the
+                    parent portal and register the returning camper there
+                </small>
+            </v-stepper-step>
 
-        <v-stepper-content step="2">
-          <v-card class="mb-12">
-            <validation-observer ref="observer2" v-slot="{ invalid }">
-              <form @submit.prevent="submit">
-                <validation-provider
-                  v-slot="{ errors }"
-                  name="First Name"
-                  rules="required"
-                >
-                  <v-text-field
-                    v-model="childFname"
-                    :error-messages="errors"
-                    label="First Name"
-                    required
-                  ></v-text-field>
-                </validation-provider>
-                <validation-provider
-                  v-slot="{ errors }"
-                  name="Last Name"
-                  rules="required"
-                >
-                  <v-text-field
-                    v-model="childLname"
-                    :error-messages="errors"
-                    label="Last Name"
-                    required
-                  ></v-text-field>
-                </validation-provider>
-                <validation-provider
-                  v-slot="{ errors }"
-                  name="Child's Gender"
-                  rules="required"
-                >
-                  <v-select
-                    v-model="childGender"
-                    :items="genders"
-                    :error-messages="errors"
-                    label="Select Child's Gender"
-                    data-vv-name="genders"
-                    required
-                  ></v-select>
-                </validation-provider>
-                <validation-provider
-                  v-slot="{ errors }"
-                  name="Date of Birth (YYYY-MM-DD)"
-                  :rules="{
+            <v-stepper-content step="2">
+                <v-card class="mb-12">
+                    <validation-observer ref="observer2" v-slot="{ invalid }">
+                        <form @submit.prevent="submit">
+                            <validation-provider v-slot="{ errors }"
+                                                 name="First Name"
+                                                 rules="required">
+                                <v-text-field v-model="childFname"
+                                              :error-messages="errors"
+                                              label="First Name"
+                                              required></v-text-field>
+                            </validation-provider>
+                            <validation-provider v-slot="{ errors }"
+                                                 name="Last Name"
+                                                 rules="required">
+                                <v-text-field v-model="childLname"
+                                              :error-messages="errors"
+                                              label="Last Name"
+                                              required></v-text-field>
+                            </validation-provider>
+                            <validation-provider v-slot="{ errors }"
+                                                 name="Child's Gender"
+                                                 rules="required">
+                                <v-select v-model="childGender"
+                                          :items="genders"
+                                          :error-messages="errors"
+                                          label="Select Child's Gender"
+                                          data-vv-name="genders"
+                                          required></v-select>
+                            </validation-provider>
+                            <validation-provider v-slot="{ errors }"
+                                                 name="Date of Birth (YYYY-MM-DD)"
+                                                 :rules="{
                     required: true,
-                  }"
-                >
-                  <v-text-field
-                    v-model="childDOB"
-                    type="date"
-                    :error-messages="errors"
-                    label="Date of Birth"
-                    required
-                  ></v-text-field>
-                </validation-provider>
-                <validation-provider
-                  v-slot="{ errors }"
-                  name="School Attended (2020-2021)"
-                  rules="required"
-                >
-                  <v-text-field
-                    v-model="childAttended"
-                    :error-messages="errors"
-                    label="School Attended (2020-2021)"
-                    required
-                  ></v-text-field>
-                </validation-provider>
-                <validation-provider
-                  v-slot="{ errors }"
-                  name="Child's Grade (2020-2021)"
-                  rules="required"
-                >
-                  <v-select
-                    v-model="childGrade"
-                    :items="grades"
-                    :error-messages="errors"
-                    label="Select Child's Grade"
-                    data-vv-name="grades"
-                    required
-                  ></v-select>
-                </validation-provider>
-                <validation-provider
-                  v-slot="{ errors }"
-                  name="Child's Allergies ( if you child has no allergies, write 'n/a' )"
-                  rules="required"
-                >
-                  <v-text-field
-                    v-model="childAllergy"
-                    :error-messages="errors"
-                    label="List Child's Allergies"
-                    required
-                  ></v-text-field>
-                </validation-provider>
-                <validation-provider
-                  v-slot="{ errors }"
-                  name="Child's Medications ( if you child does not take medication, write 'n/a' ) "
-                  rules="required"
-                >
-                  <v-text-field
-                    v-model="childMeds"
-                    :error-messages="errors"
-                    label="List Child's Medications"
-                    required
-                  ></v-text-field>
-                </validation-provider>
-                <validation-provider
-                  v-slot="{ errors }"
-                  name="Child's Doctor's First Name"
-                  rules="required"
-                >
-                  <v-text-field
-                    v-model="childDocFname"
-                    :error-messages="errors"
-                    label="Child's Doctor's First Name"
-                    required
-                  ></v-text-field>
-                </validation-provider>
-                <validation-provider
-                  v-slot="{ errors }"
-                  name="Child's Doctor's Last Name"
-                  rules="required"
-                >
-                  <v-text-field
-                    v-model="childDocLname"
-                    :error-messages="errors"
-                    label="Child's Doctor's Last Name"
-                    required
-                  ></v-text-field>
-                </validation-provider>
-                <validation-provider
-                  v-slot="{ errors }"
-                  name="Doctor's Phone Number"
-                  :rules="{
+                  }">
+                                <v-text-field v-model="childDOB"
+                                              type="date"
+                                              :error-messages="errors"
+                                              label="Date of Birth"
+                                              required></v-text-field>
+                            </validation-provider>
+                            <validation-provider v-slot="{ errors }"
+                                                 name="School Attended (2020-2021)"
+                                                 rules="required">
+                                <v-text-field v-model="childAttended"
+                                              :error-messages="errors"
+                                              label="School Attended (2020-2021)"
+                                              required></v-text-field>
+                            </validation-provider>
+                            <validation-provider v-slot="{ errors }"
+                                                 name="Child's Grade (2020-2021)"
+                                                 rules="required">
+                                <v-select v-model="childGrade"
+                                          :items="grades"
+                                          :error-messages="errors"
+                                          label="Select Child's Grade"
+                                          data-vv-name="grades"
+                                          required></v-select>
+                            </validation-provider>
+                            <validation-provider v-slot="{ errors }"
+                                                 name="Child's Allergies ( if you child has no allergies, write 'n/a' )"
+                                                 rules="required">
+                                <v-text-field v-model="childAllergy"
+                                              :error-messages="errors"
+                                              label="List Child's Allergies"
+                                              required></v-text-field>
+                            </validation-provider>
+                            <validation-provider v-slot="{ errors }"
+                                                 name="Child's Medications ( if you child does not take medication, write 'n/a' ) "
+                                                 rules="required">
+                                <v-text-field v-model="childMeds"
+                                              :error-messages="errors"
+                                              label="List Child's Medications"
+                                              required></v-text-field>
+                            </validation-provider>
+                            <validation-provider v-slot="{ errors }"
+                                                 name="Child's Doctor's First Name"
+                                                 rules="required">
+                                <v-text-field v-model="childDocFname"
+                                              :error-messages="errors"
+                                              label="Child's Doctor's First Name"
+                                              required></v-text-field>
+                            </validation-provider>
+                            <validation-provider v-slot="{ errors }"
+                                                 name="Child's Doctor's Last Name"
+                                                 rules="required">
+                                <v-text-field v-model="childDocLname"
+                                              :error-messages="errors"
+                                              label="Child's Doctor's Last Name"
+                                              required></v-text-field>
+                            </validation-provider>
+                            <validation-provider v-slot="{ errors }"
+                                                 name="Doctor's Phone Number"
+                                                 :rules="{
                     required: true,
                     digits: 10,
-                  }"
-                >
-                  <v-text-field
-                    v-model="childDocNum"
-                    :counter="10"
-                    :error-messages="errors"
-                    label="Doctor's Phone Number"
-                    required
-                  ></v-text-field>
-                </validation-provider>
-                <v-btn
-                  class="mr-4"
-                  type="submit"
-                  :disabled="invalid"
-                  color="secondary"
-                  @click="
+                  }">
+                                <v-text-field v-model="childDocNum"
+                                              :counter="10"
+                                              :error-messages="errors"
+                                              label="Doctor's Phone Number"
+                                              required></v-text-field>
+                            </validation-provider>
+                            <v-btn class="mr-4"
+                                   type="submit"
+                                   :disabled="invalid"
+                                   color="secondary"
+                                   @click="
                     createChild();
                     e6 = 3;
-                  "
-                >
-                  submit
-                </v-btn>
-                <v-btn outlined @click="e6 = 3" color="accent"> clear </v-btn>
-              </form>
-            </validation-observer>
-          </v-card>
-        </v-stepper-content>
+                  ">
+                                submit
+                            </v-btn>
+                            <v-btn outlined @click="e6 = 3" color="accent"> clear </v-btn>
+                        </form>
+                    </validation-observer>
+                </v-card>
+            </v-stepper-content>
 
-        <v-stepper-step :complete="e6 > 3" step="3">
-          Camp Registration
-        </v-stepper-step>
+            <v-stepper-step :complete="e6 > 3" step="3">
+                Camp Registration
+            </v-stepper-step>
 
-        <v-stepper-content step="3">
-          <v-card class="mb-12">
-            <validation-provider
-              v-slot="{ errors }"
-              name="C2C Location"
-              rules="required"
-            >
-              <v-select
-                v-model="thislocation"
-                :items="locations"
-                :error-messages="errors"
-                label="C2C Location"
-                data-vv-name="locations"
-                required
-              ></v-select>
-            </validation-provider>
-            <validation-provider
-              v-slot="{ errors }"
-              name="C2C Programs"
-              rules="required"
-            >
-              <v-select
-                v-model="thisprogram"
-                :items="programs"
-                :error-messages="errors"
-                label="What program are you enrolling your child in?"
-                data-vv-name="programs"
-                required
-              ></v-select>
-            </validation-provider>
-            <validation-provider
-              v-slot="{ errors }"
-              name="Expected Start Date"
-              :rules="{
-                required: true,
-              }"
-            >
-              <v-text-field
-                v-model="expectedDate"
-                type="date"
-                :error-messages="errors"
-                label="Expected Start Date"
-                required
-              ></v-text-field>
-            </validation-provider>
-          </v-card>
-          <v-btn color="primary" @click="e6 = 4"> Continue </v-btn>
-          <v-btn text> Cancel </v-btn>
-        </v-stepper-content>
+            <v-stepper-content step="3">
+                <v-card class="mb-12">
+                    <validation-observer ref="observer3" v-slot="{ invalid }">
+                        <form @submit.prevent="submit">
+                            <validation-provider v-slot="{ errors }"
+                                                 name="C2C Location"
+                                                 rules="required">
+                                <v-select v-model="thislocation"
+                                          :items="locations"
+                                          :error-messages="errors"
+                                          label="C2C Location"
+                                          data-vv-name="locations"
+                                          required></v-select>
+                            </validation-provider>
+                            <validation-provider v-slot="{ errors }"
+                                                 name="C2C Programs"
+                                                 rules="required">
+                                <v-select v-model="thisprogram"
+                                          :items="programs"
+                                          :error-messages="errors"
+                                          label="What program are you enrolling your child in?"
+                                          data-vv-name="programs"
+                                          required></v-select>
+                            </validation-provider>
+                            <validation-provider v-slot="{ errors }"
+                                                 name="Expected Start Date"
+                                                 :rules="{
+                    required: true,
+                  }">
+                                <v-text-field v-model="expectedDate"
+                                              type="date"
+                                              :error-messages="errors"
+                                              label="Expected Start Date"
+                                              required></v-text-field>
+                            </validation-provider>
+                            <v-btn class="mr-4"
+                                   type="submit"
+                                   :disabled="invalid"
+                                   color="secondary"
+                                   @click="
+                    determineLocation();
+                    e6 = 4;
+                  ">
+                                submit
+                            </v-btn>
+                            <v-btn outlined @click="e6 = 3" color="accent"> clear </v-btn>
+                        </form>
+                    </validation-observer>
+                </v-card>
+            </v-stepper-content>
 
-        <v-stepper-step step="4"> Payment and Waivers </v-stepper-step>
-        <v-stepper-content step="4">
-          <v-card
-            color="grey lighten-1"
-            class="mb-12"
-            height="200px"
-            width="2000px"
-          ></v-card>
-          <v-btn color="primary" @click="e6 = 1"> Continue </v-btn>
-          <v-btn text> Cancel </v-btn>
-        </v-stepper-content>
-      </v-stepper>
+            <v-stepper-step step="4"> Payment and Waivers </v-stepper-step>
+            <v-stepper-content step="4">
+                <v-card color="grey lighten-1"
+                        class="mb-12"
+                        height="200px"
+                        width="2000px"></v-card>
+                <v-btn color="primary" @click="e6 = 1"> Continue </v-btn>
+                <v-btn text> Cancel </v-btn>
+            </v-stepper-content>
+        </v-stepper>
     </v-layout>
   </v-container>
 </template>
@@ -371,6 +302,14 @@ const UPDATE_CHILD = `
 const UPDATE_PARENT = `
         mutation updateParent($myParent: ID!, $myChild: ChildRelateToManyInput) {
             updateParent(id: $myParent, data: {child: $myChild}) {
+              id
+            }
+          }
+    `;
+
+    const UPDATE_CHILD_LOCATION = `
+        mutation updateChild($myChild: ID!, $myLocation: LocationRelateToOneInput) {
+            updateChild(id: $myChild, data: {location: $myLocation}) {
               id
             }
           }
@@ -465,17 +404,16 @@ export default {
       childDocLname: "",
       childDocNum: "",
       locations: ["Greenville", "Spartanburg"],
-      programs: [
-        "C2C Virtual School (5 Full Days)",
-        "Hybrid E-learning (Full days/school pick ups as needed due to schools schedule)",
-        "After School Only (School pick up-6pm only)",
-        "Drop-In Attendance (Summer Camp Only)",
-        "Summer Camp Only (2021)",
-        "Annual Contract (June 2021 - May 2022)",
-      ],
+        programs: [
+            "After School Only (School pick up-6pm only)",
+            "Drop-In Attendance (Summer Camp Only)",
+            "Summer Camp Only (2021)",
+            "Annual Contract (June 2021 - May 2022)",
+        ],
       thislocation: "",
       thisprogram: "",
       expectedDate: "",
+      finalLocationID: '',
       e6: 1,
     };
   },
@@ -564,7 +502,61 @@ export default {
       this.select = null;
       this.checkbox = null;
       this.$refs.observer.reset();
-    },
+      },
+      determineLocation() {
+          if (this.thislocation == "Greenville") {
+              if (this.thisprogram == "After School Only (School pick up-6pm only)") {
+                  this.finalLocationID = 2;
+              } else if (
+                  this.thisprogram == "Drop-In Attendance (Summer Camp Only)"
+              ) {
+                  this.finalLocationID = 4;
+              } else if (this.thisprogram == "Summer Camp Only (2021)") {
+                  this.finalLocationID = 5;
+              } else if (
+                  this.thisprogram == "Annual Contract (June 2021 - May 2022)"
+              ) {
+                  this.finalLocationID = 6;
+              } else {
+                  console.log("Something went wrong in Greenville");
+              }
+          } else if (this.thislocation == "Spartanburg") {
+              if (this.thisprogram == "After School Only (School pick up-6pm only)") {
+                  this.finalLocationID = 7;
+              } else if (
+                  this.thisprogram == "Drop-In Attendance (Summer Camp Only)"
+              ) {
+                  this.finalLocationID = 8;
+              } else if (this.thisprogram == "Summer Camp Only (2021)") {
+                  this.finalLocationID = 9;
+              } else if (
+                  this.thisprogram == "Annual Contract (June 2021 - May 2022)"
+              ) {
+                  this.finalLocationID = 10;
+              } else {
+                  console.log("Something went wrong in Spartanburg");
+              }
+          } else {
+              console.log("Location/Program could not be determined");
+          }
+          console.log("determine location ran");
+
+          this.connectLocation2Child();
+      },
+      async connectLocation2Child() {
+          await graphql(UPDATE_CHILD_LOCATION, {
+              myChild: this.childid.createChild.id,
+              myLocation: { connect: { id: this.finalLocationID } },
+          });
+          console.log("connect location ran");
+
+          console.log(
+              "child ID: " +
+              this.childid.createChild.id +
+              " /// locationID: " +
+              this.finalLocationID
+          );
+      },
   },
   computed: {
     ...mapGetters({
