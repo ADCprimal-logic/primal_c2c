@@ -103,9 +103,9 @@
             text: 'Parent Profile'
             },
             {
-                to: '/Parents-Child-Profile-Editor',
+                to: '/Parents-Approved-Contacts',
                 icon: 'mdi-account-edit',
-                text: 'Child Profile'
+                text: 'Approved Contacts'
             },
           {
             to: '/Parents-Child-Packages',
