@@ -7,7 +7,7 @@
 
     <v-card-title>
       This chart contains a list of all students. <br/> Find the correct student and clock them out. <br/> A notifcation will be sent to administrators and the guardian responsible for the child.
-      <br/> ALWAYS VERIFY THE CODEWORD AND ONE TIME PIN ON THE ACCOUNT PRIOR TO RELEASING THE CHILD 
+      <br/> ALWAYS VERIFY THE PIN ON THE ACCOUNT PRIOR TO RELEASING THE CHILD 
      <v-spacer></v-spacer>
       <v-text-field
         v-model="search"
@@ -47,109 +47,60 @@
         <v-card-text>
           <v-layout row wrap align-right>
               <v-flex xs12 sm6 offset-sm3>
-                <v-card color = '#698390'>
+                <v-card color = 'C2Cblue'>
                     <v-layout column fill-height>
                       <!-- Name over Image -->
-                      <v-card-title class="bluebird--text pl-5 pt-5" row wrap align-right>
-                        <div class="display-1 pl-5 pt-5">
-                          {{ props.item.full_name }}
-                        </div>
-                        
+                      <v-card-title class="white--text pl-26 pt-26" row wrap align-right>
+                        {{props.item.first_name}}'s data is printed below.
                       </v-card-title>
                     </v-layout>
 <!-- Defines the two lines in each data field -->
         <v-list two-line>
-          <v-list-tile>
             <v-layout justify-center>
               <v-list-tile-action>
-              <v-btn
-              color="C2Corange"
-              @click="loader = ''"
-            >
-              Send OTP
-            </v-btn>
             </v-list-tile-action>
             </v-layout>
-            <v-divider inset full-width></v-divider>
 <!-- A line of expanded data in the table -->
-            <v-list-tile >
-            <v-list-tile-content>
-
-                <v-text-field
-                  type="text"
-                  v-model="username"
-                  prepend-icon="mdi-cellphone-lock"
-                  name="username"
-                  label="Enter one time PIN"
-                  :placeholder="defaultUserPassword"
-                ></v-text-field>
-            </v-list-tile-content>
-          </v-list-tile>
-          </v-list-tile>
-        
-          <v-list-tile>
+            
                <v-layout justify-center align-center>
-                <v-btn
-                  color="blue"
-                  :disabled="isDisabled"
-                  >Signout Student</v-btn
-                >
             </v-layout>
             
 <!-- A line of expanded data in the table -->
-            <v-list-tile >
-            <v-list-tile-content>
-            </v-list-tile-content>
-          </v-list-tile>
-          </v-list-tile>
-          <v-divider inset></v-divider>
 
           <v-list-tile @click="">
             <v-list-tile-action>
-              <v-icon color="red">mdi-alphabetical</v-icon>
+              <v-icon color="red">mdi-numeric</v-icon>
             </v-list-tile-action>
 
             <v-list-tile-content>
-              <v-list-tile-title>Blue Falcon</v-list-tile-title>
-              <v-list-tile-sub-title>Code Word Goes here</v-list-tile-sub-title>
+              <v-list-tile-title>{{ props.item.pin_number }}</v-list-tile-title>
+              <v-list-tile-sub-title>Childs PIN number</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
           <v-divider inset></v-divider>
 <!-- Start of a field -->
+
             <v-list-tile @click="">
             <v-list-tile-action>
               <v-icon color="bluebird">phone</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
-              <v-list-tile-title>(650) 555-1234</v-list-tile-title>
-              <v-list-tile-sub-title>Guardian Full Name / Guardian Mobile Number</v-list-tile-sub-title>
+              <v-list-tile-title>{{props.item.parent[0].mobile_phone}}</v-list-tile-title>
+              <v-list-tile-sub-title>Parent Name: {{props.item.parent[0].full_name}} <br/></v-list-tile-sub-title>
             
             </v-list-tile-content>
           </v-list-tile>
-          <v-divider inset></v-divider>
-<!-- Field Divider -->
-          <v-list-tile @click="">
-            <v-list-tile-action>
-              <v-icon color="bluebird">phone</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>(323) 555-6789</v-list-tile-title>
-              <v-list-tile-sub-title>Guardian Full Name / Guardian Mobile Number</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
-<!-- Field Divider -->
-          <v-divider inset></v-divider>
 
-          <v-list-tile @click="">
-            <v-list-tile-action>
-              <v-icon color="bluebird">mail</v-icon>
-            </v-list-tile-action>
+<!-- Field Divider -->
 
-            <v-list-tile-content>
-              <v-list-tile-title>aliconnors@example.com</v-list-tile-title>
-              <v-list-tile-sub-title>Guardian Email</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
+
+              <!--This code block is for future proof to show two parents--!>
+            <!--<v-list-tile-sub-title>2nd Parent Name: {{props.item.parent[1].full_name}} <br/></v-list-tile-sub-title>-->
+            <!--<v-list-tile-title>2nd Parent Number: {{props.item.parent[1].mobile_phone}}</v-list-tile-title>-->
+            <!-- Expansion Data -->
+
+
+
 <!-- Field Divider -->
           <v-divider inset></v-divider>
 
@@ -159,10 +110,11 @@
             </v-list-tile-action>
 
             <v-list-tile-content>
-              <v-list-tile-title>aliconnors@example.com</v-list-tile-title>
-              <v-list-tile-sub-title>Guardian Email</v-list-tile-sub-title>
+              <v-list-tile-title>{{props.item.parent[0].email}}</v-list-tile-title>
+              <v-list-tile-sub-title>Parent Email</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
+<!-- Field Divider -->
           <v-divider inset></v-divider>
 <!-- Field Divider --> 
             
@@ -172,8 +124,8 @@
             </v-list-tile-action>
 
             <v-list-tile-content>
-              <v-list-tile-title>Location goes here</v-list-tile-title>
-              <v-list-tile-sub-title>Homeroom</v-list-tile-sub-title>
+              <v-list-tile-title>{{props.item.location.name}}</v-list-tile-title>
+              <v-list-tile-sub-title>Location</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
 <!-- Field Divider --> 
@@ -186,8 +138,29 @@
             </v-list-tile-action>
 
             <v-list-tile-content>
-              <v-list-tile-title>Approved Contacts</v-list-tile-title>
-              <v-list-tile-sub-title>Click here to expand</v-list-tile-sub-title>
+              <v-list-tile-title >{{props.item.approved_contact[0].full_name}} <br/> Name</v-list-tile-title>
+              <v-list-tile-sub-title></v-list-tile-sub-title>
+              <v-list-tile-sub-title>Approved Contact Full Name</v-list-tile-sub-title>
+            </v-list-tile-content>
+          </v-list-tile>
+            <v-list-tile @click="">
+            <v-list-tile-action>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title >{{props.item.approved_contact[0].phone}} </v-list-tile-title>
+              <v-list-tile-sub-title></v-list-tile-sub-title>
+              <v-list-tile-sub-title>Approved Contact Phone</v-list-tile-sub-title>
+            </v-list-tile-content>
+          </v-list-tile>
+<!-- Field Divider -->   
+            <v-list-tile @click="">
+            <v-list-tile-action>
+            </v-list-tile-action>
+
+            <v-list-tile-content>
+              <v-list-tile-title >{{props.item.approved_contact[0].relation}} <br/> Name</v-list-tile-title>
+              <v-list-tile-sub-title></v-list-tile-sub-title>
+              <v-list-tile-sub-title>Approved Contact Relation</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
 <!-- End of Fields -->
@@ -206,6 +179,7 @@ const ALL_CHILD = `
 query{
   allChildren{
     full_name
+    first_name
     gender
     parent{
       full_name
@@ -229,9 +203,19 @@ query{
     }
     pin_number
     enrollment_status
+    school_grade
+    location{
+      name
+      program
+      room{
+        type
+        name
+      }
+    }
   }
 }
 `;
+
 
 function graphql(query, variables = {}) {
   return fetch("http://localhost:3000/admin/api", {
