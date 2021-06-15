@@ -66,19 +66,17 @@
                                                     name="Content"
                                                     label="Enter content here"
                                                     :value="myContent = props.item.content"
-                                                    @input="myContent = $event"
-                                                    ></v-textarea>
+                                                    @input="myContent = $event"></v-textarea>
                                         <v-text-field color="C2Cblue"
                                                       label="Update Date Posted"
                                                       :value="myDate = props.item.date_posted"
-                                                      @input="myDate = $event"
-                                        ></v-text-field>
+                                                      @input="myDate = $event"></v-text-field>
                                         <v-textarea auto-grow
                                                     filled
                                                     color="C2Cblue"
                                                     label="Update Time Posted"
                                                     :value="myTime = props.item.time_posted"
-                                                    @input = "myTime = $event"
+                                                    @input="myTime = $event"
                                                     rows="1"></v-textarea>
                                     </v-form>
                                     <v-divider></v-divider>
@@ -132,11 +130,57 @@
                         </template>
                     </v-data-table>
                 </material-card>
+                <material-card color="C2Cblue"
+                               title="Create a News Letter"
+                               >
+                    <v-form>
+                        <v-container py-0>
+                            <v-layout wrap>
+                                <v-flex xs12 md12>
+                                    <v-text-field v-model="mySubject"
+                                                  label="Subject"
+                                                  class="purple-input" />
+                                </v-flex>
+                                <v-flex xs12 md12>
+                                    <v-text-field label="Content"
+                                                  class="purple-input"
+                                                  v-model="myContent" />
+                                </v-flex>
+                                <v-flex xs12 md6>
+                                    <v-text-field v-model="myDate"
+                                                  label="Date Posted"
+                                                  class="purple-input" />
+                                </v-flex>
+                                <v-flex xs12 md6>
+                                    <v-text-field label="Time Posted"
+                                                  class="purple-input"
+                                                  v-model="myTime" />
+                                </v-flex>
+                                <v-flex xs12 md12>
+                                    <v-select label="Location"
+                                              v-model="myLocation"
+                                              :items="locations"
+                                              />
+                                </v-flex>
+                                
+                                <v-flex xs12 text-xs-right>
+                                    <v-btn class="mx-0 font-weight-light"
+                                           color="mint"
+                                           @click="determineLocation()">
+                                        Post Newsletter
+                                    </v-btn>
+                                </v-flex>
+                                <h4 v-if="this.posted === true">Newsletter posted Successfully!</h4>
+                            </v-layout>
+                        </v-container>
+                    </v-form>
+                </material-card>
             </v-flex>
 
         </v-layout>
     </v-container>
 </template>
+
 <script>
     const allNewsletters = `
         query{
@@ -147,6 +191,15 @@
             time_posted
             }
         }
+    `;
+    const POST_NEWS = `
+        mutation postNewsletters($mysubject: String, $mycontent: String, $mydate: String, $mytime: String, 
+  $mylocation: LocationRelateToOneInput) {
+            createNewsletter(data: {subject: $mysubject, content: $mycontent, date_posted: $mydate, time_posted: $mytime, 
+              basedFrom: $mylocation}) {
+              id
+            }
+          }
     `;
 
     function graphql(query, variables = {}) {
@@ -173,11 +226,51 @@
                 myContent: '',
                 myDate: '',
                 myTime: '',
+                myLocation: '',
+                locationID: '',
+                locations: ["Greenville", "Spartanburg"],
+                search: "",
+                headers: [
+                    { text: "Subject", value: "item.subject" },
+                    { text: "Date Posted", value: "item.date_posted" },
+                    { text: "Time Posted", value: "item.time_posted" },
+                ],
+                posted: '',
             };
         },
         layout: "admindashboard",
         components: {
             materialCard,
+        },
+        methods: {
+            determineLocation() {
+                if (this.myLocation == "Greenville") {
+                    this.locationID = 4;
+                } else if (this.myLocation == "Spartanburg") {
+                    this.locationID = 3;
+                } else {
+                    console.log("Location/Program could not be determined");
+                }
+                console.log("determine location ran");
+
+                this.postNewsletter();
+            },
+            async postNewsletter() {
+                await graphql(POST_NEWS, {
+                    mysubject: this.mySubject,
+                    mycontent: this.myContent,
+                    mydate: this.myDate,
+                    mytime: this.myTime,
+                    mylocation: { connect: { id: this.locationID } },
+                });
+                console.log("newsletter posted");
+                this.posted = true;
+                this.mySubject = '';
+                this.myContent = '';
+                this.myTime = '';
+                this.myDate = '';
+                this.myLocation = '';
+            },
         },
         async asyncData() {
             const { data } = await graphql(allNewsletters);
@@ -185,13 +278,6 @@
                 currentNewsletter: data.allNewsletters,
             };
         },
-        data: () => ({
-            search: "",
-            headers: [
-                { text: "Subject", value: "item.subject" },
-                { text: "Date Posted", value: "item.date_posted" },
-                { text: "Time Posted", value: "item.time_posted" },
-            ],
-        }),
+        
     };
 </script>
