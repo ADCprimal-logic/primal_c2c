@@ -44,6 +44,11 @@ REGION = 'us-west-1'
 TWILIO_ACCOUNT_SID = ""
 TWILIO_AUTH_TOKEN = ""
 TWILIO_NUMBER = ""
+# Stripe Creds
+SECRET_KEY = ""
+PUBLISH_KEY = ""
+TEST_SECRET_KEY = ""
+TEST_PUBLISH_KEY = ""
 # Database Config
 DATABASE_URL="postgres://primal_postgres:primal-squad@c2cdatabase.cqs5a6cxnjkx.us-east-1.rds.amazonaws.com:5432/production"
 # Build Config

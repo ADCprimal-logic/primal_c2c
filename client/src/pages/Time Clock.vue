@@ -105,9 +105,9 @@
             >
               <!-- Constructor for visulation of data. These are the real headers of the chart. -->
               <template v-slot:items="props">
-                <td>{{ props.item.name }}</td>
-                <td class="text-xs-right">{{ props.item.Date }}</td>
-                <td class="text-xs-right">{{ props.item.Time }}</td>
+                <td>{{ props.item.day }}</td>
+                <td class="text-xs-right">{{ props.item.ClockIn }}</td>
+                <td class="text-xs-right">{{ props.item.ClockOut }}</td>
                 <td class="text-xs-right">{{ props.item.Status }}</td>
                 <td class="text-xs-right">{{ props.item.Hours }}</td>
                 <td class="justify-center layout px-0">
@@ -253,8 +253,8 @@ export default {
         sortable: false,
         value: "day",
       },
-      { text: "Date", value: "Date" },
-      { text: "Time Recorded", value: "Time" },
+      { text: "Clock In", value: "ClockIn" },
+      { text: "Clock Out", value: "ClockOut" },
       { text: "Status (In/Out)", value: "Status" },
       { text: "Hours", value: "Hours" },
       { text: "Actions", value: "name", sortable: false },

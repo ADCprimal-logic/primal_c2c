@@ -13,14 +13,15 @@
               <v-layout wrap>
                 <v-flex xs12 md4>
                   <v-text-field
-                    :value="todos[0].location.name"
+                    :value="todos.location.name"
                     label="Work Location"
                     class="purple-input"
+                    disabled
                   />
                 </v-flex>
                 <v-flex xs12 md4>
                   <v-text-field
-                    :value="(my_email = todos[0].email)"
+                    :value="(my_email = todos.email)"
                     @input="my_email = $event"
                     label="Email Address"
                     class="purple-input"
@@ -31,12 +32,12 @@
                     label="First Name"
                     class="purple-input"
                     @input="fname = $event"
-                    :value="(fname = todos[0].first_name)"
+                    :value="(fname = todos.first_name)"
                   />
                 </v-flex>
                 <v-flex xs12 md6>
                   <v-text-field
-                    :value="(lname = todos[0].last_name)"
+                    :value="(lname = todos.last_name)"
                     @input="lname = $event"
                     label="Last Name"
                     class="purple-input"
@@ -46,14 +47,16 @@
                   <v-text-field
                     label="Phone Number"
                     class="purple-input"
-                    :value="(my_phone = todos[0].location.phone)"
+                    :value="(my_phone = todos.phone)"
                     @input="my_phone = $event"
-                /></v-flex>
+                  />
+                </v-flex>
                 <v-flex xs12 md12>
                   <v-text-field
-                    label="Address"
+                    label="Work Address"
+                    disabled
                     class="purple-input"
-                    :value="(my_address = todos[0].location.street_Address)"
+                    :value="(my_address = todos.location.street_Address)"
                     @input="my_address = $event"
                   />
                 </v-flex>
@@ -61,21 +64,24 @@
                   <v-text-field
                     label="City"
                     class="purple-input"
-                    :value="todos[0].location.city"
+                    :value="todos.location.city"
+                    disabled
                   />
                 </v-flex>
                 <v-flex xs12 md4>
                   <v-text-field
                     label="State"
                     class="purple-input"
-                    :value="todos[0].location.state"
+                    :value="todos.location.state"
+                    disabled
                   />
                 </v-flex>
                 <v-flex xs12 md4>
                   <v-text-field
-                    :value="todos[0].location.country"
+                    :value="todos.location.country"
                     label="Country"
                     class="purple-input"
+                    disabled
                   />
                 </v-flex>
                 <v-flex xs12 md4>
@@ -83,14 +89,15 @@
                     class="purple-input"
                     label="Postal Code"
                     type="number"
-                    :value="todos[0].location.zip"
+                    :value="todos.location.zip"
+                    disabled
                   />
                 </v-flex>
                 <v-flex xs12>
                   <v-textarea
                     class="purple-input"
                     label="About Me"
-                    value="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                    value="about me text field: This doesnt get saved anywhere should we remove it?"
                   />
                 </v-flex>
                 <v-flex xs12 text-xs-right>
@@ -131,8 +138,8 @@
 
 <script>
 const GET_TODOS = `
-	    query{
-        allStaffMembers(where: {email_contains: "@yahoo.com"}){
+      query getStaff($myid: StaffMemberWhereUniqueInput!) {
+        StaffMember(where: $myid) {
           first_name
           last_name
           email
@@ -147,14 +154,14 @@ const GET_TODOS = `
           }
         }
       }
-	`;
+  `;
 const UPDATE_STAFF = `
-	    mutation upStaff($my_id: ID!, $firstname: String, $lastname: String, $myemail: String, $myphone: String) {
-            updateStaffMember(id: $my_id, data: {first_name: $firstname, last_name: $lastname, email: $myemail, password: "Password123", phone: $myphone}) {
-              id
-            }
+      mutation upStaff($my_id: ID!, $firstname: String, $lastname: String, $myemail: String, $myphone: String) {
+          updateStaffMember(id: $my_id, data: {first_name: $firstname, last_name: $lastname, email: $myemail, password: "Password123", phone: $myphone}) {
+            id
           }
-	`;
+        }
+  `;
 
 function graphql(query, variables = {}) {
   return fetch("http://localhost:3000/admin/api", {
@@ -167,6 +174,21 @@ function graphql(query, variables = {}) {
       query,
     }),
   }).then(function (result) {
+    return result.json();
+  });
+}
+
+function getUser(data) {
+  return fetch("http://localhost:3000/api/auth/user/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      data,
+    }),
+  }).then(function (result) {
+    //console.log(result);
     return result.json();
   });
 }
@@ -191,14 +213,19 @@ export default {
   methods: {
     async updateStaff() {
       await graphql(UPDATE_STAFF, {
-        my_id: this.id,
+        my_id: this.myStaffID,
         firstname: this.fname,
         lastname: this.lname,
         myemail: this.my_email,
         myphone: this.my_phone,
       });
       console.log(
-        "i am updating id: " + this.id + " for " + this.fname + " " + this.lname
+        "i am updating id: " +
+          this.myStaffID +
+          " for " +
+          this.fname +
+          " " +
+          this.lname
       );
     },
   },
@@ -210,10 +237,20 @@ export default {
   },
   // Get the todo items on server side
   async asyncData() {
-    const { data } = await graphql(GET_TODOS);
-    return {
-      todos: data.allStaffMembers,
-    };
+    try {
+      var token = await localStorage.getItem("auth_token");
+      var responseUser = await getUser(token);
+      const { data } = await graphql(GET_TODOS, {
+        myid: { id: responseUser.decoded.id },
+      });
+      console.log(responseUser.decoded.id);
+      return {
+        myStaffID: responseUser.decoded.id,
+        todos: data.StaffMember,
+      };
+    } catch (err) {
+      console.log(err);
+    }
   },
 };
 </script>
