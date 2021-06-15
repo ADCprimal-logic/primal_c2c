@@ -50,7 +50,7 @@
         </v-layout>
       </v-card-actions>
     </material-card>
-      <v-snackbar
+    <v-snackbar
       v-model="snackbar"
       :color="color"
       :multi-line="mode === 'multi-line'"
@@ -58,16 +58,9 @@
       :vertical="mode === 'vertical'"
     >
       {{ text }}
-      <v-btn
-        dark
-        flat
-        @click="snackbar = false"
-      >
-        Close
-      </v-btn>
+      <v-btn dark flat @click="snackbar = false"> Close </v-btn>
     </v-snackbar>
   </v-layout>
-  
 </template>
 
 <script>
@@ -118,11 +111,11 @@ export default {
         password: "",
         role: "Staff",
       },
-    snackbar: {
+      snackbar: {
         show: false,
         message: null,
-        color: null
-    }
+        color: null,
+      },
     };
   },
   computed: {
@@ -149,14 +142,12 @@ export default {
         } else {
           console.log(responseLogin);
         }
-        if (responseLogin.status === 500){
+        if (responseLogin.status === 500) {
           console.log("This is in case user is invalid.");
         }
-      }
-      catch (err) {
+      } catch (err) {
         console.log(err);
       }
-      d
     },
   },
 };
