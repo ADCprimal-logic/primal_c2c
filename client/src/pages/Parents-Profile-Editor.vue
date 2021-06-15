@@ -4,7 +4,7 @@
         <v-layout justify-center wrap>
             <v-flex xs12 md8>
                 <material-card color="mint"
-                               title="Edit Child Profile"
+                               title="Edit Parent Profile"
                                text="Use this page to update your contact, personal information and system avatar.">
                     <v-form>
                         <v-container py-0>

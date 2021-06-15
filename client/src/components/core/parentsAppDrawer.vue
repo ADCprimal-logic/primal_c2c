@@ -98,10 +98,15 @@
             text: 'Child Records'
           },
           {
-            to: '/Parents-Child-Profile-Editor',
+            to: '/Parents-Profile-Editor',
             icon: 'mdi-account-edit',
-            text: 'Child Profile'
-          },
+            text: 'Parent Profile'
+            },
+            {
+                to: '/Parents-Child-Profile-Editor',
+                icon: 'mdi-account-edit',
+                text: 'Child Profile'
+            },
           {
             to: '/Parents-Child-Packages',
             icon: 'mdi-application',
