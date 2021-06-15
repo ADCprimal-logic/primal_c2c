@@ -560,9 +560,11 @@ export default {
     },
     async connectParent2Child() {
       await graphql(UPDATE_PARENT, {
-        myParent: this.parentid.createParent.id,
+        myParent: this.myParentID,
         myChild: { connect: { id: this.childid.createChild.id } },
       });
+
+        this.radioGroup = this.childid.createChild.id;
     },
     submit() {
       this.$refs.observer.validate();
