@@ -46,9 +46,9 @@
           <tr @click="props.expanded = !props.expanded">
           <td>{{ props.item.full_name }}</td>
           <td class="text-xs-left">{{ props.item.gender }}</td>
-          <td class="text-xs-left">{{ props.item.medical_record.birthdate }}
+          <td class="text-xs-left" v-if="props.item.medical_record">{{ props.item.medical_record.birthdate }}
           </td>
-          <td class="text-xs-left">{{ props.item._id }}</td>
+          <td class="text-xs-left" v-if="props.item.location">{{ props.item.location.name }}</td>
           <td class="text-xs-left">{{ props.item.Allergies }}</td>
           <td class="text-xs-left">{{ props.item.enrollment_status }}</td>
         </tr>
@@ -310,7 +310,7 @@ export default {
       },
       { text: "Gender(M/F)", value: "gender" },
       { text: "Date of Birth", value: "medical_record.birthdate" },
-      { text: "Location", value: "_id" },
+      { text: "Location", value: "location.name" },
       { text: "Allergies", value: "medical_record.allergies" },
       { text: "Status (In/Out)", value: "enrollment_status" },
     ],

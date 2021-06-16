@@ -26,15 +26,22 @@
       :search="search"
     >
       <template v-slot:items="props">
-        <tr @click="props.expanded = !props.expanded">
-          <td>{{ props.item.full_name }}</td>
-          <td class="text-xs-left">{{ props.item.gender }}</td>
-          <td class="text-xs-left">{{ props.item.medical_record.birthdate }}
-          </td>
-          <td class="text-xs-left">{{ props.item._id }}</td>
-          <td class="text-xs-left">{{ props.item.Allergies }}</td>
-          <td class="text-xs-left">{{ props.item.enrollment_status }}</td>
-        </tr>
+          <tr @click="props.expanded = !props.expanded">
+              <td>{{ props.item.full_name }}</td>
+              <td class="text-xs-left">{{ props.item.gender }}</td>
+              <td class="text-xs-left" v-if="props.item.medical_record">
+                  {{ props.item.medical_record.birthdate }}
+              </td>
+              <td class="text-xs-left" v-else>
+                  n/a
+              </td>
+              <td class="text-xs-left" v-if="props.item.location">{{ props.item.location.name }}</td>
+              <td class="text-xs-left" v-else>
+                  n/a
+              </td>
+              <td class="text-xs-left">{{ props.item.Allergies }}</td>
+              <td class="text-xs-left">{{ props.item.enrollment_status }}</td>
+          </tr>
       </template>
       <!-- Expansion Data -->
       <template v-slot:no-results>
@@ -85,19 +92,13 @@
               <v-icon color="bluebird">phone</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
-              <v-list-tile-title>{{props.item.parent[0].mobile_phone}}</v-list-tile-title>
-              <v-list-tile-sub-title>Parent Name: {{props.item.parent[0].full_name}} <br/></v-list-tile-sub-title>
+              <v-list-tile-title v-if="props.item.parent[0]">{{props.item.parent[0].mobile_phone}}</v-list-tile-title>
+              <v-list-tile-sub-title v-if="props.item.parent[0]">Parent Name: {{props.item.parent[0].full_name}} <br/></v-list-tile-sub-title>
             
             </v-list-tile-content>
           </v-list-tile>
 
 <!-- Field Divider -->
-
-
-              <!--This code block is for future proof to show two parents--!>
-            <!--<v-list-tile-sub-title>2nd Parent Name: {{props.item.parent[1].full_name}} <br/></v-list-tile-sub-title>-->
-            <!--<v-list-tile-title>2nd Parent Number: {{props.item.parent[1].mobile_phone}}</v-list-tile-title>-->
-            <!-- Expansion Data -->
 
 
 
@@ -110,7 +111,7 @@
             </v-list-tile-action>
 
             <v-list-tile-content>
-              <v-list-tile-title>{{props.item.parent[0].email}}</v-list-tile-title>
+              <v-list-tile-title v-if="props.item.parent[0]">{{props.item.parent[0].email}}</v-list-tile-title >
               <v-list-tile-sub-title>Parent Email</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
@@ -138,7 +139,8 @@
             </v-list-tile-action>
 
             <v-list-tile-content>
-              <v-list-tile-title >{{props.item.approved_contact[0].full_name}} <br/> Name</v-list-tile-title>
+              <v-list-tile-title v-if="props.item.approved_contact" 
+                                 v-for="value in props.item.approved_contact">{{value.full_name}} <br/> Name</v-list-tile-title>
               <v-list-tile-sub-title></v-list-tile-sub-title>
               <v-list-tile-sub-title>Approved Contact Full Name</v-list-tile-sub-title>
             </v-list-tile-content>
@@ -147,7 +149,8 @@
             <v-list-tile-action>
             </v-list-tile-action>
             <v-list-tile-content>
-              <v-list-tile-title >{{props.item.approved_contact[0].phone}} </v-list-tile-title>
+              <v-list-tile-title v-if="props.item.approved_contact" 
+                                 v-for="value in props.item.approved_contact">{{value.phone}} </v-list-tile-title>
               <v-list-tile-sub-title></v-list-tile-sub-title>
               <v-list-tile-sub-title>Approved Contact Phone</v-list-tile-sub-title>
             </v-list-tile-content>
@@ -158,7 +161,8 @@
             </v-list-tile-action>
 
             <v-list-tile-content>
-              <v-list-tile-title >{{props.item.approved_contact[0].relation}} <br/> Name</v-list-tile-title>
+              <v-list-tile-title v-if="props.item.approved_contact" 
+                                 v-for="value in props.item.approved_contact">{{value.relation}} <br/> Name</v-list-tile-title>
               <v-list-tile-sub-title></v-list-tile-sub-title>
               <v-list-tile-sub-title>Approved Contact Relation</v-list-tile-sub-title>
             </v-list-tile-content>
@@ -256,47 +260,11 @@ export default {
       },
       { text: "Gender(M/F)", value: "gender" },
       { text: "Date of Birth", value: "medical_record.birthdate" },
-      { text: "Location", value: "_id" },
+      { text: "Location", value: "location.name" },
       { text: "Allergies", value: "medical_record.allergies" },
       { text: "Status (In/Out)", value: "enrollment_status" },
     ],
-    studentData: [
-      {
-        name: "Chris Cooper",
-        Gender: "Male",
-        dateofBirth: "9/6/1992",
-        Location: "Homeroom",
-        Allergies: "Peanuts",
-        Email: "cooperc2606@gmail.com",
-        Status: "Clocked In",
-        TuitionBalance: "0",
-        Medications: "0",
-        approvedcontactName: "asdf",
-        approvedcontactPhone: "0",
-        approvedcontactEmail: "0",
-        apporvedcontactAddress: "0",
-        approvedcontactRelationship: "0",
-        approvedcontactPIN: "0",
-      },
-      {
-        name: "Chris Cooper3",
-        Gender: "Male",
-        dateofBirth: "9/6/1992",
-        Location: "Homeroom 6",
-        Phone: "843-324-1344",
-        Email: "cooperc2606@gmail.com",
-        Status: "Clocked In",
-      },
-      {
-        name: "Chris Cooper2",
-        Gender: "Male",
-        dateofBirth: "9/6/1992",
-        Location: "Homeroom 77",
-        Phone: "843-324-1344",
-        Email: "cooperc2606@gmail.com",
-        Status: "Clocked In",
-      },
-    ],
+    
     onetimepin: "admin",
 
     bottomNav: 'recent',
