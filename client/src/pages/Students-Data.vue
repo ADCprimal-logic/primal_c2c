@@ -55,7 +55,7 @@
                                             <v-card color='C2Cblue'>
                                                 <v-layout column fill-height>
                                                     <!-- Name over Image -->
-                                                    <v-card-title class="white--text pl-26 pt-26" row wrap align-right>
+                                                    <v-card-title class="white--text text-center pl-26 pt-26" row align-center>
                                                         {{props.item.first_name}}'s data is printed below.
                                                     </v-card-title>
                                                 </v-layout>
@@ -72,7 +72,7 @@
                                                     <!-- Start of a field -->
                                                     <v-list-tile @click="" v-for="value in props.item.parent">
                                                         <v-list-tile-action>
-                                                            <v-icon color="bluebird">phone</v-icon>
+                                                            <v-icon color="C2Corange">phone</v-icon>
                                                         </v-list-tile-action>
 
                                                         <v-list-tile-content>
@@ -87,7 +87,7 @@
                                                     <!-- Field Divider -->
                                                     <v-list-tile @click="" v-for="value in props.item.parent">
                                                         <v-list-tile-action>
-                                                            <v-icon color="bluebird">phone</v-icon>
+                                                            <v-icon color="C2Corange">phone</v-icon>
                                                         </v-list-tile-action>
                                                         <v-list-tile-content>
                                                             <v-list-tile-title>{{value.mobile_phone}}</v-list-tile-title>
@@ -102,7 +102,7 @@
 
                                                     <v-list-tile @click="" v-for="value in props.item.parent">
                                                         <v-list-tile-action>
-                                                            <v-icon color="bluebird">mail</v-icon>
+                                                            <v-icon color="C2Corange">mail</v-icon>
                                                         </v-list-tile-action>
 
                                                         <v-list-tile-content>
@@ -115,7 +115,7 @@
 
                                                     <v-list-tile @click="">
                                                         <v-list-tile-action>
-                                                            <v-icon color="bluebird">mdi-pill</v-icon>
+                                                            <v-icon color="C2Corange">mdi-pill</v-icon>
                                                         </v-list-tile-action>
 
                                                         <v-list-tile-content>
@@ -128,7 +128,7 @@
                                                     <!-- Field Divider -->
                                                     <v-list-tile @click="">
                                                         <v-list-tile-action>
-                                                            <v-icon color="#FF1744">mdi-alert-decagram</v-icon>
+                                                            <v-icon color="C2Corange">mdi-alert-decagram</v-icon>
                                                         </v-list-tile-action>
 
                                                         <v-list-tile-content>
@@ -155,7 +155,7 @@
 
                                                     <v-list-tile @click="">
                                                         <v-list-tile-action>
-                                                            <v-icon color="bluebird">mdi-hospital-marker</v-icon>
+                                                            <v-icon color="C2Corange">mdi-hospital-marker</v-icon>
                                                         </v-list-tile-action>
 
                                                         <v-list-tile-content>
@@ -175,8 +175,7 @@
                                                         <v-list-tile-content>
                                                             <v-list-tile-title>Immuniziations</v-list-tile-title>
                                                             <v-list-tile-sub-title>
-                                                                Click here to expand
-                                                                immuniziations
+                                                                Future Update
                                                             </v-list-tile-sub-title>
                                                         </v-list-tile-content>
                                                     </v-list-tile>
@@ -184,7 +183,7 @@
                                                     <!-- Field Divider -->
                                                     <v-list-tile @click="" v-for="value in props.item.approved_contact">
                                                         <v-list-tile-action>
-                                                            <v-icon color="bluebird">mdi-message-bulleted</v-icon>
+                                                            <v-icon color="C2Corange">mdi-message-bulleted</v-icon>
                                                         </v-list-tile-action>
 
                                                         <v-list-tile-content>
