@@ -81,55 +81,52 @@
                       <!-- A line of expanded data in the table -->
                       <v-list-tile-content>
                         <v-list-tile-title
-                          >Child name goes here</v-list-tile-title
+                          >{{props.item.full_name}}</v-list-tile-title
                         >
                         <v-list-tile-sub-title
-                          >Childs Full Name</v-list-tile-sub-title
+                          >Child's Full Name</v-list-tile-sub-title
                         >
                       </v-list-tile-content>
                     </v-list-tile>
                     <!-- Start of a field -->
-                    <v-list-tile @click="">
+                    <v-list-tile @click="" v-for="value in props.item.parent">
                       <v-list-tile-action>
                         <v-icon color="bluebird">phone</v-icon>
                       </v-list-tile-action>
 
                       <v-list-tile-content>
-                        <v-list-tile-title>(650) 555-1234</v-list-tile-title>
-                        <v-list-tile-sub-title
-                          >Guardian Full Name / Guardian Mobile
-                          Number</v-list-tile-sub-title
-                        >
+                          <v-list-tile-title v-if="props.item.parent">{{value.full_name}}</v-list-tile-title>
+                          <v-list-tile-title v-else>n/a</v-list-tile-title>
+
+                          <v-list-tile-sub-title>
+                              Guardian Full Name
+                          </v-list-tile-sub-title>
                       </v-list-tile-content>
                     </v-list-tile>
                     <!-- Field Divider -->
-                    <v-list-tile @click="">
+                    <v-list-tile @click="" v-for="value in props.item.parent">
                       <v-list-tile-action>
                         <v-icon color="bluebird">phone</v-icon>
                       </v-list-tile-action>
                       <v-list-tile-content>
-                        <v-list-tile-title>(323) 555-6789</v-list-tile-title>
-                        <v-list-tile-sub-title
-                          >Guardian Full Name / Guardian Mobile
-                          Number</v-list-tile-sub-title
-                        >
+                          <v-list-tile-title>{{value.mobile_phone}}</v-list-tile-title>
+                          <v-list-tile-sub-title>
+                              Guardian's Mobile Phone ({{value.full_name}})
+
+                          </v-list-tile-sub-title>
                       </v-list-tile-content>
                     </v-list-tile>
                     <!-- Field Divider -->
                     <v-divider inset></v-divider>
 
-                    <v-list-tile @click="">
+                    <v-list-tile @click="" v-for="value in props.item.parent">
                       <v-list-tile-action>
                         <v-icon color="bluebird">mail</v-icon>
                       </v-list-tile-action>
 
                       <v-list-tile-content>
-                        <v-list-tile-title
-                          >aliconnors@example.com</v-list-tile-title
-                        >
-                        <v-list-tile-sub-title
-                          >Guardian Email</v-list-tile-sub-title
-                        >
+                          <v-list-tile-title>{{value.email}}</v-list-tile-title>
+                          <v-list-tile-sub-title>Guardian's Email ({{value.full_name}})</v-list-tile-sub-title>
                       </v-list-tile-content>
                     </v-list-tile>
                     <!-- Field Divider -->
@@ -141,12 +138,9 @@
                       </v-list-tile-action>
 
                       <v-list-tile-content>
-                        <v-list-tile-title
-                          >Some medication is imported here</v-list-tile-title
-                        >
-                        <v-list-tile-sub-title
-                          >Known Medications</v-list-tile-sub-title
-                        >
+                          <v-list-tile-title v-if="props.item.medical_record">{{ props.item.medical_record.medications}}</v-list-tile-title>
+                          <v-list-tile-title v-else>n/a</v-list-tile-title>
+                          <v-list-tile-sub-title>Known Medications</v-list-tile-sub-title>
                       </v-list-tile-content>
                     </v-list-tile>
                     <v-divider inset></v-divider>
@@ -157,12 +151,9 @@
                       </v-list-tile-action>
 
                       <v-list-tile-content>
-                        <v-list-tile-title
-                          >Some Allergy goes here</v-list-tile-title
-                        >
-                        <v-list-tile-sub-title
-                          >Known Phone</v-list-tile-sub-title
-                        >
+                          <v-list-tile-title v-if="props.item.medical_record">{{ props.item.medical_record.allergies}}</v-list-tile-title>
+                          <v-list-tile-title v-else>n/a</v-list-tile-title>
+                          <v-list-tile-sub-title>Known Allergies</v-list-tile-sub-title>
                       </v-list-tile-content>
                     </v-list-tile>
                     <v-divider inset></v-divider>
@@ -183,16 +174,15 @@
                     <v-divider inset></v-divider>
                     <!-- Field Divider -->
 
-                    <v-list-tile @click="">
+                    <v-list-tile @click="" >
                       <v-list-tile-action>
                         <v-icon color="bluebird">mdi-hospital-marker</v-icon>
                       </v-list-tile-action>
 
                       <v-list-tile-content>
-                        <v-list-tile-title
-                          >Location goes here</v-list-tile-title
-                        >
-                        <v-list-tile-sub-title>Homeroom</v-list-tile-sub-title>
+                          <v-list-tile-title v-if="props.item.location">{{ props.item.location.name }}</v-list-tile-title>
+                          <v-list-tile-title v-else>n/a</v-list-tile-title>
+                          <v-list-tile-sub-title>Camp Location</v-list-tile-sub-title>
                       </v-list-tile-content>
                     </v-list-tile>
                     <v-divider inset></v-divider>
@@ -213,17 +203,22 @@
                     </v-list-tile>
                     <v-divider inset></v-divider>
                     <!-- Field Divider -->
-                    <v-list-tile @click="">
-                      <v-list-tile-action>
-                        <v-icon color="bluebird">mdi-message-bulleted</v-icon>
-                      </v-list-tile-action>
+                    <v-list-tile @click="" v-for="value in props.item.approved_contact">
+                        <v-list-tile-action>
+                            <v-icon color="bluebird">mdi-message-bulleted</v-icon>
+                        </v-list-tile-action>
 
-                      <v-list-tile-content>
-                        <v-list-tile-title>Approved Contacts</v-list-tile-title>
-                        <v-list-tile-sub-title
-                          >Click here to expand</v-list-tile-sub-title
-                        >
-                      </v-list-tile-content>
+                        <v-list-tile-content>
+                            <v-list-tile-title v-if="value.full_name">{{value.full_name}}</v-list-tile-title>
+                            <v-list-tile-title v-else>n/a</v-list-tile-title>
+                            <!--
+                                <v-list-tile-title v-if="value.relation">Relation: {{value.relation}}</v-list-tile-title>
+                                <v-list-tile-title v-else>n/a</v-list-tile-title>
+                                <v-list-tile-title v-if="value.phone">Phone: {{value.phone}}</v-list-tile-title>
+                                <v-list-tile-title v-else>n/a</v-list-tile-title>
+                            -->
+                            <v-list-tile-sub-title>Approved Contact</v-list-tile-sub-title>
+                        </v-list-tile-content>
                     </v-list-tile>
                     <!-- End of Fields -->
                   </v-list>
@@ -261,6 +256,10 @@ query{
     }
     room{
       name
+    }
+    location{
+      name
+      program
     }
     medical_record{
       allergies

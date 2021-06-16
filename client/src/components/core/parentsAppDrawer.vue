@@ -78,11 +78,6 @@
             alt: 'Dashboard',
           },
           {
-            to: '/Parents-Inbox',
-            icon: 'mdi-animation',
-            text: 'Inbox'
-          },
-          {
             to: '/Parents-Child-Schedule',
             icon: 'mdi-clipboard-outline',
             text: 'Child Time Sheet'
@@ -107,11 +102,6 @@
                 icon: 'mdi-account-edit',
                 text: 'Approved Contacts'
             },
-          {
-            to: '/Parents-Child-Packages',
-            icon: 'mdi-application',
-            text: 'Packages'
-          },
           {
             to: '/Parents-Faculty-Contact',
             icon: 'mdi-archive',
