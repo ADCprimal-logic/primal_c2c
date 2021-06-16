@@ -20,7 +20,7 @@
           hide-details
         ></v-text-field>
         <material-card
-          color="bluebird"
+          color="C2Cblue"
           title="Student Data"
           text="Expands to show detailed data on the child."
         >
@@ -31,6 +31,8 @@
                   item-key="full_name"
                   loading="true"
                   :search="search"
+                  dark
+                  class
           >
             <template
               slot="headerCell"
@@ -60,20 +62,16 @@
         <v-alert :value="true" color="error" icon="warning">
           Your search for "{{ search }}" found no results.
         </v-alert>
-        </template>
-        <template v-slot:expand="props">
-        <v-responsive :aspect-ratio="16 / 9">
-          <v-card-text>
-            <v-layout row wrap align-right>
+        </template><template v-slot:expand="props">
+      <v-responsive :aspect-ratio="16/9">
+        <v-card-text>
+          <v-layout row wrap align-right>
               <v-flex xs12 sm6 offset-sm3>
-                <v-card color = '#698390'>
+                <v-card color = 'C2Cblue'>
                     <v-layout column fill-height>
                       <!-- Name over Image -->
-                      <v-card-title class="black--text pl-5 pt-5" row wrap align-right>
-                        <div class="display-1 pl-5 pt-5">
-                          {{ props.item.full_name }}
-                        </div>
-                        
+                      <v-card-title class="white--text pl-26 pt-26" row wrap align-right>
+                            {{props.item.first_name}}'s data is printed below.
                       </v-card-title>
                     </v-layout>
                   <!-- Defines the two lines in each data field -->
@@ -247,6 +245,7 @@ const ALL_CHILD = `
 query{
   allChildren{
     full_name
+    first_name
     gender
     parent{
       full_name
