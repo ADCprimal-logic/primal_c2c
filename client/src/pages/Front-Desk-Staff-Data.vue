@@ -28,7 +28,7 @@
                                   v-text="header.text" />
                         </template>
                         <template v-slot:items="props">
-                            <tr @click="props.expanded = !props.expanded">
+                            <tr>
                                 <td>{{ props.item.full_name }}</td>
                                 <td class="text-xs-left" v-if="props.item.role === 1">General</td>
                                 <td class="text-xs-left" v-else-if="props.item.role === 2">Front-Desk</td>
