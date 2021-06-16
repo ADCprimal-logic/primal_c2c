@@ -42,15 +42,19 @@
               />
             </template>
           <template v-slot:items="props">
-          <tr @click="props.expanded = !props.expanded">
-          <td>{{ props.item.full_name }}</td>
-          <td class="text-xs-left">{{ props.item.gender }}</td>
-          <td class="text-xs-left">{{ props.item.medical_record.birthdate }}
-          </td>
-          <td class="text-xs-left">{{ props.item._id }}</td>
-          <td class="text-xs-left">{{ props.item.Allergies }}</td>
-          <td class="text-xs-left">{{ props.item.enrollment_status }}</td>
-        </tr>
+              <tr @click="props.expanded = !props.expanded">
+                  <td>{{ props.item.full_name }}</td>
+                  <td class="text-xs-left">{{ props.item.gender }}</td>
+                  <td class="text-xs-left" v-if="props.item.medical_record">
+                      {{ props.item.medical_record.birthdate }}
+                  </td>
+                  <td class="text-xs-left" v-else>n/a</td>
+                  <td class="text-xs-left" v-if="props.item.location">{{ props.item.location.name }}</td>
+                  <td class="text-xs-left" v-else>n/a</td>
+                  <td class="text-xs-left" v-if="props.item.medical_record">{{ props.item.medical_record.allergies }}</td>
+                  <td class="text-xs-left" v-else>n/a</td>
+                  <td class="text-xs-left">{{ props.item.enrollment_status }}</td>
+              </tr>
         </template>
            <template v-slot:no-results>
         <v-alert :value="true" color="error" icon="warning">
