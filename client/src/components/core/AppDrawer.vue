@@ -93,11 +93,6 @@
             text: 'Time Off Requests'
           },
           {
-            to: '/Mass Messages',
-            icon: 'mdi-account-edit',
-            text: 'Mass Messages'
-          },
-          {
             to: '/Schedule',
             icon: 'mdi-application',
             text: 'Schedule'
