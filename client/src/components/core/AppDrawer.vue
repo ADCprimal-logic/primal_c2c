@@ -78,11 +78,6 @@
             alt: 'Dashboard',
           },
           {
-            to: '/Inbox',
-            icon: 'mdi-animation',
-            text: 'Inbox'
-          },
-          {
             to: '/Child-Check-In-System',
             icon: 'mdi-clipboard-outline',
             text: 'Child Check-In System'

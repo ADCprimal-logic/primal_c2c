@@ -177,7 +177,7 @@
                 posted: '',
             };
         },
-        layout: "admindashboard",
+        layout: "dashboard",
         components: {
             materialCard,
         },
