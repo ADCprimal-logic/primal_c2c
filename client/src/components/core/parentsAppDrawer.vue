@@ -86,7 +86,12 @@
             to: '/Parents-Financials',
             icon: 'mdi-arrange-bring-to-front',
             text: 'Financials'
-          },
+            },
+            {
+                to: '/Parent-Schedule',
+                icon: 'mdi-application',
+                text: 'Schedule'
+            },
           {
             to: '/Parents-Child-Record',
             icon: 'mdi-account-box-multiple',

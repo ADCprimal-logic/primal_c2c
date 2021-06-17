@@ -93,7 +93,7 @@
             text: 'Time Off Requests'
           },
           {
-            to: '/Schedule',
+            to: '/Staff-Schedule',
             icon: 'mdi-application',
             text: 'Schedule'
           },

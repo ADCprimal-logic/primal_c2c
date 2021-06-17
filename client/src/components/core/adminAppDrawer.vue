@@ -96,7 +96,12 @@
             to: '/Admin-Financials',
             icon: 'mdi-account-cash',
             text: 'Financials'
-          },
+            },
+            {
+                to: '/Admin-Schedule',
+                icon: 'mdi-application',
+                text: 'Schedule'
+            },
           {
             to: '/Admin-Newsletter',
             icon: 'mdi-newspaper-variant',
