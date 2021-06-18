@@ -54,8 +54,10 @@
               <!-- Below indicates action when user closes edit box -->
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" @click="close">Cancel</v-btn>
-                <v-btn color="blue darken-1" @click="save">Save</v-btn>
+                <v-btn color="blue darken-1" @click="closeClockIn"
+                  >Cancel</v-btn
+                >
+                <v-btn color="blue darken-1" @click="saveClockIn">Save</v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
@@ -107,8 +109,12 @@
                   <!-- Below indicates action when user closes edit box -->
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="blue darken-1" @click="close">Cancel</v-btn>
-                    <v-btn color="blue darken-1" @click="save">Save</v-btn>
+                    <v-btn color="blue darken-1" @click="closeClockOut"
+                      >Cancel</v-btn
+                    >
+                    <v-btn color="blue darken-1" @click="saveClockOut"
+                      >Save</v-btn
+                    >
                   </v-card-actions>
                 </v-card>
               </v-dialog>
@@ -474,13 +480,22 @@ export default {
       }, 300);
     },
 
-    save() {
+    saveClockIn() {
       if (this.editedIndex > -1) {
         Object.assign(this.childTimecard[this.editedIndex], this.editedItem);
       } else {
         this.childTimecard.push(this.editedItem);
       }
-      this.close();
+      this.closeClockIn();
+    },
+
+    saveclockOut() {
+      if (this.editedIndex > -1) {
+        Object.assign(this.childTimecard[this.editedIndex], this.editedItem);
+      } else {
+        this.childTimecard.push(this.editedItem);
+      }
+      this.closeClockOut();
     },
   },
 };
