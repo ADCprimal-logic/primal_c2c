@@ -94,7 +94,7 @@
                         </validation-observer>
                     </v-card>
                 </v-stepper-content>
-                <v-stepper-step :complete="e6 > 3" step="3">
+                <v-stepper-step :complete="e6 >= 3" step="3">
                     Approved Contact Registration Complete!
                 </v-stepper-step>
 
