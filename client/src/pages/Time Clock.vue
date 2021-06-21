@@ -31,19 +31,19 @@
                     <!-- Constructor data for editing fields -->
                     <v-flex xs12 sm6 md4>
                       <v-text-field
-                        v-model="defaultItem.day"
+                        v-model="editedItem.day"
                         label="Day"
                       ></v-text-field>
                     </v-flex>
                     <v-flex xs12 sm6 md4>
                       <v-text-field
-                        v-model="defaultItem.ClockIn"
+                        v-model="editedItem.ClockIn"
                         label="Clock In"
                       ></v-text-field>
                     </v-flex>
                     <v-flex xs12 sm6 md4>
                       <v-select
-                        v-model="defaultItem.Status"
+                        v-model="editedItem.Status"
                         :items="statusSelect"
                         label="Status (In/Out)"
                       ></v-select>
@@ -85,20 +85,20 @@
                         <!-- Constructor data for editing fields -->
                         <v-flex xs12 sm6 md4>
                           <v-text-field
-                            v-model="defaultItem.day"
+                            v-model="editedItem.day"
                             label="Day"
                           ></v-text-field>
                         </v-flex>
                         <v-flex xs12 sm6 md4>
                           <v-text-field
-                            v-model="defaultItem.ClockOut"
+                            v-model="editedItem.ClockOut"
                             :value="timeStamp"
                             label="Clock Out"
                           ></v-text-field>
                         </v-flex>
                         <v-flex xs12 sm6 md4>
                           <v-select
-                            v-model="defaultItem.Status"
+                            v-model="editedItem.Status"
                             :items="statusSelect"
                             label="Status (In/Out)"
                           ></v-select>
@@ -272,11 +272,12 @@ function getUser(data) {
 }
 
 const currentDate = new Date();
+const currentDay = currentDate.getDay();
 const currentDayOfMonth = currentDate.getDate();
 const currentMonth = currentDate.getMonth(); // Be careful! January is 0, not 1
 const currentYear = currentDate.getFullYear();
 const dateString =
-  currentDayOfMonth + "-" + (currentMonth + 1) + "-" + currentYear;
+  currentYear + "-" + (currentMonth + 1) + "-" + currentDayOfMonth;
 
 import materialCard from "~/components/material/AppCard";
 export default {
@@ -302,11 +303,12 @@ export default {
     ],
     statusSelect: ["In", "Out"],
     timeStamp: dateString,
+    dayStamp: currentDay,
     childTimecard: [],
     allStaffTimeCards: [],
     editedIndex: -1,
     editedItem: {
-      day: "",
+      day: "X",
       ClockIn: "",
       ClockOut: "",
       Status: "",
@@ -340,16 +342,106 @@ export default {
   methods: {
     async updateStaff() {
       console.log(this.timeStamp);
+      console.log(this.dayStamp);
       try {
-        let responseUser = await getUser(responseLogin.accessToken);
+        var token = localStorage.getItem("auth_token");
+        let responseUser = await getUser(token);
         console.log(responseUser);
-        await this.setUsername(responseUser.decoded.name);
       } catch (err) {
         console.log(err);
       }
       const { data } = await graphql(GET_TODOS);
       this.allStaffTimeCards = data.allStaffMembers[0].time_card;
-      console.log(this.allStaffTimeCards);
+      //console.log(this.allStaffTimeCards);
+      switch (this.dayStamp) {
+        case 0:
+          this.defaultItem = {
+            day: "Sunday",
+            ClockIn: this.timeStamp,
+            ClockOut: this.timeStamp,
+          };
+          this.editedItem = {
+            day: "Sunday",
+            ClockIn: this.timeStamp,
+            ClockOut: this.timeStamp,
+          };
+          break;
+        case 1:
+          this.defaultItem = {
+            day: "Monday",
+            ClockIn: this.timeStamp,
+            ClockOut: this.timeStamp,
+          };
+          this.editedItem = {
+            day: "Monday",
+            ClockIn: this.timeStamp,
+            ClockOut: this.timeStamp,
+          };
+          break;
+        case 2:
+          this.defaultItem = {
+            day: "Tuesday",
+            ClockIn: this.timeStamp,
+            ClockOut: this.timeStamp,
+          };
+          this.editedItem = {
+            day: "Tuesday",
+            ClockIn: this.timeStamp,
+            ClockOut: this.timeStamp,
+          };
+          break;
+        case 3:
+          this.defaultItem = {
+            day: "Wednesday",
+            ClockIn: this.timeStamp,
+            ClockOut: this.timeStamp,
+          };
+          this.editedItem = {
+            day: "Wednesday",
+            ClockIn: this.timeStamp,
+            ClockOut: this.timeStamp,
+          };
+          break;
+        case 4:
+          this.defaultItem = {
+            day: "Thursday",
+            ClockIn: this.timeStamp,
+            ClockOut: this.timeStamp,
+          };
+          this.editedItem = {
+            day: "Thursday",
+            ClockIn: this.timeStamp,
+            ClockOut: this.timeStamp,
+          };
+          break;
+        case 5:
+          this.defaultItem = {
+            day: "Friday",
+            ClockIn: this.timeStamp,
+            ClockOut: this.timeStamp,
+          };
+          this.editedItem = {
+            day: "Friday",
+            ClockIn: this.timeStamp,
+            ClockOut: this.timeStamp,
+          };
+          break;
+        case 6:
+          this.defaultItem = {
+            day: "Saturday",
+            ClockIn: this.timeStamp,
+            ClockOut: this.timeStamp,
+          };
+          this.editedItem = {
+            day: "Saturday",
+            ClockIn: this.timeStamp,
+            ClockOut: this.timeStamp,
+          };
+          break;
+        default:
+          console.log("OK");
+          break;
+      }
       this.childTimecard = [
         {
           day: this.allStaffTimeCards.day1,
