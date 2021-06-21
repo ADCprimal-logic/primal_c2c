@@ -39,6 +39,7 @@
                 @click="
                   e6 = 2;
                   radioGroup = '';
+                  isNewChild = true;
                 "
                 color="accent"
               >
@@ -209,13 +210,12 @@
                   :disabled="invalid"
                   color="secondary"
                   @click="
-                    createChild();
                     e6 = 3;
                   "
                 >
                   submit
                 </v-btn>
-                <v-btn outlined @click="e6 = 3" color="accent"> clear </v-btn>
+                <v-btn outlined @click="clearStep2(); e6 = 3" color="accent"> clear </v-btn>
               </form>
             </validation-observer>
           </v-card>
@@ -278,19 +278,19 @@
                   :disabled="invalid"
                   color="secondary"
                   @click="
-                    determineLocation();
+                    
                     e6 = 4;
                   "
                 >
                   submit
                 </v-btn>
-                <v-btn outlined @click="e6 = 3" color="accent"> clear </v-btn>
+                <v-btn outlined @click="clearStep3(); e6 = 4" color="accent"> clear </v-btn>
               </form>
             </validation-observer>
           </v-card>
         </v-stepper-content>
 
-        <v-stepper-step step="4"> Payment and Waivers </v-stepper-step>
+        <v-stepper-step step="4" :complete="e6 > 4"> Payment and Waivers </v-stepper-step>
         <v-stepper-content step="4">
           <v-card
             color="grey lighten-1"
@@ -298,7 +298,7 @@
             height="200px"
             width="2000px"
           ></v-card>
-          <v-btn color="primary" @click="e6 = 1"> Continue </v-btn>
+          <v-btn color="primary" @click="e6 = 5; isNewChildOrNot()"> Continue </v-btn>
           <v-btn text> Cancel </v-btn>
         </v-stepper-content>
       </v-stepper>
@@ -484,7 +484,8 @@ export default {
       thisprogram: "",
       expectedDate: "",
       finalLocationID: "",
-      e6: 1,
+        e6: 1,
+        isNewChild: false,
     };
   },
   components: {
@@ -495,7 +496,16 @@ export default {
   },
 
   methods: {
-    async createParent() {
+      async isNewChildOrNot() {
+          if (this.isNewChild) {
+              this.createChild();
+          } else {
+              this.determineLocation();
+          }
+
+      },
+
+      async createParent() {
       const { data } = await graphql(CREATE_PARENT, {
         firstname: this.parentFname,
         lastname: this.parentLname,
@@ -565,6 +575,7 @@ export default {
       });
 
         this.radioGroup = this.childid.createChild.id;
+        this.determineLocation();
     },
     submit() {
       this.$refs.observer.validate();
@@ -641,7 +652,27 @@ export default {
       this.select = null;
       this.checkbox = null;
       this.$refs.observer.reset();
-    },
+      },
+      clearStep2() {
+          this.childFname = "";
+          this.childLname = "";
+          this.childGender = "";
+          this.childDOB = "";
+          this.childAttended = "";
+          this.childGrade = "";
+          this.childAllergy = "";
+          this.childMeds = "";
+          this.childDocFname = "";
+          this.childDocLname = "";
+          this.childDocNum = "";
+          this.$refs.observer.reset();
+      },
+      clearStep3() {
+          this.thislocation = "";
+          this.thisprogram = "";
+          this.expectedDate = "";
+          this.$refs.observer.reset();
+      },
   },
   computed: {
     ...mapGetters({

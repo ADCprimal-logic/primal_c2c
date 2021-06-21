@@ -62,10 +62,11 @@
                                type="submit"
                                :disabled="invalid"
                                color="secondary"
-                               @click="createParent()">
+                                @click="e6 = 2;">
+
                             submit
                         </v-btn>
-                        <v-btn outlined @click="e6 = 2" color="accent"> clear </v-btn>
+                        <v-btn outlined @click="clearStep1();e6 = 2" color="accent"> clear </v-btn>
                     </form>
                 </validation-observer>
             </v-stepper-content>
@@ -172,9 +173,9 @@
                             <validation-provider v-slot="{ errors }"
                                                  name="Doctor's Phone Number"
                                                  :rules="{
-                    required: true,
-                    digits: 10,
-                  }">
+                                                        required: true,
+                                                        digits: 10,
+                                                      }">
                                 <v-text-field v-model="childDocNum"
                                               :counter="10"
                                               :error-messages="errors"
@@ -186,12 +187,11 @@
                                    :disabled="invalid"
                                    color="secondary"
                                    @click="
-                    createChild();
-                    e6 = 3;
-                  ">
+                                        e6 = 3;
+                                      ">
                                 submit
                             </v-btn>
-                            <v-btn outlined @click="e6 = 3" color="accent"> clear </v-btn>
+                            <v-btn outlined @click="clearStep2(); e6 = 3" color="accent"> clear </v-btn>
                         </form>
                     </validation-observer>
                 </v-card>
@@ -228,8 +228,8 @@
                             <validation-provider v-slot="{ errors }"
                                                  name="Expected Start Date"
                                                  :rules="{
-                    required: true,
-                  }">
+                                                        required: true,
+                                                      }">
                                 <v-text-field v-model="expectedDate"
                                               type="date"
                                               :error-messages="errors"
@@ -241,24 +241,23 @@
                                    :disabled="invalid"
                                    color="secondary"
                                    @click="
-                    determineLocation();
-                    e6 = 4;
-                  ">
+                                    e6 = 4;
+                                  ">
                                 submit
                             </v-btn>
-                            <v-btn outlined @click="e6 = 3" color="accent"> clear </v-btn>
+                            <v-btn outlined @click="clearStep3(); e6 = 3" color="accent"> clear </v-btn>
                         </form>
                     </validation-observer>
                 </v-card>
             </v-stepper-content>
 
-            <v-stepper-step step="4"> Payment and Waivers </v-stepper-step>
+            <v-stepper-step :complete="e6 > 4" step="4"> Payment and Waivers </v-stepper-step>
             <v-stepper-content step="4">
                 <v-card color="grey lighten-1"
                         class="mb-12"
                         height="200px"
                         width="2000px"></v-card>
-                <v-btn color="primary" @click="e6 = 1"> Continue </v-btn>
+                <v-btn color="primary" @click="e6 = 5; createParent()"> Continue </v-btn>
                 <v-btn text> Cancel </v-btn>
             </v-stepper-content>
         </v-stepper>
@@ -435,7 +434,8 @@ export default {
       this.parentid = data;
       try {
         if (this.parentid.createParent.id !== null) {
-          this.e6 = 2;
+            
+            this.createChild();
         }
         console.log("Parent ID: " + this.parentid.createParent.id);
       } catch (err) {
@@ -491,17 +491,39 @@ export default {
         myParent: this.parentid.createParent.id,
         myChild: { connect: { id: this.childid.createChild.id } },
       });
+
+        this.determineLocation();
     },
     submit() {
       this.$refs.observer.validate();
     },
-    clear() {
-      this.name = "";
+    clearStep1() {
+        this.parentFname = "";
+        this.parentLname = "";
       this.phoneNumber = "";
       this.email = "";
-      this.select = null;
-      this.checkbox = null;
+      this.pw = "";
       this.$refs.observer.reset();
+      },
+      clearStep2() {
+          this.childFname = "";
+          this.childLname = "";
+          this.childGender = "";
+          this.childDOB = "";
+          this.childAttended = "";
+          this.childGrade = "";
+          this.childAllergy = "";
+          this.childMeds = "";
+          this.childDocFname = "";
+          this.childDocLname = "";
+          this.childDocNum = "";
+          this.$refs.observer.reset();
+      },
+      clearStep3() {
+          this.thislocation = "";
+          this.thisprogram = "";
+          this.expectedDate = "";
+          this.$refs.observer.reset();
       },
       determineLocation() {
           if (this.thislocation == "Greenville") {
