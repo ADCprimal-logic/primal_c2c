@@ -7,103 +7,18 @@
   >
     <v-layout wrap>
       <v-flex
-        md12
-        sm12
-        lg4
-      >
-        <material-chart-card
-          :data="dailySalesChart.data"
-          :options="dailySalesChart.options"
-          color="info"
-          type="Line"
-        >
-          <h4 class="title font-weight-light">Daily Sales</h4>
-          <p class="category d-inline-flex font-weight-light">
-            <v-icon
-              color="green"
-              small
-            >
-              mdi-arrow-up
-            </v-icon>
-            <span class="green--text">55%</span>&nbsp;
-            increase in today's sales
-          </p>
-
-          <template slot="actions">
-            <v-icon
-              class="mr-2"
-              small
-            >
-              mdi-clock-outline
-            </v-icon>
-            <span class="caption grey--text font-weight-light">updated 4 minutes ago</span>
-          </template>
-        </material-chart-card>
-      </v-flex>
-      <v-flex
-        md12
-        sm12
-        lg4
-      >
-        <material-chart-card
-          :data="emailsSubscriptionChart.data"
-          :options="emailsSubscriptionChart.options"
-          :responsive-options="emailsSubscriptionChart.responsiveOptions"
-          color="red"
-          type="Bar"
-        >
-          <h4 class="title font-weight-light">Email Subscription</h4>
-          <p class="category d-inline-flex font-weight-light">Last Campaign Performance</p>
-
-          <template slot="actions">
-            <v-icon
-              class="mr-2"
-              small
-            >
-              mdi-clock-outline
-            </v-icon>
-            <span class="caption grey--text font-weight-light">updated 10 minutes ago</span>
-          </template>
-        </material-chart-card>
-      </v-flex>
-      <v-flex
-        md12
-        sm12
-        lg4
-      >
-        <material-chart-card
-          :data="dataCompletedTasksChart.data"
-          :options="dataCompletedTasksChart.options"
-          color="green"
-          type="Line"
-        >
-          <h3 class="title font-weight-light">Completed Tasks</h3>
-          <p class="category d-inline-flex font-weight-light">Last Last Campaign Performance</p>
-
-          <template slot="actions">
-            <v-icon
-              class="mr-2"
-              small
-            >
-              mdi-clock-outline
-            </v-icon>
-            <span class="caption grey--text font-weight-light">campaign sent 26 minutes ago</span>
-          </template>
-        </material-chart-card>
-      </v-flex>
-      <v-flex
         sm6
         xs12
         md6
         lg3
       >
         <material-stats-card
-          color="green"
-          icon="mdi-store"
-          title="Revenue"
+          color="red"
+          icon="mdi-cash"
+          title="Balance Owed"
           value="$34,245"
           sub-icon="mdi-calendar"
-          sub-text="Last 24 Hours"
+          sub-text="Pulled from"
         />
       </v-flex>
       <v-flex
@@ -211,11 +126,11 @@
               >Tasks:</span>
               <v-tab class="mr-3">
                 <v-icon class="mr-2">mdi-bug</v-icon>
-                Bugs
+                Send Payment
               </v-tab>
               <v-tab class="mr-3">
                 <v-icon class="mr-2">mdi-code-tags</v-icon>
-                Website
+                Autopay
               </v-tab>
               <v-tab>
                 <v-icon class="mr-2">mdi-cloud</v-icon>

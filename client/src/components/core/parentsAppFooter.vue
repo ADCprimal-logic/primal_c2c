@@ -13,6 +13,15 @@
           :href="link.Link"
           class="tertiary--text footer-links">{{ link.name }}</a>
       </span>
+      <v-btn
+      color="primary"
+      elevation="7"
+      icon
+      large
+      raised
+      rounded
+      x-large
+    ></v-btn>
     </div>
     <v-spacer/>
     <span class="font-weight-light copyright">
