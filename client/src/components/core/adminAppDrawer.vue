@@ -78,19 +78,24 @@
             alt: 'Dashboard',
           },
           {
+            to: '/C2Cchildrenconnect/admin/signin',
+            icon: 'mdi-atom',
+            text: 'Edit Database'
+          },
+          {
             to: '/Admin-Staff-Data',
             icon: 'mdi-account',
-            text: 'Staff Data'
+            text: 'View Staff Data'
           },
           {
             to: '/Admin-Student-Data',
             icon: 'mdi-account-multiple',
-            text: 'Child Data'
+            text: 'View Child Data'
           },
           {
             to: '/Admin-Time-Clock',
             icon: 'mdi-alarm',
-            text: 'Time Clocks'
+            text: 'View Time Clocks'
           },
           {
             to: '/Admin-Financials',
@@ -107,8 +112,6 @@
             icon: 'mdi-newspaper-variant',
             text: 'News Letters'
           },
-
-
           {
             to: '/icons',
             icon: 'mdi-chart-bubble',

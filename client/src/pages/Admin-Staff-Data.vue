@@ -1,382 +1,270 @@
-<!-- Comment -->
 <template>
-<!-- Comment -->
-  <v-container
-    fill-height
-    fluid
-    grid-list-xl
-  >
-    <v-layout
-      justify-center
-      wrap
-    >
-      <v-flex
-        md12
-      >
-        <v-text-field
-          v-model="search"
-          append-icon="search"
-          label="Search the newsletter!"
-          single-line
-          hide-details
-        ></v-text-field>
-        <material-card
-          color="C2Cblue"
-          title="News Letters"
-          text="This table shows all previously posted newsletters."
-        >
-          <v-data-table
-                  :headers="headers"
-                  :items="currentNewsletter"
-                  :expand="expand"
-                  item-key="subject"
-                  loading="true"
-                  :search="search"
-                  dark
-                  class
-          >
-            <template
-              slot="headerCell"
-              slot-scope="{ header }"
-            >
-              <span
-                class="subheading font-weight-light text-success text--darken-3"
-                v-text="header.text"
-              />
-            </template>
-          <template v-slot:items="props">
-          <tr @click="props.expanded = !props.expanded">
-          <td class="text-xs-left">{{ props.item.subject }}</td>
-          <td class="text-xs-left">{{ props.item.date_posted }}</td>
-          <td class="text-xs-left">{{ props.item.time_posted }}</td>
-        </tr>
-        </template>
-           <template v-slot:no-results>
-        <v-alert :value="true" color="error" icon="warning">
-          Your search for "{{ search }}" found no results.
-        </v-alert>
-        </template>
-        <template v-slot:expand="props">
-        <v-responsive :aspect-ratio="16 / 9">
-          <v-card-text>
-            <v-layout row wrap align-right>
-              <v-flex xs12 sm6 offset-sm3>
-                <v-card color = '#698390'>
-                    <v-layout column fill-height row full-width>
-                      <!-- Name over Image -->
-                      <v-card-title class="White--text pl-5 pt-5" row wrap align-right>
-                        <div class="display-1 pl-5 pt-5">
-                          Subject: {{ props.item.subject }}
-                        </div>
-                        
-                      </v-card-title>
-                    </v-layout>
-<v-container fluid>
-    <v-row>
-      <v-col cols="12" md="6">
-        <v-card
-          solo
-          disabled
-        ></v-card>
-      </v-col>
-    </v-row>
-  </v-container>
-                </v-card>
-              </v-flex>
-            </v-layout>
-          </v-card-text>
-        </v-responsive>
-        </template>
-          </v-data-table>
-        </material-card>
-      </v-flex>
-  <div>
-    <v-toolbar flat color="white">
-      <v-toolbar-title>My CRUD</v-toolbar-title>
-      <v-divider
-        class="mx-2"
-        inset
-        vertical
-      ></v-divider>
-      <v-spacer></v-spacer>
-      <v-dialog v-model="dialog" max-width="500px">
-        <template v-slot:activator="{ on }">
-          <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
-        </template>
-        <v-card>
-          <v-card-title>
-            <span class="headline">{{ formTitle }}</span>
-          </v-card-title>
+    <!-- Comment -->
+    <v-container fill-height
+                 fluid
+                 grid-list-xl>
+        <v-layout justify-center
+                  wrap>
+            <v-flex md12>
+                <v-text-field v-model="search"
+                              append-icon="search"
+                              label="Search for a staff member by any associated data."
+                              single-line
+                              hide-details></v-text-field>
+                <material-card color="C2Cblue"
+                               title="Staff Data"
+                               text="Expands to show detailed data on the child.">
+                    <v-data-table :headers="headers"
+                                  :items="allStaff"
+                                  :expand="expand"
+                                  item-key="full_name"
+                                  loading="true"
+                                  :search="search"
+                                  dark
+                                  class>
+                        <template slot="headerCell"
+                                  slot-scope="{ header }">
+                            <span class="subheading font-weight-light text-success text--darken-3"
+                                  v-text="header.text" />
+                        </template>
+                        <template v-slot:items="props">
+                            <tr>
+                                <td>{{ props.item.full_name }}</td>
+                                <td class="text-xs-left" v-if="props.item.role === 1">General</td>
+                                <td class="text-xs-left" v-else-if="props.item.role === 2">Front-Desk</td>
+                                <td class="text-xs-left" v-else-if="props.item.role === 3">Director</td>
+                                <td class="text-xs-left" v-else>n/a</td>
 
-          <v-card-text>
-            <v-container grid-list-md>
-              <v-layout wrap>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.name" label="Dessert name"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.calories" label="Calories"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.fat" label="Fat (g)"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.carbs" label="Carbs (g)"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.protein" label="Protein (g)"></v-text-field>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-card-text>
+                                <td class="text-xs-left">{{ props.item.email }}</td>
+                                <td class="text-xs-left">{{ props.item.phone }}</td>
+                                <td class="text-xs-left" v-if="props.item.location">{{ props.item.location.name }}</td>
+                                <td class="text-xs-left" v-else>n/a</td>
 
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
-            <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </v-toolbar>
-    <v-data-table
-      :headers="headers"
-      :items="desserts"
-      class="elevation-1"
-    >
-      <template v-slot:items="props">
-        <td>{{ props.item.name }}</td>
-        <td class="text-xs-right">{{ props.item.calories }}</td>
-        <td class="text-xs-right">{{ props.item.fat }}</td>
-        <td class="text-xs-right">{{ props.item.carbs }}</td>
-        <td class="text-xs-right">{{ props.item.protein }}</td>
-        <td class="justify-center layout px-0">
-          <v-icon
-            small
-            class="mr-2"
-            @click="editItem(props.item)"
-          >
-            edit
-          </v-icon>
-          <v-icon
-            small
-            @click="deleteItem(props.item)"
-          >
-            delete
-          </v-icon>
-        </td>
-      </template>
-      <template v-slot:no-data>
-        <v-btn color="primary" @click="initialize">Reset</v-btn>
-      </template>
-    </v-data-table>
-  </div>
-    </v-layout>
-  </v-container>
+                            </tr>
+                        </template>
+                        <template v-slot:no-results>
+                            <v-alert :value="true" color="error" icon="warning">
+                                Your search for "{{ search }}" found no results.
+                            </v-alert>
+                        </template>
+                        <template v-slot:expand="props">
+                            <v-responsive :aspect-ratio="16/9">
+                                <v-card-text>
+                                    <v-layout row wrap align-right>
+                                        <v-flex xs12 sm6 offset-sm3>
+                                            <v-card color='C2Cblue'>
+                                                <v-layout column fill-height>
+                                                    <!-- Name over Image -->
+                                                    <v-card-title class="white--text pl-26 pt-26" row wrap align-right>
+                                                        {{props.item.first_name}}'s data is printed below.
+                                                    </v-card-title>
+                                                </v-layout>
+                                                <!-- Defines the two lines in each data field -->
+                                                <v-list two-line>
+                                                    <v-list-tile @click="">
+                                                        <v-list-tile-action> </v-list-tile-action>
+                                                        <!-- A line of expanded data in the table -->
+                                                        <v-list-tile-content>
+                                                            <v-list-tile-title>Child name goes here</v-list-tile-title>
+                                                            <v-list-tile-sub-title>Childs Full Name</v-list-tile-sub-title>
+                                                        </v-list-tile-content>
+                                                    </v-list-tile>
+                                                    <!-- Start of a field -->
+                                                    <v-list-tile @click="">
+                                                        <v-list-tile-action>
+                                                            <v-icon color="bluebird">phone</v-icon>
+                                                        </v-list-tile-action>
+
+                                                        <v-list-tile-content>
+                                                            <v-list-tile-title>(650) 555-1234</v-list-tile-title>
+                                                            <v-list-tile-sub-title>
+                                                                Guardian Full Name / Guardian Mobile
+                                                                Number
+                                                            </v-list-tile-sub-title>
+                                                        </v-list-tile-content>
+                                                    </v-list-tile>
+                                                    <!-- Field Divider -->
+                                                    <v-list-tile @click="">
+                                                        <v-list-tile-action>
+                                                            <v-icon color="bluebird">phone</v-icon>
+                                                        </v-list-tile-action>
+                                                        <v-list-tile-content>
+                                                            <v-list-tile-title>(323) 555-6789</v-list-tile-title>
+                                                            <v-list-tile-sub-title>
+                                                                Guardian Full Name / Guardian Mobile
+                                                                Number
+                                                            </v-list-tile-sub-title>
+                                                        </v-list-tile-content>
+                                                    </v-list-tile>
+                                                    <!-- Field Divider -->
+                                                    <v-divider inset></v-divider>
+
+                                                    <v-list-tile @click="">
+                                                        <v-list-tile-action>
+                                                            <v-icon color="bluebird">mail</v-icon>
+                                                        </v-list-tile-action>
+
+                                                        <v-list-tile-content>
+                                                            <v-list-tile-title>aliconnors@example.com</v-list-tile-title>
+                                                            <v-list-tile-sub-title>Guardian Email</v-list-tile-sub-title>
+                                                        </v-list-tile-content>
+                                                    </v-list-tile>
+                                                    <!-- Field Divider -->
+                                                    <v-divider inset></v-divider>
+
+                                                    <v-list-tile @click="">
+                                                        <v-list-tile-action>
+                                                            <v-icon color="bluebird">mdi-pill</v-icon>
+                                                        </v-list-tile-action>
+
+                                                        <v-list-tile-content>
+                                                            <v-list-tile-title>Some medication is imported here</v-list-tile-title>
+                                                            <v-list-tile-sub-title>Known Medications</v-list-tile-sub-title>
+                                                        </v-list-tile-content>
+                                                    </v-list-tile>
+                                                    <v-divider inset></v-divider>
+                                                    <!-- Field Divider -->
+                                                    <v-list-tile @click="">
+                                                        <v-list-tile-action>
+                                                            <v-icon color="#FF1744">mdi-alert-decagram</v-icon>
+                                                        </v-list-tile-action>
+
+                                                        <v-list-tile-content>
+                                                            <v-list-tile-title>Some Allergy goes here</v-list-tile-title>
+                                                            <v-list-tile-sub-title>Known Phone</v-list-tile-sub-title>
+                                                        </v-list-tile-content>
+                                                    </v-list-tile>
+                                                    <v-divider inset></v-divider>
+                                                    <!-- Field Divider -->
+
+                                                    <v-list-tile @click="">
+                                                        <v-list-tile-action>
+                                                            <v-icon color="#43A047">mdi-currency-usd</v-icon>
+                                                        </v-list-tile-action>
+
+                                                        <v-list-tile-content>
+                                                            <v-list-tile-title>Tuition Paid: () Tuition Owed: ()</v-list-tile-title>
+                                                            <v-list-tile-sub-title>Balance</v-list-tile-sub-title>
+                                                        </v-list-tile-content>
+                                                    </v-list-tile>
+                                                    <v-divider inset></v-divider>
+                                                    <!-- Field Divider -->
+
+                                                    <v-list-tile @click="">
+                                                        <v-list-tile-action>
+                                                            <v-icon color="bluebird">mdi-hospital-marker</v-icon>
+                                                        </v-list-tile-action>
+
+                                                        <v-list-tile-content>
+                                                            <v-list-tile-title>Location goes here</v-list-tile-title>
+                                                            <v-list-tile-sub-title>Homeroom</v-list-tile-sub-title>
+                                                        </v-list-tile-content>
+                                                    </v-list-tile>
+                                                    <v-divider inset></v-divider>
+                                                    <!-- Field Divider -->
+
+                                                    <v-list-tile @click="">
+                                                        <v-list-tile-action>
+                                                            <v-icon color="#AEEA00">mdi-needle</v-icon>
+                                                        </v-list-tile-action>
+
+                                                        <v-list-tile-content>
+                                                            <v-list-tile-title>Immuniziations</v-list-tile-title>
+                                                            <v-list-tile-sub-title>
+                                                                Click here to expand
+                                                                immuniziations
+                                                            </v-list-tile-sub-title>
+                                                        </v-list-tile-content>
+                                                    </v-list-tile>
+                                                    <v-divider inset></v-divider>
+                                                    <!-- Field Divider -->
+                                                    <v-list-tile @click="">
+                                                        <v-list-tile-action>
+                                                            <v-icon color="bluebird">mdi-message-bulleted</v-icon>
+                                                        </v-list-tile-action>
+
+                                                        <v-list-tile-content>
+                                                            <v-list-tile-title>Approved Contacts</v-list-tile-title>
+                                                            <v-list-tile-sub-title>Click here to expand</v-list-tile-sub-title>
+                                                        </v-list-tile-content>
+                                                    </v-list-tile>
+                                                    <!-- End of Fields -->
+                                                </v-list>
+                                            </v-card>
+                                        </v-flex>
+                                    </v-layout>
+                                </v-card-text>
+                            </v-responsive>
+                        </template>
+                    </v-data-table>
+                </material-card>
+            </v-flex>
+
+        </v-layout>
+    </v-container>
 </template>
+
 <script>
-const allNewsletters = `
-query{
-  allNewsletters{
-    subject
-    content
-    date_posted
-    time_posted
-  }
-}
-`;
 
-function graphql(query, variables = {}) {
-  return fetch("http://localhost:3000/admin/api", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      variables,
-      query,
-    }),
-  }).then(function (result) {
-    return result.json();
-  });
-}
 
-import materialCard from "~/components/material/AppCard";
 
-export default {
-  layout: "admindashboard",
-  components: {
-    materialCard,
-  },
-  async asyncData() {
-    const { data } = await graphql(allNewsletters);
-    return {
-      currentNewsletter: data.allNewsletters,
-    };
-  },
-  data: () => ({
-    search: "",
-    headers: [
-      { text: "Subject", value: "item.subject" },
-      { text: "Date Posted", value: "item.date_posted" },
-      { text: "Time Posted", value: "item.time_posted" },
-    ],
-  }),
-};
-</script>
-<script>
-  export default {
-    data: () => ({
-      dialog: false,
-      headers: [
-        {
-          text: 'Dessert (100g serving)',
-          align: 'left',
-          sortable: false,
-          value: 'name'
-        },
-        { text: 'Calories', value: 'calories' },
-        { text: 'Fat (g)', value: 'fat' },
-        { text: 'Carbs (g)', value: 'carbs' },
-        { text: 'Protein (g)', value: 'protein' },
-        { text: 'Actions', value: 'name', sortable: false }
-      ],
-      desserts: [],
-      editedIndex: -1,
-      editedItem: {
-        name: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0
-      },
-      defaultItem: {
-        name: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0
-      }
-    }),
-
-    computed: {
-      formTitle () {
-        return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-      }
-    },
-
-    watch: {
-      dialog (val) {
-        val || this.close()
-      }
-    },
-
-    created () {
-      this.initialize()
-    },
-
-    methods: {
-      initialize () {
-        this.desserts = [
-          {
-            name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-            protein: 4.0
-          },
-          {
-            name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
-            protein: 4.3
-          },
-          {
-            name: 'Eclair',
-            calories: 262,
-            fat: 16.0,
-            carbs: 23,
-            protein: 6.0
-          },
-          {
-            name: 'Cupcake',
-            calories: 305,
-            fat: 3.7,
-            carbs: 67,
-            protein: 4.3
-          },
-          {
-            name: 'Gingerbread',
-            calories: 356,
-            fat: 16.0,
-            carbs: 49,
-            protein: 3.9
-          },
-          {
-            name: 'Jelly bean',
-            calories: 375,
-            fat: 0.0,
-            carbs: 94,
-            protein: 0.0
-          },
-          {
-            name: 'Lollipop',
-            calories: 392,
-            fat: 0.2,
-            carbs: 98,
-            protein: 0
-          },
-          {
-            name: 'Honeycomb',
-            calories: 408,
-            fat: 3.2,
-            carbs: 87,
-            protein: 6.5
-          },
-          {
-            name: 'Donut',
-            calories: 452,
-            fat: 25.0,
-            carbs: 51,
-            protein: 4.9
-          },
-          {
-            name: 'KitKat',
-            calories: 518,
-            fat: 26.0,
-            carbs: 65,
-            protein: 7
+    const ALL_STAFF = `
+        query{
+          allStaffMembers{
+            full_name
+            role
+            email
+            phone
+            location {
+              name
+            }
           }
-        ]
-      },
-
-      editItem (item) {
-        this.editedIndex = this.desserts.indexOf(item)
-        this.editedItem = Object.assign({}, item)
-        this.dialog = true
-      },
-
-      deleteItem (item) {
-        const index = this.desserts.indexOf(item)
-        confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1)
-      },
-
-      close () {
-        this.dialog = false
-        setTimeout(() => {
-          this.editedItem = Object.assign({}, this.defaultItem)
-          this.editedIndex = -1
-        }, 300)
-      },
-
-      save () {
-        if (this.editedIndex > -1) {
-          Object.assign(this.desserts[this.editedIndex], this.editedItem)
-        } else {
-          this.desserts.push(this.editedItem)
         }
-        this.close()
-      }
+    `;
+
+    function graphql(query, variables = {}) {
+        return fetch("http://localhost:3000/admin/api", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                variables,
+                query,
+            }),
+        }).then(function (result) {
+            return result.json();
+        });
     }
-  }
+
+    import materialCard from "~/components/material/AppCard";
+
+    export default {
+        layout: "admindashboard",
+        components: {
+            materialCard,
+        },
+        async asyncData() {
+            const { data } = await graphql(ALL_STAFF);
+            return {
+                allStaff: data.allStaffMembers,
+            };
+        },
+        data: () => ({
+            search: "",
+            headers: [
+                {
+                    text: "Staff Name",
+                    align: "left",
+                    sortable: true,
+                    value: "full_name",
+                },
+                { text: "Role", value: "role" },
+                { text: "Email", value: "email" },
+                { text: "Phone", value: "phone" },
+                { text: "Location", value: "location.name" },
+                
+            ],
+        }),
+    };
 </script>
