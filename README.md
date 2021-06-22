@@ -54,6 +54,7 @@ DATABASE_URL="postgres://primal_postgres:primal-squad@c2cdatabase.cqs5a6cxnjkx.u
 # Build Config
 NUXT_TELEMETRY_DISABLED=1
 JWT_TOKEN="primalC2C"
+JWT_EXPIRE="6h"
 ```
 
 ## Documentation for further development:
