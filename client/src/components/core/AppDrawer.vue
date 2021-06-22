@@ -21,16 +21,17 @@
         <v-list dense>
           <v-list-tile avatar to="/">
           <v-list-tile-avatar
-            color="white"
+            color="clear"
           >
               <v-img
                 :src="logo"
-                height="34"
-                contain
+                height="50"
+                width="50"
+                
               />
             </v-list-tile-avatar>
             <v-list-tile-title class="title">
-              Vuetify MD
+              <h4>Coast 2 Coast Kids</h4>
             </v-list-tile-title>
           </v-list-tile>
         </v-list>
@@ -39,11 +40,6 @@
           <v-list-tile
             v-if="responsive"
           >
-            <v-text-field
-              class="purple-input search-input"
-              label="Search..."
-              color="purple"
-            />
           </v-list-tile>
           <v-list-tile
             v-for="(link, i) in links"
@@ -76,40 +72,57 @@
         logo: '/vuetifylogo.png',
         links: [
           {
-            to: '/dashboard',
+            to: '/Dashboard',
             icon: 'mdi-view-dashboard',
-            text: 'Dashboard'
+            text: 'Staff Dash',
+            alt: 'Dashboard',
           },
           {
-            to: '/user-profile',
-            icon: 'mdi-account',
-            text: 'User Profile'
-          },
-          {
-            to: '/table-list',
+            to: '/Child-Check-In-System',
             icon: 'mdi-clipboard-outline',
-            text: 'Table List'
+            text: 'Child Check-In System'
           },
           {
-            to: '/typography',
-            icon: 'mdi-format-font',
-            text: 'Typography'
+            to: '/Time Clock',
+            icon: 'mdi-alarm',
+            text: 'Staff Time Clock'
+          },
+          {
+            to: '/Time Off Requests',
+            icon: 'mdi-airplane-takeoff',
+            text: 'Time Off Requests'
+          },
+          {
+            to: '/Staff-Schedule',
+            icon: 'mdi-application',
+            text: 'Schedule'
+          },
+          {
+            to: '/Students-Data',
+            icon: 'mdi-archive',
+            text: 'Student Data'
+          },
+          {
+            to: '/Staff-Data',
+            icon: 'mdi-apple',
+            text: 'Staff Data'
+          },
+          {
+            to: '/Profile Editor',
+            icon: 'mdi-account',
+            text: ' Update Staff Profile'
           },
           {
             to: '/icons',
             icon: 'mdi-chart-bubble',
             text: 'Icons'
           },
-          {
-            to: '/maps',
-            icon: 'mdi-map-marker',
-            text: 'Maps'
-          },
-          {
-            to: '/notifications',
-            icon: 'mdi-bell',
-            text: 'Notifications'
-          }
+          //This is a secondary function for maps integrations. Future use.
+          //{
+            //to: '/maps',
+            //icon: 'mdi-map-marker',
+            //text: 'Maps'
+          //},
         ],
         responsive: true
       }
@@ -164,7 +177,7 @@
 
     .v-list__tile {
       border-radius: 4px;
-
+      font: 200
       &--buy {
         margin-top: auto;
         margin-bottom: 17px;
@@ -172,6 +185,7 @@
 
       &__title {
         color: #ffffff;
+        
       }
     }
 
@@ -184,6 +198,9 @@
       margin-bottom: 30px !important;
       padding-left: 15px;
       padding-right: 15px;
+    }
+    .font-weight-regular.font-italic{
+      font:200
     }
   }
 </style>

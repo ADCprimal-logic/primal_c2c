@@ -54,7 +54,7 @@
             v-ripple
             slot="activator"
             class="toolbar-items"
-            to="/notifications"
+            to="/Inbox"
           >
             <v-badge
               color="error"
@@ -83,7 +83,7 @@
         <nuxt-link
           v-ripple
           class="toolbar-items"
-          to="/user-profile"
+          to="/Profile Editor"
           title="User profile"
         >
           <v-icon color="tertiary">mdi-account</v-icon>
@@ -108,11 +108,12 @@
   export default {
     data: () => ({
       notifications: [
-        'Mike, John responded to your email',
-        'You have 5 new tasks',
-        'You\'re now a friend with Andrew',
-        'Another Notification',
+        //'Mike, John responded to your email',
+        //'You have 5 new tasks',
+        //'You\'re now a friend with Andrew',
+       //'Another Notification',
         'Another One'
+        //A variable can also be added
       ],
       title: 'Dashboard',
       responsive: true,

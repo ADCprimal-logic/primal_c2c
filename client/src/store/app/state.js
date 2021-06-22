@@ -1,5 +1,5 @@
 export default () => ({
   drawer: null,
   color: 'info',
-  image: 'https://demos.creative-tim.com/vue-material-dashboard/img/sidebar-3.3a54f533.jpg'
+  image: 'https://primal-c2c-images.s3.amazonaws.com/static/bluetheme.jpg'
 })

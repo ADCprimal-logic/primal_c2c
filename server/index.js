@@ -1,27 +1,58 @@
 const { Keystone } = require("@keystonejs/keystone");
-const { PasswordAuthStrategy } = require("@keystonejs/auth-password");
-const { Text, Checkbox, Password } = require("@keystonejs/fields");
 const { GraphQLApp } = require("@keystonejs/app-graphql");
 const { AdminUIApp } = require("@keystonejs/app-admin-ui");
 const { NuxtApp } = require("@keystonejs/app-nuxt");
+// Admin UI Auth
+const { PasswordAuthStrategy } = require("@keystonejs/auth-password");
 // Nuxt Plugins
 var VuetifyLoaderPlugin = require("vuetify-loader/lib/plugin");
-// .ENV Configuration
+// .ENV Configuration (ANY process.env.VARIABLE MUST be declared AFTER dotev.config();)
 const dotenv = require("dotenv");
 dotenv.config();
+const PROJECT_NAME = process.env.PROJECT_NAME;
 // Database Configuration
 const { KnexAdapter: Adapter } = require("@keystonejs/adapter-knex");
-//const initialiseData = require("./initial-data");
-const PROJECT_NAME = process.env.PROJECT_NAME;
 const DATABASE_URL = process.env.DATABASE_URL;
-//console.log("Database: " + DATABASE_URL);
 const adapterConfig = {
   knexOptions: {
     connection: DATABASE_URL,
   },
 };
+// S3 Configuration
+const { S3Adapter } = require("@keystonejs/file-adapters");
+const CF_DISTRIBUTION_ID = process.env.CF_DISTRIBUTION_ID;
+const S3_PATH = process.env.S3_PATH;
+const S3_BUCKET = process.env.S3_BUCKET;
+const fileAdapter = new S3Adapter({
+  bucket: S3_BUCKET,
+  folder: S3_PATH,
+  publicUrl: ({ id, filename, _meta }) =>
+    `https://${CF_DISTRIBUTION_ID}.cloudfront.net/${S3_PATH}/${filename}`,
+  s3Options: {
+    // Optional parameters to be supplied directly to AWS.S3 constructor
+    accessKeyId: process.env.ACCESS_KEY_ID,
+    secretAccessKey: process.env.SECRET_ACCESS_KEY,
+    region: process.env.REGION,
+  },
+  uploadParams: ({ filename, id, mimetype, encoding }) => ({
+    Metadata: {
+      keystone_id: `${id}`,
+    },
+  }),
+});
+
+//Utils Initialize
+const auth = require("./util/auth");
+const initialiseData = require("./util/initial-data");
+const contact = require("./util/contact");
+// Express Packages
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 
 const keystone = new Keystone({
+  appVersion: {
+    version: process.env.APP_VERSION,
+  },
   cookieSecret: process.env.COOKIE_SECRET,
   cookie: {
     secure: process.env.NODE_ENV === "production", // Default to true in production
@@ -29,23 +60,26 @@ const keystone = new Keystone({
     sameSite: false,
   },
   adapter: new Adapter(adapterConfig),
-  //onConnect: process.env.CREATE_TABLES !== "true" && initialiseData,
+  onConnect: process.env.CREATE_TABLES !== "true" && initialiseData,
 });
 
-// See Keystone Object
-//console.log(keystone);
-
+// Index Exports
 exports.indexKey = keystone;
+exports.s3Adapter = fileAdapter;
 
 // User Schemas
-const superAdminSchema = require("./schemas/superadmin");
-const staffSchema = require("./schemas/staff");
-const parentSchema = require("./schemas/parent");
-const childSchema = require("./schemas/child");
+const superAdminSchema = require("./schema/superadmin");
+const staffSchema = require("./schema/staff");
+const parentSchema = require("./schema/parent");
+const approvedContactSchema = require("./schema/approvedcontact");
+const childSchema = require("./schema/child");
 // Object Schemas
-const locationSchema = require("./schemas/location");
-const scheduleSchema = require("./schemas/schedule");
-//const healthSchema = require("./schemas/schedule");
+const locationSchema = require("./schema/location");
+const roomSchema = require("./schema/room");
+const healthSchema = require("./schema/health");
+const newsletterSchema = require("./schema/newsletter");
+const childCheckInSchema = require("./schema/childcheckin");
+const staffCheckInSchema = require("./schema/staffcheckin");
 
 const authStrategy = keystone.createAuthStrategy({
   type: PasswordAuthStrategy,
@@ -55,10 +89,22 @@ const authStrategy = keystone.createAuthStrategy({
 
 module.exports = {
   keystone,
+  // Express Configuration (Optional)
+  configureExpress: (app) => {
+    //* START *//
+    // Express Middleware
+    app.use(cookieParser());
+    app.use(bodyParser.json());
+    // Express Routes
+    app.post("/api/auth/login", auth.login);
+    app.post("/api/auth/user", auth.user);
+    //* END *//
+  },
   apps: [
     new GraphQLApp(),
     new AdminUIApp({
       name: PROJECT_NAME,
+      hooks: require.resolve("./server-ui"),
       authStrategy,
     }),
     new NuxtApp({
@@ -75,8 +121,7 @@ module.exports = {
           { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
           {
             rel: "stylesheet",
-            href:
-              "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons",
+            href: "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons",
           },
         ],
       },
@@ -84,7 +129,12 @@ module.exports = {
        ** Global CSS
        */
       css: ["~/assets/style/index.scss"],
-
+      /*
+      ** Enviornment Variables for Front
+      */
+      env: {
+        baseUrl: process.env.BASE_URL || 'http://localhost:3000'
+      }
       /*
        ** Plugins to load before mounting the App
        */
@@ -106,12 +156,17 @@ module.exports = {
       axios: {
         // See https://github.com/nuxt-community/axios-module#options
       },
-
+      ssr: false,
       /*
        ** Build configuration
        */
       build: {
-        transpile: ["vuetify/lib"],
+        transpile: [
+          "vuetify/lib",
+          "@fullcalendar",
+          "vee-validate",
+          "vee-validate/dist/rules",
+        ],
         plugins: [new VuetifyLoaderPlugin()],
         loaders: {},
         /*

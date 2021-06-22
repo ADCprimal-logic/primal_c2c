@@ -1,12 +1,17 @@
 // Importing All Material Design Colors
 @import "./colors";
 
+@font-face {
+    font-family: 'Avenir Medium Oblique';
+    src: url("../style/fonts/avenir-mediumoblique-opentype_bigfontsite.com.otf") format('opentype');
+}
+
 //  Brand Colors
 $brand-primary:                    $purple !default;
 $brand-success:                    $green !default;
-$brand-danger:                     $red !default;
-$brand-warning:                    $orange !default;
-$brand-info:                       $cyan !default;
+$brand-danger:                     $black !default;
+$brand-warning:                    $orange-900 !default;
+$brand-info:                       $bluebird !default;
 
 // Paddings
 $padding-logo:                      15px !default;
@@ -125,6 +130,9 @@ $card-profile-avatar-pos:           -50px !default;
 // Typography
 $font-family-sans-serif:            'Roboto', 'Helvetica', 'Arial', sans-serif !default;
 $font-family-serif:                 'Roboto Slab', 'Times New Roman', serif !default;
+$font-family-header:                'Avenir Medium Oblique', serif;
+$font-family-subheader:             'Avenir Medium Oblique', 'Helvetica', 'Arial', sans-serif !default;
+$font-family-body:                  'Avenir Roman', 'Helvetica', 'Arial', sans-serif !default;
 
 // Tooltips
 $tooltip-min-width:                 130px !default;
