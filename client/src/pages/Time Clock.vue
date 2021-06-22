@@ -43,13 +43,6 @@
                         label="Clock In"
                       ></v-text-field>
                     </v-flex>
-                    <v-flex xs12 sm6 md4>
-                      <v-select
-                        v-model="editedItem.Status"
-                        :items="statusSelect"
-                        label="Status (In/Out)"
-                      ></v-select>
-                    </v-flex>
                   </v-layout>
                 </v-container>
               </v-card-text>
@@ -98,14 +91,6 @@
                             @input="clockOutSend = $event"
                             label="Clock Out"
                           ></v-text-field>
-                        </v-flex>
-                        <v-flex xs12 sm6 md4>
-                          <v-select
-                            v-model="editedItem.Status"
-                            :items="statusSelect"
-                            @input="statusSelect = $event"
-                            label="Status (In/Out)"
-                          ></v-select>
                         </v-flex>
                       </v-layout>
                     </v-container>
@@ -215,8 +200,30 @@ const currentDay = currentDate.getDay();
 const currentDayOfMonth = currentDate.getDate();
 const currentMonth = currentDate.getMonth(); // Be careful! January is 0, not 1
 const currentYear = currentDate.getFullYear();
-const dateString =
-  currentYear + "-" + (currentMonth + 1) + "-" + currentDayOfMonth;
+var dateString = currentYear + "-";
+if (currentMonth < 10) {
+  dateString = dateString + "0" + (currentMonth + 1) + "-" + currentDayOfMonth;
+} else {
+  dateString = dateString + (currentMonth + 1) + "-" + currentDayOfMonth;
+}
+const currentHour = currentDate.getHours();
+if (currentHour < 10) {
+  dateString = dateString + "T" + "0" + currentHour + ":";
+} else {
+  dateString = dateString + "T" + currentHour + ":";
+}
+const currentMinute = currentDate.getMinutes();
+if (currentMinute < 10) {
+  dateString = dateString + "0" + currentMinute + ":";
+} else {
+  dateString = dateString + currentMinute + ":";
+}
+const currentSecond = currentDate.getSeconds();
+if (currentSecond < 10) {
+  dateString = dateString + "0" + currentSecond;
+} else {
+  dateString = dateString + currentSecond;
+}
 
 import materialCard from "~/components/material/AppCard";
 export default {
@@ -672,12 +679,13 @@ export default {
 
     saveClockIn() {
       console.log(this.clockInSend);
-      console.log(this.statusSelect);
+      var parsedDate = new Date(this.clockInSend).toISOString();
+      console.log(parsedDate);
       console.log(this.id);
       /*const { punchInData } = await graphql(UPDATE_PUNCH_IN, {
         id: this.id,
         clockInSend: this.clockInSend,
-        statusSelect: this.statusSelect
+        statusSelect: "In"
       });*/
       /*if (this.editedIndex > -1) {
         Object.assign(this.childTimecard[this.editedIndex], this.editedItem);
@@ -688,12 +696,18 @@ export default {
     },
 
     async saveclockOut() {
-      const { punchOutData } = await graphql(UPDATE_PUNCH_OUT);
-      if (this.editedIndex > -1) {
+      console.log(this.clockOutSend);
+      console.log(this.id);
+      /*const { punchInData } = await graphql(UPDATE_PUNCH_OUT, {
+        id: this.id,
+        clockInSend: this.clockInSend,
+        statusSelect: "Out"
+      });*/
+      /*if (this.editedIndex > -1) {
         Object.assign(this.childTimecard[this.editedIndex], this.editedItem);
       } else {
         this.childTimecard.push(this.editedItem);
-      }
+      }*/
       this.closeClockOut();
     },
   },
