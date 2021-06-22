@@ -246,6 +246,7 @@ export default {
     editedIndex: -1,
     punchInQuery: null,
     punchOutQuery: null,
+    punchInSave: null,
     editedItem: {
       day: "X",
       ClockIn: "",
@@ -405,6 +406,7 @@ export default {
                 }
               }
           `;
+          this.punchInSave = this.allStaffTimeCards.time_PunchIn7;
           break;
         case 1:
           this.defaultItem = {
@@ -431,6 +433,7 @@ export default {
                 }
               }
           `;
+          this.punchInSave = this.allStaffTimeCards.time_PunchIn1;
           break;
         case 2:
           this.defaultItem = {
@@ -457,6 +460,7 @@ export default {
                }
              }
          `;
+          this.punchInSave = this.allStaffTimeCards.time_PunchIn2;
           break;
         case 3:
           this.defaultItem = {
@@ -483,6 +487,7 @@ export default {
                }
              }
          `;
+          this.punchInSave = this.allStaffTimeCards.time_PunchIn3;
           break;
         case 4:
           this.defaultItem = {
@@ -509,6 +514,7 @@ export default {
                 }
               }
           `;
+          this.punchInSave = this.allStaffTimeCards.time_PunchIn4;
           break;
         case 5:
           this.defaultItem = {
@@ -535,6 +541,7 @@ export default {
                 }
               }
           `;
+          this.punchInSave = this.allStaffTimeCards.time_PunchIn5;
           break;
         case 6:
           this.defaultItem = {
@@ -561,6 +568,7 @@ export default {
                }
              }
          `;
+          this.punchInSave = this.allStaffTimeCards.time_PunchIn6;
           break;
         default:
           console.log("OK");
@@ -709,6 +717,8 @@ export default {
       console.log(parsedDate);
       console.log(this.id);
       console.log(this.punchOutQuery);
+      var time1 = new Date(this.clockOutSend).getHours();
+      console.log(time1)
       const { punchOutData } = await graphql(this.punchOutQuery, {
         id: this.id,
         clockInSend: parsedDate,

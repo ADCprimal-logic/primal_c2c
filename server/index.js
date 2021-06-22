@@ -129,7 +129,12 @@ module.exports = {
        ** Global CSS
        */
       css: ["~/assets/style/index.scss"],
-
+      /*
+      ** Enviornment Variables for Front
+      */
+      env: {
+        baseUrl: process.env.BASE_URL || 'http://localhost:3000'
+      }
       /*
        ** Plugins to load before mounting the App
        */
