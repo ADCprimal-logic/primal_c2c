@@ -47,13 +47,14 @@ TWILIO_NUMBER = ""
 # Stripe Creds
 SECRET_KEY = "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"
 PUBLISH_KEY = "pk_live_51J4szdAmjaieFijUxBoFtILLFar9IYL5uEvbpN2RxAtmQpZGVIpC5so1YOuX2SsOxgljq5RilaGIIhq0LlXKSpAf00KBuDXZmn"
-TEST_SECRET_KEY = ""
-TEST_PUBLISH_KEY = ""
+TEST_SECRET_KEY = "sk_test_51J4szdAmjaieFijUTMG9SMwZMPgaSBl0QPOQIkIlR3t6Z84nz8Wh6TfL3u7T80OwYrK1YaCnhf5Hp9lc7oghlY8000TnMgyqHg"
+TEST_PUBLISH_KEY = "pk_test_51J4szdAmjaieFijUIsUCzz7kzQFzuAU8GCZfy5IpQOOArntei5FwDMcH1KjaIx1W3ONwj9kOEqjcAxcjBwkijTvb00I6ecQHj5"
 # Database Config
 DATABASE_URL="postgres://primal_postgres:primal-squad@c2cdatabase.cqs5a6cxnjkx.us-east-1.rds.amazonaws.com:5432/production"
 # Build Config
 NUXT_TELEMETRY_DISABLED=1
 JWT_TOKEN="primalC2C"
+JWT_EXPIRE="6h"
 ```
 
 ## Documentation for further development:

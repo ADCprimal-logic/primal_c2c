@@ -13,7 +13,7 @@ exports.login = async (req, res) => {
   console.log(req.body.data);
   // Declare Variables
   const { email, password, role } = req.body.data;
-  const expiresIn = "1h";
+  const expiresIn = process.env.JWT_EXPIRE;
   var user = null;
   let isValidPassword;
   const sql = postgres(process.env.DATABASE_URL);
@@ -81,7 +81,17 @@ exports.user = async (req, res) => {
   //console.log(req.body);
   //console.log("Getting User");
   var accessToken = req.body.data;
-  var decoded = jsonwebtoken.verify(accessToken, process.env.JWT_TOKEN);
+  var decoded = jsonwebtoken.verify(
+    accessToken,
+    process.env.JWT_TOKEN,
+    function (err, decoded) {
+      if (err) {
+        console.log(err);
+      } else {
+        return decoded;
+      }
+    }
+  );
   //console.log(decoded);
   res.send({
     status: 200,
