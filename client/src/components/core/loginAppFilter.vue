@@ -17,6 +17,7 @@
       dark
       fab
       fixed
+      rotating
       style="top: 96px;"
       top
       title="Color Palette!"

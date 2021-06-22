@@ -93,11 +93,6 @@
                 text: 'Schedule'
             },
           {
-            to: '/Parents-Child-Record',
-            icon: 'mdi-account-box-multiple',
-            text: 'Child Records'
-          },
-          {
             to: '/Parents-Profile-Editor',
             icon: 'mdi-account-edit',
             text: 'Parent Profile'
