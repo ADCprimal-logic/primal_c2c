@@ -718,7 +718,7 @@ export default {
       console.log(this.id);
       console.log(this.punchOutQuery);
       var time1 = new Date(this.clockOutSend).getHours();
-      console.log(time1)
+      console.log(time1);
       const { punchOutData } = await graphql(this.punchOutQuery, {
         id: this.id,
         clockInSend: parsedDate,
