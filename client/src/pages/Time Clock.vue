@@ -696,39 +696,31 @@ export default {
 
     async saveClockIn() {
       var parsedDate = new Date(this.clockInSend).toISOString();
-      //console.log(parsedDate);
+      console.log(parsedDate);
       //console.log(this.id);
-      console.log(this.punchInQuery);
+      //console.log(this.punchInQuery);
       const { punchInData } = await graphql(this.punchInQuery, {
         id: this.id,
         clockInSend: parsedDate,
         statusSelect: "In",
       });
-      if (this.editedIndex > -1) {
-        Object.assign(this.childTimecard[this.editedIndex], this.editedItem);
-      } else {
-        this.childTimecard.push(this.editedItem);
-      }
       this.closeClockIn();
     },
 
     async saveClockOut() {
       var parsedDate = new Date(this.clockOutSend).toISOString();
       console.log(parsedDate);
-      console.log(this.id);
-      console.log(this.punchOutQuery);
+      //console.log(this.id);
+      //console.log(this.punchOutQuery);
       var time1 = new Date(this.clockOutSend).getHours();
       console.log(time1);
+      var time2 = new Date(this.punchInSave).getHours();
+      console.log(time2);
       const { punchOutData } = await graphql(this.punchOutQuery, {
         id: this.id,
-        clockInSend: parsedDate,
+        clockOutSend: parsedDate,
         statusSelect: "Out",
       });
-      /*if (this.editedIndex > -1) {
-        Object.assign(this.childTimecard[this.editedIndex], this.editedItem);
-      } else {
-        this.childTimecard.push(this.editedItem);
-      }*/
       this.closeClockOut();
     },
   },
