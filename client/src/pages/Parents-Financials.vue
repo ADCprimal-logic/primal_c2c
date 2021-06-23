@@ -154,7 +154,7 @@
                     />
                   </v-list-tile-action>
                   <v-list-tile-title>
-                    Sign contract for "What are conference organized afraid of?"
+                    Payment form goes here
                   </v-list-tile-title>
                   <div class="d-flex">
                     <v-tooltip
@@ -195,7 +195,7 @@
                     />
                   </v-list-tile-action>
                   <v-list-tile-title>
-                    Lines From Great Russian Literature? Or E-mails From My Boss?
+                    Payment form here
                   </v-list-tile-title>
                   <div class="d-flex">
                     <v-tooltip
@@ -235,7 +235,7 @@
                     />
                   </v-list-tile-action>
                   <v-list-tile-title>
-                    Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+                    Payment form goes here
                   </v-list-tile-title>
                   <div class="d-flex">
                     <v-tooltip
@@ -304,7 +304,7 @@
           },
           {
             sortable: false,
-            text: 'Payment Ammount',
+            text: 'Payment Amount',
             value: 'salary',
             align: 'right'
           },
@@ -324,30 +324,30 @@
         items: [
           {
             name: '06/20/2021',
-            AutoPay: 'Niger',
-            city: 'Oud-Tunrhout',
+            AutoPay: 'Scheduled',
+            city: 'Carters',
             salary: '$325.10'
           },
           {
-            name: 'Minerva Hooper',
-            AutoPay: 'Curaçao',
-            city: 'Sinaai-Waas',
-            salary: '$23,738'
+            name: '06/20/2021',
+            AutoPay: 'Scheduled',
+            city: 'Carters',
+            salary: '$400'
           }, {
-            name: 'Sage Rodriguez',
-            AutoPay: 'Netherlands',
-            city: 'Overland Park',
-            salary: '$56,142'
+            name: '06/20/2021',
+            AutoPay: 'Scheduled',
+            city: 'Carters',
+            salary: '$450.12'
           }, {
-            name: 'Philip Chanley',
-            AutoPay: 'Korea, South',
-            city: 'Gloucester',
-            salary: '$38,735'
+            name: '06/20/2021',
+            AutoPay: 'None',
+            city: 'Carters',
+            salary: '$352.50'
           }, {
-            name: 'Doris Greene',
-            AutoPay: 'Malawi',
-            city: 'Feldkirchen in Kārnten',
-            salary: '$63,542'
+            name: '06/20/2021',
+            AutoPay: 'None',
+            city: 'Carters',
+            salary: '$1200'
           }
         ],
         tabs: 0,
