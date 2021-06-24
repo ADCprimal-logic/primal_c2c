@@ -16,9 +16,9 @@
           color="red"
           icon="mdi-cash"
           title="Balance Owed"
-          value="$34,245"
+          value="$2,500"
           sub-icon="mdi-calendar"
-          sub-text="Pulled from"
+          sub-text="Daily Update"
         />
       </v-flex>
       <v-flex
@@ -28,14 +28,13 @@
         lg3
       >
         <material-stats-card
-          color="orange"
+          color="C2Cblue"
           icon="mdi-content-copy"
-          title="Used Space"
-          value="49/50"
-          small-value="GB"
-          sub-icon="mdi-alert"
+          title="Last Payment"
+          value="$352.50"
+          sub-icon="mdi-clock"
           sub-icon-color="error"
-          sub-text="Get More Space..."
+          sub-text="Your account is current."
           sub-text-color="text-primary"
         />
       </v-flex>
@@ -46,12 +45,12 @@
         lg3
       >
         <material-stats-card
-          color="red"
-          icon="mdi-information-outline"
-          title="Fixed Issues"
-          value="75"
-          sub-icon="mdi-tag"
-          sub-text="Tracked from Github"
+          color="mint"
+          icon="mdi-clock"
+          title="Next Scheduled Payment"
+          value="6/29/2021"
+          sub-icon="mdi-alert"
+          sub-text="Update Autopay"
         />
       </v-flex>
       <v-flex
@@ -62,9 +61,9 @@
       >
         <material-stats-card
           color="info"
-          icon="mdi-twitter"
-          title="Followers"
-          value="+245"
+          icon="mdi-cash-remove"
+          title="Returned Payments/Pending Payments"
+          value="$0"
           sub-icon="mdi-update"
           sub-text="Just Updated"
         />
@@ -74,9 +73,9 @@
         lg6
       >
         <material-card
-          color="orange"
-          title="Employee Stats"
-          text="New employees on 15th September, 2016"
+          color="C2Cblue"
+          title="Recent Payments Summary"
+          text="This is a list of all payments made to C2CKids."
         >
           <v-data-table
             :headers="headers"
@@ -99,7 +98,7 @@
               <td>{{ index + 1 }}</td>
               <td>{{ item.name }}</td>
               <td class="text-xs-right">{{ item.salary }}</td>
-              <td class="text-xs-right">{{ item.country }}</td>
+              <td class="text-xs-right">{{ item.AutoPay }}</td>
               <td class="text-xs-right">{{ item.city }}</td>
             </template>
           </v-data-table>
@@ -111,14 +110,16 @@
       >
         <material-card
           class="card-tabs"
-          color="green">
+          color="C2Corange">
           <v-flex
             slot="header"
           >
             <v-tabs
               v-model="tabs"
               color="transparent"
-              slider-color="white"
+              slider-color="C2Cblue"
+              dark
+              class
             >
               <span
                 class="subheading font-weight-light mr-3"
@@ -126,15 +127,15 @@
               >Tasks:</span>
               <v-tab class="mr-3">
                 <v-icon class="mr-2">mdi-bug</v-icon>
-                Send Payment
+                Make One Time Payment
               </v-tab>
               <v-tab class="mr-3">
                 <v-icon class="mr-2">mdi-code-tags</v-icon>
-                Autopay
+                Update Autopay
               </v-tab>
               <v-tab>
-                <v-icon class="mr-2">mdi-cloud</v-icon>
-                Server
+                <v-icon class="mr-2">mdi-chat-question-outline</v-icon>
+                Request Special Invoices
               </v-tab>
             </v-tabs>
           </v-flex>
@@ -153,7 +154,7 @@
                     />
                   </v-list-tile-action>
                   <v-list-tile-title>
-                    Sign contract for "What are conference organized afraid of?"
+                    Payment form goes here
                   </v-list-tile-title>
                   <div class="d-flex">
                     <v-tooltip
@@ -194,7 +195,7 @@
                     />
                   </v-list-tile-action>
                   <v-list-tile-title>
-                    Lines From Great Russian Literature? Or E-mails From My Boss?
+                    Payment form here
                   </v-list-tile-title>
                   <div class="d-flex">
                     <v-tooltip
@@ -234,7 +235,7 @@
                     />
                   </v-list-tile-action>
                   <v-list-tile-title>
-                    Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+                    Payment form goes here
                   </v-list-tile-title>
                   <div class="d-flex">
                     <v-tooltip
@@ -290,73 +291,6 @@
     },
     data() {
       return {
-        dailySalesChart: {
-          data: {
-            labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-            series: [
-              [12, 17, 7, 17, 23, 18, 38]
-            ]
-          },
-          options: {
-            low: 0,
-            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-            chartPadding: {
-              top: 0,
-              right: 0,
-              bottom: 0,
-              left: 0
-            }
-          }
-        },
-        dataCompletedTasksChart: {
-          data: {
-            labels: ['12am', '3pm', '6pm', '9pm', '12pm', '3am', '6am', '9am'],
-            series: [
-              [230, 750, 450, 300, 280, 240, 200, 190]
-            ]
-          },
-          options: {
-            low: 0,
-            high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-            chartPadding: {
-              top: 0,
-              right: 0,
-              bottom: 0,
-              left: 0
-            }
-          }
-        },
-        emailsSubscriptionChart: {
-          data: {
-            labels: ['Ja', 'Fe', 'Ma', 'Ap', 'Mai', 'Ju', 'Jul', 'Au', 'Se', 'Oc', 'No', 'De'],
-            series: [
-              [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]
-            ]
-          },
-          options: {
-            axisX: {
-              showGrid: false
-            },
-            low: 0,
-            high: 1000,
-            chartPadding: {
-              top: 0,
-              right: 5,
-              bottom: 0,
-              left: 0
-            }
-          },
-          responsiveOptions: [
-            ['screen and (max-width: 640px)', {
-              seriesBarDistance: 5,
-              axisX: {
-                labelInterpolationFnc: function (value) {
-                  return value[0]
-                }
-              }
-            }]
-          ]
-        },
         headers: [
           {
             sortable: false,
@@ -365,55 +299,55 @@
           },
           {
             sortable: false,
-            text: 'Name',
+            text: 'Date/Time Posted',
             value: 'name'
           },
           {
             sortable: false,
-            text: 'Salary',
+            text: 'Payment Amount',
             value: 'salary',
             align: 'right'
           },
           {
             sortable: false,
-            text: 'Country',
-            value: 'country',
+            text: 'AutoPay',
+            value: 'AutoPay',
             align: 'right'
           },
           {
             sortable: false,
-            text: 'City',
+            text: 'Posted By',
             value: 'city',
             align: 'right'
           }
         ],
         items: [
           {
-            name: 'Dakota Rice',
-            country: 'Niger',
-            city: 'Oud-Tunrhout',
-            salary: '$35,738'
+            name: '06/20/2021',
+            AutoPay: 'Scheduled',
+            city: 'Carters',
+            salary: '$325.10'
           },
           {
-            name: 'Minerva Hooper',
-            country: 'Curaçao',
-            city: 'Sinaai-Waas',
-            salary: '$23,738'
+            name: '06/20/2021',
+            AutoPay: 'Scheduled',
+            city: 'Carters',
+            salary: '$400'
           }, {
-            name: 'Sage Rodriguez',
-            country: 'Netherlands',
-            city: 'Overland Park',
-            salary: '$56,142'
+            name: '06/20/2021',
+            AutoPay: 'Scheduled',
+            city: 'Carters',
+            salary: '$450.12'
           }, {
-            name: 'Philip Chanley',
-            country: 'Korea, South',
-            city: 'Gloucester',
-            salary: '$38,735'
+            name: '06/20/2021',
+            AutoPay: 'None',
+            city: 'Carters',
+            salary: '$352.50'
           }, {
-            name: 'Doris Greene',
-            country: 'Malawi',
-            city: 'Feldkirchen in Kārnten',
-            salary: '$63,542'
+            name: '06/20/2021',
+            AutoPay: 'None',
+            city: 'Carters',
+            salary: '$1200'
           }
         ],
         tabs: 0,

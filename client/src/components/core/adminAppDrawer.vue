@@ -72,13 +72,13 @@
         logo: '/vuetifylogo.png',
         links: [
           {
-            to: '/Dashboard',
+            to: '/admin-dashboard',
             icon: 'mdi-view-dashboard',
             text: 'Admin Dash',
             alt: 'Dashboard',
           },
           {
-            to: '/C2Cchildrenconnect/admin/signin',
+            to: '/admin-database-editor',
             icon: 'mdi-atom',
             text: 'Edit Database'
           },
