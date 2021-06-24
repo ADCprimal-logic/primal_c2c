@@ -186,6 +186,39 @@ function getUser(data) {
     return result.json();
   });
 }
+function makeDate() {
+  const currentDate = new Date();
+  const currentDay = currentDate.getDay();
+  const currentDayOfMonth = currentDate.getDate();
+  const currentMonth = currentDate.getMonth(); // Be careful! January is 0, not 1
+  const currentYear = currentDate.getFullYear();
+  var dateString = currentYear + "-";
+  if (currentMonth < 10) {
+    dateString =
+      dateString + "0" + (currentMonth + 1) + "-" + currentDayOfMonth;
+  } else {
+    dateString = dateString + (currentMonth + 1) + "-" + currentDayOfMonth;
+  }
+  const currentHour = currentDate.getHours();
+  if (currentHour < 10) {
+    dateString = dateString + "T" + "0" + currentHour + ":";
+  } else {
+    dateString = dateString + "T" + currentHour + ":";
+  }
+  const currentMinute = currentDate.getMinutes();
+  if (currentMinute < 10) {
+    dateString = dateString + "0" + currentMinute + ":";
+  } else {
+    dateString = dateString + currentMinute + ":";
+  }
+  const currentSecond = currentDate.getSeconds();
+  if (currentSecond < 10) {
+    dateString = dateString + "0" + currentSecond;
+  } else {
+    dateString = dateString + currentSecond;
+  }
+  return dateString;
+}
 
 const currentDate = new Date();
 const currentDay = currentDate.getDay();
@@ -248,7 +281,7 @@ export default {
     punchOutQuery: null,
     punchInSave: null,
     editedItem: {
-      day: "X",
+      day: "",
       ClockIn: "",
       ClockOut: "",
       Status: "",
@@ -268,7 +301,7 @@ export default {
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "New Time Punch" : "Edit Time Punch";
+      return "New Time Punch";
     },
   },
 
@@ -400,8 +433,8 @@ export default {
               }
           `;
           var UPDATE_PUNCH_OUT = `
-          mutation timePunchOut($id: ID!, $clockOutSend: DateTime, $statusSelect: StaffTimecardClockedIO7Type) {
-                updateStaffTimecard(id: $id, data: {time_PunchOut7: $clockOutSend, clockedIO7: $statusSelect}) {
+          mutation timePunchOut($id: ID!, $clockOutSend: DateTime, $statusSelect: StaffTimecardClockedIO7Type, $hoursLogged: Int) {
+                updateStaffTimecard(id: $id, data: {time_PunchOut7: $clockOutSend, clockedIO7: $statusSelect, hours_worked7: $hoursLogged}) {
                   id
                 }
               }
@@ -427,8 +460,8 @@ export default {
               }
           `;
           var UPDATE_PUNCH_OUT = `
-          mutation timePunchOut($id: ID!, $clockOutSend: DateTime, $statusSelect: StaffTimecardClockedIO1Type) {
-                updateStaffTimecard(id: $id, data: {time_PunchOut1: $clockOutSend, clockedIO1: $statusSelect}) {
+          mutation timePunchOut($id: ID!, $clockOutSend: DateTime, $statusSelect: StaffTimecardClockedIO1Type, $hoursLogged: Int) {
+                updateStaffTimecard(id: $id, data: {time_PunchOut1: $clockOutSend, clockedIO1: $statusSelect, hours_worked1: $hoursLogged}) {
                   id
                 }
               }
@@ -454,8 +487,8 @@ export default {
              }
          `;
           var UPDATE_PUNCH_OUT = `
-         mutation timePunchOut($id: ID!, $clockOutSend: DateTime, $statusSelect: StaffTimecardClockedIO2Type) {
-               updateStaffTimecard(id: $id, data: {time_PunchOut2: $clockOutSend, clockedIO2: $statusSelect}) {
+         mutation timePunchOut($id: ID!, $clockOutSend: DateTime, $statusSelect: StaffTimecardClockedIO2Type, $hoursLogged: Int) {
+               updateStaffTimecard(id: $id, data: {time_PunchOut2: $clockOutSend, clockedIO2: $statusSelect, hours_worked2: $hoursLogged}) {
                  id
                }
              }
@@ -481,8 +514,8 @@ export default {
              }
          `;
           var UPDATE_PUNCH_OUT = `
-         mutation timePunchOut($id: ID!, $clockOutSend: DateTime, $statusSelect: StaffTimecardClockedIO3Type) {
-               updateStaffTimecard(id: $id, data: {time_PunchOut3: $clockOutSend, clockedIO3: $statusSelect}) {
+         mutation timePunchOut($id: ID!, $clockOutSend: DateTime, $statusSelect: StaffTimecardClockedIO3Type, $hoursLogged: Int) {
+               updateStaffTimecard(id: $id, data: {time_PunchOut3: $clockOutSend, clockedIO3: $statusSelect, hours_worked3: $hoursLogged}) {
                  id
                }
              }
@@ -508,8 +541,8 @@ export default {
               }
           `;
           var UPDATE_PUNCH_OUT = `
-          mutation timePunchOut($id: ID!, $clockOutSend: DateTime, $statusSelect: StaffTimecardClockedIO4Type) {
-                updateStaffTimecard(id: $id, data: {time_PunchOut4: $clockOutSend, clockedIO4: $statusSelect}) {
+          mutation timePunchOut($id: ID!, $clockOutSend: DateTime, $statusSelect: StaffTimecardClockedIO4Type, $hoursLogged: Int) {
+                updateStaffTimecard(id: $id, data: {time_PunchOut4: $clockOutSend, clockedIO4: $statusSelect, hours_worked4: $hoursLogged}) {
                   id
                 }
               }
@@ -535,8 +568,8 @@ export default {
               }
           `;
           var UPDATE_PUNCH_OUT = `
-          mutation timePunchOut($id: ID!, $clockOutSend: DateTime, $statusSelect: StaffTimecardClockedIO5Type) {
-                updateStaffTimecard(id: $id, data: {time_PunchOut5: $clockOutSend, clockedIO5: $statusSelect}) {
+          mutation timePunchOut($id: ID!, $clockOutSend: DateTime, $statusSelect: StaffTimecardClockedIO5Type, $hoursLogged: Int) {
+                updateStaffTimecard(id: $id, data: {time_PunchOut5: $clockOutSend, clockedIO5: $statusSelect, hours_worked5: $hoursLogged}) {
                   id
                 }
               }
@@ -562,8 +595,8 @@ export default {
              }
          `;
           var UPDATE_PUNCH_OUT = `
-         mutation timePunchOut($id: ID!, $clockOutSend: DateTime, $statusSelect: StaffTimecardClockedIO6Type) {
-               updateStaffTimecard(id: $id, data: {time_PunchOut6: $clockOutSend, clockedIO6: $statusSelect}) {
+         mutation timePunchOut($id: ID!, $clockOutSend: DateTime, $statusSelect: StaffTimecardClockedIO6Type, $hoursLogged: Int) {
+               updateStaffTimecard(id: $id, data: {time_PunchOut6: $clockOutSend, clockedIO6: $statusSelect, hours_worked6: $hoursLogged}) {
                  id
                }
              }
@@ -696,39 +729,38 @@ export default {
 
     async saveClockIn() {
       var parsedDate = new Date(this.clockInSend).toISOString();
-      //console.log(parsedDate);
+      console.log(parsedDate);
       //console.log(this.id);
-      console.log(this.punchInQuery);
+      //console.log(this.punchInQuery);
       const { punchInData } = await graphql(this.punchInQuery, {
         id: this.id,
         clockInSend: parsedDate,
         statusSelect: "In",
       });
-      if (this.editedIndex > -1) {
-        Object.assign(this.childTimecard[this.editedIndex], this.editedItem);
-      } else {
-        this.childTimecard.push(this.editedItem);
-      }
+      this.timeStamp = makeDate();
+      this.updateStaff();
       this.closeClockIn();
     },
 
     async saveClockOut() {
       var parsedDate = new Date(this.clockOutSend).toISOString();
-      console.log(parsedDate);
-      console.log(this.id);
-      console.log(this.punchOutQuery);
-      var time1 = new Date(this.clockOutSend).getHours();
-      console.log(time1);
+      //console.log(parsedDate);
+      //console.log(this.id);
+      //console.log(this.punchOutQuery);
+      var timeOut = new Date(this.clockOutSend).getHours();
+      //console.log(timeOut);
+      var timeIn = new Date(this.punchInSave).getHours();
+      //console.log(timeIn);
+      var loggedHours = timeOut - timeIn;
+      //console.log(loggedHours);
       const { punchOutData } = await graphql(this.punchOutQuery, {
         id: this.id,
-        clockInSend: parsedDate,
+        clockOutSend: parsedDate,
         statusSelect: "Out",
+        hoursLogged: loggedHours,
       });
-      /*if (this.editedIndex > -1) {
-        Object.assign(this.childTimecard[this.editedIndex], this.editedItem);
-      } else {
-        this.childTimecard.push(this.editedItem);
-      }*/
+      this.timeStamp = makeDate();
+      this.updateStaff();
       this.closeClockOut();
     },
   },
