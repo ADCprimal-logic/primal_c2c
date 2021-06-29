@@ -147,6 +147,7 @@
               <v-list-tile-sub-title>Approved Contact Full Name</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
+          <v-divider inset></v-divider>
             <v-list-tile @click="">
             <v-list-tile-action>
             <v-icon color= 'C2Corange'>mdi-phone</v-icon>
@@ -158,6 +159,7 @@
               <v-list-tile-sub-title>Approved Contact Phone</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
+          <v-divider inset></v-divider>
 <!-- Field Divider -->   
             <v-list-tile @click="">
             <v-list-tile-action>
@@ -165,22 +167,26 @@
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title v-if="props.item.approved_contact" 
-             v-for="value in props.item.approved_contact">{{value.relation}} <br/> Name</v-list-tile-title>
+             v-for="value in props.item.approved_contact">{{value.relation}} </v-list-tile-title>
               <v-list-tile-sub-title></v-list-tile-sub-title>
               <v-list-tile-sub-title>Approved Contact Relation</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
-          <v-list-tile @click="">
-            <v-list-tile-action>
-            <v-icon color= 'C2Corange'>mdi-account-switch</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title > Click Here to Sign out the student. <br/> Name</v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
+          
 <!-- End of Fields -->
         </v-list>
+        
       </v-card>
+                  <a href="javascript:void( window.open( 'https://form.jotform.com/211794184029055', 'blank', 'scrollbars=yes, toolbar=no, width=1000, height=1000' ) ) "> 
+                  <v-btn
+                    block
+                    color="C2Corange"
+                    round
+                    class = "C2Cblue--text"
+                  >
+                  Click here to sign out the student!
+                  </v-btn>
+                  </a>
     </v-flex>
   </v-layout>
         </v-card-text>
