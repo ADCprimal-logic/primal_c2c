@@ -170,6 +170,14 @@
               <v-list-tile-sub-title>Approved Contact Relation</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
+          <v-list-tile @click="">
+            <v-list-tile-action>
+            <v-icon color= 'C2Corange'>mdi-account-switch</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title > Click Here to Sign out the student. <br/> Name</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
 <!-- End of Fields -->
         </v-list>
       </v-card>
