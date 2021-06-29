@@ -30,6 +30,7 @@ keystone.createList("Parent", {
     mobile_phone: { type: Text, isRequired: true },
     home_phone: { type: Text },
     work_phone: { type: Text },
+    stripe_id: { type: Text },
     child: { type: Relationship, ref: "Child", many: true },
     approved_contact: {
       type: Relationship,
