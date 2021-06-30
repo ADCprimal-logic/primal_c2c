@@ -1,5 +1,7 @@
 <template>
-    <!-- Comment -->
+    <!-- Once tony creates the balance variable for the child object i will change this table just to show the child's name, pin, and balance -->
+    <!-- when you click on the child you will have multiple buttons that will deduct money from the child's balance-->
+    <!-- button for one day's lunch, buttons for different snack prices or drinks or something-->
     <v-container fill-height
                  fluid
                  grid-list-xl>
@@ -12,7 +14,7 @@
                               single-line
                               hide-details></v-text-field>
                 <material-card color="C2Cblue"
-                               title="Student Data"
+                               title="Find Student and Check them out"
                                text="Expands to show detailed data on the child.">
                     <v-data-table :headers="headers"
                                   :items="children"

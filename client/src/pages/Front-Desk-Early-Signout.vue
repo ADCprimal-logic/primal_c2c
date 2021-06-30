@@ -24,6 +24,8 @@
       item-key="full_name"
       loading="true"
       :search="search"
+      dark
+      class
     >
       <template v-slot:items="props">
           <tr @click="props.expanded = !props.expanded">
@@ -54,10 +56,10 @@
         <v-card-text>
           <v-layout row wrap align-right>
               <v-flex xs12 sm6 offset-sm3>
-                <v-card color = 'C2Cblue'>
+                <v-card color = 'C2Corange'>
                     <v-layout column fill-height>
                       <!-- Name over Image -->
-                      <v-card-title class="white--text pl-26 pt-26" row wrap align-right>
+                      <v-card-title class="justify-center C2Cblue--text pl-26 pt-26" row wrap align-right>
                         {{props.item.first_name}}'s data is printed below.
                       </v-card-title>
                     </v-layout>
@@ -76,7 +78,7 @@
 
           <v-list-tile @click="">
             <v-list-tile-action>
-              <v-icon color="red">mdi-numeric</v-icon>
+              <v-icon color="C2Corange">mdi-numeric</v-icon>
             </v-list-tile-action>
 
             <v-list-tile-content>
@@ -89,7 +91,7 @@
 
             <v-list-tile @click="">
             <v-list-tile-action>
-              <v-icon color="bluebird">phone</v-icon>
+              <v-icon color="C2Corange">phone</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title v-if="props.item.parent[0]">{{props.item.parent[0].mobile_phone}}</v-list-tile-title>
@@ -107,7 +109,7 @@
 
           <v-list-tile @click="">
             <v-list-tile-action>
-              <v-icon color="bluebird">mail</v-icon>
+              <v-icon color="C2Corange">mail</v-icon>
             </v-list-tile-action>
 
             <v-list-tile-content>
@@ -121,7 +123,7 @@
             
             <v-list-tile @click="">
             <v-list-tile-action>
-              <v-icon color= 'bluebird'>mdi-hospital-marker</v-icon>
+              <v-icon color= 'C2Corange'>mdi-hospital-marker</v-icon>
             </v-list-tile-action>
 
             <v-list-tile-content>
@@ -135,41 +137,56 @@
 <!-- Field Divider -->   
             <v-list-tile @click="">
             <v-list-tile-action>
-              <v-icon color= 'bluebird'>mdi-message-bulleted</v-icon>
+              <v-icon color= 'C2Corange'>mdi-message-bulleted</v-icon>
             </v-list-tile-action>
 
             <v-list-tile-content>
               <v-list-tile-title v-if="props.item.approved_contact" 
-                                 v-for="value in props.item.approved_contact">{{value.full_name}} <br/> Name</v-list-tile-title>
+              v-for="value in props.item.approved_contact">{{value.full_name}} <br/> Name</v-list-tile-title>
               <v-list-tile-sub-title></v-list-tile-sub-title>
               <v-list-tile-sub-title>Approved Contact Full Name</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
+          <v-divider inset></v-divider>
             <v-list-tile @click="">
             <v-list-tile-action>
+            <v-icon color= 'C2Corange'>mdi-phone</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title v-if="props.item.approved_contact" 
-                                 v-for="value in props.item.approved_contact">{{value.phone}} </v-list-tile-title>
+              v-for="value in props.item.approved_contact">{{value.phone}} </v-list-tile-title>
               <v-list-tile-sub-title></v-list-tile-sub-title>
               <v-list-tile-sub-title>Approved Contact Phone</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
+          <v-divider inset></v-divider>
 <!-- Field Divider -->   
             <v-list-tile @click="">
             <v-list-tile-action>
+            <v-icon color= 'C2Corange'>mdi-account-switch</v-icon>
             </v-list-tile-action>
-
             <v-list-tile-content>
               <v-list-tile-title v-if="props.item.approved_contact" 
-                                 v-for="value in props.item.approved_contact">{{value.relation}} <br/> Name</v-list-tile-title>
+             v-for="value in props.item.approved_contact">{{value.relation}} </v-list-tile-title>
               <v-list-tile-sub-title></v-list-tile-sub-title>
               <v-list-tile-sub-title>Approved Contact Relation</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
+          
 <!-- End of Fields -->
         </v-list>
+        
       </v-card>
+                  <a href="javascript:void( window.open( 'https://form.jotform.com/211794184029055', 'blank', 'scrollbars=yes, toolbar=no, width=1000, height=1000' ) ) "> 
+                  <v-btn
+                    block
+                    color="C2Corange"
+                    round
+                    class = "C2Cblue--text"
+                  >
+                  Click here to sign out the student!
+                  </v-btn>
+                  </a>
     </v-flex>
   </v-layout>
         </v-card-text>

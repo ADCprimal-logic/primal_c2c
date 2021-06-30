@@ -67,6 +67,7 @@
                                 submit
                             </v-btn>
                             <v-btn outlined @click="clearStep1();e6 = 2" color="accent"> clear </v-btn>
+                            <v-btn outlined @click="getCustomerID()" color="accent"> test </v-btn>
                         </form>
                     </validation-observer>
                 </v-stepper-content>
@@ -192,6 +193,7 @@
                                     submit
                                 </v-btn>
                                 <v-btn outlined @click="clearStep2(); e6 = 3" color="accent"> clear </v-btn>
+                                <v-btn outlined @click="e6 = 1" color="accent"> back </v-btn>
                             </form>
                         </validation-observer>
                     </v-card>
@@ -216,16 +218,6 @@
                                               required></v-select>
                                 </validation-provider>
                                 <validation-provider v-slot="{ errors }"
-                                                     name="C2C Programs"
-                                                     rules="required">
-                                    <v-select v-model="thisprogram"
-                                              :items="programs"
-                                              :error-messages="errors"
-                                              label="What program are you enrolling your child in?"
-                                              data-vv-name="programs"
-                                              required></v-select>
-                                </validation-provider>
-                                <validation-provider v-slot="{ errors }"
                                                      name="Expected Start Date"
                                                      :rules="{
                                                         required: true,
@@ -245,20 +237,324 @@
                                   ">
                                     submit
                                 </v-btn>
-                                <v-btn outlined @click="clearStep3(); e6 = 3" color="accent"> clear </v-btn>
+                                <v-btn outlined @click="e6 = 4" color="accent"> clear </v-btn>
+                                <!--clearStep3()-->
+                                <v-btn outlined @click="e6 = 2" color="accent"> back </v-btn>
                             </form>
                         </validation-observer>
                     </v-card>
                 </v-stepper-content>
 
-                <v-stepper-step :complete="e6 > 4" step="4"> Payment and Waivers </v-stepper-step>
+                <v-stepper-step :complete="e6 > 4" step="4"> Payment and Waivers <small>
+                        Do not click the "complete registration" button until the payment form is complete.
+                    </small>
+                </v-stepper-step>
+                
                 <v-stepper-content step="4">
-                    <v-card color="grey lighten-1"
-                            class="mb-12"
-                            height="200px"
-                            width="2000px"></v-card>
-                    <v-btn color="primary" @click="e6 = 5; createParent()"> Continue </v-btn>
-                    <v-btn text> Cancel </v-btn>
+                    <v-card class="mb-12">
+                        <form @submit.prevent="submit">
+                            <!--Shows the jotform for the location selected in step 3-->
+                            <!--Spartanburg-->
+                            <div v-if="thislocation == 'Spartanburg'">
+                                <iframe id="JotFormIFrame-211783125722048"
+                                        title="Spartanburg Registration"
+                                        onload="window.parent.scrollTo(0,0)"
+                                        allowtransparency="true"
+                                        allowfullscreen="true"
+                                        allow="geolocation; microphone; camera"
+                                        src="https://form.jotform.com/211783125722048"
+                                        frameborder="0"
+                                        style="
+          min-width: 100%;
+          height:539px;
+          border:none;"
+                                        scrolling="no">
+                                </iframe>
+                                <script type="text/javascript">
+                                    var ifr = document.getElementById("JotFormIFrame-211783125722048");
+                                    if (ifr) {
+                                        var src = ifr.src;
+                                        var iframeParams = [];
+                                        if (window.location.href && window.location.href.indexOf("?") > -1) {
+                                            iframeParams = iframeParams.concat(window.location.href.substr(window.location.href.indexOf("?") + 1).split('&'));
+                                        }
+                                        if (src && src.indexOf("?") > -1) {
+                                            iframeParams = iframeParams.concat(src.substr(src.indexOf("?") + 1).split("&"));
+                                            src = src.substr(0, src.indexOf("?"))
+                                        }
+                                        iframeParams.push("isIframeEmbed=1");
+                                        ifr.src = src + "?" + iframeParams.join('&');
+                                    }
+                                    window.handleIFrameMessage = function (e) {
+                                        if (typeof e.data === 'object') { return; }
+                                        var args = e.data.split(":");
+                                        if (args.length > 2) { iframe = document.getElementById("JotFormIFrame-" + args[(args.length - 1)]); } else { iframe = document.getElementById("JotFormIFrame"); }
+                                        if (!iframe) { return; }
+                                        switch (args[0]) {
+                                            case "scrollIntoView":
+                                                iframe.scrollIntoView();
+                                                break;
+                                            case "setHeight":
+                                                iframe.style.height = args[1] + "px";
+                                                break;
+                                            case "collapseErrorPage":
+                                                if (iframe.clientHeight > window.innerHeight) {
+                                                    iframe.style.height = window.innerHeight + "px";
+                                                }
+                                                break;
+                                            case "reloadPage":
+                                                window.location.reload();
+                                                break;
+                                            case "loadScript":
+                                                if (!window.isPermitted(e.origin, ['jotform.com', 'jotform.pro'])) { break; }
+                                                var src = args[1];
+                                                if (args.length > 3) {
+                                                    src = args[1] + ':' + args[2];
+                                                }
+                                                var script = document.createElement('script');
+                                                script.src = src;
+                                                script.type = 'text/javascript';
+                                                document.body.appendChild(script);
+                                                break;
+                                            case "exitFullscreen":
+                                                if (window.document.exitFullscreen) window.document.exitFullscreen();
+                                                else if (window.document.mozCancelFullScreen) window.document.mozCancelFullScreen();
+                                                else if (window.document.mozCancelFullscreen) window.document.mozCancelFullScreen();
+                                                else if (window.document.webkitExitFullscreen) window.document.webkitExitFullscreen();
+                                                else if (window.document.msExitFullscreen) window.document.msExitFullscreen();
+                                                break;
+                                        }
+                                        var isJotForm = (e.origin.indexOf("jotform") > -1) ? true : false;
+                                        if (isJotForm && "contentWindow" in iframe && "postMessage" in iframe.contentWindow) {
+                                            var urls = { "docurl": encodeURIComponent(document.URL), "referrer": encodeURIComponent(document.referrer) };
+                                            iframe.contentWindow.postMessage(JSON.stringify({ "type": "urls", "value": urls }), "*");
+                                        }
+                                    };
+                                    window.isPermitted = function (originUrl, whitelisted_domains) {
+                                        var url = document.createElement('a');
+                                        url.href = originUrl;
+                                        var hostname = url.hostname;
+                                        var result = false;
+                                        if (typeof hostname !== 'undefined') {
+                                            whitelisted_domains.forEach(function (element) {
+                                                if (hostname.slice((-1 * element.length - 1)) === '.'.concat(element) || hostname === element) {
+                                                    result = true;
+                                                }
+                                            });
+                                            return result;
+                                        }
+                                    }
+                                    if (window.addEventListener) {
+                                        window.addEventListener("message", handleIFrameMessage, false);
+                                    } else if (window.attachEvent) {
+                                        window.attachEvent("onmessage", handleIFrameMessage);
+                                    }
+                                </script>
+                            </div>
+                            <!--Greenville-->
+                            <div v-else-if="thislocation == 'Greenville'">
+
+                                <iframe id="JotFormIFrame-211791018021141"
+                                        title="Greenville Registration"
+                                        onload="window.parent.scrollTo(0,0)"
+                                        allowtransparency="true"
+                                        allowfullscreen="true"
+                                        allow="geolocation; microphone; camera"
+                                        src="https://form.jotform.com/211791018021141"
+                                        frameborder="0"
+                                        style="
+      min-width: 100%;
+      height:539px;
+      border:none;"
+                                        scrolling="no">
+                                </iframe>
+                                <script type="text/javascript">
+                                    var ifr = document.getElementById("JotFormIFrame-211791018021141");
+                                    if (ifr) {
+                                        var src = ifr.src;
+                                        var iframeParams = [];
+                                        if (window.location.href && window.location.href.indexOf("?") > -1) {
+                                            iframeParams = iframeParams.concat(window.location.href.substr(window.location.href.indexOf("?") + 1).split('&'));
+                                        }
+                                        if (src && src.indexOf("?") > -1) {
+                                            iframeParams = iframeParams.concat(src.substr(src.indexOf("?") + 1).split("&"));
+                                            src = src.substr(0, src.indexOf("?"))
+                                        }
+                                        iframeParams.push("isIframeEmbed=1");
+                                        ifr.src = src + "?" + iframeParams.join('&');
+                                    }
+                                    window.handleIFrameMessage = function (e) {
+                                        if (typeof e.data === 'object') { return; }
+                                        var args = e.data.split(":");
+                                        if (args.length > 2) { iframe = document.getElementById("JotFormIFrame-" + args[(args.length - 1)]); } else { iframe = document.getElementById("JotFormIFrame"); }
+                                        if (!iframe) { return; }
+                                        switch (args[0]) {
+                                            case "scrollIntoView":
+                                                iframe.scrollIntoView();
+                                                break;
+                                            case "setHeight":
+                                                iframe.style.height = args[1] + "px";
+                                                break;
+                                            case "collapseErrorPage":
+                                                if (iframe.clientHeight > window.innerHeight) {
+                                                    iframe.style.height = window.innerHeight + "px";
+                                                }
+                                                break;
+                                            case "reloadPage":
+                                                window.location.reload();
+                                                break;
+                                            case "loadScript":
+                                                if (!window.isPermitted(e.origin, ['jotform.com', 'jotform.pro'])) { break; }
+                                                var src = args[1];
+                                                if (args.length > 3) {
+                                                    src = args[1] + ':' + args[2];
+                                                }
+                                                var script = document.createElement('script');
+                                                script.src = src;
+                                                script.type = 'text/javascript';
+                                                document.body.appendChild(script);
+                                                break;
+                                            case "exitFullscreen":
+                                                if (window.document.exitFullscreen) window.document.exitFullscreen();
+                                                else if (window.document.mozCancelFullScreen) window.document.mozCancelFullScreen();
+                                                else if (window.document.mozCancelFullscreen) window.document.mozCancelFullScreen();
+                                                else if (window.document.webkitExitFullscreen) window.document.webkitExitFullscreen();
+                                                else if (window.document.msExitFullscreen) window.document.msExitFullscreen();
+                                                break;
+                                        }
+                                        var isJotForm = (e.origin.indexOf("jotform") > -1) ? true : false;
+                                        if (isJotForm && "contentWindow" in iframe && "postMessage" in iframe.contentWindow) {
+                                            var urls = { "docurl": encodeURIComponent(document.URL), "referrer": encodeURIComponent(document.referrer) };
+                                            iframe.contentWindow.postMessage(JSON.stringify({ "type": "urls", "value": urls }), "*");
+                                        }
+                                    };
+                                    window.isPermitted = function (originUrl, whitelisted_domains) {
+                                        var url = document.createElement('a');
+                                        url.href = originUrl;
+                                        var hostname = url.hostname;
+                                        var result = false;
+                                        if (typeof hostname !== 'undefined') {
+                                            whitelisted_domains.forEach(function (element) {
+                                                if (hostname.slice((-1 * element.length - 1)) === '.'.concat(element) || hostname === element) {
+                                                    result = true;
+                                                }
+                                            });
+                                            return result;
+                                        }
+                                    }
+                                    if (window.addEventListener) {
+                                        window.addEventListener("message", handleIFrameMessage, false);
+                                    } else if (window.attachEvent) {
+                                        window.attachEvent("onmessage", handleIFrameMessage);
+                                    }
+                                </script>
+                            </div>
+                            <!--Preschool - Lyman-->
+                            <div v-else-if="thislocation == 'Preschool - Lyman'">
+
+
+                                <iframe id="JotFormIFrame-211784591321152"
+                                        title="Preschool - Lyman"
+                                        onload="window.parent.scrollTo(0,0)"
+                                        allowtransparency="true"
+                                        allowfullscreen="true"
+                                        allow="geolocation; microphone; camera"
+                                        src="https://form.jotform.com/211784591321152"
+                                        frameborder="0"
+                                        style="
+      min-width: 100%;
+      height:539px;
+      border:none;"
+                                        scrolling="no">
+                                </iframe>
+                                <script type="text/javascript">
+                                    var ifr = document.getElementById("JotFormIFrame-211784591321152");
+                                    if (ifr) {
+                                        var src = ifr.src;
+                                        var iframeParams = [];
+                                        if (window.location.href && window.location.href.indexOf("?") > -1) {
+                                            iframeParams = iframeParams.concat(window.location.href.substr(window.location.href.indexOf("?") + 1).split('&'));
+                                        }
+                                        if (src && src.indexOf("?") > -1) {
+                                            iframeParams = iframeParams.concat(src.substr(src.indexOf("?") + 1).split("&"));
+                                            src = src.substr(0, src.indexOf("?"))
+                                        }
+                                        iframeParams.push("isIframeEmbed=1");
+                                        ifr.src = src + "?" + iframeParams.join('&');
+                                    }
+                                    window.handleIFrameMessage = function (e) {
+                                        if (typeof e.data === 'object') { return; }
+                                        var args = e.data.split(":");
+                                        if (args.length > 2) { iframe = document.getElementById("JotFormIFrame-" + args[(args.length - 1)]); } else { iframe = document.getElementById("JotFormIFrame"); }
+                                        if (!iframe) { return; }
+                                        switch (args[0]) {
+                                            case "scrollIntoView":
+                                                iframe.scrollIntoView();
+                                                break;
+                                            case "setHeight":
+                                                iframe.style.height = args[1] + "px";
+                                                break;
+                                            case "collapseErrorPage":
+                                                if (iframe.clientHeight > window.innerHeight) {
+                                                    iframe.style.height = window.innerHeight + "px";
+                                                }
+                                                break;
+                                            case "reloadPage":
+                                                window.location.reload();
+                                                break;
+                                            case "loadScript":
+                                                if (!window.isPermitted(e.origin, ['jotform.com', 'jotform.pro'])) { break; }
+                                                var src = args[1];
+                                                if (args.length > 3) {
+                                                    src = args[1] + ':' + args[2];
+                                                }
+                                                var script = document.createElement('script');
+                                                script.src = src;
+                                                script.type = 'text/javascript';
+                                                document.body.appendChild(script);
+                                                break;
+                                            case "exitFullscreen":
+                                                if (window.document.exitFullscreen) window.document.exitFullscreen();
+                                                else if (window.document.mozCancelFullScreen) window.document.mozCancelFullScreen();
+                                                else if (window.document.mozCancelFullscreen) window.document.mozCancelFullScreen();
+                                                else if (window.document.webkitExitFullscreen) window.document.webkitExitFullscreen();
+                                                else if (window.document.msExitFullscreen) window.document.msExitFullscreen();
+                                                break;
+                                        }
+                                        var isJotForm = (e.origin.indexOf("jotform") > -1) ? true : false;
+                                        if (isJotForm && "contentWindow" in iframe && "postMessage" in iframe.contentWindow) {
+                                            var urls = { "docurl": encodeURIComponent(document.URL), "referrer": encodeURIComponent(document.referrer) };
+                                            iframe.contentWindow.postMessage(JSON.stringify({ "type": "urls", "value": urls }), "*");
+                                        }
+                                    };
+                                    window.isPermitted = function (originUrl, whitelisted_domains) {
+                                        var url = document.createElement('a');
+                                        url.href = originUrl;
+                                        var hostname = url.hostname;
+                                        var result = false;
+                                        if (typeof hostname !== 'undefined') {
+                                            whitelisted_domains.forEach(function (element) {
+                                                if (hostname.slice((-1 * element.length - 1)) === '.'.concat(element) || hostname === element) {
+                                                    result = true;
+                                                }
+                                            });
+                                            return result;
+                                        }
+                                    }
+                                    if (window.addEventListener) {
+                                        window.addEventListener("message", handleIFrameMessage, false);
+                                    } else if (window.attachEvent) {
+                                        window.attachEvent("onmessage", handleIFrameMessage);
+                                    }
+                                </script>
+                            </div>
+                            <div v-else>
+                                <p>No valid location selected. Please go back</p>
+                            </div>
+                        </form>
+                    </v-card>
+                    <v-btn color="primary" @click="e6 = 5; createParent()"> Complete Registration </v-btn>
+                    <v-btn outlined @click="e6 = 3" color="accent"> back </v-btn>
                 </v-stepper-content>
             </v-stepper>
         </v-layout>
@@ -346,6 +642,7 @@
         ValidationProvider,
         setInteractionMode,
     } from "vee-validate";
+    import stripe from "stripe";
 
     setInteractionMode("eager");
     extend("digits", {
@@ -402,7 +699,7 @@
                 childDocFname: "",
                 childDocLname: "",
                 childDocNum: "",
-                locations: ["Greenville", "Spartanburg"],
+                locations: ["Greenville", "Spartanburg", "Preschool - Lyman"],
                 programs: [
                     "After School Only (School pick up-6pm only)",
                     "Drop-In Attendance (Summer Camp Only)",
@@ -527,37 +824,11 @@
             },
             determineLocation() {
                 if (this.thislocation == "Greenville") {
-                    if (this.thisprogram == "After School Only (School pick up-6pm only)") {
-                        this.finalLocationID = 2;
-                    } else if (
-                        this.thisprogram == "Drop-In Attendance (Summer Camp Only)"
-                    ) {
-                        this.finalLocationID = 4;
-                    } else if (this.thisprogram == "Summer Camp Only (2021)") {
-                        this.finalLocationID = 5;
-                    } else if (
-                        this.thisprogram == "Annual Contract (June 2021 - May 2022)"
-                    ) {
-                        this.finalLocationID = 6;
-                    } else {
-                        console.log("Something went wrong in Greenville");
-                    }
+                    this.finalLocationID = 11;
                 } else if (this.thislocation == "Spartanburg") {
-                    if (this.thisprogram == "After School Only (School pick up-6pm only)") {
-                        this.finalLocationID = 7;
-                    } else if (
-                        this.thisprogram == "Drop-In Attendance (Summer Camp Only)"
-                    ) {
-                        this.finalLocationID = 8;
-                    } else if (this.thisprogram == "Summer Camp Only (2021)") {
-                        this.finalLocationID = 9;
-                    } else if (
-                        this.thisprogram == "Annual Contract (June 2021 - May 2022)"
-                    ) {
-                        this.finalLocationID = 10;
-                    } else {
-                        console.log("Something went wrong in Spartanburg");
-                    }
+                    this.finalLocationID = 3;
+                } else if (this.thislocation == "Preschool - Lyman") {
+                    this.finalLocationID = 12;
                 } else {
                     console.log("Location/Program could not be determined");
                 }

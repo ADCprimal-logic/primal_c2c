@@ -47,7 +47,7 @@
 
                                 <v-textarea outlined
                                             name="Content"
-                                            label="News Letter Conent"
+                                            label="News Letter Content"
                                             :value=props.item.content
                                             readonly
                                             >

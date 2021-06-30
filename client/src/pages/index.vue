@@ -40,12 +40,12 @@
             </v-card-actions>
             <v-card-actions>
               <v-layout justify-center align-center>
-                <v-btn
-                  color="bluebird"
-                  :disabled="isDisabled"
-                  @click.prevent="authenticate"
-                  >Forgot Password?</v-btn
-                >
+                  <v-btn href="javascript:void( window.open( 'https://form.jotform.com/211805048797059', 'blank', 'scrollbars=yes, toolbar=no, width=700, height=500' ) ) "
+                         color="bluebird">
+
+                      Forgot Password?
+
+                  </v-btn>
               </v-layout>
             </v-card-actions>
          </material-card>

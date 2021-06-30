@@ -14,6 +14,7 @@
       >
 
         <material-card
+          class = "justify-center"
           color="bluebird"
           title="Time off request forms"
           text="Use this form to submit a time off request!"
@@ -25,106 +26,10 @@
             justify-center
             wrap
           >
-          
-        <v-icon
-        size="40px"
-        large
-        center
-        >
-        mdi-airport
-        </v-icon>
             </v-layout>
           <v-form>
             <v-container py-0>
               <v-layout wrap>
-                <v-flex
-                  xs12
-                  md4
-                >
-                  <v-text-field
-                    class="purple-input"
-                    label="Location"
-                    
-                  />
-                </v-flex>
-                <v-flex
-                  xs12
-                  md4
-                >
-                  <v-text-field
-                    class="purple-input"
-                    label="Phone number"
-                    
-                  />
-                </v-flex>
-                <v-flex
-                  xs12
-                  md4
-                >
-                  <v-text-field
-                    label="Email Address"
-                    class="purple-input"/>
-                </v-flex>
-                <v-flex
-                  xs12
-                  md6
-                >
-                  <v-text-field
-                    label="First Name"
-                    class="purple-input"/>
-                </v-flex>
-                <v-flex
-                  xs12
-                  md6
-                >
-                  <v-text-field
-                    label="Last Name"
-                    class="purple-input"/>
-                </v-flex>
-                <v-flex
-                  xs12
-                  md12
-                >
-                  <v-text-field
-                    label="Address"
-                    class="purple-input"/>
-                </v-flex>
-                <v-flex
-                  xs12
-                  md4>
-                  <v-text-field
-                    label="City"
-                    class="purple-input"/>
-                </v-flex>
-                <v-flex
-                  xs12
-                  md4>
-                  <v-text-field
-                    label="Country"
-                    class="purple-input"/>
-                </v-flex>
-                <v-flex
-                  xs12
-                  md4>
-                  <v-text-field
-                    class="purple-input"
-                    label="Postal Code"
-                    type="number"/>
-                </v-flex>
-                <v-flex xs12>
-                  <v-textarea
-                    class="purple-input"
-                    label="Dates requested off"
-                    value=""
-                  />
-                </v-flex>
-                <v-flex xs12>
-                  <v-textarea
-                    class="purple-input"
-                    label="Additional Information/Reason"
-                    value=""
-                  />
-                </v-flex>
                 <v-layout
                 justify-center
                 wrap
@@ -132,6 +37,7 @@
                 <v-flex
                   xs12
                   sm4>
+                  <a href="javascript:void( window.open( 'https://form.jotform.com/211745339022046', 'blank', 'scrollbars=yes, toolbar=no, width=1000, height=1000' ) ) "> 
                   <v-btn
                     block
                     color="bluebird"
@@ -139,6 +45,7 @@
                   >
                   Submit Request
                   </v-btn>
+                  </a>
                 </v-flex>
                 </v-layout>
               </v-layout>
@@ -159,7 +66,7 @@
               >
                 mdi-airplane
               </v-icon>
-              <div>Great job! You have successfully submitted a time off request.</div>
+              <div>Opening form in a seperate window.</div>
               <v-icon
                 size="16"
                 @click="snackbar = false"

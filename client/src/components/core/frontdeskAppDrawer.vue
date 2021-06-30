@@ -61,7 +61,7 @@
  <div class="sk-folding-cube">
   <div class="sk-cube1 sk-cube"></div>
   <div class="sk-cube2 sk-cube"></div>
-  <div class="sk-cube4 sk-cube">d</div>
+  <div class="sk-cube4 sk-cube"></div>
   <div class="sk-cube3 sk-cube"></div>
  </div>
     <!-- Start of Data Table-->
@@ -112,7 +112,12 @@
             to: '/Front-Desk-Student-Data',
             icon: 'mdi-archive',
             text: 'Student Data'
-          },
+            },
+            {
+                to: '/Front-Desk-Lunch-Checkout',
+                icon: 'mdi-clipboard-outline',
+                text: 'Lunch Checkout'
+            },
           {
             to: '/Front-Desk-Staff-Data',
             icon: 'mdi-apple',
@@ -122,11 +127,6 @@
             to: '/Front-Desk-Profile-Editor',
             icon: 'mdi-account',
             text: ' Update Front Desk Profile'
-          },
-          {
-            to: '/icons',
-            icon: 'mdi-chart-bubble',
-            text: 'Icons'
           },
           //This is a secondary function for maps integrations. Future use.
           //{

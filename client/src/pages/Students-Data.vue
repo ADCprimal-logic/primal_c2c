@@ -55,15 +55,16 @@
                                             <v-card color='C2Cblue'>
                                                 <v-layout column fill-height>
                                                     <!-- Name over Image -->
-                                                    <v-card-title class="white--text text-center pl-26 pt-26" row align-center>
+                                                    <v-card-title class="justify-center align-center white--text text-center pl-26 pt-26" >
                                                         {{props.item.first_name}}'s data is printed below.
                                                     </v-card-title>
                                                 </v-layout>
                                                 <!-- Defines the two lines in each data field -->
                                                 <v-list two-line>
                                                     <v-list-tile @click="">
-                                                        <v-list-tile-action> </v-list-tile-action>
+                                                        <v-list-tile-action><v-icon color="C2Corange">mdi-account</v-icon></v-list-tile-action>
                                                         <!-- A line of expanded data in the table -->
+                                                        
                                                         <v-list-tile-content>
                                                             <v-list-tile-title>{{props.item.full_name}}</v-list-tile-title>
                                                             <v-list-tile-sub-title>Child's Full Name</v-list-tile-sub-title>
@@ -72,7 +73,7 @@
                                                     <!-- Start of a field -->
                                                     <v-list-tile @click="" v-for="value in props.item.parent">
                                                         <v-list-tile-action>
-                                                            <v-icon color="C2Corange">phone</v-icon>
+                                                            <v-icon color="C2Corange">mdi-account-switch</v-icon>
                                                         </v-list-tile-action>
 
                                                         <v-list-tile-content>
@@ -293,43 +294,7 @@
                 { text: "Allergies", value: "medical_record.allergies" },
                 { text: "Status (In/Out)", value: "enrollment_status" },
             ],
-            studentData: [
-                {
-                    name: "Chris Cooper",
-                    Gender: "Male",
-                    dateofBirth: "9/6/1992",
-                    Location: "Homeroom",
-                    Allergies: "Peanuts",
-                    Email: "cooperc2606@gmail.com",
-                    Status: "Clocked In",
-                    TuitionBalance: "0",
-                    Medications: "0",
-                    approvedcontactName: "asdf",
-                    approvedcontactPhone: "0",
-                    approvedcontactEmail: "0",
-                    apporvedcontactAddress: "0",
-                    approvedcontactRelationship: "0",
-                    approvedcontactPIN: "0",
-                },
-                {
-                    name: "Chris Cooper3",
-                    Gender: "Male",
-                    dateofBirth: "9/6/1992",
-                    Location: "Homeroom 6",
-                    Phone: "843-324-1344",
-                    Email: "cooperc2606@gmail.com",
-                    Status: "Clocked In",
-                },
-                {
-                    name: "Chris Cooper2",
-                    Gender: "Male",
-                    dateofBirth: "9/6/1992",
-                    Location: "Homeroom 77",
-                    Phone: "843-324-1344",
-                    Email: "cooperc2606@gmail.com",
-                    Status: "Clocked In",
-                },
-            ],
+
         }),
     };
 </script>

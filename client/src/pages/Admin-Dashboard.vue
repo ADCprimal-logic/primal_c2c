@@ -47,7 +47,7 @@
 
                                 <v-textarea outlined
                                             name="Content"
-                                            label="News Letter Conent"
+                                            label="News Letter Content"
                                             :value=props.item.content
                                             readonly
                                             >
@@ -68,52 +68,6 @@
                         </template>
                     </v-data-table>
                 </material-card>
-                <!--<material-card color="C2Cblue"
-                               title="Create a News Letter"
-                               >
-                    <v-form>
-                        <v-container py-0>
-                            <v-layout wrap>
-                                <v-flex xs12 md12>
-                                    <v-text-field v-model="mySubject"
-                                                  label="Subject"
-                                                  class="purple-input" />
-                                </v-flex>
-                                <v-flex xs12 md12>
-                                    <v-text-field label="Content"
-                                                  class="purple-input"
-                                                  v-model="myContent" />
-                                </v-flex>
-                                <v-flex xs12 md6>
-                                    <v-text-field v-model="myDate"
-                                                  label="Date Posted"
-                                                  class="purple-input" />
-                                </v-flex>
-                                <v-flex xs12 md6>
-                                    <v-text-field label="Time Posted"
-                                                  class="purple-input"
-                                                  v-model="myTime" />
-                                </v-flex>
-                                <v-flex xs12 md12>
-                                    <v-select label="Location"
-                                              v-model="myLocation"
-                                              :items="locations"
-                                              />
-                                </v-flex>
-                                
-                                <v-flex xs12 text-xs-right>
-                                    <v-btn class="mx-0 font-weight-light"
-                                           color="mint"
-                                           @click="determineLocation()">
-                                        Post Newsletter
-                                    </v-btn>
-                                </v-flex>
-                                <h4 v-if="this.posted === true">Newsletter posted Successfully!</h4> 
-                            </v-layout>
-                        </v-container>
-                    </v-form>
-                </material-card>
-                --> 
             </v-flex>
 
         </v-layout>
