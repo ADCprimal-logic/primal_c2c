@@ -15,14 +15,8 @@
       </v-layout>
 
       <v-layout justify-center wrap text-center fluid>
-        <v-btn round color="bluebird" href="https://dashboard.stripe.com/login">
-          Proceed to Stripe dashboard</v-btn
-        >
-      </v-layout>
-
-      <v-layout justify-center wrap text-center fluid>
-        <v-btn color="bluebird" href="https://dashboard.stripe.com/login">
-          Proceed to Stripe dashboard</v-btn
+        <v-btn round color="bluebird" href="http://35.175.132.76:3000/admin">
+          Proceed to DB editor</v-btn
         >
       </v-layout>
       

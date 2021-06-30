@@ -40,12 +40,12 @@
         </v-flex>
         <v-flex sm6 xs12 md6 lg3>
           <material-stats-card
-            color="info"
-            icon="mdi-twitter"
-            title="Followers"
-            value="+245"
-            sub-icon="mdi-update"
-            sub-text="Just Updated"
+            color="mint"
+            icon="mdi-account"
+            title="StripeStatus"
+            value="Active"
+            sub-icon="mdi-check"
+            sub-text="Online"
           />
         </v-flex>
       </v-layout>
@@ -123,43 +123,6 @@ export default {
       { text: "Location", value: "_id" },
       { text: "Allergies", value: "medical_record.allergies" },
       { text: "Status (In/Out)", value: "enrollment_status" },
-    ],
-    studentData: [
-      {
-        name: "Chris Cooper",
-        Gender: "Male",
-        dateofBirth: "9/6/1992",
-        Location: "Homeroom",
-        Allergies: "Peanuts",
-        Email: "cooperc2606@gmail.com",
-        Status: "Clocked In",
-        TuitionBalance: "0",
-        Medications: "0",
-        approvedcontactName: "asdf",
-        approvedcontactPhone: "0",
-        approvedcontactEmail: "0",
-        apporvedcontactAddress: "0",
-        approvedcontactRelationship: "0",
-        approvedcontactPIN: "0",
-      },
-      {
-        name: "Chris Cooper3",
-        Gender: "Male",
-        dateofBirth: "9/6/1992",
-        Location: "Homeroom 6",
-        Phone: "843-324-1344",
-        Email: "cooperc2606@gmail.com",
-        Status: "Clocked In",
-      },
-      {
-        name: "Chris Cooper2",
-        Gender: "Male",
-        dateofBirth: "9/6/1992",
-        Location: "Homeroom 77",
-        Phone: "843-324-1344",
-        Email: "cooperc2606@gmail.com",
-        Status: "Clocked In",
-      },
     ],
   }),
 };
