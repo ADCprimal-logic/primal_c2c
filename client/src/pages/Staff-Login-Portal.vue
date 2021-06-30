@@ -65,7 +65,7 @@
 
 <script>
 function login(data) {
-  return fetch("http://localhost:3000/api/auth/login/", {
+  return fetch("http://35.175.132.76:3000/api/auth/login/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -80,7 +80,7 @@ function login(data) {
 }
 
 function getUser(data) {
-  return fetch("http://localhost:3000/api/auth/user/", {
+  return fetch("http://35.175.132.76:3000/api/auth/user/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
