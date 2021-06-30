@@ -93,30 +93,21 @@
             text: 'View Child Data'
           },
           {
-            to: '/Admin-Time-Clock',
-            icon: 'mdi-alarm',
-            text: 'View Time Clocks'
-          },
-          {
             to: '/Admin-Financials',
             icon: 'mdi-account-cash',
             text: 'Financials'
             },
             {
-                to: '/Admin-Schedule',
-                icon: 'mdi-application',
-                text: 'Schedule'
+            to: '/Admin-Schedule',
+            icon: 'mdi-application',
+            text: 'Schedule'
             },
           {
             to: '/Admin-Newsletter',
             icon: 'mdi-newspaper-variant',
             text: 'News Letters'
           },
-          {
-            to: '/icons',
-            icon: 'mdi-chart-bubble',
-            text: 'Icons'
-          },
+
           //This is a secondary function for maps integrations. Future use.
           //{
             //to: '/maps',

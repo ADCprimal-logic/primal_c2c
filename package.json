@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "cd server && cross-env NODE_ENV=development DISABLE_LOGGING=true keystone dev",
     "build": "cd server && cross-env NODE_ENV=production keystone build",
-    "start": "yarn build && cd server && cross-env NODE_ENV=production keystone start",
+    "start": "cd server && cross-env NODE_ENV=production keystone start",
     "build-test": "cd server && cross-env NODE_ENV=testing keystone build",
     "start-test": "cd server && cross-env NODE_ENV=testing keystone start",
     "create-tables": "cd server && cross-env CREATE_TABLES=true keystone create-tables",

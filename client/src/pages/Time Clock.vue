@@ -134,13 +134,7 @@
                 <td>{{ props.item.day }}</td>
                 <td class="text-xs-right">{{ props.item.ClockIn }}</td>
                 <td class="text-xs-right">{{ props.item.ClockOut }}</td>
-                <td class="text-xs-right">{{ props.item.Status }}</td>
                 <td class="text-xs-right">{{ props.item.Hours }}</td>
-                <td class="justify-center layout px-0">
-                  <v-icon small class="mr-2" @click="editItem(props.item)">
-                    edit
-                  </v-icon>
-                </td>
               </template>
               <!-- Defines what is done when there is no data in availble. Initialize refills the data from the server -->
               <!--<template v-slot:no-data>
@@ -268,7 +262,6 @@ export default {
       },
       { text: "Clock In", value: "ClockIn", sortable: false },
       { text: "Clock Out", value: "ClockOut", sortable: false },
-      { text: "Status (In/Out)", value: "Status", sortable: false },
       { text: "Hours", value: "Hours", sortable: false },
     ],
     statusSelect: ["In", "Out"],
