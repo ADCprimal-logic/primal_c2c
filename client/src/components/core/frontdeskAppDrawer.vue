@@ -128,11 +128,6 @@
             icon: 'mdi-account',
             text: ' Update Front Desk Profile'
           },
-          {
-            to: '/icons',
-            icon: 'mdi-chart-bubble',
-            text: 'Icons'
-          },
           //This is a secondary function for maps integrations. Future use.
           //{
             //to: '/maps',
