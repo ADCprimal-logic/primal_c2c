@@ -106,7 +106,12 @@
             to: '/Parents-Faculty-Contact',
             icon: 'mdi-archive',
             text: 'Faculty Contacts'
-          },
+            },
+            {
+                to: '/Parents-Lunch-Portal',
+                icon: 'mdi-arrange-bring-to-front',
+                text: 'Lunch Portal'
+            },
           {
             to: '/Parents-Child-Registration',
             icon: 'mdi-clipboard-outline',

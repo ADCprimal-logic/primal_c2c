@@ -112,7 +112,12 @@
             to: '/Front-Desk-Student-Data',
             icon: 'mdi-archive',
             text: 'Student Data'
-          },
+            },
+            {
+                to: '/Front-Desk-Lunch-Checkout',
+                icon: 'mdi-clipboard-outline',
+                text: 'Lunch Checkout'
+            },
           {
             to: '/Front-Desk-Staff-Data',
             icon: 'mdi-apple',
