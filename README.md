@@ -19,7 +19,7 @@ email: c2cSuper@admin.net
 password: #primalPassAdmin
 ```
 
-Once run you will have a http://localhost:3000 url which would prompt your NuxtJS Front-End with http://localhost:3000/admin acting as your Administrative KeystoneJS Backend
+Once run you will have a http://35.175.132.76:3000 url which would prompt your NuxtJS Front-End with http://35.175.132.76:3000/admin acting as your Administrative KeystoneJS Backend
 
 ## NOTICE:
 

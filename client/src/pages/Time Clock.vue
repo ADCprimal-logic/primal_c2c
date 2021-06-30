@@ -152,7 +152,7 @@
 <script>
 var staffEmail = "";
 function graphql(query, variables = {}) {
-  return fetch("http://localhost:3000/admin/api", {
+  return fetch("http://35.175.132.76:3000/admin/api", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -167,7 +167,7 @@ function graphql(query, variables = {}) {
 }
 
 function getUser(data) {
-  return fetch("http://localhost:3000/api/auth/user/", {
+  return fetch("http://35.175.132.76:3000/api/auth/user/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
