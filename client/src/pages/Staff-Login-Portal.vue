@@ -43,8 +43,7 @@
         </material-card>
         <v-snackbar :color="color1"
                     :top="true"
-                    v-model="snackbar1"
-                    >
+                    v-model="snackbar1">
             <v-icon color="white"
                     class="mr-3">
                 mdi-alert-circle
@@ -57,8 +56,7 @@
         </v-snackbar>
         <v-snackbar :color="color1"
                     :top="true"
-                    v-model="snackbar2"
-                    >
+                    v-model="snackbar2">
             <v-icon color="white"
                     class="mr-3">
                 mdi-alert-circle
@@ -71,15 +69,27 @@
         </v-snackbar>
         <v-snackbar :color="color1"
                     :top="true"
-                    v-model="snackbar3"
-                    >
+                    v-model="snackbar3">
             <v-icon color="white"
                     class="mr-3">
                 mdi-alert-circle
             </v-icon>
-            <div>Invalid Username or Password</div>
+            <div>Invalid Email. (Make sure you are in the right portal.)</div>
             <v-icon size="16"
                     @click="snackbar3 = false">
+                mdi-close-circle
+            </v-icon>
+        </v-snackbar>
+        <v-snackbar :color="color1"
+                    :top="true"
+                    v-model="snackbar4">
+            <v-icon color="white"
+                    class="mr-3">
+                mdi-alert-circle
+            </v-icon>
+            <div>Invalid Password</div>
+            <v-icon size="16"
+                    @click="snackbar4 = false">
                 mdi-close-circle
             </v-icon>
         </v-snackbar>
@@ -142,6 +152,7 @@ export default {
         snackbar1: false,
         snackbar2: false,
         snackbar3: false,
+        snackbar4: false,
         color1: 'C2Corange',
       
     };
@@ -183,7 +194,11 @@ export default {
         if (responseLogin.status === 500) {
             console.log("This is in case user is invalid. User doesn't exist (might be a parent account)");
             this.snackbar3 = true;
-        }
+          }
+          if (responseLogin.status === 401) {
+              console.log("Invalid Password!");
+              this.snackbar4 = true;
+          }
       } catch (err) {
         console.log(err);
       }
