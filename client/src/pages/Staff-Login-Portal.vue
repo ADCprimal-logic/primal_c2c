@@ -1,5 +1,5 @@
 <template>
-  <!-- Comment -->
+    <!-- Comment -->
     <v-layout justify-center>
         <material-card color="bluebird"
                        elevation="12"
@@ -97,112 +97,112 @@
 </template>
 
 <script>
-function login(data) {
-  return fetch("http://localhost:3000/api/auth/login/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      data,
-    }),
-  }).then(function (result) {
-    //console.log(result);
-    return result.json();
-  });
-}
+    function login(data) {
+        return fetch("http://localhost:3000/api/auth/login/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                data,
+            }),
+        }).then(function (result) {
+            //console.log(result);
+            return result.json();
+        });
+    }
 
-function getUser(data) {
-  return fetch("http://localhost:3000/api/auth/user/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      data,
-    }),
-  }).then(function (result) {
-    //console.log(result);
-    return result.json();
-  });
-}
+    function getUser(data) {
+        return fetch("http://localhost:3000/api/auth/user/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                data,
+            }),
+        }).then(function (result) {
+            //console.log(result);
+            return result.json();
+        });
+    }
 
-import { mapActions } from "vuex";
-import materialCard from "~/components/material/AppCard";
+    import { mapActions } from "vuex";
+    import materialCard from "~/components/material/AppCard";
 
-export default {
-  layout: "logindashboard",
-  components: {
-    materialCard,
-  },
-  data() {
-    return {
-      defaultUserPassword: "***",
-      bottomNav: "recent",
-      login: {
-        email: "",
-        password: "",
-        role: "Staff",
-      },
-      snackbar: {
-        show: false,
-        message: null,
-        color: null,
+    export default {
+        layout: "logindashboard",
+        components: {
+            materialCard,
         },
-        snackbar1: false,
-        snackbar2: false,
-        snackbar3: false,
-        snackbar4: false,
-        color1: 'C2Corange',
-      
+        data() {
+            return {
+                defaultUserPassword: "***",
+                bottomNav: "recent",
+                login: {
+                    email: "",
+                    password: "",
+                    role: "Staff",
+                },
+                snackbar: {
+                    show: false,
+                    message: null,
+                    color: null,
+                },
+                snackbar1: false,
+                snackbar2: false,
+                snackbar3: false,
+                snackbar4: false,
+                color1: 'C2Corange',
+
+            };
+        },
+        computed: {
+            isDisabled() {
+                return this.login.email === "" || this.login.password === "";
+            },
+        },
+        methods: {
+            ...mapActions({
+                setUsername: "user/setUsername",
+            }),
+            async userLogin() {
+                console.log("Running Login");
+                try {
+                    let responseLogin = await login(this.login);
+                    console.log(responseLogin);
+                    if (responseLogin.status === 200) {
+                        console.log("Go to Dashboard");
+                        localStorage.setItem("auth_token", responseLogin.accessToken);
+                        let responseUser = await getUser(responseLogin.accessToken);
+                        console.log(responseUser);
+                        if (responseUser.decoded.parsedRole === 1) {
+                            await this.setUsername(responseUser.decoded.name);
+                            this.$router.push({ path: "dashboard" });
+                        } else if (responseUser.decoded.parsedRole === 2) {
+                            console.log("Incorrect Portal. Please log into the Front-Desk Portal");
+                            this.snackbar1 = true;
+                        } else if (responseUser.decoded.parsedRole === 3) {
+                            console.log("Incorrect Portal. Please log into the Admin Portal")
+                            this.snackbar2 = true;
+                        } else {
+                            console.log("No role or invalid role")
+                        }
+                    } else {
+                        console.log(responseLogin);
+                    }
+                    if (responseLogin.status === 500) {
+                        console.log("This is in case user is invalid. User doesn't exist (might be a parent account)");
+                        this.snackbar3 = true;
+                    }
+                    if (responseLogin.status === 401) {
+                        console.log("Invalid Password!");
+                        this.snackbar4 = true;
+                    }
+                } catch (err) {
+                    console.log(err);
+                }
+            },
+        },
     };
-  },
-  computed: {
-    isDisabled() {
-      return this.login.email === "" || this.login.password === "";
-    },
-  },
-  methods: {
-    ...mapActions({
-      setUsername: "user/setUsername",
-    }),
-    async userLogin() {
-      console.log("Running Login");
-      try {
-        let responseLogin = await login(this.login);
-        console.log(responseLogin);
-        if (responseLogin.status === 200) {
-          console.log("Go to Dashboard");
-          localStorage.setItem("auth_token", responseLogin.accessToken);
-          let responseUser = await getUser(responseLogin.accessToken);
-            console.log(responseUser);
-            if (responseUser.decoded.parsedRole === 1) {
-                await this.setUsername(responseUser.decoded.name);
-                this.$router.push({ path: "dashboard" });
-            } else if (responseUser.decoded.parsedRole === 2) {
-                console.log("Incorrect Portal. Please log into the Front-Desk Portal");
-                this.snackbar1 = true;
-            } else if (responseUser.decoded.parsedRole === 3) {
-                console.log("Incorrect Portal. Please log into the Admin Portal")
-                this.snackbar2 = true;
-            } else {
-                console.log("No role or invalid role")
-            }
-        } else {
-          console.log(responseLogin);
-        }
-        if (responseLogin.status === 500) {
-            console.log("This is in case user is invalid. User doesn't exist (might be a parent account)");
-            this.snackbar3 = true;
-          }
-          if (responseLogin.status === 401) {
-              console.log("Invalid Password!");
-              this.snackbar4 = true;
-          }
-      } catch (err) {
-        console.log(err);
-      }
-    },
-  },
-};
 </script>
