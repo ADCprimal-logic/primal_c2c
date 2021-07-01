@@ -23,7 +23,7 @@ exports.login = async (req, res) => {
     WHERE email =  ${email}`;
   } else if (role === "Staff") {
     user =
-      await sql`SELECT email, password, id, first_name FROM public."StaffMember"
+      await sql`SELECT email, password, id, first_name, role FROM public."StaffMember"
     WHERE email =  ${email}`;
   } else if (role === "SuperAdmin") {
     user =
@@ -50,23 +50,43 @@ exports.login = async (req, res) => {
     }
     if (isValidPassword === true) {
       // Sign and Send Token
-      const accessToken = jsonwebtoken.sign(
-        {
-          id,
-          email,
-          name,
-          role,
-        },
-        process.env.JWT_TOKEN,
-        {
-          expiresIn,
-        }
-      );
-      res.send({
-        status: 200,
-        message: "Access Granted!",
-        accessToken,
-      });
+      if (role == "Staff") {
+        var parsedRole = user[0].role;
+        const accessToken = jsonwebtoken.sign(
+          {
+            id,
+            email,
+            name,
+            parsedRole,
+          },
+          process.env.JWT_TOKEN,
+          {
+            expiresIn,
+          }
+        );
+        res.send({
+          status: 200,
+          message: "Access Granted!",
+          accessToken,
+        });
+      } else {
+        const accessToken = jsonwebtoken.sign(
+          {
+            id,
+            email,
+            name,
+          },
+          process.env.JWT_TOKEN,
+          {
+            expiresIn,
+          }
+        );
+        res.send({
+          status: 200,
+          message: "Access Granted!",
+          accessToken,
+        });
+      }
     } else {
       console.log("Invalid Password");
       res.send({
