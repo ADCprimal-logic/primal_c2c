@@ -12,7 +12,7 @@
               <v-form>
                 <v-text-field
                   type="text"
-                  v-model="username"
+                  v-model="login.email"
                   prepend-icon="person"
                   name="username"
                   label="Email"
@@ -20,7 +20,7 @@
                 ></v-text-field>
                 <v-text-field
                   type="password"
-                  v-model="password"
+                  v-model="login.password"
                   prepend-icon="lock"
                   name="password"
                   label="Password"
@@ -33,7 +33,7 @@
                 <v-btn
                   color="bluebird"
                   :disabled="isDisabled"
-                  @click.prevent="authenticate"
+                  @click.prevent="userLogin"
                   >Login</v-btn
                 >
               </v-layout>
@@ -53,6 +53,36 @@
 </template>
 
 <script>
+    function login(data) {
+        return fetch("http://localhost:3000/api/auth/login/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                data,
+            }),
+        }).then(function (result) {
+            //console.log(result);
+            return result.json();
+        });
+    }
+
+    function getUser(data) {
+        return fetch("http://localhost:3000/api/auth/user/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                data,
+            }),
+        }).then(function (result) {
+            //console.log(result);
+            return result.json();
+        });
+    }
+
 import { mapActions } from "vuex";
 import materialCard from "~/components/material/AppCard";
 
@@ -61,33 +91,47 @@ export default {
   components: {
     materialCard,
   },
-  data() {
-    return {
-      username: "admin",
-      password: "admin",
-      defaultUserPassword: "admin",
-      bottomNav: 'recent'
-    };
-  },
+        data() {
+            return {
+                defaultUserPassword: "***",
+                bottomNav: "recent",
+                login: {
+                    email: "",
+                    password: "",
+                    role: "Parent",
+                },
+            };
+        },
   computed: {
-    isDisabled() {
-      return (
-        this.username !== this.defaultUserPassword ||
-        this.password !== this.defaultUserPassword
-      );
-    },
+      isDisabled() {
+          return this.login.email === "" || this.login.password === "";
+      },
   },
   methods: {
     ...mapActions({
       setUsername: "user/setUsername",
     }),
 
-    async authenticate() {
-      if (!this.isDisabled) {
-        await this.setUsername(this.defaultUserPassword);
-        this.$router.push({ path: "dashboard" });
-      }
-    },
+      async userLogin() {
+          console.log("Running Login");
+          try {
+              let responseLogin = await login(this.login);
+              console.log(responseLogin);
+              if (responseLogin.status === 200) {
+                  console.log("Go to Dashboard");
+                  localStorage.setItem("auth_token", responseLogin.accessToken);
+                  var token = localStorage.getItem("auth_token");
+                  let responseUser = await getUser(token);
+                  console.log(responseUser);
+                  await this.setUsername(responseUser.decoded.name);
+                  this.$router.push({ path: "Parents-Dashboard" });
+              } else {
+                  console.log(responseLogin);
+              }
+          } catch (err) {
+              console.log(err);
+          }
+      },
   },
 };
 </script>
