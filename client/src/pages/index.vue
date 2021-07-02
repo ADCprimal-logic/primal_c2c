@@ -128,6 +128,10 @@
                 return this.login.email === "" || this.login.password === "";
             },
         },
+        mounted() {
+            console.log(process.env.test)
+            console.log(process.env.JWT_TOKEN)
+        },
         methods: {
             ...mapActions({
                 setUsername: "user/setUsername",

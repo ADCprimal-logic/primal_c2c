@@ -130,19 +130,12 @@ module.exports = {
        */
       css: ["~/assets/style/index.scss"],
       /*
-       ** Enviornment Variables for Front
-       */
-      env: {
-        baseUrl: process.env.BASE_URL || "http://100.25.45.227:3000",
-      },
-      /*
        ** Plugins to load before mounting the App
        */
       plugins: [
         "~/plugins/vuetify",
         { src: "~/plugins/chartist", mode: "client" },
       ],
-
       /*
        ** Nuxt.js modules
        */
@@ -151,10 +144,18 @@ module.exports = {
         "@nuxtjs/axios",
       ],
       /*
+       ** Nuxt.js build modules
+       */
+      buildModules: ["@nuxtjs/dotenv"],
+      /*
        ** Axios module configuration
        */
       axios: {
         // See https://github.com/nuxt-community/axios-module#options
+      },
+      env: {
+        baseUrl: process.env.BASE_URL || "http://100.25.45.227:3000",
+        test: "Test123",
       },
       ssr: false,
       /*
