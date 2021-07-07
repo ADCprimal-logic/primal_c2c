@@ -64,7 +64,7 @@
                     Your Children
                     <ul>
                       <li v-for="value in todos.child">
-                        {{ value.first_name }} {{ value.last_name }}
+                        {{ value.first_name }} {{ value.last_name }} - PIN: {{value.pin_number}}
                       </li>
                     </ul>
                   </li>
@@ -101,6 +101,7 @@ const GET_TODOS = `
             child {
               first_name
               last_name
+              pin_number
             }
 
           }
