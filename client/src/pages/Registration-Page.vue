@@ -133,7 +133,7 @@ const ADD_PARENT = `
 	`;
 
 function graphql(query = {}) {
-  return fetch("http://100.25.45.227:3000/admin/api", {
+  return fetch("http://34.234.191.221:3000/admin/api", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

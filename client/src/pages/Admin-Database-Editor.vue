@@ -15,7 +15,7 @@
       </v-layout>
 
       <v-layout justify-center wrap text-center fluid>
-        <v-btn round color="bluebird" href="http://100.25.45.227:3000/admin">
+        <v-btn round color="bluebird" href="http://34.234.191.221:3000/admin">
           Proceed to DB editor</v-btn
         >
       </v-layout>
