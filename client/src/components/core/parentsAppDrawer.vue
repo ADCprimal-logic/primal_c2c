@@ -115,7 +115,7 @@
           {
             to: '/Parents-Child-Registration',
             icon: 'mdi-clipboard-outline',
-            text: 'Child Registration'
+            text: 'Child Re-Enrollment'
           },
           //This is a secondary function for maps integrations. Future use.
           //{

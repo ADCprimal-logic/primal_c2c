@@ -99,11 +99,6 @@
             text: 'Front Desk Time Clock'
           },
           {
-            to: '/Front-Desk-Timeoff-Requests',
-            icon: 'mdi-airplane-takeoff',
-            text: 'Time Off Requests'
-          },
-          {
             to: '/Front-Desk-Schedule',
             icon: 'mdi-application',
             text: 'Schedule'
@@ -122,11 +117,6 @@
             to: '/Front-Desk-Staff-Data',
             icon: 'mdi-apple',
             text: 'Staff Data'
-          },
-          {
-            to: '/Front-Desk-Profile-Editor',
-            icon: 'mdi-account',
-            text: ' Update Front Desk Profile'
           },
           //This is a secondary function for maps integrations. Future use.
           //{

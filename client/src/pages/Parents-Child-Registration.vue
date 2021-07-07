@@ -4,10 +4,9 @@
         <v-layout justify-center wrap fill-width>
             <v-stepper v-model="e6" vertical fill-width>
                 <v-stepper-step :complete="e6 > 1" step="1">
-                    Select a Child to Re-Enroll
+                    Select a Child to Re-Enroll or Add a Child
                     <small>
-                        If you already have a parent account, please log in and register in
-                        the parent portal
+                        Please click "add a new child" if you would like to enroll a child that is not in the system yet
                     </small>
                 </v-stepper-step>
 
@@ -46,8 +45,7 @@
                 <v-stepper-step :complete="e6 > 2" step="2">
                     Child Registration
                     <small>
-                        If you are registering a returning camper, please log in to the
-                        parent portal and register the returning camper there
+                        
                     </small>
                 </v-stepper-step>
 

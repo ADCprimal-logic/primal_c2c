@@ -175,12 +175,9 @@ function getUser(data) {
                         localStorage.setItem("auth_token", responseLogin.accessToken);
                         let responseUser = await getUser(responseLogin.accessToken);
                         console.log(responseUser);
-                        if (responseUser.decoded.parsedRole === 1) {
+                        if (responseUser.decoded.parsedRole === 1 || responseUser.decoded.parsedRole === 2) {
                             await this.setUsername(responseUser.decoded.name);
                             this.$router.push({ path: "dashboard" });
-                        } else if (responseUser.decoded.parsedRole === 2) {
-                            console.log("Incorrect Portal. Please log into the Front-Desk Portal");
-                            this.snackbar1 = true;
                         } else if (responseUser.decoded.parsedRole === 3) {
                             console.log("Incorrect Portal. Please log into the Admin Portal")
                             this.snackbar2 = true;
