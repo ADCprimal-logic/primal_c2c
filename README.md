@@ -53,6 +53,7 @@ TEST_PUBLISH_KEY = "pk_test_51J4szdAmjaieFijUIsUCzz7kzQFzuAU8GCZfy5IpQOOArntei5F
 DATABASE_URL="postgres://primal_postgres:primal-squad@c2cdatabase.cqs5a6cxnjkx.us-east-1.rds.amazonaws.com:5432/production"
 # Build Config
 NUXT_TELEMETRY_DISABLED=1
+BASE_URL="http://localhost:3000"
 JWT_TOKEN="primalC2C"
 JWT_EXPIRE="6h"
 ```
