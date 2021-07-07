@@ -42,7 +42,7 @@
   `;
 
     function graphql(query, variables = {}) {
-        return fetch("http://100.25.45.227:3000/admin/api", {
+        return fetch("http://localhost:3000/admin/api", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -57,7 +57,7 @@
     }
 
     function getUser(data) {
-        return fetch("http://100.25.45.227:3000/api/auth/user/", {
+        return fetch("http://localhost:3000/api/auth/user/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
