@@ -15,7 +15,7 @@
       </v-layout>
 
       <v-layout justify-center wrap text-center fluid>
-        <v-btn round color="bluebird" href="http://localhost:3000/admin">
+        <v-btn round color="bluebird" href=process.env.baseUrl + "/admin">
           Proceed to DB editor</v-btn
         >
       </v-layout>

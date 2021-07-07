@@ -207,7 +207,7 @@
     `;
 
     function graphql(query, variables = {}) {
-        return fetch("http://localhost:3000/admin/api", {
+        return fetch(process.env.baseUrl + "/admin/api", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -222,7 +222,7 @@
     }
 
     function getUser(data) {
-        return fetch("http://localhost:3000/api/auth/user/", {
+        return fetch(process.env.baseUrl + "/api/auth/user/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

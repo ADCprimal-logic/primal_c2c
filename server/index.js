@@ -154,8 +154,7 @@ module.exports = {
         // See https://github.com/nuxt-community/axios-module#options
       },
       env: {
-        baseUrl: process.env.BASE_URL || "http://localhost:3000",
-        test: "Test123",
+        baseUrl: process.env.BASE_URL || process.env.baseUrl + "",
       },
       ssr: false,
       /*

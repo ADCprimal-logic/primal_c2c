@@ -551,7 +551,7 @@ const ALL_CHILD = `
     `;
 
 function graphql(query, variables = {}) {
-  return fetch("http://localhost:3000/admin/api", {
+  return fetch(process.env.baseUrl + "/admin/api", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -810,9 +810,8 @@ export default {
     },
 
     async saveClockIn(id) {
-      
       var parsedDate = new Date(this.timeStamp).toISOString();
-      
+
       const { punchInData } = await graphql(this.punchInQuery, {
         id: id,
         clockInSend: parsedDate,
@@ -823,9 +822,8 @@ export default {
     },
 
     async saveClockOut(id) {
-      
       var parsedDate = new Date(this.timeStamp).toISOString();
-     
+
       const { punchOutData } = await graphql(this.punchOutQuery, {
         id: id,
         clockOutSend: parsedDate,

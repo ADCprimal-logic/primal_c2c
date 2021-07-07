@@ -274,7 +274,7 @@ const ALL_STAFF = `
     `;
 
 function graphql(query, variables = {}) {
-  return fetch("http://100.25.45.227:3000/admin/api", {
+  return fetch(process.env.baseUrl + "/admin/api", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -98,7 +98,7 @@
 
 <script>
 function login(data) {
-  return fetch("http://localhost:3000/api/auth/login/", {
+  return fetch(process.env.baseUrl + "/api/auth/login/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -113,7 +113,7 @@ function login(data) {
 }
 
 function getUser(data) {
-  return fetch("http://localhost:3000/api/auth/user/", {
+  return fetch(process.env.baseUrl + "/api/auth/user/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
