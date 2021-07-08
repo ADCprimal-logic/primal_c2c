@@ -18,6 +18,7 @@ keystone.createList("ChildTimecard", {
     time_PunchIn1: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
     time_PunchOut1: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
     clockedIO1: { type: Select, options: "In, Out" },
+    day1_notes: { type: Text },
     day2: {
       type: Virtual,
       resolver: (item) => `Tuesday`,
@@ -25,6 +26,7 @@ keystone.createList("ChildTimecard", {
     time_PunchIn2: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
     time_PunchOut2: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
     clockedIO2: { type: Select, options: "In, Out" },
+    day2_notes: { type: Text },
     day3: {
       type: Virtual,
       resolver: (item) => `Wednesday`,
@@ -32,6 +34,7 @@ keystone.createList("ChildTimecard", {
     time_PunchIn3: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
     time_PunchOut3: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
     clockedIO3: { type: Select, options: "In, Out" },
+    day3_notes: { type: Text },
     day4: {
       type: Virtual,
       resolver: (item) => `Thursday`,
@@ -39,6 +42,7 @@ keystone.createList("ChildTimecard", {
     time_PunchIn4: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
     time_PunchOut4: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
     clockedIO4: { type: Select, options: "In, Out" },
+    day4_notes: { type: Text },
     day5: {
       type: Virtual,
       resolver: (item) => `Friday`,
@@ -46,6 +50,7 @@ keystone.createList("ChildTimecard", {
     time_PunchIn5: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
     time_PunchOut5: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
     clockedIO5: { type: Select, options: "In, Out" },
+    day5_notes: { type: Text },
     day6: {
       type: Virtual,
       resolver: (item) => `Saturday`,
@@ -53,6 +58,7 @@ keystone.createList("ChildTimecard", {
     time_PunchIn6: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
     time_PunchOut6: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
     clockedIO6: { type: Select, options: "In, Out" },
+    day6_notes: { type: Text },
     day7: {
       type: Virtual,
       resolver: (item) => `Sunday`,
@@ -60,6 +66,7 @@ keystone.createList("ChildTimecard", {
     time_PunchIn7: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
     time_PunchOut7: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
     clockedIO7: { type: Select, options: "In, Out" },
+    day7_notes: { type: Text },
   },
   labelResolver: (item) => `TimeCard-C${item.id}`,
 });

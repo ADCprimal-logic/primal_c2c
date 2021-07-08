@@ -13,6 +13,7 @@ keystone.createList("StaffTimecard", {
     time_PunchOut1: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
     hours_worked1: { type: Float },
     clockedIO1: { type: Select, options: "In, Out" },
+    day1_notes: { type: Text },
     day2: {
       type: Virtual,
       resolver: (item) => `1st Tuesday`,
@@ -21,6 +22,7 @@ keystone.createList("StaffTimecard", {
     time_PunchOut2: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
     hours_worked2: { type: Float },
     clockedIO2: { type: Select, options: "In, Out" },
+    day2_notes: { type: Text },
     day3: {
       type: Virtual,
       resolver: (item) => `1st Wednesday`,
@@ -29,6 +31,7 @@ keystone.createList("StaffTimecard", {
     time_PunchOut3: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
     hours_worked3: { type: Float },
     clockedIO3: { type: Select, options: "In, Out" },
+    day3_notes: { type: Text },
     day4: {
       type: Virtual,
       resolver: (item) => `1st Thursday`,
@@ -37,6 +40,7 @@ keystone.createList("StaffTimecard", {
     time_PunchOut4: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
     hours_worked4: { type: Float },
     clockedIO4: { type: Select, options: "In, Out" },
+    day4_notes: { type: Text },
     day5: {
       type: Virtual,
       resolver: (item) => `1st Friday`,
@@ -45,6 +49,7 @@ keystone.createList("StaffTimecard", {
     time_PunchOut5: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
     hours_worked5: { type: Float },
     clockedIO5: { type: Select, options: "In, Out" },
+    day5_notes: { type: Text },
     day6: {
       type: Virtual,
       resolver: (item) => `1st Saturday`,
@@ -53,6 +58,7 @@ keystone.createList("StaffTimecard", {
     time_PunchOut6: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
     hours_worked6: { type: Float },
     clockedIO6: { type: Select, options: "In, Out" },
+    day6_notes: { type: Text },
     day7: {
       type: Virtual,
       resolver: (item) => `1st Sunday`,
@@ -61,6 +67,7 @@ keystone.createList("StaffTimecard", {
     time_PunchOut7: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
     hours_worked7: { type: Float },
     clockedIO7: { type: Select, options: "In, Out" },
+    day7_notes: { type: Text },
     day8: {
       type: Virtual,
       resolver: (item) => `2nd Monday`,
@@ -69,6 +76,7 @@ keystone.createList("StaffTimecard", {
     time_PunchOut8: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
     hours_worked8: { type: Float },
     clockedIO8: { type: Select, options: "In, Out" },
+    day8_notes: { type: Text },
     day9: {
       type: Virtual,
       resolver: (item) => `2nd Tuesday`,
@@ -77,6 +85,7 @@ keystone.createList("StaffTimecard", {
     time_PunchOut9: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
     hours_worked9: { type: Float },
     clockedIO9: { type: Select, options: "In, Out" },
+    day9_notes: { type: Text },
     day10: {
       type: Virtual,
       resolver: (item) => `2nd Wednesday`,
@@ -85,6 +94,7 @@ keystone.createList("StaffTimecard", {
     time_PunchOut10: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
     hours_worked10: { type: Float },
     clockedIO10: { type: Select, options: "In, Out" },
+    day10_notes: { type: Text },
     day11: {
       type: Virtual,
       resolver: (item) => `2nd Thursday`,
@@ -93,6 +103,7 @@ keystone.createList("StaffTimecard", {
     time_PunchOut11: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
     hours_worked11: { type: Float },
     clockedIO11: { type: Select, options: "In, Out" },
+    day11_notes: { type: Text },
     day12: {
       type: Virtual,
       resolver: (item) => `2nd Friday`,
@@ -101,6 +112,7 @@ keystone.createList("StaffTimecard", {
     time_PunchOut12: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
     hours_worked12: { type: Float },
     clockedIO12: { type: Select, options: "In, Out" },
+    day12_notes: { type: Text },
     day13: {
       type: Virtual,
       resolver: (item) => `2nd Saturday`,
@@ -109,6 +121,7 @@ keystone.createList("StaffTimecard", {
     time_PunchOut13: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
     hours_worked13: { type: Float },
     clockedIO13: { type: Select, options: "In, Out" },
+    day13_notes: { type: Text },
     day14: {
       type: Virtual,
       resolver: (item) => `2nd Sunday`,
@@ -117,6 +130,7 @@ keystone.createList("StaffTimecard", {
     time_PunchOut14: { type: DateTime, format: "dd/MM/yyyy HH:mm O" },
     hours_worked14: { type: Float },
     clockedIO14: { type: Select, options: "In, Out" },
+    day14_notes: { type: Text },
   },
   labelResolver: (item) => `TimeCard-S${item.id}`,
 });

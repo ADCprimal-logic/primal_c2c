@@ -16,6 +16,8 @@ const options = [
   { value: 1, label: "General" },
   { value: 2, label: "Front-Desk" },
   { value: 3, label: "Director" },
+  { value: 4, label: "Billing" },
+  { value: 5, label: "Days" },
 ];
 
 console.log("Creating Staff");
