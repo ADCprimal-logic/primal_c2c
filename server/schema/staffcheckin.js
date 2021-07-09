@@ -1,5 +1,11 @@
 const index = require("../index");
-const { Virtual, DateTime, Float, Select } = require("@keystonejs/fields");
+const {
+  Virtual,
+  DateTime,
+  Float,
+  Select,
+  Text,
+} = require("@keystonejs/fields");
 const keystone = index.indexKey;
 
 console.log("Creating Staff Timecard");
