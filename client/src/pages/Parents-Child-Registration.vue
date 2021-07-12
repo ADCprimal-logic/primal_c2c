@@ -45,7 +45,7 @@
                 <v-stepper-step :complete="e6 > 2" step="2">
                     Child Registration
                     <small>
-                        
+
                     </small>
                 </v-stepper-step>
 

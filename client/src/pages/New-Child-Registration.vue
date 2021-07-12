@@ -244,11 +244,12 @@
                     </v-card>
                 </v-stepper-content>
 
-                <v-stepper-step :complete="e6 > 4" step="4"> Payment and Waivers <small>
+                <v-stepper-step :complete="e6 > 4" step="4">
+                    Payment and Waivers <small>
                         Do not click the "complete registration" button until the payment form is complete.
                     </small>
                 </v-stepper-step>
-                
+
                 <v-stepper-content step="4">
                     <v-card class="mb-12">
                         <form @submit.prevent="submit">

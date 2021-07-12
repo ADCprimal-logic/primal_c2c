@@ -387,7 +387,7 @@
 
 
             </v-stepper>
-           
+
         </v-layout>
     </v-container>
 </template>
@@ -412,7 +412,7 @@
     const GET_BALANCE = `
         query getBalance($myChild: ID!) {
             Child(where: {id: $myChild}) {
-    					balence
+                        balence
             }
           }
     `;
@@ -444,7 +444,7 @@
     `;
 
     const CREATE_APPROVED = `
-        mutation addapprovedcontact($myfname: String, $mylname: String, $myphone: String, $myrelation: String, 
+        mutation addapprovedcontact($myfname: String, $mylname: String, $myphone: String, $myrelation: String,
                                     $mychild: ChildRelateToManyInput, $myparent: ParentRelateToManyInput) {
             createApprovedContact(data: {first_name: $myfname, last_name: $mylname, phone: $myphone,
                                          relation: $myrelation, child: $mychild, parent: $myparent}) {
@@ -572,7 +572,7 @@
                     " Parent ID: " + this.myParentID);
 
                 this.connectChild2Approved();
-                
+
             },
             async connectChild2Approved() {
                 await graphql(UPDATE_CHILD, {
@@ -594,7 +594,7 @@
                 }
                 console.log("determine balance ran");
 
- 
+
             },
             async getBalance() {
                 const { data } = await graphql(GET_BALANCE, {
@@ -624,7 +624,7 @@
             printMe() {
                 console.log(this.selectedChildID + " radioGroup= " + this.radioGroup);
             },
-            
+
             clear() {
                 this.name = "";
                 this.phoneNumber = "";
@@ -651,7 +651,7 @@
                 return {
                     myParentID: responseUser.decoded.id,
                     myChildData: childrenData.data.Parent.child,
-     
+
                 };
             } catch (err) {
                 console.log(err);

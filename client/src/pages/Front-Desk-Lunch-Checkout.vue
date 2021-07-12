@@ -189,7 +189,7 @@
     const GET_BALANCE = `
         query getBalance($myChild: ID!) {
             Child(where: {id: $myChild}) {
-    					balence
+                        balence
             }
           }
     `;
@@ -233,7 +233,7 @@
                 },
                 { text: "PIN Number", value: "pin_number" },
                 { text: "Lunch/Snack Balance", value: "balence" },
-                
+
             ],
             selectedID: '',
             snackbar1: false,
