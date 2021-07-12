@@ -17,7 +17,7 @@ const options = [
   { value: 2, label: "Front-Desk" },
   { value: 3, label: "Director" },
   { value: 4, label: "Billing" },
-  { value: 5, label: "Days" },
+  { value: 5, label: "Age Group" },
 ];
 
 console.log("Creating Staff");

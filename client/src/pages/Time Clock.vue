@@ -652,7 +652,7 @@ export default {
           Status: this.allStaffTimeCards.clockedIO7,
           Hours: this.allStaffTimeCards.hours_worked7,
         },
-        {
+        /*{
           day: this.allStaffTimeCards.day8,
           ClockIn: this.allStaffTimeCards.time_PunchIn8,
           ClockOut: this.allStaffTimeCards.time_PunchOut8,
@@ -700,7 +700,7 @@ export default {
           ClockOut: this.allStaffTimeCards.time_PunchOut14,
           Status: this.allStaffTimeCards.clockedIO14,
           Hours: this.allStaffTimeCards.hours_worked14,
-        },
+        },*/
       ];
     },
 
