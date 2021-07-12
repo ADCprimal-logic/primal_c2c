@@ -19,7 +19,7 @@
                                                  rules="required">
                                 <v-text-field v-model="parentFname"
                                               :error-messages="errors"
-                                              label="First Name"
+                                              label="Responsible Parent or Guardian First Name"
                                               required></v-text-field>
                             </validation-provider>
                             <validation-provider v-slot="{ errors }"
@@ -27,7 +27,7 @@
                                                  rules="required">
                                 <v-text-field v-model="parentLname"
                                               :error-messages="errors"
-                                              label="Last Name"
+                                              label="Responsible Parent or Guardian Last Name"
                                               required></v-text-field>
                             </validation-provider>
                             <validation-provider v-slot="{ errors }"
@@ -66,8 +66,7 @@
 
                                 submit
                             </v-btn>
-                            <v-btn outlined @click="clearStep1();e6 = 2" color="accent"> clear </v-btn>
-                            <v-btn outlined @click="getCustomerID()" color="accent"> test </v-btn>
+                            <v-btn outlined @click="clearStep1();" color="accent"> clear </v-btn>
                         </form>
                     </validation-observer>
                 </v-stepper-content>
@@ -192,7 +191,7 @@
                                       ">
                                     submit
                                 </v-btn>
-                                <v-btn outlined @click="clearStep2(); e6 = 3" color="accent"> clear </v-btn>
+                                <v-btn outlined @click="clearStep2();" color="accent"> clear </v-btn>
                                 <v-btn outlined @click="e6 = 1" color="accent"> back </v-btn>
                             </form>
                         </validation-observer>
@@ -237,8 +236,8 @@
                                   ">
                                     submit
                                 </v-btn>
-                                <v-btn outlined @click="e6 = 4" color="accent"> clear </v-btn>
-                                <!--clearStep3()-->
+                                <v-btn outlined @click="clearStep3()" color="accent"> clear </v-btn>
+
                                 <v-btn outlined @click="e6 = 2" color="accent"> back </v-btn>
                             </form>
                         </validation-observer>

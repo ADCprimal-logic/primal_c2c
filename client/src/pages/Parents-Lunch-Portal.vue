@@ -16,7 +16,7 @@
                             <v-radio-group v-model="radioGroup">
                                 <v-radio v-for="value in myChildData"
                                          :key="value.id"
-                                         :label="`${value.first_name} ${value.last_name}`"
+                                         :label="`${value.first_name} ${value.last_name}: Balance - $ ${value.balence}`"
                                          :value="value.id"></v-radio>
                             </v-radio-group>
                             <v-btn class="mr-4"

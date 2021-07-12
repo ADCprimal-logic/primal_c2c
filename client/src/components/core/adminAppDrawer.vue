@@ -92,11 +92,6 @@
             icon: 'mdi-account-multiple',
             text: 'View Child Data'
           },
-          {
-            to: '/Admin-Financials',
-            icon: 'mdi-account-cash',
-            text: 'Financials'
-            },
             {
             to: '/Admin-Schedule',
             icon: 'mdi-application',

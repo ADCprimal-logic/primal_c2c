@@ -84,7 +84,7 @@
                                                     <!-- Field Divider -->
                                                     <v-divider inset></v-divider>
                                                     <v-list-tile @click="">
-                                                        <v-list-tile-action><v-icon color="C2Corange">mdi-apps</v-icon></v-list-tile-action>
+                                                        <v-list-tile-action><v-icon color="C2Corange">mdi-account-cash</v-icon></v-list-tile-action>
                                                         <!-- A line of expanded data in the table -->
 
                                                         <v-list-tile-content>
