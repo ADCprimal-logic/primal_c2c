@@ -19,7 +19,7 @@
                                                  rules="required">
                                 <v-text-field v-model="parentFname"
                                               :error-messages="errors"
-                                              label="First Name"
+                                              label="Responsible Parent or Guardian First Name"
                                               required></v-text-field>
                             </validation-provider>
                             <validation-provider v-slot="{ errors }"
@@ -27,7 +27,7 @@
                                                  rules="required">
                                 <v-text-field v-model="parentLname"
                                               :error-messages="errors"
-                                              label="Last Name"
+                                              label="Responsible Parent or Guardian Last Name"
                                               required></v-text-field>
                             </validation-provider>
                             <validation-provider v-slot="{ errors }"
@@ -66,8 +66,7 @@
 
                                 submit
                             </v-btn>
-                            <v-btn outlined @click="clearStep1();e6 = 2" color="accent"> clear </v-btn>
-                            <v-btn outlined @click="getCustomerID()" color="accent"> test </v-btn>
+                            <v-btn outlined @click="clearStep1();" color="accent"> clear </v-btn>
                         </form>
                     </validation-observer>
                 </v-stepper-content>
@@ -192,7 +191,7 @@
                                       ">
                                     submit
                                 </v-btn>
-                                <v-btn outlined @click="clearStep2(); e6 = 3" color="accent"> clear </v-btn>
+                                <v-btn outlined @click="clearStep2();" color="accent"> clear </v-btn>
                                 <v-btn outlined @click="e6 = 1" color="accent"> back </v-btn>
                             </form>
                         </validation-observer>
@@ -237,19 +236,20 @@
                                   ">
                                     submit
                                 </v-btn>
-                                <v-btn outlined @click="e6 = 4" color="accent"> clear </v-btn>
-                                <!--clearStep3()-->
+                                <v-btn outlined @click="clearStep3()" color="accent"> clear </v-btn>
+
                                 <v-btn outlined @click="e6 = 2" color="accent"> back </v-btn>
                             </form>
                         </validation-observer>
                     </v-card>
                 </v-stepper-content>
 
-                <v-stepper-step :complete="e6 > 4" step="4"> Payment and Waivers <small>
+                <v-stepper-step :complete="e6 > 4" step="4">
+                    Payment and Waivers <small>
                         Do not click the "complete registration" button until the payment form is complete.
                     </small>
                 </v-stepper-step>
-                
+
                 <v-stepper-content step="4">
                     <v-card class="mb-12">
                         <form @submit.prevent="submit">
@@ -556,6 +556,16 @@
                     <v-btn color="primary" @click="e6 = 5; createParent()"> Complete Registration </v-btn>
                     <v-btn outlined @click="e6 = 3" color="accent"> back </v-btn>
                 </v-stepper-content>
+                <v-stepper-step :complete="e6 > 4" step="5">
+                    Registration Complete!
+                    <small>
+                        Please Login to the Parent Portal with your email and password!
+                    </small>
+                </v-stepper-step>
+
+                <v-stepper-content step="5">
+                    
+                </v-stepper-content>
             </v-stepper>
         </v-layout>
     </v-container>
@@ -675,7 +685,7 @@
     });
 
     export default {
-        layout: "logindashboard",
+        layout: "registrationdashboard",
         data() {
             return {
                 parentid: "",

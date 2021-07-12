@@ -45,7 +45,7 @@
                 <v-stepper-step :complete="e6 > 2" step="2">
                     Child Registration
                     <small>
-                        
+
                     </small>
                 </v-stepper-step>
 
@@ -161,7 +161,7 @@
                                               ">
                                     submit
                                 </v-btn>
-                                <v-btn outlined @click="clearStep2(); e6 = 3" color="accent"> clear </v-btn>
+                                <v-btn outlined @click="clearStep2();" color="accent"> clear </v-btn>
                                 <v-btn outlined @click="e6 = 1" color="accent"> back </v-btn>
                             </form>
                         </validation-observer>
@@ -207,7 +207,7 @@
                                     submit
                                 </v-btn>
                                 <v-btn outlined @click="e6 = 4" color="accent"> clear </v-btn>
-                                <v-btn outlined @click="e6 = 2" color="accent"> back </v-btn>
+                                <v-btn outlined @click="e6 = 1" color="accent"> back </v-btn>
                             </form>
                         </validation-observer>
                     </v-card>
@@ -519,6 +519,14 @@
                     </v-card>
                     <v-btn color="primary" @click="e6 = 5; createParent()"> Complete Registration </v-btn>
                     <v-btn outlined @click="e6 = 3" color="accent"> back </v-btn>
+                </v-stepper-content>
+                <v-stepper-step :complete="e6 > 4" step="5">
+                    Registration Complete!
+                    
+                </v-stepper-step>
+
+                <v-stepper-content step="5">
+
                 </v-stepper-content>
             </v-stepper>
         </v-layout>

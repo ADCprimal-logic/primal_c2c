@@ -14,7 +14,7 @@
                               single-line
                               hide-details></v-text-field>
                 <material-card color="C2Cblue"
-                               title="Find Student and Check them out"
+                               title="Find Student and Charge them for Lunch/Snack"
                                text="Expands to show detailed data on the child.">
                     <v-data-table :headers="headers"
                                   :items="children"
@@ -32,16 +32,11 @@
                         <template v-slot:items="props">
                             <tr @click="props.expanded = !props.expanded">
                                 <td>{{ props.item.full_name }}</td>
-                                <td class="text-xs-left">{{ props.item.gender }}</td>
-                                <td class="text-xs-left" v-if="props.item.medical_record">
-                                    {{ props.item.medical_record.birthdate }}
-                                </td>
+                                <td class="text-xs-left" v-if="props.item.pin_number">{{ props.item.pin_number }}</td>
                                 <td class="text-xs-left" v-else>n/a</td>
-                                <td class="text-xs-left" v-if="props.item.location">{{ props.item.location.name }}</td>
+                                <td class="text-xs-left" v-if="props.item.balence">{{ props.item.balence }}</td>
                                 <td class="text-xs-left" v-else>n/a</td>
-                                <td class="text-xs-left" v-if="props.item.medical_record">{{ props.item.medical_record.allergies }}</td>
-                                <td class="text-xs-left" v-else>n/a</td>
-                                <td class="text-xs-left">{{ props.item.enrollment_status }}</td>
+
                             </tr>
                         </template>
                         <template v-slot:no-results>
@@ -57,7 +52,7 @@
                                             <v-card color='C2Cblue'>
                                                 <v-layout column fill-height>
                                                     <!-- Name over Image -->
-                                                    <v-card-title class="justify-center align-center white--text text-center pl-26 pt-26" >
+                                                    <v-card-title class="justify-center align-center white--text text-center pl-26 pt-26">
                                                         {{props.item.first_name}}'s data is printed below.
                                                     </v-card-title>
                                                 </v-layout>
@@ -66,141 +61,65 @@
                                                     <v-list-tile @click="">
                                                         <v-list-tile-action><v-icon color="C2Corange">mdi-account</v-icon></v-list-tile-action>
                                                         <!-- A line of expanded data in the table -->
-                                                        
+
                                                         <v-list-tile-content>
                                                             <v-list-tile-title>{{props.item.full_name}}</v-list-tile-title>
                                                             <v-list-tile-sub-title>Child's Full Name</v-list-tile-sub-title>
                                                         </v-list-tile-content>
                                                     </v-list-tile>
-                                                    <!-- Start of a field -->
-                                                    <v-list-tile @click="" v-for="value in props.item.parent">
-                                                        <v-list-tile-action>
-                                                            <v-icon color="C2Corange">mdi-account-switch</v-icon>
-                                                        </v-list-tile-action>
 
-                                                        <v-list-tile-content>
-                                                            <v-list-tile-title v-if="props.item.parent">{{value.full_name}}</v-list-tile-title>
-                                                            <v-list-tile-title v-else>n/a</v-list-tile-title>
-
-                                                            <v-list-tile-sub-title>
-                                                                Guardian Full Name
-                                                            </v-list-tile-sub-title>
-                                                        </v-list-tile-content>
-                                                    </v-list-tile>
-                                                    <!-- Field Divider -->
-                                                    <v-list-tile @click="" v-for="value in props.item.parent">
-                                                        <v-list-tile-action>
-                                                            <v-icon color="C2Corange">phone</v-icon>
-                                                        </v-list-tile-action>
-                                                        <v-list-tile-content>
-                                                            <v-list-tile-title>{{value.mobile_phone}}</v-list-tile-title>
-                                                            <v-list-tile-sub-title>
-                                                                Guardian's Mobile Phone ({{value.full_name}})
-
-                                                            </v-list-tile-sub-title>
-                                                        </v-list-tile-content>
-                                                    </v-list-tile>
                                                     <!-- Field Divider -->
                                                     <v-divider inset></v-divider>
-
-                                                    <v-list-tile @click="" v-for="value in props.item.parent">
-                                                        <v-list-tile-action>
-                                                            <v-icon color="C2Corange">mail</v-icon>
-                                                        </v-list-tile-action>
-
-                                                        <v-list-tile-content>
-                                                            <v-list-tile-title>{{value.email}}</v-list-tile-title>
-                                                            <v-list-tile-sub-title>Guardian's Email ({{value.full_name}})</v-list-tile-sub-title>
-                                                        </v-list-tile-content>
-                                                    </v-list-tile>
-                                                    <!-- Field Divider -->
-                                                    <v-divider inset></v-divider>
-
                                                     <v-list-tile @click="">
-                                                        <v-list-tile-action>
-                                                            <v-icon color="C2Corange">mdi-pill</v-icon>
-                                                        </v-list-tile-action>
+                                                        <v-list-tile-action><v-icon color="C2Corange">mdi-account-search</v-icon></v-list-tile-action>
+                                                        <!-- A line of expanded data in the table -->
 
                                                         <v-list-tile-content>
-                                                            <v-list-tile-title v-if="props.item.medical_record">{{ props.item.medical_record.medications}}</v-list-tile-title>
+                                                            <v-list-tile-title v-if="props.item.pin_number">{{props.item.pin_number}}</v-list-tile-title>
                                                             <v-list-tile-title v-else>n/a</v-list-tile-title>
-                                                            <v-list-tile-sub-title>Known Medications</v-list-tile-sub-title>
+                                                            <v-list-tile-sub-title>Child's PIN Number</v-list-tile-sub-title>
                                                         </v-list-tile-content>
                                                     </v-list-tile>
-                                                    <v-divider inset></v-divider>
+
                                                     <!-- Field Divider -->
+                                                    <v-divider inset></v-divider>
                                                     <v-list-tile @click="">
-                                                        <v-list-tile-action>
-                                                            <v-icon color="C2Corange">mdi-alert-decagram</v-icon>
-                                                        </v-list-tile-action>
+                                                        <v-list-tile-action><v-icon color="C2Corange">mdi-account-cash</v-icon></v-list-tile-action>
+                                                        <!-- A line of expanded data in the table -->
 
                                                         <v-list-tile-content>
-                                                            <v-list-tile-title v-if="props.item.medical_record">{{ props.item.medical_record.allergies}}</v-list-tile-title>
+                                                            <v-list-tile-title v-if="props.item.balence">{{props.item.balence}}</v-list-tile-title>
                                                             <v-list-tile-title v-else>n/a</v-list-tile-title>
-                                                            <v-list-tile-sub-title>Known Allergies</v-list-tile-sub-title>
+                                                            <v-list-tile-sub-title>Child's Lunch/Snack Balance</v-list-tile-sub-title>
                                                         </v-list-tile-content>
                                                     </v-list-tile>
-                                                    <v-divider inset></v-divider>
+
                                                     <!-- Field Divider -->
 
-                                                    <v-list-tile @click="">
-                                                        <v-list-tile-action>
-                                                            <v-icon color="#43A047">mdi-currency-usd</v-icon>
-                                                        </v-list-tile-action>
-
-                                                        <v-list-tile-content>
-                                                            <v-list-tile-title>Tuition Paid: () Tuition Owed: ()</v-list-tile-title>
-                                                            <v-list-tile-sub-title>Balance</v-list-tile-sub-title>
-                                                        </v-list-tile-content>
-                                                    </v-list-tile>
                                                     <v-divider inset></v-divider>
-                                                    <!-- Field Divider -->
-
-                                                    <v-list-tile @click="">
-                                                        <v-list-tile-action>
-                                                            <v-icon color="C2Corange">mdi-hospital-marker</v-icon>
-                                                        </v-list-tile-action>
+                                                    <v-list-tile @click="selectedID = props.item.id; getBalance()">
+                                                        <v-list-tile-action><v-icon color="C2Corange">mdi-arrange-send-backward</v-icon></v-list-tile-action>
+                                                        <!-- A line of expanded data in the table -->
 
                                                         <v-list-tile-content>
-                                                            <v-list-tile-title v-if="props.item.location">{{ props.item.location.name }}</v-list-tile-title>
-                                                            <v-list-tile-title v-else>n/a</v-list-tile-title>
-                                                            <v-list-tile-sub-title>Camp Location</v-list-tile-sub-title>
+                                                            <v-list-tile-title>Charge Child - <u>One Lunch</u> - $5</v-list-tile-title>
+
+
                                                         </v-list-tile-content>
                                                     </v-list-tile>
+                                                    <!-- Field Divider -->
                                                     <v-divider inset></v-divider>
-                                                    <!-- Field Divider -->
-
-                                                    <v-list-tile @click="">
-                                                        <v-list-tile-action>
-                                                            <v-icon color="#AEEA00">mdi-needle</v-icon>
-                                                        </v-list-tile-action>
+                                                    <v-list-tile @click="selectedID = props.item.id; getBalanceSnack()">
+                                                        <v-list-tile-action><v-icon color="C2Corange">mdi-arrange-send-backward</v-icon></v-list-tile-action>
+                                                        <!-- A line of expanded data in the table -->
 
                                                         <v-list-tile-content>
-                                                            <v-list-tile-title>Immuniziations</v-list-tile-title>
-                                                            <v-list-tile-sub-title>
-                                                                Future Update
-                                                            </v-list-tile-sub-title>
-                                                        </v-list-tile-content>
-                                                    </v-list-tile>
-                                                    <v-divider inset></v-divider>
-                                                    <!-- Field Divider -->
-                                                    <v-list-tile @click="" v-for="value in props.item.approved_contact">
-                                                        <v-list-tile-action>
-                                                            <v-icon color="C2Corange">mdi-message-bulleted</v-icon>
-                                                        </v-list-tile-action>
+                                                            <v-list-tile-title>Charge Child - <u>One Snack</u> - $2</v-list-tile-title>
 
-                                                        <v-list-tile-content>
-                                                            <v-list-tile-title v-if="value.full_name">{{value.full_name}}</v-list-tile-title>
-                                                            <v-list-tile-title v-else>n/a</v-list-tile-title>
-                                                            <!--
-                                                                <v-list-tile-title v-if="value.relation">Relation: {{value.relation}}</v-list-tile-title>
-                                                                <v-list-tile-title v-else>n/a</v-list-tile-title>
-                                                                <v-list-tile-title v-if="value.phone">Phone: {{value.phone}}</v-list-tile-title>
-                                                                <v-list-tile-title v-else>n/a</v-list-tile-title>
-                                                            -->
-                                                            <v-list-tile-sub-title>Approved Contact</v-list-tile-sub-title>
+
                                                         </v-list-tile-content>
                                                     </v-list-tile>
+                                                    <!-- Field Divider -->
                                                     <!-- End of Fields -->
                                                 </v-list>
                                             </v-card>
@@ -212,7 +131,11 @@
                     </v-data-table>
                 </material-card>
             </v-flex>
-
+            <v-snackbar :color="color1" :top="true" v-model="snackbar1">
+                <v-icon color="white" class="mr-3"> mdi-alert-circle </v-icon>
+                <div>Successfully Charged!</div>
+                <v-icon size="16" @click="snackbar3 = false"> mdi-close-circle </v-icon>
+            </v-snackbar>
         </v-layout>
     </v-container>
 </template>
@@ -249,8 +172,26 @@
             }
             pin_number
             enrollment_status
+            id
+            balence
           }
         }
+    `;
+
+    const UPDATE_BALANCE = `
+        mutation updateBalance($myChild: ID!, $myBalance: Int) {
+            updateChild(id: $myChild, data: {balence: $myBalance}) {
+              id
+            }
+          }
+    `;
+
+    const GET_BALANCE = `
+        query getBalance($myChild: ID!) {
+            Child(where: {id: $myChild}) {
+                        balence
+            }
+          }
     `;
 
     function graphql(query, variables = {}) {
@@ -290,14 +231,45 @@
                     sortable: true,
                     value: "full_name",
                 },
-                { text: "Gender(M/F)", value: "gender" },
-                { text: "Date of Birth", value: "medical_record.birthdate" },
-                { text: "Location", value: "_id" },
-                { text: "Allergies", value: "medical_record.allergies" },
-                { text: "Status (In/Out)", value: "enrollment_status" },
+                { text: "PIN Number", value: "pin_number" },
+                { text: "Lunch/Snack Balance", value: "balence" },
+
             ],
+            selectedID: '',
+            snackbar1: false,
 
         }),
+        methods: {
+            async getBalance() {
+                const { data } = await graphql(GET_BALANCE, {
+                    myChild: this.selectedID,
+                });
+                console.log("this childs id is " + this.selectedID)
+                this.temp2 = (data.Child.balence - 5);
+                console.log("tempBalance = " + this.tempBalance);
+                console.log("balence = " + data.Child.balence);
+                console.log(this.temp2);
+                this.updateBalance();
+            },
+            async getBalanceSnack() {
+                const { data } = await graphql(GET_BALANCE, {
+                    myChild: this.selectedID,
+                });
+                console.log("this childs id is " + this.selectedID)
+                this.temp2 = (data.Child.balence - 2);
+                console.log("tempBalance = " + this.tempBalance);
+                console.log("balence = " + data.Child.balence);
+                console.log(this.temp2);
+                this.updateBalance();
+            },
+            async updateBalance() {
+                await graphql(UPDATE_BALANCE, {
+                    myChild: this.selectedID,
+                    myBalance: this.temp2,
+                });
+                this.snackbar1 = true;
+            },
+        }
     };
 </script>
 <!--Comment-->
