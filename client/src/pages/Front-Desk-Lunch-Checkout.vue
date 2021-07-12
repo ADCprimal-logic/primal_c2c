@@ -84,7 +84,7 @@
                                                     <!-- Field Divider -->
                                                     <v-divider inset></v-divider>
                                                     <v-list-tile @click="">
-                                                        <v-list-tile-action><v-icon color="C2Corange">mdi-apps</v-icon></v-list-tile-action>
+                                                        <v-list-tile-action><v-icon color="C2Corange">mdi-account-cash</v-icon></v-list-tile-action>
                                                         <!-- A line of expanded data in the table -->
 
                                                         <v-list-tile-content>
@@ -189,7 +189,7 @@
     const GET_BALANCE = `
         query getBalance($myChild: ID!) {
             Child(where: {id: $myChild}) {
-    					balence
+                        balence
             }
           }
     `;
@@ -233,7 +233,7 @@
                 },
                 { text: "PIN Number", value: "pin_number" },
                 { text: "Lunch/Snack Balance", value: "balence" },
-                
+
             ],
             selectedID: '',
             snackbar1: false,

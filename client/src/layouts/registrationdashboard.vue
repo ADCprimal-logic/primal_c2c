@@ -13,7 +13,7 @@
 <script>
   import coreFilter from '~/components/core/loginAppFilter';
   import coreToolbar from '~/components/core/registrationAppToolbar';
-  import coreDrawer from '~/components/core/loginAppDrawer';
+  import coreDrawer from '~/components/core/registrationAppDrawer';
   import coreView from '~/components/core/registrationAppView';
 
   export default {
