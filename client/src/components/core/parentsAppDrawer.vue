@@ -64,11 +64,6 @@ export default {
           text: "Child Time Sheet",
         },
         {
-          to: "/Parents-Financials",
-          icon: "mdi-arrange-bring-to-front",
-          text: "Financials",
-        },
-        {
           to: "/Parent-Schedule",
           icon: "mdi-application",
           text: "Schedule",
