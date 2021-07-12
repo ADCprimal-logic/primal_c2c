@@ -58,21 +58,7 @@
                         icon: 'mdi-account-multiple-outline',
                         text: 'Parent Login'
                     },
-                    {
-                        to: '/Staff-Login-Portal',
-                        icon: 'mdi-clipboard-outline',
-                        text: 'Staff Login'
-                    },
-                    {
-                        to: '/Front-Desk-Login-Portal',
-                        icon: 'mdi-desk',
-                        text: 'Front Desk Portal',
-                    },
-                    {
-                        to: '/AdminLoginPortal',
-                        icon: 'mdi-angularjs',
-                        text: 'Administrator Portal'
-                    },
+                    
                     {
                         to: '/New-Child-Registration',
                         icon: 'mdi-account-plus',

@@ -675,7 +675,7 @@
     });
 
     export default {
-        layout: "logindashboard",
+        layout: "registrationdashboard",
         data() {
             return {
                 parentid: "",
