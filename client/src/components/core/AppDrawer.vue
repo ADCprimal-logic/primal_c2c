@@ -9,38 +9,21 @@
     mobile-break-point="991"
     width="260"
   >
-    <v-img
-      :src="image"
-      height="100%"
-    >
-      <v-layout
-        class="fill-height"
-        tag="v-list"
-        column
-      >
+    <v-img :src="image" height="100%">
+      <v-layout class="fill-height" tag="v-list" column>
         <v-list dense>
           <v-list-tile avatar to="/">
-          <v-list-tile-avatar
-            color="clear"
-          >
-              <v-img
-                :src="logo"
-                height="50"
-                width="50"
-                
-              />
+            <v-list-tile-avatar color="clear">
+              <v-img :src="logo" height="50" width="50" />
             </v-list-tile-avatar>
             <v-list-tile-title class="title">
               <h4>Coast 2 Coast Kids</h4>
             </v-list-tile-title>
           </v-list-tile>
         </v-list>
-        <v-divider/>
+        <v-divider />
         <v-list dense>
-          <v-list-tile
-            v-if="responsive"
-          >
-          </v-list-tile>
+          <v-list-tile v-if="responsive"> </v-list-tile>
           <v-list-tile
             v-for="(link, i) in links"
             :key="i"
@@ -52,9 +35,7 @@
             <v-list-tile-action>
               <v-icon>{{ link.icon }}</v-icon>
             </v-list-tile-action>
-            <v-list-tile-title
-              v-text="link.text"
-            />
+            <v-list-tile-title v-text="link.text" />
           </v-list-tile>
         </v-list>
       </v-layout>
@@ -63,139 +44,140 @@
 </template>
 
 <script>
-  // Utilities
-  import { mapActions, mapGetters } from 'vuex'
+// Utilities
+import { mapActions, mapGetters } from "vuex";
 
-  export default {
-    data() {
-      return {
-        logo: '/vuetifylogo.png',
-        links: [
-          {
-            to: '/Dashboard',
-            icon: 'mdi-view-dashboard',
-            text: 'Staff Dash',
-            alt: 'Dashboard',
-          },
-          {
-            to: '/Child-Check-In-System',
-            icon: 'mdi-clipboard-outline',
-            text: 'Child Check-In System'
-          },
-          {
-            to: '/Time Clock',
-            icon: 'mdi-alarm',
-            text: 'Staff Time Clock'
-          },
-          {
-            to: '/Time Off Requests',
-            icon: 'mdi-airplane-takeoff',
-            text: 'Time Off Requests'
-          },
-          {
-            to: '/Staff-Schedule',
-            icon: 'mdi-application',
-            text: 'Schedule'
-          },
-          {
-            to: '/Students-Data',
-            icon: 'mdi-archive',
-            text: 'Student Data'
-          },
-          {
-            to: '/Staff-Data',
-            icon: 'mdi-apple',
-            text: 'Staff Data'
-          },
-          {
-            to: '/Profile Editor',
-            icon: 'mdi-account',
-            text: ' Update Staff Profile'
-          },
-          //This is a secondary function for maps integrations. Future use.
-          //{
-            //to: '/maps',
-            //icon: 'mdi-map-marker',
-            //text: 'Maps'
-          //},
-        ],
-        responsive: true
-      }
-    },
-    computed: {
-      ...mapGetters({
-        image: 'app/getImage',
-        color: 'app/getColor',
-        drawer: 'app/getDrawer'
-      }),
-
-
-      inputValue: {
-        get() {
-          return this.drawer
+export default {
+  data() {
+    return {
+      logo: "/vuetifylogo.png",
+      links: [
+        {
+          to: "/Dashboard",
+          icon: "mdi-view-dashboard",
+          text: "Staff Dash",
+          alt: "Dashboard",
         },
-        set(val) {
-          this.setDrawer(val)
-        }
-      }
-    },
-    mounted () {
-      this.onResponsiveInverted()
-      window.addEventListener('resize', this.onResponsiveInverted)
-    },
-    beforeDestroy () {
-      window.removeEventListener('resize', this.onResponsiveInverted)
-    },
-    methods: {
-      ...mapActions({
-        setDrawer: 'app/setDrawer'
-      }),
+        {
+          to: "/Child-Check-In-System",
+          icon: "mdi-clipboard-outline",
+          text: "Child Check-In System",
+        },
+        {
+          to: "/Time Clock",
+          icon: "mdi-alarm",
+          text: "Staff Time Clock",
+        },
+        {
+          to: "/Time Off Requests",
+          icon: "mdi-airplane-takeoff",
+          text: "Time Off Requests",
+        },
+        {
+          to: "/Staff-Schedule",
+          icon: "mdi-application",
+          text: "Schedule",
+        },
+        {
+          to: "/Students-Data",
+          icon: "mdi-archive",
+          text: "Student Data",
+        },
+        {
+          to: "/Staff-Data",
+          icon: "mdi-apple",
+          text: "Staff Data",
+        },
+        {
+          to: "/Profile Editor",
+          icon: "mdi-account",
+          text: " Update Staff Profile",
+        },
+        {
+          to: "/slack-staff",
+          icon: "mdi-slack",
+          text: "Slack Channel",
+        },
+        //This is a secondary function for maps integrations. Future use.
+        //{
+        //to: '/maps',
+        //icon: 'mdi-map-marker',
+        //text: 'Maps'
+        //},
+      ],
+      responsive: true,
+    };
+  },
+  computed: {
+    ...mapGetters({
+      image: "app/getImage",
+      color: "app/getColor",
+      drawer: "app/getDrawer",
+    }),
 
-      onResponsiveInverted() {
-        this.responsive = window.innerWidth < 991;
-      }
-    }
-  }
+    inputValue: {
+      get() {
+        return this.drawer;
+      },
+      set(val) {
+        this.setDrawer(val);
+      },
+    },
+  },
+  mounted() {
+    this.onResponsiveInverted();
+    window.addEventListener("resize", this.onResponsiveInverted);
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.onResponsiveInverted);
+  },
+  methods: {
+    ...mapActions({
+      setDrawer: "app/setDrawer",
+    }),
+
+    onResponsiveInverted() {
+      this.responsive = window.innerWidth < 991;
+    },
+  },
+};
 </script>
 
 <style lang="scss">
-  #app-drawer {
+#app-drawer {
+  &.v-navigation-drawer .v-list {
+    background: rgba(27, 27, 27, 0.4);
+    padding: 0;
+  }
 
-    &.v-navigation-drawer .v-list {
-      background: rgba(27, 27, 27, 0.4);
-      padding: 0;
+  .v-divider {
+    margin: 0;
+  }
+
+  .v-list__tile {
+    border-radius: 4px;
+    font: 200 &--buy {
+      margin-top: auto;
+      margin-bottom: 17px;
     }
 
-    .v-divider {
-      margin: 0;
-    }
-
-    .v-list__tile {
-      border-radius: 4px;
-      font: 200
-      &--buy {
-        margin-top: auto;
-        margin-bottom: 17px;
-      }
-
-      &__title {
-        color: #ffffff;
-        
-      }
-    }
-
-    .v-image__image--contain {
-      top: 9px;
-      height: 60%;
-    }
-
-    .search-input {
-      margin-bottom: 30px !important;
-      padding-left: 15px;
-      padding-right: 15px;
-    }
-    .font-weight-regular.font-italic{
-      font:200
+    &__title {
+      color: #ffffff;
     }
   }
+
+  .v-image__image--contain {
+    top: 9px;
+    height: 60%;
+  }
+
+  .search-input {
+    margin-bottom: 30px !important;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .font-weight-regular.font-italic {
+    font: 200;
+  }
+}
 </style>
