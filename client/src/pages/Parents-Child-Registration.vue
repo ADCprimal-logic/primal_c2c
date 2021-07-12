@@ -520,6 +520,14 @@
                     <v-btn color="primary" @click="e6 = 5; createParent()"> Complete Registration </v-btn>
                     <v-btn outlined @click="e6 = 3" color="accent"> back </v-btn>
                 </v-stepper-content>
+                <v-stepper-step :complete="e6 > 4" step="5">
+                    Registration Complete!
+                    
+                </v-stepper-step>
+
+                <v-stepper-content step="5">
+
+                </v-stepper-content>
             </v-stepper>
         </v-layout>
     </v-container>
