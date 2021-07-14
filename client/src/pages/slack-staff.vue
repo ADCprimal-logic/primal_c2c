@@ -4,7 +4,8 @@
     <material-card
       color="bluebird"
       elevation="12"
-      title="C2C-Children-Connect Channel"
+      title="C2C Messenger"
+      subtitle = "Login to our secure Slack channel to communicate and share information."
       height="auto"
       width="auto"
     >
@@ -14,7 +15,7 @@
             href="javascript:void( window.open( 'https://c2c-children-connect.slack.com', 'blank', 'scrollbars=yes, toolbar=no, width=700, height=500' ) ) "
             color="bluebird"
           >
-            Go To Slack
+            Messenger
           </v-btn>
         </v-layout>
       </v-card-actions>
