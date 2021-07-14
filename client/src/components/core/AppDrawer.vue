@@ -96,7 +96,7 @@ export default {
         {
           to: "/slack-staff",
           icon: "mdi-slack",
-          text: "Slack Channel",
+          text: "C2C Messenger",
         },
         //This is a secondary function for maps integrations. Future use.
         //{

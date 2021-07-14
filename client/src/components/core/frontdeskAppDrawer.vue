@@ -73,11 +73,6 @@ export default {
           text: "Early Sign Out",
         },
         {
-          to: "/Front-Desk-Time-Clock",
-          icon: "mdi-alarm",
-          text: "Front Desk Time Clock",
-        },
-        {
           to: "/Front-Desk-Schedule",
           icon: "mdi-application",
           text: "Schedule",
@@ -100,7 +95,7 @@ export default {
         {
           to: "/slack-front-desk",
           icon: "mdi-slack",
-          text: "Slack Channel",
+          text: "C2C Messenger",
         },
         //This is a secondary function for maps integrations. Future use.
         //{

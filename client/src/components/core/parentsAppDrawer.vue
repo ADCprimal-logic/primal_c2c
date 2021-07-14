@@ -59,11 +59,6 @@ export default {
           alt: "Dashboard",
         },
         {
-          to: "/Parents-Child-Schedule",
-          icon: "mdi-clipboard-outline",
-          text: "Child Time Sheet",
-        },
-        {
           to: "/Parent-Schedule",
           icon: "mdi-application",
           text: "Schedule",
@@ -87,17 +82,18 @@ export default {
           to: "/Parents-Lunch-Portal",
           icon: "mdi-arrange-bring-to-front",
           text: "Lunch Portal",
-        },
+          },
+          {
+              to: "/slack-parent",
+              icon: "mdi-slack",
+              text: "C2C Messenger",
+          },
         {
           to: "/Parents-Child-Registration",
           icon: "mdi-clipboard-outline",
           text: "Child Re-Enrollment",
         },
-        {
-          to: "/slack-parent",
-          icon: "mdi-slack",
-          text: "Slack Channel",
-        },
+        
         //This is a secondary function for maps integrations. Future use.
         //{
         //to: '/maps',
