@@ -73,11 +73,6 @@ export default {
           text: "Early Sign Out",
         },
         {
-          to: "/Front-Desk-Time-Clock",
-          icon: "mdi-alarm",
-          text: "Front Desk Time Clock",
-        },
-        {
           to: "/Front-Desk-Schedule",
           icon: "mdi-application",
           text: "Schedule",

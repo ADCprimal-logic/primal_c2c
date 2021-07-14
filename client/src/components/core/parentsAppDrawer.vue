@@ -59,11 +59,6 @@ export default {
           alt: "Dashboard",
         },
         {
-          to: "/Parents-Child-Schedule",
-          icon: "mdi-clipboard-outline",
-          text: "Child Time Sheet",
-        },
-        {
           to: "/Parent-Schedule",
           icon: "mdi-application",
           text: "Schedule",
