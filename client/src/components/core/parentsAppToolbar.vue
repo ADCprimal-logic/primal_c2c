@@ -3,7 +3,7 @@
                flat
                prominent
                style="background: #eee;">
-        <div class="v-toolbar-title" v-if="title === 'Parents-Dashboard' || title === ''">
+        <div class="v-toolbar-title">
             <v-toolbar-title class="tertiary--text font-weight-light">
                 <v-btn v-if="responsive"
                        class="default v-btn--simple"
@@ -12,103 +12,7 @@
                        @click.stop="onClickBtn">
                     <v-icon>mdi-view-list</v-icon>
                 </v-btn>
-                Parent Dashboard
-            </v-toolbar-title>
-        </div>
-        <div class="v-toolbar-title" v-else-if="title === 'Parent-Schedule'">
-            <v-toolbar-title class="tertiary--text font-weight-light">
-                <v-btn v-if="responsive"
-                       class="default v-btn--simple"
-                       dark
-                       icon
-                       @click.stop="onClickBtn">
-                    <v-icon>mdi-view-list</v-icon>
-                </v-btn>
-                Schedule
-            </v-toolbar-title>
-        </div>
-        <div class="v-toolbar-title" v-else-if="title === 'Parents-Profile-Editor'">
-            <v-toolbar-title class="tertiary--text font-weight-light">
-                <v-btn v-if="responsive"
-                       class="default v-btn--simple"
-                       dark
-                       icon
-                       @click.stop="onClickBtn">
-                    <v-icon>mdi-view-list</v-icon>
-                </v-btn>
-                Parent Profile Editor
-            </v-toolbar-title>
-        </div>
-        <div class="v-toolbar-title" v-else-if="title === 'Parents-Approved-Contacts'">
-            <v-toolbar-title class="tertiary--text font-weight-light">
-                <v-btn v-if="responsive"
-                       class="default v-btn--simple"
-                       dark
-                       icon
-                       @click.stop="onClickBtn">
-                    <v-icon>mdi-view-list</v-icon>
-                </v-btn>
-                Approved Contacts Page
-            </v-toolbar-title>
-        </div>
-        <div class="v-toolbar-title" v-else-if="title === 'Parents-Faculty-Contact'">
-            <v-toolbar-title class="tertiary--text font-weight-light">
-                <v-btn v-if="responsive"
-                       class="default v-btn--simple"
-                       dark
-                       icon
-                       @click.stop="onClickBtn">
-                    <v-icon>mdi-view-list</v-icon>
-                </v-btn>
-                Faculty Contact Page
-            </v-toolbar-title>
-        </div>
-        <div class="v-toolbar-title" v-else-if="title === 'Parents-Lunch-Portal'">
-            <v-toolbar-title class="tertiary--text font-weight-light">
-                <v-btn v-if="responsive"
-                       class="default v-btn--simple"
-                       dark
-                       icon
-                       @click.stop="onClickBtn">
-                    <v-icon>mdi-view-list</v-icon>
-                </v-btn>
-                Lunch Portal
-            </v-toolbar-title>
-        </div>
-        <div class="v-toolbar-title" v-else-if="title === 'Parents-Child-Registration'">
-            <v-toolbar-title class="tertiary--text font-weight-light">
-                <v-btn v-if="responsive"
-                       class="default v-btn--simple"
-                       dark
-                       icon
-                       @click.stop="onClickBtn">
-                    <v-icon>mdi-view-list</v-icon>
-                </v-btn>
-                Child Re-Enrollment
-            </v-toolbar-title>
-        </div>
-        <div class="v-toolbar-title" v-else-if="title === 'slack-parent'">
-            <v-toolbar-title class="tertiary--text font-weight-light">
-                <v-btn v-if="responsive"
-                       class="default v-btn--simple"
-                       dark
-                       icon
-                       @click.stop="onClickBtn">
-                    <v-icon>mdi-view-list</v-icon>
-                </v-btn>
-                C2C Messenger
-            </v-toolbar-title>
-        </div>
-        <div class="v-toolbar-title" v-else>
-            <v-toolbar-title class="tertiary--text font-weight-light">
-                <v-btn v-if="responsive"
-                       class="default v-btn--simple"
-                       dark
-                       icon
-                       @click.stop="onClickBtn">
-                    <v-icon>mdi-view-list</v-icon>
-                </v-btn>
-                {{ title }}
+                You are logged in as Parent!
             </v-toolbar-title>
         </div>
 

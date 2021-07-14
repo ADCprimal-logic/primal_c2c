@@ -3,7 +3,7 @@
                flat
                prominent
                style="background: #eee;">
-        <div class="v-toolbar-title" v-if="title === 'Dashboard' || title === 'dashboard'">
+        <div class="v-toolbar-title">
             <v-toolbar-title class="tertiary--text font-weight-light">
                 <v-btn v-if="responsive"
                        class="default v-btn--simple"
@@ -12,103 +12,7 @@
                        @click.stop="onClickBtn">
                     <v-icon>mdi-view-list</v-icon>
                 </v-btn>
-                Staff Dashboard
-            </v-toolbar-title>
-        </div>
-        <div class="v-toolbar-title" v-else-if="title === 'Child-Check-In-System'">
-            <v-toolbar-title class="tertiary--text font-weight-light">
-                <v-btn v-if="responsive"
-                       class="default v-btn--simple"
-                       dark
-                       icon
-                       @click.stop="onClickBtn">
-                    <v-icon>mdi-view-list</v-icon>
-                </v-btn>
-                Child Check In System
-            </v-toolbar-title>
-        </div>
-        <div class="v-toolbar-title" v-else-if="title === 'Time Clock'">
-            <v-toolbar-title class="tertiary--text font-weight-light">
-                <v-btn v-if="responsive"
-                       class="default v-btn--simple"
-                       dark
-                       icon
-                       @click.stop="onClickBtn">
-                    <v-icon>mdi-view-list</v-icon>
-                </v-btn>
-                Staff Time Clock
-            </v-toolbar-title>
-        </div>
-        <div class="v-toolbar-title" v-else-if="title === 'Staff-Schedule'">
-            <v-toolbar-title class="tertiary--text font-weight-light">
-                <v-btn v-if="responsive"
-                       class="default v-btn--simple"
-                       dark
-                       icon
-                       @click.stop="onClickBtn">
-                    <v-icon>mdi-view-list</v-icon>
-                </v-btn>
-                Staff Schedule
-            </v-toolbar-title>
-        </div>
-        <div class="v-toolbar-title" v-else-if="title === 'Students-Data'">
-            <v-toolbar-title class="tertiary--text font-weight-light">
-                <v-btn v-if="responsive"
-                       class="default v-btn--simple"
-                       dark
-                       icon
-                       @click.stop="onClickBtn">
-                    <v-icon>mdi-view-list</v-icon>
-                </v-btn>
-                Student Data
-            </v-toolbar-title>
-        </div>
-        <div class="v-toolbar-title" v-else-if="title === 'Staff-Data'">
-            <v-toolbar-title class="tertiary--text font-weight-light">
-                <v-btn v-if="responsive"
-                       class="default v-btn--simple"
-                       dark
-                       icon
-                       @click.stop="onClickBtn">
-                    <v-icon>mdi-view-list</v-icon>
-                </v-btn>
-                Staff Data
-            </v-toolbar-title>
-        </div>
-        <div class="v-toolbar-title" v-else-if="title === 'Profile Editor'">
-            <v-toolbar-title class="tertiary--text font-weight-light">
-                <v-btn v-if="responsive"
-                       class="default v-btn--simple"
-                       dark
-                       icon
-                       @click.stop="onClickBtn">
-                    <v-icon>mdi-view-list</v-icon>
-                </v-btn>
-                Staff Profile Editor
-            </v-toolbar-title>
-        </div>
-        <div class="v-toolbar-title" v-else-if="title === 'slack-staff'">
-            <v-toolbar-title class="tertiary--text font-weight-light">
-                <v-btn v-if="responsive"
-                       class="default v-btn--simple"
-                       dark
-                       icon
-                       @click.stop="onClickBtn">
-                    <v-icon>mdi-view-list</v-icon>
-                </v-btn>
-                C2C Messenger
-            </v-toolbar-title>
-        </div>
-        <div class="v-toolbar-title" v-else>
-            <v-toolbar-title class="tertiary--text font-weight-light">
-                <v-btn v-if="responsive"
-                       class="default v-btn--simple"
-                       dark
-                       icon
-                       @click.stop="onClickBtn">
-                    <v-icon>mdi-view-list</v-icon>
-                </v-btn>
-                {{ title }}
+                You are logged in as Staff!
             </v-toolbar-title>
         </div>
 
