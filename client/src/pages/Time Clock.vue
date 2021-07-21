@@ -16,7 +16,7 @@
           <br />
           <v-dialog v-model="clockInDialog" max-width="500px">
             <template v-slot:activator="clockIn">
-              <v-btn color="mint" fab large dark v-on="clockIn.on">
+              <v-btn color="mFloat" fab large dark v-on="clockIn.on">
                 <v-icon>mdi-alarm</v-icon>
               </v-btn>
             </template>
@@ -39,8 +39,15 @@
                       <v-text-field
                         v-model="editedItem.ClockIn"
                         :value="(clockInSend = timeStamp)"
-                        @input="clockInbSend = $event"
+                        @input="clockInSend = $event"
                         label="Clock In"
+                      ></v-text-field>
+                    </v-flex>
+                    <v-flex xs12 sm6 md4>
+                      <v-text-field
+                        v-model="editedItem.Notes"
+                        @input="clockInNotes = $event"
+                        label="Notes"
                       ></v-text-field>
                     </v-flex>
                   </v-layout>
@@ -91,6 +98,11 @@
                             @input="clockOutSend = $event"
                             label="Clock Out"
                           ></v-text-field>
+                          <v-text-field
+                            v-model="editedItem.Notes"
+                            @input="clockOutNotes = $event"
+                            label="Notes"
+                          ></v-text-field>
                         </v-flex>
                       </v-layout>
                     </v-container>
@@ -135,6 +147,7 @@
                 <td class="text-xs-right">{{ props.item.ClockIn }}</td>
                 <td class="text-xs-right">{{ props.item.ClockOut }}</td>
                 <td class="text-xs-right">{{ props.item.Hours }}</td>
+                <td class="text-xs-right">{{ props.item.Notes }}</td>
               </template>
               <!-- Defines what is done when there is no data in availble. Initialize refills the data from the server -->
               <!--<template v-slot:no-data>
@@ -263,6 +276,7 @@ export default {
       { text: "Clock In", value: "ClockIn", sortable: false },
       { text: "Clock Out", value: "ClockOut", sortable: false },
       { text: "Hours", value: "Hours", sortable: false },
+      { text: "Notes", value: "Notes", sortable: false },
     ],
     statusSelect: ["In", "Out"],
     timeStamp: dateString,
@@ -273,12 +287,14 @@ export default {
     punchInQuery: null,
     punchOutQuery: null,
     punchInSave: null,
+    notesDefault: "X",
     editedItem: {
       day: "",
       ClockIn: "",
       ClockOut: "",
       Status: "",
       Hours: 0,
+      Notes: "",
     },
     defaultItem: {
       day: "",
@@ -286,10 +302,13 @@ export default {
       ClockOut: "",
       Status: "",
       Hours: 0,
+      Notes: "",
     },
     id: null,
     clockInSend: "",
     clockOutSend: "",
+    clockInNotes: "",
+    clockOutNotes: "",
   }),
 
   computed: {
@@ -326,36 +345,43 @@ export default {
           `"}){
           time_card{
             day1
+            day1_notes
             time_PunchIn1
             time_PunchOut1
             hours_worked1
             clockedIO1
             day2
+            day2_notes
             time_PunchIn2
             time_PunchOut2
             hours_worked2
             clockedIO2
             day3
+            day3_notes
             time_PunchIn3
             time_PunchOut3
             hours_worked3
             clockedIO3
             day4
+            day4_notes
             time_PunchIn4
             time_PunchOut4
             hours_worked4
             clockedIO4
             day5
+            day5_notes
             time_PunchIn5
             time_PunchOut5
             hours_worked5
             clockedIO5
             day6
+            day6_notes
             time_PunchIn6
             time_PunchOut6
             hours_worked6
             clockedIO6
             day7
+            day7_notes
             time_PunchIn7
             time_PunchOut7
             hours_worked7
@@ -419,15 +445,15 @@ export default {
             ClockOut: this.timeStamp,
           };
           var UPDATE_PUNCH_IN = `
-          mutation timePunchIn($id: ID!, $clockInSend: DateTime, $statusSelect: StaffTimecardClockedIO7Type) {
-                updateStaffTimecard(id: $id, data: {time_PunchIn7: $clockInSend, clockedIO7: $statusSelect}) {
+          mutation timePunchIn($id: ID!, $clockInSend: DateTime, $statusSelect: StaffTimecardClockedIO7Type, $notes: String) {
+                updateStaffTimecard(id: $id, data: {time_PunchIn7: $clockInSend, clockedIO7: $statusSelect, day7_notes: $notes}) {
                   id
                 }
               }
           `;
           var UPDATE_PUNCH_OUT = `
-          mutation timePunchOut($id: ID!, $clockOutSend: DateTime, $statusSelect: StaffTimecardClockedIO7Type, $hoursLogged: Int) {
-                updateStaffTimecard(id: $id, data: {time_PunchOut7: $clockOutSend, clockedIO7: $statusSelect, hours_worked7: $hoursLogged}) {
+          mutation timePunchOut($id: ID!, $clockOutSend: DateTime, $statusSelect: StaffTimecardClockedIO7Type, $hoursLogged: Float, $notes: String) {
+                updateStaffTimecard(id: $id, data: {time_PunchOut7: $clockOutSend, clockedIO7: $statusSelect, hours_worked7: $hoursLogged, day7_notes: $notes}) {
                   id
                 }
               }
@@ -446,15 +472,15 @@ export default {
             ClockOut: this.timeStamp,
           };
           var UPDATE_PUNCH_IN = `
-          mutation timePunchIn($id: ID!, $clockInSend: DateTime, $statusSelect: StaffTimecardClockedIO1Type) {
-                updateStaffTimecard(id: $id, data: {time_PunchIn1: $clockInSend, clockedIO1: $statusSelect}) {
+          mutation timePunchIn($id: ID!, $clockInSend: DateTime, $statusSelect: StaffTimecardClockedIO1Type, $notes: String) {
+                updateStaffTimecard(id: $id, data: {time_PunchIn1: $clockInSend, clockedIO1: $statusSelect, day1_notes: $notes}) {
                   id
                 }
               }
           `;
           var UPDATE_PUNCH_OUT = `
-          mutation timePunchOut($id: ID!, $clockOutSend: DateTime, $statusSelect: StaffTimecardClockedIO1Type, $hoursLogged: Int) {
-                updateStaffTimecard(id: $id, data: {time_PunchOut1: $clockOutSend, clockedIO1: $statusSelect, hours_worked1: $hoursLogged}) {
+          mutation timePunchOut($id: ID!, $clockOutSend: DateTime, $statusSelect: StaffTimecardClockedIO1Type, $hoursLogged: Float, $notes: String) {
+                updateStaffTimecard(id: $id, data: {time_PunchOut1: $clockOutSend, clockedIO1: $statusSelect, hours_worked1: $hoursLogged, day1_notes: $notes}) {
                   id
                 }
               }
@@ -473,15 +499,15 @@ export default {
             ClockOut: this.timeStamp,
           };
           var UPDATE_PUNCH_IN = `
-         mutation timePunchIn($id: ID!, $clockInSend: DateTime, $statusSelect: StaffTimecardClockedIO2Type) {
-               updateStaffTimecard(id: $id, data: {time_PunchIn2: $clockInSend, clockedIO2: $statusSelect}) {
+         mutation timePunchIn($id: ID!, $clockInSend: DateTime, $statusSelect: StaffTimecardClockedIO2Type, $notes: String) {
+               updateStaffTimecard(id: $id, data: {time_PunchIn2: $clockInSend, clockedIO2: $statusSelect, day2_notes: $notes}) {
                  id
                }
              }
          `;
           var UPDATE_PUNCH_OUT = `
-         mutation timePunchOut($id: ID!, $clockOutSend: DateTime, $statusSelect: StaffTimecardClockedIO2Type, $hoursLogged: Int) {
-               updateStaffTimecard(id: $id, data: {time_PunchOut2: $clockOutSend, clockedIO2: $statusSelect, hours_worked2: $hoursLogged}) {
+         mutation timePunchOut($id: ID!, $clockOutSend: DateTime, $statusSelect: StaffTimecardClockedIO2Type, $hoursLogged: Float, $notes: String) {
+               updateStaffTimecard(id: $id, data: {time_PunchOut2: $clockOutSend, clockedIO2: $statusSelect, hours_worked2: $hoursLogged, day2_notes: $notes}) {
                  id
                }
              }
@@ -500,15 +526,15 @@ export default {
             ClockOut: this.timeStamp,
           };
           var UPDATE_PUNCH_IN = `
-         mutation timePunchIn($id: ID!, $clockInSend: DateTime, $statusSelect: StaffTimecardClockedIO3Type) {
-               updateStaffTimecard(id: $id, data: {time_PunchIn3: $clockInSend, clockedIO3: $statusSelect}) {
+         mutation timePunchIn($id: ID!, $clockInSend: DateTime, $statusSelect: StaffTimecardClockedIO3Type, $notes: String) {
+               updateStaffTimecard(id: $id, data: {time_PunchIn3: $clockInSend, clockedIO3: $statusSelect, day3_notes: $notes}) {
                  id
                }
              }
          `;
           var UPDATE_PUNCH_OUT = `
-         mutation timePunchOut($id: ID!, $clockOutSend: DateTime, $statusSelect: StaffTimecardClockedIO3Type, $hoursLogged: Int) {
-               updateStaffTimecard(id: $id, data: {time_PunchOut3: $clockOutSend, clockedIO3: $statusSelect, hours_worked3: $hoursLogged}) {
+         mutation timePunchOut($id: ID!, $clockOutSend: DateTime, $statusSelect: StaffTimecardClockedIO3Type, $hoursLogged: Float, $notes: String) {
+               updateStaffTimecard(id: $id, data: {time_PunchOut3: $clockOutSend, clockedIO3: $statusSelect, hours_worked3: $hoursLogged, day3_notes: $notes}) {
                  id
                }
              }
@@ -527,15 +553,15 @@ export default {
             ClockOut: this.timeStamp,
           };
           var UPDATE_PUNCH_IN = `
-          mutation timePunchIn($id: ID!, $clockInSend: DateTime, $statusSelect: StaffTimecardClockedIO4Type) {
-                updateStaffTimecard(id: $id, data: {time_PunchIn4: $clockInSend, clockedIO4: $statusSelect}) {
+          mutation timePunchIn($id: ID!, $clockInSend: DateTime, $statusSelect: StaffTimecardClockedIO4Type, $notes: String) {
+                updateStaffTimecard(id: $id, data: {time_PunchIn4: $clockInSend, clockedIO4: $statusSelect, day4_notes: $notes}) {
                   id
                 }
               }
           `;
           var UPDATE_PUNCH_OUT = `
-          mutation timePunchOut($id: ID!, $clockOutSend: DateTime, $statusSelect: StaffTimecardClockedIO4Type, $hoursLogged: Int) {
-                updateStaffTimecard(id: $id, data: {time_PunchOut4: $clockOutSend, clockedIO4: $statusSelect, hours_worked4: $hoursLogged}) {
+          mutation timePunchOut($id: ID!, $clockOutSend: DateTime, $statusSelect: StaffTimecardClockedIO4Type, $hoursLogged: Float, $notes: String) {
+                updateStaffTimecard(id: $id, data: {time_PunchOut4: $clockOutSend, clockedIO4: $statusSelect, hours_worked4: $hoursLogged, day4_notes: $notes}) {
                   id
                 }
               }
@@ -554,15 +580,15 @@ export default {
             ClockOut: this.timeStamp,
           };
           var UPDATE_PUNCH_IN = `
-          mutation timePunchIn($id: ID!, $clockInSend: DateTime, $statusSelect: StaffTimecardClockedIO5Type) {
-                updateStaffTimecard(id: $id, data: {time_PunchIn5: $clockInSend, clockedIO5: $statusSelect}) {
+          mutation timePunchIn($id: ID!, $clockInSend: DateTime, $statusSelect: StaffTimecardClockedIO5Type, $notes: String) {
+                updateStaffTimecard(id: $id, data: {time_PunchIn5: $clockInSend, clockedIO5: $statusSelect, day5_notes: $notes}) {
                   id
                 }
               }
           `;
           var UPDATE_PUNCH_OUT = `
-          mutation timePunchOut($id: ID!, $clockOutSend: DateTime, $statusSelect: StaffTimecardClockedIO5Type, $hoursLogged: Int) {
-                updateStaffTimecard(id: $id, data: {time_PunchOut5: $clockOutSend, clockedIO5: $statusSelect, hours_worked5: $hoursLogged}) {
+          mutation timePunchOut($id: ID!, $clockOutSend: DateTime, $statusSelect: StaffTimecardClockedIO5Type, $hoursLogged: Float, $notes: String) {
+                updateStaffTimecard(id: $id, data: {time_PunchOut5: $clockOutSend, clockedIO5: $statusSelect, hours_worked5: $hoursLogged, day5_notes: $notes}) {
                   id
                 }
               }
@@ -581,15 +607,15 @@ export default {
             ClockOut: this.timeStamp,
           };
           var UPDATE_PUNCH_IN = `
-         mutation timePunchIn($id: ID!, $clockInSend: DateTime, $statusSelect: StaffTimecardClockedIO6Type) {
-               updateStaffTimecard(id: $id, data: {time_PunchIn6: $clockInSend, clockedIO6: $statusSelect}) {
+         mutation timePunchIn($id: ID!, $clockInSend: DateTime, $statusSelect: StaffTimecardClockedIO6Type, $notes: String) {
+               updateStaffTimecard(id: $id, data: {time_PunchIn6: $clockInSend, clockedIO6: $statusSelect, day6_notes: $notes}) {
                  id
                }
              }
          `;
           var UPDATE_PUNCH_OUT = `
-         mutation timePunchOut($id: ID!, $clockOutSend: DateTime, $statusSelect: StaffTimecardClockedIO6Type, $hoursLogged: Int) {
-               updateStaffTimecard(id: $id, data: {time_PunchOut6: $clockOutSend, clockedIO6: $statusSelect, hours_worked6: $hoursLogged}) {
+         mutation timePunchOut($id: ID!, $clockOutSend: DateTime, $statusSelect: StaffTimecardClockedIO6Type, $hoursLogged: Float, $notes: String) {
+               updateStaffTimecard(id: $id, data: {time_PunchOut6: $clockOutSend, clockedIO6: $statusSelect, hours_worked6: $hoursLogged, day6_notes: $notes}) {
                  id
                }
              }
@@ -609,6 +635,7 @@ export default {
           ClockOut: this.allStaffTimeCards.time_PunchOut1,
           Status: this.allStaffTimeCards.clockedIO1,
           Hours: this.allStaffTimeCards.hours_worked1,
+          Notes: this.allStaffTimeCards.day1_notes,
         },
         {
           day: this.allStaffTimeCards.day2,
@@ -616,6 +643,7 @@ export default {
           ClockOut: this.allStaffTimeCards.time_PunchOut2,
           Status: this.allStaffTimeCards.clockedIO2,
           Hours: this.allStaffTimeCards.hours_worked2,
+          Notes: this.allStaffTimeCards.day2_notes,
         },
         {
           day: this.allStaffTimeCards.day3,
@@ -623,6 +651,7 @@ export default {
           ClockOut: this.allStaffTimeCards.time_PunchOut3,
           Status: this.allStaffTimeCards.clockedIO3,
           Hours: this.allStaffTimeCards.hours_worked3,
+          Notes: this.allStaffTimeCards.day3_notes,
         },
         {
           day: this.allStaffTimeCards.day4,
@@ -630,6 +659,7 @@ export default {
           ClockOut: this.allStaffTimeCards.time_PunchOut4,
           Status: this.allStaffTimeCards.clockedIO4,
           Hours: this.allStaffTimeCards.hours_worked4,
+          Notes: this.allStaffTimeCards.day4_notes,
         },
         {
           day: this.allStaffTimeCards.day5,
@@ -637,6 +667,7 @@ export default {
           ClockOut: this.allStaffTimeCards.time_PunchOut5,
           Status: this.allStaffTimeCards.clockedIO5,
           Hours: this.allStaffTimeCards.hours_worked5,
+          Notes: this.allStaffTimeCards.day5_notes,
         },
         {
           day: this.allStaffTimeCards.day6,
@@ -644,6 +675,7 @@ export default {
           ClockOut: this.allStaffTimeCards.time_PunchOut6,
           Status: this.allStaffTimeCards.clockedIO6,
           Hours: this.allStaffTimeCards.hours_worked6,
+          Notes: this.allStaffTimeCards.day6_notes,
         },
         {
           day: this.allStaffTimeCards.day7,
@@ -651,6 +683,7 @@ export default {
           ClockOut: this.allStaffTimeCards.time_PunchOut7,
           Status: this.allStaffTimeCards.clockedIO7,
           Hours: this.allStaffTimeCards.hours_worked7,
+          Notes: this.allStaffTimeCards.day7_notes,
         },
         /*{
           day: this.allStaffTimeCards.day8,
@@ -728,6 +761,7 @@ export default {
       const { punchInData } = await graphql(this.punchInQuery, {
         id: this.id,
         clockInSend: parsedDate,
+        notes: this.clockOutNotes,
         statusSelect: "In",
       });
       this.timeStamp = makeDate();
@@ -746,10 +780,12 @@ export default {
       //console.log(timeIn);
       var loggedHours = timeOut - timeIn;
       //console.log(loggedHours);
+      console.log(this.notesDefault);
       const { punchOutData } = await graphql(this.punchOutQuery, {
         id: this.id,
         clockOutSend: parsedDate,
         statusSelect: "Out",
+        notes: this.clockOutNotes,
         hoursLogged: loggedHours,
       });
       this.timeStamp = makeDate();
