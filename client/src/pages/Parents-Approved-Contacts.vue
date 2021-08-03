@@ -101,26 +101,38 @@
 
 
             </v-stepper>
-            <v-flex xs12 md4>
-                <material-card class="v-card-profile">
-                    
-                    <v-card-text >
-                        <h6 class="category text-gray font-weight-thin mb-3">
-                            
-                        </h6>
-                        <h4 class="card-title font-weight-light">Children(s) Approved Contacts:</h4>
-                        <p class="card-description font-weight-light">
-                            
-                        </p>
-                        <ul>
-                            <li v-for="value in myChildData">
-                                {{value.first_name}} {{value.last_name}}'s Approved Contacts:
-                                <ul>
-                                    <li v-for="value2 in value.approved_contact">{{value2.first_name}} {{value2.last_name}}: {{value2.relation}}</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </v-card-text>
+            
+            <v-flex xs12 md8>
+                <material-card color="mint"
+                               title="Children(s) Approved Contacts:"
+                               text="Use this page to update your contact, personal information and system avatar.">
+                    <v-form>
+                        <v-container py-0>
+                            <v-layout wrap>
+                                <v-flex xs12 md12>
+
+                                        <v-card-text>
+                                            
+                                            <ul>
+                                                <li v-for="value in myChildData">
+                                                    {{value.first_name}} {{value.last_name}}'s Approved Contacts:
+                                                    <ul>
+                                                        <li v-for="value2 in value.approved_contact">{{value2.first_name}} {{value2.last_name}}: 
+                                                            <ul>
+                                                                <li>Relation: {{value2.relation}}</li>
+                                                                <li>Phone:    {{value2.phone}}</li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </v-card-text>
+                                </v-flex>
+
+                                
+                            </v-layout>
+                        </v-container>
+                    </v-form>
                 </material-card>
             </v-flex>
         </v-layout>
@@ -155,6 +167,7 @@
                   first_name
                   last_name
                   relation
+                  phone
                 }
               }
             }
